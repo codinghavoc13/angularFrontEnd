@@ -1,0 +1,34 @@
+<div style="width:700px">
+    <form [formGroup]="caesarForm" (ngSubmit)="onSubmit()">
+        <div>
+            <p>Enter the message you want to encrypt:</p>
+            <textarea rows="2" cols="50" id="message" name="message" 
+            formControlName="message"></textarea>
+        </div>
+        <div>
+            <p>Please enter a key to shift by:</p>
+            <div>
+                <label for="keyone">Key One: </label>
+                <input type="number" id="keyOne" name="keyOne" 
+                formControlName="keyOne" min="0" max="26" value="0"/>
+            </div>
+            <div>
+                <label for="keytwo">Key Two: </label>
+                <input type="text" id="keyTwo" name="keyTwo" formControlName="keyTwo" />
+            </div>
+        </div>
+        <div>
+            <label for="methods">Choose a Method: </label>
+            <select name="methods" id="methods" formControlName="action">
+                <option value="E1K">Encrypt with 1 key</option>
+                <option value="E2K">Encrypt with 2 keys</option>
+                <option value="D1K">Decrypt with 1 key</option>
+                <option value="D2K">Decrypt with 2 keys</option>
+            </select>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<hr>
+<p>Go back to the <a routerLink="">main page</a></p>

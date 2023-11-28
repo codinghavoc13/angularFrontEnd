@@ -1,0 +1,12 @@
+<p>Caesar Cipher Result</p>
+
+<!-- <p>{{ cbResult.msg }}</p> -->
+<div *ngIf="cbResult.msg==='temp'; else displayResults">
+    <p>Please process a proper message</p>
+</div>
+<ng-template #displayResults>
+    <p>{{ cbResult.msg }}</p>
+</ng-template>
+<hr>
+<p>Go back to the <a routerLink="/caesar">Caesar Cipher page</a></p>
+<p>Go back to the <a routerLink="">Main page</a></p>
