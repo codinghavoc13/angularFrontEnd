@@ -5,7 +5,7 @@ import { CaesarCipherService } from '../../service/caesar/caesar-cipher.service'
 @Component({
   selector: 'app-caesar-cipher-result',
   templateUrl: './caesar-cipher-result.component.html',
-  styleUrl: './caesar-cipher-result.component.css'
+  styleUrls: ['./caesar-cipher-result.component.css']
 })
 export class CaesarCipherResultComponent {
   cbResult = new CipherBody("temp",0,0,"UNK");

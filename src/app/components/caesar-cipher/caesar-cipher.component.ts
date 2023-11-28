@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Cipher } from 'crypto';
 import { CipherBody } from '../../common/cipher-body';
 import { CaesarCipherService } from '../../service/caesar/caesar-cipher.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 @Component({
   selector: 'app-caesar-cipher',
   templateUrl: './caesar-cipher.component.html',
-  styleUrl: './caesar-cipher.component.css'
+  styleUrls: ['./caesar-cipher.component.css']
 })
 
 export class CaesarCipherComponent implements OnInit{
