@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 export class CaesarCipherService {
   cbInput = new CipherBody("temp",0,0,"UNK");
   cbOutput = new CipherBody("temp",0,0,"UNK");
-  private baseUrl = environment.baseUrl + "caesarCipher/process"
+  private baseUrl = environment.baseUrl + "caesarCipher/process";
 
   constructor(private httpClient: HttpClient,
     private router: Router){
@@ -20,6 +20,7 @@ export class CaesarCipherService {
 
   // https://stackoverflow.com/questions/68191099/how-to-pass-data-between-routed-components-in-angular
   async processCB(cbInputParam: CipherBody) {
+    console.log(this.baseUrl);
     this.httpClient.post<CipherBody>(this.baseUrl, cbInputParam).subscribe(
       data=>{
         this.cbOutput = data as CipherBody;
