@@ -1,4 +1,4 @@
-import cors from "cors"
+const cors = requires("cors")
 
 const express = require('express');
 const app = express();
