@@ -3,6 +3,7 @@ import { CipherBody } from '../../common/cipher-body';
 import { CaesarCipherService } from '../../service/caesar/caesar-cipher.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-caesar-cipher',
@@ -26,6 +27,8 @@ export class CaesarCipherComponent implements OnInit{
 
   }
   ngOnInit(): void {
+    console.log("working with: " + environment.baseUrl);
+    console.log("production is: " + environment.production);
   }
   
   // Need to figure out how to get the form on the html page to pass these values
