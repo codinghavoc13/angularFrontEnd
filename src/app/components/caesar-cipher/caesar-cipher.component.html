@@ -1,6 +1,9 @@
 <div style="width:700px">
     <form [formGroup]="caesarForm" (ngSubmit)="onSubmit()">
         <div>
+            <p>Currently, the code will only cipher a-z lower case, spaces will be ignored. I am working on updating the backend to handle more characters. Check back for further updates</p>
+        </div>
+        <div>
             <p>Enter the message you want to encrypt:</p>
             <textarea rows="2" cols="50" id="message" name="message" 
             formControlName="message"></textarea>
