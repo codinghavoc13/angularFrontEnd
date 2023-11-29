@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    baseUrl: "https://spring-cipher-d3777a1b1b56.herokuapp.com/"
+    baseUrl: "https://monolithbackend-74629fdb83e0.herokuapp.com"
 }
