@@ -7,7 +7,8 @@
     "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "prod": "ng build --configuration=production"
+    "prod": "ng build --configuration=production",
+    "heroku-postbuild":"ng build --configuration=production"
   },
   "engines": {"node":"18.x"},
   "private": true,
