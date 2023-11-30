@@ -11,12 +11,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { CipherMainComponent } from './components/cipher-main/cipher-main.component';
 import { PassphraseComponent } from './components/passphrase/passphrase.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavComponent } from './components/nav/nav.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainComponent } from './components/main/main.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
   {path: 'caesarResult', component: CaesarCipherResultComponent},
   {path: 'passphrase', component:PassphraseComponent},
-  {path: '', component: CipherMainComponent},
+  {path: 'cipher', component: CipherMainComponent},
+  {path: '', component: MainComponent},
   {path: '**', component:CipherMainComponent}
 ];
 
@@ -26,14 +31,18 @@ const routes: Routes = [
     CaesarCipherComponent,
     CaesarCipherResultComponent,
     CipherMainComponent,
-    PassphraseComponent
+    PassphraseComponent,
+    NavComponent,
+    MainComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
