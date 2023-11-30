@@ -18,6 +18,7 @@ export class CaesarCipherService {
   }
 
   async processCB(cbInputParam: CipherBody) {
+    console.log("Working with:" + this.baseUrl)
     this.httpClient.post<CipherBody>(this.baseUrl, cbInputParam).subscribe(
       data=>{
         this.cbOutput = data as CipherBody;
