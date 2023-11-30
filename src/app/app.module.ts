@@ -21,6 +21,7 @@ const routes: Routes = [
   {path: 'caesarResult', component: CaesarCipherResultComponent},
   {path: 'passphrase', component:PassphraseComponent},
   {path: 'cipher', component: CipherMainComponent},
+  {path: '/', component: MainComponent},
   {path: '', component: MainComponent},
   {path: '**', component:CipherMainComponent}
 ];
