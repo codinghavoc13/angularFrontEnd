@@ -1,39 +1,78 @@
 <h1><a routerLink="/cipher">Cipher</a>->Caesar Cipher</h1>
 <div style="width:700px">
-    <form [formGroup]="caesarForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="caesarForm" name="caesarForm" (ngSubmit)="onSubmit()">
         <div>
-            <p><i>Currently, the cipher will only handle letters (A-Z and a-z), 
-                not any punctuation or numbers. Further updates are in the works</i></p>
+            <p><i>Currently, the cipher will only handle letters (A-Z and a-z) and numbers (0-9), 
+                no other characters including spaces. Further updates are in the works</i></p>
         </div>
         <div>
             <p>Enter the message you want to encrypt:</p>
             <textarea rows="2" cols="50" id="message" name="message" 
-            formControlName="message"></textarea>
+            formControlName="message" required class="form-control"
+            ng-model="caesarForm.message"></textarea>
         </div>
+        <hr>
         <div>
-            <p>Please enter a key to shift by:</p>
+            <form>
+                <label>One Key</label>
+                <input type="radio" name="keySelectInput" value="1K" 
+                (click)="updateKey('1K')" checked="checked"/>
+                <label style="margin-left: 20px;">Two Keys</label>
+                <input type="radio" name="keySelectInput" value="2K"
+                (click)="updateKey('2K')"/>
+            </form>
+        </div>
+        <hr>
+        <div>
+            Please enter a key to shift by:
             <div>
                 <label for="keyone">Key One: </label>
-                <input type="number" id="keyOne" name="keyOne" 
-                formControlName="keyOne" min="0" max="26" value="0"/>
+                <input type="number" id="keyOne" name="keyOne"
+                formControlName="keyOne"/>
             </div>
-            <div>
+            <div *ngIf="keySelect==='2K'">
                 <label for="keytwo">Key Two: </label>
-                <input type="text" id="keyTwo" name="keyTwo" formControlName="keyTwo" />
+                <input type="number" id="keyTwo" name="keyTwo"
+                formControlName="keyTwo" />
             </div>
         </div>
-        <div>
-            <label for="methods">Choose a Method: </label>
-            <select name="methods" id="methods" formControlName="action">
-                <option value="E1K">Encrypt with 1 key</option>
-                <option value="E2K">Encrypt with 2 keys</option>
-                <option value="D1K">Decrypt with 1 key</option>
-                <option value="D2K">Decrypt with 2 keys</option>
-            </select>
+        <div *ngIf="keySelect==='1K'">
+            <label for="methods">Choose a Method:</label>
+            <div>
+                <select name="methods" id="methods" formControlName="action">
+                    <option value="E1K">Encrypt with 1 Key</option>
+                    <option value="D1K">Decrypt with 1 Key</option>
+                </select>
+            </div>
         </div>
-
-        <button type="submit">Submit</button>
+        <div *ngIf="keySelect==='2K'">
+            <label for="methods">Choose a Method: </label>
+            <div>
+                <select name="methods" id="methods" formControlName="action">
+                    <option value="E2K">Encrypt with 2 Keys</option>
+                    <option value="D2K">Decrypt with 2 Keys</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" [disabled]="!caesarForm.valid">Submit</button>
     </form>
+
+    <!-- <hr>
+    <app-caesar-cipher-result></app-caesar-cipher-result> -->
+
+    <hr>
+    <div *ngIf="!showExplained; else display">
+        <button (click)="showExplanation(true)">Explain on a Caesar Cipher works</button>
+    </div>
+    <ng-template #display>
+        <h2>Caesar Cipher Explained</h2>
+        <button (click)="showExplanation(false)">Hide the explanation</button>
+        <app-caesarexplained></app-caesarexplained>
+        <button (click)="showExplanation(false)">Hide the explanation</button>
+    </ng-template>
+
 </div>
 <hr>
 <p>Go back to the <a routerLink="">main page</a></p>
+

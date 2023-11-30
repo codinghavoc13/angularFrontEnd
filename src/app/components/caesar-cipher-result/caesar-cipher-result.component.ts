@@ -8,23 +8,12 @@ import { CaesarCipherService } from '../../service/caesar/caesar-cipher.service'
   styleUrls: ['./caesar-cipher-result.component.css']
 })
 export class CaesarCipherResultComponent {
-  cbResult = new CipherBody("temp",0,0,"UNK");
+  cbResult = this.ccService.cbOutput;
   constructor(private ccService: CaesarCipherService){
 
   }
   ngOnInit(): void {
-    // this.getCipherBody();
-    // this.cbResult = this.ccService.cbOutput;
-    // this.ccService.processCB();
     this.cbResult = this.ccService.cbOutput;
   }
-
-  // getCipherBody(){
-  //   this.ccService.getProcessedBody().subscribe(
-  //     data=>{
-  //       this.cbResult = data as CipherBody;
-  //     }
-  //   )
-  // }
 
 }

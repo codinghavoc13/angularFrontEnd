@@ -1,11 +1,13 @@
-<p>Caesar Cipher Result</p>
-
+<h1><a routerLink="/cipher">Cipher</a>->
+    <a routerLink="/caesar">Caesar Cipher</a>->Caesar Cipher Result</h1>
+<!-- <p>Caesar Cipher Result</p> -->
+<hr>
 <!-- <p>{{ cbResult.msg }}</p> -->
-<div *ngIf="cbResult.msg==='temp'; else displayResults">
-    <p>Please process a proper message</p>
+<div *ngIf="cbResult.message==='temp'; else displayResults">
+    <p style="color: red; font-style: italic;">Please process a proper message</p>
 </div>
 <ng-template #displayResults>
-    <p>{{ cbResult.msg }}</p>
+    <p>{{ cbResult.message }}</p>
 </ng-template>
 <hr>
 <p>Go back to the <a routerLink="/caesar">Caesar Cipher page</a></p>

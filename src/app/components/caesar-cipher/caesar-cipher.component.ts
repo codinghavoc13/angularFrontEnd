@@ -12,13 +12,16 @@ import { environment } from 'src/environments/environment';
 })
 
 export class CaesarCipherComponent implements OnInit{
+  keySelect = "1K";
+  showExplained = false;
   cbInput: CipherBody | undefined;
+  // cbInput = new CipherBody("temp",0,0,"E1K");
 
   caesarForm = new FormGroup({
-    message: new FormControl(),
-    keyOne: new FormControl(),
-    keyTwo: new FormControl(),
-    action: new FormControl()
+    message: new FormControl('', Validators.required),
+    keyOne: new FormControl('0',[Validators.min(0), Validators.max(62), Validators.required]),
+    keyTwo: new FormControl('0',[Validators.min(0), Validators.max(62)]),
+    action: new FormControl('E1K',Validators.required)
   })
 
   constructor(private ccService: CaesarCipherService,
@@ -28,22 +31,19 @@ export class CaesarCipherComponent implements OnInit{
   }
   ngOnInit(): void {
   }
-  
-  // Need to figure out how to get the form on the html page to pass these values
-  // and to do so without blasting it on the url path
-  buildCB(msg: string, k1: number, k2: number, action: string){
-    this.cbInput = this.ccService.buildCB(msg,k1,k2,action);
-    // console.log("cc1");
-    // console.log(this.cbInput);
-    this.ccService.processCB(this.cbInput);
-    // this.router.navigate(['/caesarResult']);
-  }
 
   onSubmit(){
-    const formValues = this.caesarForm.value;
-    this.buildCB(formValues.message,
-      formValues.keyOne,
-      formValues.keyTwo, 
-      formValues.action);
+    let temp = this.caesarForm.value as unknown as CipherBody;
+    this.ccService.processCB(temp);
+  }
+
+  updateKey(input: string){
+    this.keySelect = input;
+    if(input==='1K') this.caesarForm.controls['action'].setValue('E1K');
+    if(input==='2K') this.caesarForm.controls['action'].setValue('E2K');    
+  }
+
+  showExplanation(flag: boolean){
+    this.showExplained = flag;
   }
 }

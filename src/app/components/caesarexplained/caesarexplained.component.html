@@ -1,0 +1,73 @@
+<div>
+    <h2>How it works</h2>
+    <p>A Caesar Cipher is a very basic encryption method, the complexity and security of which can vary. At the most basic level, three things are required:</p>
+    <ol>
+        <li>A message to encrypt</li>
+        <li>At least one key, usually a number</li>
+        <li>A list of characters (letters, numbers, punctuation marks, special characters)</li>
+    </ol>
+    <h3>Encrypting</h3>
+    <p>If using one single key, to encrypt a message, you would:</p>
+    <ol>
+        <li>Go through each character in the message</li>
+        <li>Find that character in the list of characters</li>
+        <li>Shift to the left or right by the number of the key</li>
+        <li>Add that character to the new message</li>
+        <li>Repeat for each character in the plain message</li>
+        <li>If the key goes beyond the end of the character list, wrap around to the beginning</li>
+        <li>Characters not in the list can be handled in different ways</li>
+    </ol>
+    <p>Example, let's use this cipher on a simple message of 'secret message', and the following list of characters 'abcdefghijklmnopqrstuvwxyz ' (note that I included a space), and a key of 2 (keeping things simple for explaining) and shifting to the right to encrypt.</p>
+    <ul>
+        <li>'s' becomes 'u'</li>
+        <li>'e' becomes 'g'</li>
+        <li>'c' becomes 'e'</li>
+        <li>'r' becomes 't'</li>
+        <li>'e' becomes 'g'</li>
+        <li>'t' becomes 'v'</li>
+        <li>' ' becomes 'b'</li>
+        <li>'m' becomes 'o'</li>
+        <li>'e' becomes 'g'</li>
+        <li>'s' becomes 'u'</li>
+        <li>'s' becomes 'u'</li>
+        <li>'a' becomes 'c'</li>
+        <li>'g' becomes 'i'</li>
+        <li>'e' becomes 'g'</li>
+    </ul>
+    <p>'secret message' becomes 'ugetgvboguucig'</p>
+    <h3>Decrypting</h3>
+    <p>Decrypting a Caesar Cipher with a single key (if you know what the key is) is a matter of shifting each character the opposite direction (I used right above, so to decrypt, you would shift to the left). That's also why a single key Caesar Cipher is NOT secure, with a list of common words, a computer program could break this cipher very quickly.</p>
+    <h3>Improving</h3>
+    <p>There are ways to improve on the Caesar Cipher but enough to guard very important information so tread carefully.</p>
+    <ul>
+        <li>Use multiple keys. Here are a few ways of encrypting using 3 keys:</li>
+        <ul>
+            <li>Rotating Keys</li>
+            <ul>
+                <li>The first character is shifted using the first key</li>
+                <li>The second is shifted using the second key</li>
+                <li>The third is shifted using the third key</li>
+                <li>The fourth is shifted using the <b>first</b> key</li>
+                <li>The fifth is shifted using the <b>second</b> key</li>
+                <li>The sixth is shifted using the <b>third</b> key</li>
+                <li><i>This method is used with the 2 Key Encryption above</i></li>
+            </ul>
+            <li>Multiple Shifts</li>
+            <ul>
+                <li>Every character would be shifted by the first key</li>
+                <li>Every second character would be shifted by the second key</li>
+                <li>Every third character would be shifted by the third key</li>
+                <li>These would overlap each other so some characters would be shifted as many as three times</li>
+            </ul>
+            <li>Rotating Shift Direction</li>
+            <ul>
+                <li>Shift to the right with the first key</li>
+                <li>Shift to the left with the second key</li>
+                <li>Back to the right with the third key</li>
+            </ul>
+            <li>Combination of the ideas above or other possibilities</li>
+        </ul>
+        <li>Using a rotating character list. Instead of using a-z all the time, randomize the order of the letters so they aren't always in alphabetical order. Randomizing just a-z lower case where no letter repeats, means there are <a href="https://convertpedia.com.br/en/math/calculate-factorial/26-factorial.php" target="_blank">403 septillion possibilities</a>. Now expand that to include upper case letters, numbers, punctuation marks and other characters. A different randomized set could be used each hour of each day for 1,000 years and barely scratch the number of possible sets. You would just need to make sure that both sides use the same character list...</li>
+    </ul>
+    <p>There are many options available, you just need to make sure that the decryption method is the opposite of the encryption method.</p>
+</div>
