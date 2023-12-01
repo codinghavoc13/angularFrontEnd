@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CipherBody } from '../../common/cipher-body';
-import { CaesarCipherService } from '../../service/caesar/caesar-cipher.service';
+import { CipherBody } from '../../../common/cipher-body';
+import { CaesarCipherService } from '../../../service/caesar/caesar-cipher.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { environment } from 'src/environments/environment';

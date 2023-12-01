@@ -3,26 +3,32 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CaesarCipherComponent } from './components/caesar-cipher/caesar-cipher.component';
-import { CaesarCipherResultComponent } from './components/caesar-cipher-result/caesar-cipher-result.component';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
-import { CaesarCipherService } from './service/caesar/caesar-cipher.service';
+import { CaesarCipherComponent } from './components/cipher/caesar-cipher/caesar-cipher.component';
+import { CaesarCipherResultComponent } from './components/cipher/caesar-cipher-result/caesar-cipher-result.component';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { CipherMainComponent } from './components/cipher-main/cipher-main.component';
-import { PassphraseComponent } from './components/passphrase/passphrase.component';
+import { CipherMainComponent } from './components/cipher/cipher-main/cipher-main.component';
+import { PassphraseComponent } from './components/cipher/passphrase/passphrase.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavComponent } from './components/nav/nav.component';
+import { NavComponent } from './components/main/nav/nav.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './components/main/main.component';
-import { CaesarexplainedComponent } from './components/caesarexplained/caesarexplained.component';
+import { CaesarexplainedComponent } from './components/cipher/caesarexplained/caesarexplained.component';
+import { MovieDisplayComponent } from './components/mmdb/movie-display/movie-display.component';
+import { MmdbMainComponent } from './components/mmdb/mmdb-main/mmdb-main.component';
+import { ActorListComponent } from './components/mmdb/actor-list/actor-list.component';
+import { ActorDisplayComponent } from './components/mmdb/actor-display/actor-display.component';
+import { MovieListComponent } from './components/mmdb/movie-list/movie-list.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
   {path: 'caesarResult', component: CaesarCipherResultComponent},
   {path: 'passphrase', component:PassphraseComponent},
   {path: 'cipher', component: CipherMainComponent},
-  // {path: '/', component: MainComponent},
+  {path: 'mmdb', component: MmdbMainComponent},
+  {path: 'mmdb/movie-display', component: MovieDisplayComponent},
+  {path: 'mmdb/actor-display', component: ActorDisplayComponent},
   {path: '', component: MainComponent},
   {path: '**', component:CipherMainComponent}
 ];
@@ -36,7 +42,12 @@ const routes: Routes = [
     PassphraseComponent,
     NavComponent,
     MainComponent,
-    CaesarexplainedComponent
+    CaesarexplainedComponent,
+    MovieDisplayComponent,
+    MmdbMainComponent,
+    ActorListComponent,
+    ActorDisplayComponent,
+    MovieListComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
