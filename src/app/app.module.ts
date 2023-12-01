@@ -3,18 +3,21 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CaesarCipherComponent } from './components/cipher/caesar-cipher/caesar-cipher.component';
-import { CaesarCipherResultComponent } from './components/cipher/caesar-cipher-result/caesar-cipher-result.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { CipherMainComponent } from './components/cipher/cipher-main/cipher-main.component';
-import { PassphraseComponent } from './components/cipher/passphrase/passphrase.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavComponent } from './components/main/nav/nav.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MainComponent } from './components/main/main.component';
+import { NavComponent } from './components/main/nav/nav.component';
+
+import { CaesarCipherComponent } from './components/cipher/caesar-cipher/caesar-cipher.component';
+import { CaesarCipherResultComponent } from './components/cipher/caesar-cipher-result/caesar-cipher-result.component';
+import { CipherMainComponent } from './components/cipher/cipher-main/cipher-main.component';
+import { PassphraseComponent } from './components/cipher/passphrase/passphrase.component';
 import { CaesarexplainedComponent } from './components/cipher/caesarexplained/caesarexplained.component';
+
 import { MovieDisplayComponent } from './components/mmdb/movie-display/movie-display.component';
 import { MmdbMainComponent } from './components/mmdb/mmdb-main/mmdb-main.component';
 import { ActorListComponent } from './components/mmdb/actor-list/actor-list.component';
