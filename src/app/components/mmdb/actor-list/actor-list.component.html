@@ -1,4 +1,5 @@
 <h3>Starring</h3>
 <ul>
-    <li><a routerLink="/mmdb/actor-display">Actor 1</a></li>
+    <!-- <li><a routerLink="/mmdb/actor-display">Actor 1</a></li> -->
+    <li (click)="prepActorDetailsPage(actor.actor_id)" *ngFor="let actor of actors">{{actor.firstName}} {{actor.lastName}}</li>
 </ul>

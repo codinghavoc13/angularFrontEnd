@@ -1,4 +1,6 @@
 <h3>Starring In</h3>
 <ul>
-    <li><a routerLink="/mmdb/movie-display">Movie 1</a></li>
+    <!-- <li><a routerLink="/mmdb/movie-display">Movie 1</a></li> -->
+    <li (click)="prepMovieDetailsPage(movie.movie_id)" *ngFor="let movie of movies">
+    {{movie.movieTitle}}</li>
 </ul>

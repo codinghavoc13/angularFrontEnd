@@ -1,6 +1,8 @@
 <h1><a routerLink="/mmdb">MMDB - My Movie DataBase</a> -> Movie Details Page</h1>
 <h2>UNDER CONSTRUCTION - Check back later for more</h2>
-<h3>Actor Details</h3>
-<p>This page will display details about the actors I keep track of that star in movies that I've entered in the database. I won't be putting every detail about every actor here.</p>
+<p><b>NOTE:</b> Still looking into an issue where the wrong list of actors is showing up or no actors are showing up
+    at all. Every movie has at least one actor paired with it and vice versa</p>
+<h3>{{actorToDisplay.firstName}} {{actorToDisplay.lastName}}</h3>
+<p>This is not a complete list of everything this actor has starred in, only what I have and what I have entered into the database</p>
 <hr>
 <app-movie-list></app-movie-list>

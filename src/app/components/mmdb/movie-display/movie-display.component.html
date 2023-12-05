@@ -1,6 +1,13 @@
 <h1><a routerLink="/mmdb">MMDB - My Movie DataBase</a> -> Movie Details Page</h1>
 <h2>UNDER CONSTRUCTION - Check back later for more</h2>
-<h3>Movie Details</h3>
-<p>This page will display details about the movie with a list some of the actors listed below</p>
+<p><b>NOTE:</b> Still looking into an issue where the wrong list of actors is showing up or no actors are showing up
+    at all. Every movie has at least one actor paired with it and vice versa</p>
+<h3>{{movieToDisplay.movieTitle}}</h3>
+<div *ngIf="movieToDisplay.plotSummary===null; else displayResults">
+    <p style="font-style: italic;">No plot summary provided, yet</p>
+</div>
+<ng-template #displayResults>
+    <p>{{ movieToDisplay.plotSummary }}</p>
+</ng-template>
 <hr>
 <app-actor-list></app-actor-list>
