@@ -1,5 +1,19 @@
 <h1><a routerLink="/cipher">Cipher</a>->Passphrase</h1>
 <hr>
-<p>This section is still in the works, check back for updates</p>
+<form [formGroup]="passphraseForm" name="passphraseForm">
+    <div>
+        <p>Enter the message you want to encrypt or decrypt:</p>
+        <textarea rows="2" cols="50" id="message" name="message" formControlName="message" required class="form-control" ng-model="passphraseForm.message"></textarea>
+    </div>
+    <hr>
+    <div>
+        <p>Enter the pass phrase you would like to use to encrypt or decrypt your message:</p>
+        <textarea rows="2" cols="50" id="passphrase" name="passphrase" formControlName="passphrase" required class="form-control" 
+        ng-model="passphraseForm.passphrase"></textarea>
+    </div>
+    <hr>
+    <button type="submit" (click)="encrypt()" [disabled]="!passphraseForm.valid">Encrypt</button>
+    <button type="submit" (click)="decrypt()" [disabled]="!passphraseForm.valid">Decrypt</button>
+</form>
 <hr>
 <p>Go back to the <a routerLink="">main page</a></p>

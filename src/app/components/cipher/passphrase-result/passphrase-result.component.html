@@ -1,0 +1,14 @@
+<h1><a routerLink="/cipher">Cipher</a>->
+    <a routerLink="/passphrase">PassPhrase</a>->Passphrase Result</h1>
+<!-- <p>Caesar Cipher Result</p> -->
+<hr>
+<!-- <p>{{ cbResult.msg }}</p> -->
+<div *ngIf="ppResult.message===''; else displayResults">
+    <p style="color: red; font-style: italic;">Please process a proper message</p>
+</div>
+<ng-template #displayResults>
+    <p>{{ ppResult.message }}</p>
+</ng-template>
+<hr>
+<p>Go back to the <a routerLink="/passphrase">Passphrase page</a></p>
+<p>Go back to the <a routerLink="">Main page</a></p>

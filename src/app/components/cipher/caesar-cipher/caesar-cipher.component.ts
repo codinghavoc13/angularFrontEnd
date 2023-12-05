@@ -24,9 +24,7 @@ export class CaesarCipherComponent implements OnInit{
     action: new FormControl('E1K',Validators.required)
   })
 
-  constructor(private ccService: CaesarCipherService,
-    private route: ActivatedRoute,
-    private router: Router){
+  constructor(private ccService: CaesarCipherService){
 
   }
   ngOnInit(): void {
