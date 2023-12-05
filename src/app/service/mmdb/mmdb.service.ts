@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { Actor } from 'src/app/common/actor';
+import { MMDBResponse } from 'src/app/common/mmdb-response';
 import { Movie } from 'src/app/common/movie';
 import { environment } from 'src/environments/environment';
 
@@ -10,26 +11,24 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MmdbService {
-  private movieUrl = environment.baseUrl+"/movies";
-  private actorUrl = environment.baseUrl+"/actors";
-  private getActorsByMovieIdUrl = environment.baseUrl + "/actors/findByMovieId";
-  private getMoviesByActorIdUrl = environment.baseUrl + "/movies/findByActorId";
+  private allMoviesUrl = environment.baseUrl+"/movies/all";
 
   movieIdFromMain = -1;
   actorIdFromMain = -1;
   movies: Movie[] = [];
-  actors: Actor[] = [];
-  movieToDisplay: Movie = new Movie(-1,"","","",new Date(0));
-  actorToDisplay: Actor = new Actor(-1,"","","");
+
+  nullActor: Actor = new Actor(-1,"","","");
+  nullMovie: Movie = new Movie(-1,"","","",new Date(0));
+  movieDetails: MMDBResponse = new MMDBResponse(this.nullActor,[],this.nullMovie,[]);
+  private mmdbMovieUrl = environment.baseUrl + "/mmdb/movieDetails/";
+  private mmdbActorUrl = environment.baseUrl + "/mmdb/actorDetails/";
 
   constructor(private httpClient: HttpClient,
     private router: Router) {}
     
   async buildMovieList(){
-    this.httpClient.get<Movie>(this.movieUrl+"/all").subscribe(
+    this.httpClient.get<Movie>(this.allMoviesUrl).subscribe(
       data=>{
-        console.log("svc");
-        console.log(data);
         this.movies.push(data);
       }
     );
@@ -38,14 +37,9 @@ export class MmdbService {
 
   buildMovieDetail(movieID: number){
     this.movieIdFromMain = movieID;
-    this.httpClient.get<Actor[]>(this.getActorsByMovieIdUrl+'/'+movieID).subscribe(
+    this.httpClient.get<MMDBResponse>(this.mmdbMovieUrl+movieID).subscribe(
       data=>{
-        this.actors = data;
-      }
-    )
-    this.httpClient.get<Movie>(this.movieUrl+"/"+movieID).subscribe(
-      data=>{
-        this.movieToDisplay = data;
+        this.movieDetails = data;
         this.router.navigate(['/mmdb/movie-display']);
       }
     )
@@ -53,23 +47,11 @@ export class MmdbService {
 
   buildActorDetail(actorID: number){
     this.actorIdFromMain = actorID;
-    this.httpClient.get<Movie[]>(this.getMoviesByActorIdUrl+"/"+actorID).subscribe(
-      data=>{this.movies = data}
-    )
-    this.httpClient.get<Actor>(this.actorUrl+"/"+actorID).subscribe(
+    this.httpClient.get<MMDBResponse>(this.mmdbActorUrl+actorID).subscribe(
       data=>{
-        this.actorToDisplay = data;
+        this.movieDetails = data;
         this.router.navigate(['/mmdb/actor-display']);
       }
     )
-  }
-
-  reset(){
-    this.movieIdFromMain = -1;
-    this.actorIdFromMain = -1;
-    this.movies = [];
-    this.actors = [];
-    this.movieToDisplay = new Movie(-1,"","","",new Date(0));
-    this.actorToDisplay = new Actor(-1,"","","");
   }
 }

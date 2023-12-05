@@ -1,5 +1,16 @@
 <h3>Starring</h3>
-<ul>
-    <!-- <li><a routerLink="/mmdb/actor-display">Actor 1</a></li> -->
-    <li (click)="prepActorDetailsPage(actor.actor_id)" *ngFor="let actor of actors">{{actor.firstName}} {{actor.lastName}}</li>
-</ul>
+<!-- <ul>
+    <li (click)="prepActorDetailsPage(actor.actor_id)" *ngFor="let actor of actors">
+        {{actor.firstName}} {{actor.lastName}}</li>
+</ul> -->
+
+<div class="row">
+    <div *ngFor="let actor of actors" class="card bg-light" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{actor.firstName}} {{actor.lastName}}</h5>
+            <!-- <p class="card-text">{{movie.releaseDate}}</p> -->
+            <!-- <a routerLink="/mmdb/movie-display" class="btn btn-light">View Details</a> -->
+            <a (click)="prepActorDetailsPage(actor.actor_id)" class="btn btn-dark">View Details</a>
+        </div>
+    </div>
+</div>

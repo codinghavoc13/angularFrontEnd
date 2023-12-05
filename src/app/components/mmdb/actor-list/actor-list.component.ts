@@ -13,7 +13,7 @@ export class ActorListComponent implements OnInit{
   constructor(private mmdbSvc: MmdbService){}
 
   ngOnInit(): void {
-    this.actors = this.mmdbSvc.actors;
+    this.actors = this.mmdbSvc.movieDetails.actors;
   }
 
   prepActorDetailsPage(movieId: number){

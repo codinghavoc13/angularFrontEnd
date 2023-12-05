@@ -19,7 +19,6 @@ export class MmdbMainComponent implements OnInit{
 
   ngOnInit(): void {
     this.buildMovieList();
-    this.mmdbSvc.reset();
   }
 
   buildMovieList(){
