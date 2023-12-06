@@ -28,7 +28,7 @@ export class PassphraseService {
   }
 
   async decrypt(pp: PassphraseBody){
-    this.httpClient.post<PassphraseBody>(this.decryptUrl,pp).subscribe(
+    this.httpClient.post<PassphraseBody>(this.decryptUrl, pp).subscribe(
       data=>{
         this.ppOutput = data as PassphraseBody;
         this.router.navigate(['/passphraseResult']);

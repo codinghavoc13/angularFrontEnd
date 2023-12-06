@@ -7,7 +7,8 @@
     <p style="color: red; font-style: italic;">Please process a proper message</p>
 </div>
 <ng-template #displayResults>
-    <p>{{ ppResult.message }}</p>
+    <p>||{{ ppResult.message }}||</p>
+    <p><b>SPECIAL NOTE: </b> There are two pipes (||) at the beginning and end of the message. Copy the text and remove those before decrypting. There is an issue when printing the message that will trim spaces from the beginning and end of the message, causing the decrypt to fail</p>
 </ng-template>
 <hr>
 <p>Go back to the <a routerLink="/passphrase">Passphrase page</a></p>

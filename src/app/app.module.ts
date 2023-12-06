@@ -24,6 +24,7 @@ import { ActorListComponent } from './components/mmdb/actor-list/actor-list.comp
 import { ActorDisplayComponent } from './components/mmdb/actor-display/actor-display.component';
 import { MovieListComponent } from './components/mmdb/movie-list/movie-list.component';
 import { PassphraseResultComponent } from './components/cipher/passphrase-result/passphrase-result.component';
+import { PassphraseExplainedComponent } from './components/cipher/passphrase-explained/passphrase-explained.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -53,7 +54,8 @@ const routes: Routes = [
     ActorListComponent,
     ActorDisplayComponent,
     MovieListComponent,
-    PassphraseResultComponent
+    PassphraseResultComponent,
+    PassphraseExplainedComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

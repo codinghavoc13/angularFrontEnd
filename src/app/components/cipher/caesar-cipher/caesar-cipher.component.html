@@ -57,10 +57,6 @@
         <hr>
         <button type="submit" [disabled]="!caesarForm.valid">Submit</button>
     </form>
-
-    <!-- <hr>
-    <app-caesar-cipher-result></app-caesar-cipher-result> -->
-
     <hr>
     <div *ngIf="!showExplained; else display">
         <button (click)="showExplanation(true)">Explain on a Caesar Cipher works</button>

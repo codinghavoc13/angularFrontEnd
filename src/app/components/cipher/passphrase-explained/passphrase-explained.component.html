@@ -1,0 +1,25 @@
+<div>
+    <h2>How it works</h2>
+    <p>At its base, my Passphrase cipher (and I'm sure there is a more well known cipher that works the same out there somewhere) is a Caesar Cipher turbo-charged. A Caesar Cipher uses one or more numerical keys to encrypt a message. The idea behind this cipher was to use a passphrase as a way of more easily remembering keys to use to encrypt/decrypt a message.</p>
+    <p>Similarly to the Caesar Cipher, three items are required:</p>
+    <ul>
+        <li>A message to encrypt/decrypt</li>
+        <li>A passphrase, anything from a single character to a sentence or paragraph</li>
+        <li>A list of characters (letters, numbers, punctuation marks, special characters)</li>
+    </ul>
+    <h3>Encrypting</h3>
+    <p>The first character in the passphrase is identified and it's index in the list of characters is determined. That number is then used to shift the first letter in the message. Repeat for each letter in the message. When the end of the passphrase is reached, you wrap around to the beginning of the passphrase and repeat.</p>
+    <p>For example, let's take the message: "attack the west flank at dawn" (the double quotes will not be part of the message), a passphrase of "rubicon" and a character base of: "abcdefghijklmnopqrstuvwxyz " (Note that I included a space)</p>
+    <ul>
+        <li>Get the first letter of the passphrase, 'r'</li>
+        <li>Identify the index (location in the list) of 'r' is in the character base list, in this case 17 (indices in almost every programming language start at 0, so a is 0, b is 1, c is 2)</li>
+        <li>We then start at 'a' and shift 17 spaces to the right plus an additional spot, which oddly enough, gives us 's'</li>
+        <li><i>The additional shift is to account for situations where the first letter of the passphrase is the first letter of the character base. Without the additional shift, the index would be 0 which would lead to no change. Doubtful this would mean your message could be easily decrypted by someone without the correct passphrase but it's an added level of security.</i></li>
+        <li>The next letter of the passphrase is 'u' which has an index of 20, so we shift the second letter of the message, 't', to the right 20 places (as with the Caesar Cipher, we we reach the end of the character base list, we wrap around to the beginning; as well as the one additional space as above), which gives us 'n'. </li>
+        <li>The next letter in the passphrase is 'b', which has an index of 1, so the third letter of the message changes from 't' to 'v'</li>
+    </ul>
+    <p>The final encrypted message is: "snvjfznkbgiztfkuhudbyrvvigpje"</p>
+    <h3>Decrypting</h3>
+    <p>Decrypting the message requires using the exact same passphrase and character list, but this time, when shifting, instead of moving one character to the right, you reverse and go to the left. <i>Don't forget to add one to the shift to account for the same issue I mentioned earlier</i></p>
+    <h3></h3>
+</div>

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CipherBody } from '../../../common/cipher-body';
 import { CaesarCipherService } from '../../../service/caesar/caesar-cipher.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { environment } from 'src/environments/environment';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-caesar-cipher',
@@ -11,7 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./caesar-cipher.component.css']
 })
 
-export class CaesarCipherComponent implements OnInit{
+export class CaesarCipherComponent{
   keySelect = "1K";
   showExplained = false;
   cbInput: CipherBody | undefined;
@@ -26,8 +24,6 @@ export class CaesarCipherComponent implements OnInit{
 
   constructor(private ccService: CaesarCipherService){
 
-  }
-  ngOnInit(): void {
   }
 
   onSubmit(){
