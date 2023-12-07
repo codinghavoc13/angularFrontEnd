@@ -1,7 +1,8 @@
 <h1><a routerLink="/mmdb">MMDB - My Movie DataBase</a> -> Movie Details Page</h1>
-<h2>UNDER CONSTRUCTION - Check back later for more</h2>
+<h2><i>UNDER CONSTRUCTION - Check back later for more</i></h2>
+<hr>
 <h3>{{movieDetails.movie.movieTitle}}</h3>
-<div *ngIf="movieDetails.movie.plotSummary; else displayResults">
+<div *ngIf="movieDetails.movie.plotSummary===null; else displayResults">
     <p style="font-style: italic;">No plot summary provided, yet</p>
 </div>
 <ng-template #displayResults>
