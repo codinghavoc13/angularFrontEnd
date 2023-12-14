@@ -25,6 +25,8 @@ import { ActorDisplayComponent } from './components/mmdb/actor-display/actor-dis
 import { MovieListComponent } from './components/mmdb/movie-list/movie-list.component';
 import { PassphraseResultComponent } from './components/cipher/passphrase-result/passphrase-result.component';
 import { PassphraseExplainedComponent } from './components/cipher/passphrase-explained/passphrase-explained.component';
+import { SchoolManagerMainComponent } from './components/school-manager/school-manager-main/school-manager-main.component';
+import { AddAssignmentsComponent } from './components/school-manager/add-assignments/add-assignments.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -35,6 +37,7 @@ const routes: Routes = [
   {path: 'mmdb', component: MmdbMainComponent},
   {path: 'mmdb/movie-display', component: MovieDisplayComponent},
   {path: 'mmdb/actor-display', component: ActorDisplayComponent},
+  {path: 'schoolManager/addAssignment', component:AddAssignmentsComponent},
   {path: '', component: MainComponent},
   {path: '**', component:CipherMainComponent}
 ];
@@ -55,7 +58,9 @@ const routes: Routes = [
     ActorDisplayComponent,
     MovieListComponent,
     PassphraseResultComponent,
-    PassphraseExplainedComponent
+    PassphraseExplainedComponent,
+    SchoolManagerMainComponent,
+    AddAssignmentsComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
