@@ -6,7 +6,7 @@ import {FormGroup, FormControl, FormArray, FormBuilder, Validators} from '@angul
   templateUrl: './add-assignments.component.html',
   styleUrls: ['./add-assignments.component.css']
 })
-export class AddAssignmentsComponent {
+export class SMAddAssignmentsComponent {
   assignmentForm: FormGroup;
 
   constructor(private fb: FormBuilder){

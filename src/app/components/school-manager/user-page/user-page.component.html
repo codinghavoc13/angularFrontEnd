@@ -1,0 +1,18 @@
+<div *ngIf="pageView=='staff'">
+    <app-staff-page></app-staff-page>
+</div>
+<div *ngIf="pageView=='student'">
+    <app-student-page></app-student-page>
+</div>
+<div *ngIf="pageView=='parent'">
+    <app-parent-page></app-parent-page>
+</div>
+<hr>
+<a class="btn btn-primary" (click)="setViewPage('parent')">Parent</a>
+<a class="btn btn-primary" (click)="setViewPage('staff')">Staff</a>
+<a class="btn btn-primary" (click)="setViewPage('student')">Student</a>
+<hr>
+<p><a routerLink="/schoolManager/main">Back to school manager main</a></p>
+<p><a routerLink="/schoolManager/login">Login page</a></p>
+<p><a routerLink="/schoolManager/addAssignment">Add Assignment page</a></p>
+<p><a routerLink="/schoolManager/userPage">User Page</a></p>

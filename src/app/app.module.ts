@@ -25,8 +25,13 @@ import { ActorDisplayComponent } from './components/mmdb/actor-display/actor-dis
 import { MovieListComponent } from './components/mmdb/movie-list/movie-list.component';
 import { PassphraseResultComponent } from './components/cipher/passphrase-result/passphrase-result.component';
 import { PassphraseExplainedComponent } from './components/cipher/passphrase-explained/passphrase-explained.component';
-import { SchoolManagerMainComponent } from './components/school-manager/school-manager-main/school-manager-main.component';
-import { AddAssignmentsComponent } from './components/school-manager/add-assignments/add-assignments.component';
+import { SMMainComponent } from './components/school-manager/school-manager-main/school-manager-main.component';
+import { SMAddAssignmentsComponent } from './components/school-manager/add-assignments/add-assignments.component';
+import { SMLoginComponent } from './components/school-manager/login/login.component';
+import { UserPageComponent } from './components/school-manager/user-page/user-page.component';
+import { StudentPageComponent } from './components/school-manager/student-page/student-page.component';
+import { StaffPageComponent } from './components/school-manager/staff-page/staff-page.component';
+import { ParentPageComponent } from './components/school-manager/parent-page/parent-page.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -37,7 +42,10 @@ const routes: Routes = [
   {path: 'mmdb', component: MmdbMainComponent},
   {path: 'mmdb/movie-display', component: MovieDisplayComponent},
   {path: 'mmdb/actor-display', component: ActorDisplayComponent},
-  {path: 'schoolManager/addAssignment', component:AddAssignmentsComponent},
+  {path: 'schoolManager/main', component: SMMainComponent},
+  {path: 'schoolManager/login', component: SMLoginComponent},
+  {path: 'schoolManager/userPage', component: UserPageComponent},
+  {path: 'schoolManager/addAssignment', component:SMAddAssignmentsComponent},
   {path: '', component: MainComponent},
   {path: '**', component:CipherMainComponent}
 ];
@@ -59,8 +67,13 @@ const routes: Routes = [
     MovieListComponent,
     PassphraseResultComponent,
     PassphraseExplainedComponent,
-    SchoolManagerMainComponent,
-    AddAssignmentsComponent
+    SMMainComponent,
+    SMAddAssignmentsComponent,
+    SMLoginComponent,
+    UserPageComponent,
+    StudentPageComponent,
+    StaffPageComponent,
+    ParentPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
