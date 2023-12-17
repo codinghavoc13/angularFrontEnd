@@ -32,6 +32,7 @@ import { UserPageComponent } from './components/school-manager/user-page/user-pa
 import { StudentPageComponent } from './components/school-manager/student-page/student-page.component';
 import { StaffPageComponent } from './components/school-manager/staff-page/staff-page.component';
 import { ParentPageComponent } from './components/school-manager/parent-page/parent-page.component';
+import { NavbarComponent } from './components/school-manager/navbar/navbar.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -73,7 +74,8 @@ const routes: Routes = [
     UserPageComponent,
     StudentPageComponent,
     StaffPageComponent,
-    ParentPageComponent
+    ParentPageComponent,
+    NavbarComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

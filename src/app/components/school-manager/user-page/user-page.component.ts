@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
 
 @Component({
@@ -9,11 +11,15 @@ import { SchoolManagerService } from 'src/app/service/school-manager/school-mana
 export class UserPageComponent implements OnInit{
   pageView: string = '';
 
-  constructor(private smSvc: SchoolManagerService){
+  constructor(private smSvc: SchoolManagerService,
+    private router: Router){
 
   }
   ngOnInit(): void {
     this.pageView = this.smSvc.roleView;
+    if(this.pageView == 'main' || this.pageView == ''){
+      this.router.navigate(['/schoolManager/main']);
+    }
   }
 
   setViewPage(view: string){

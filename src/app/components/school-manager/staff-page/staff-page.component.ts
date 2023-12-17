@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/common/school-manager/user';
 import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
 
 @Component({
@@ -7,18 +8,22 @@ import { SchoolManagerService } from 'src/app/service/school-manager/school-mana
   styleUrls: ['./staff-page.component.css']
 })
 export class StaffPageComponent implements OnInit{
-  staff_first_name: string = '';
-  staff_id: number = -1;
+  loggedInUser: User | undefined;
 
   constructor(private smSvc: SchoolManagerService){}
 
   ngOnInit(): void {
-      console.log("localstorage - firstname: " + localStorage.getItem('user'));
-      this.smSvc.currentUser$.subscribe(
-        data=>{
-          console.log(data?.firstname!);
-          this.staff_first_name = data!.firstname!;
-        }
-      )
+    // this.loggedInUser = this.smSvc.userTgt;
+    // console.log(this.loggedInUser?.firstname);
+    // console.log(this.smSvc.currentUser$.subscribe(
+    //   data=>{
+    //     this.loggedInUser = data!;
+    //   }
+    // ));
+    // console.log(this.loggedInUser?.firstname);
+  }
+
+  logout(){
+    this.smSvc.logout();
   }
 }

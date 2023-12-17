@@ -16,6 +16,7 @@ export class SchoolManagerService {
   currentUser$ = this.currentUserSrc.asObservable();
   roleView: string = '';
   invalidLoginCredentials: boolean = false;
+  userTgt: any;
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
@@ -29,15 +30,9 @@ export class SchoolManagerService {
           this.invalidLoginCredentials = true;
         } else {
           const user = data;
-          const temp = new Map();
-          temp.set('username', data.username);
-          temp.set('role', data.role);
-          temp.set('firstName',data.firstname);
-          temp.set('lastName',data.lastname);
-          temp.set('userId', data.staff_id);
+          this.userTgt = user;
           this.roleView = data.role;
-          // console.log(JSON.stringify(Array.from(temp)));
-          localStorage.setItem('user',JSON.stringify(Array.from(temp)));
+          localStorage.setItem('user',JSON.stringify(user));
           this.currentUserSrc.next(user);
           this.router.navigate(['/schoolManager/userPage']);
         }
@@ -48,6 +43,7 @@ export class SchoolManagerService {
   logout(){
     localStorage.removeItem('user');
     this.currentUserSrc.next(null);
+    this.roleView = 'main';
     this.router.navigate(['/schoolManager/main']);
   }
 }

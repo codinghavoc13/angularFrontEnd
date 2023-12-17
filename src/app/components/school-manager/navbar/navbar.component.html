@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark"><!--Add 'fixed-top' to class list to make this nav bar the main nav bar-->
+    <div class="container">
+        <a class="navbar-brand" routerLink="/schoolManager/main">School Manager</a>
+        <!-- <ul *ngIf="smSvc.currentUser$| async" class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Matches</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Lists</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Messages</a>
+            </li>
+        </ul> -->
+        
+        <form *ngIf="!(smSvc.currentUser$ | async)" #loginForm="ngForm" class="d-flex"
+            (ngSubmit)="login()" autocomplete="off">
+            <input class="form-control me-2" 
+                type="text" placeholder="Username"
+                name="username" [(ngModel)]="loginReqDTO.username">
+            <input class="form-control me-2" 
+                type="password" placeholder="Password"
+                name="password" [(ngModel)]="loginReqDTO.password">
+            <button class="btn btn-outline-success" 
+                type="submit">Login</button>
+        </form>
+
+        <div class="dropdown" *ngIf="smSvc.currentUser$ | async" dropdown>
+            <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome user</a>
+            <div class="dropdown-menu" *dropdownMenu>
+                <a class="dropdown-item">Edit Profile</a>
+                <a class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+        </div>
+
+    </div>
+</nav>
