@@ -1,18 +1,6 @@
 <div class="card text-center">
   <div class="card-header">
     <form #loginForm="ngForm">
-      <ul class="nav nav-tabs card-header-tabs">
-        <li class="nav-item">
-          <a class="nav-link" [ngClass]="{'active':viewSelector=='staff'}" (click)="setView('staff')">Staff Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [ngClass]="{'active':viewSelector=='student'}" (click)="setView('student')">Student
-            Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [ngClass]="{'active':viewSelector=='parent'}" (click)="setView('parent')">Parent Login</a>
-        </li>
-      </ul>
       <div class="form-group">
         <label for="username">User Name <i *ngIf="usernameRequiredWarning" style="color: red;">*User name is required*</i></label>
         <input type="text" class="form-control" id="username" aria-describedby="username"
@@ -23,9 +11,10 @@
         <input type="password" class="form-control" id="password" aria-describedby="password"
         placeholder="Password" [(ngModel)]="loginReqDTO.password" name="password">
       </div>
-      <a class="btn btn-primary" *ngIf="viewSelector=='staff'" (click)="staffLogin()">Staff Login</a>
-      <a class="btn btn-primary" *ngIf="viewSelector=='student'" (click)="studentLogin()">Student Login</a>
-      <a class="btn btn-primary" *ngIf="viewSelector=='parent'" (click)="parentLogin()">Parent Login</a>
+      <div *ngIf="invalidLoginCredentials">
+        <p style="color: red;"><i>Invalid Login Credentials</i></p>
+      </div>
+      <a class="btn btn-primary" (click)="login()">Login</a>
     </form>
   </div>
 </div>

@@ -8,14 +8,13 @@ import { SchoolManagerService } from 'src/app/service/school-manager/school-mana
   styleUrls: ['./login.component.css']
 })
 export class SMLoginComponent {
-  viewSelector: string = 'student';
+  viewSelector: string = 'staff';
   loginReqDTO: SMLoginDTO = new SMLoginDTO('','');
   usernameRequiredWarning: boolean = false;
   passwordRequiredWarning: boolean = false;
+  invalidLoginCredentials: boolean = this.smSvc.invalidLoginCredentials;
 
-  constructor(private smSvc: SchoolManagerService){
-
-  }
+  constructor(private smSvc: SchoolManagerService){}
 
   setView(view: string){
     this.viewSelector = view;
@@ -27,31 +26,11 @@ export class SMLoginComponent {
     return !(this.usernameRequiredWarning || this.passwordRequiredWarning);
   }
 
-  parentLogin(){
-    console.log(this.loginReqDTO);
-    if(this.validateLoginDTO()){
-        console.log("Starting the Parent login process, this still in the works, doesn't do anything right now");
-        this.smSvc.login(this.loginReqDTO,'parent');
-      } else {
-        console.log("username and/or password is empty");
-      }
-  }
-
-  staffLogin(){
+  login(){
     console.log(this.loginReqDTO);
     if(this.validateLoginDTO()){
       console.log("Starting the Staff login process, this still in the works, doesn't do anything right now");
-      this.smSvc.login(this.loginReqDTO, 'staff');
-    } else {
-      console.log("username and/or password is empty");
-    }
-  }
-
-  studentLogin(){
-    console.log(this.loginReqDTO);
-    if(this.validateLoginDTO()) {
-      console.log("Starting the Student login process, this still in the works, doesn't do anything right now");
-      this.smSvc.login(this.loginReqDTO,'student');
+      this.smSvc.login(this.loginReqDTO);
     } else {
       console.log("username and/or password is empty");
     }
