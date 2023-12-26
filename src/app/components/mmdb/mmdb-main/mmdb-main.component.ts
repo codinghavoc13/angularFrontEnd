@@ -21,6 +21,8 @@ export class MmdbMainComponent implements OnInit{
     this.buildMovieList();
   }
 
+  //rework this to set this.movies = this mmdbsvc.movies
+  //or remove this completely and move the logic into ngoninit
   buildMovieList(){
     this.httpClient.get<Movie[]>(this.allUrl).subscribe(
       data=>{
