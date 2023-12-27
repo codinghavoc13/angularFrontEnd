@@ -1,6 +1,9 @@
-<p>Welcome {{loggedInUser?.firstname}}</p>
-<!--Build up a card based div like originally planned for the login page
+<app-navbar></app-navbar>
+<div *ngIf="(smSvc.currentUser$ | async) as user">
+    <p>Welcome {{user.firstName}}</p>
+    <!--Build up a card based div like originally planned for the login page
     - Assignment form
     - Grade book
     - Attendance
 -->
+</div>

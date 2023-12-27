@@ -1,10 +1,6 @@
 <div class="container">
-    <h1>Add new assignments using a dynamic form</h1>
     <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
-        <p>
-            <label for="name">Staff ID</label>
-            <input type="text" id="staff_id" name="staff_id" formControlName="staff_id" class="form-control">
-        </p>
+            <input type="hidden" id="teacher_id" name="teacher_id" formControlName="teacher_id" class="form-control">
 
         <table class="table table-bordered" formArrayName="assignments">
             <tr>
@@ -22,7 +18,12 @@
                     <input type="text" formControlName="assignmentTitle" class="form-control">
                 </td>
                 <td>
-                    <input type="text" formControlName="type" class="form-control">
+                    <!-- <input type="text" formControlName="assignmentType" class="form-control"> -->
+                    <select id="assignmentType" name="assignmentType" formControlName="assignmentType" class="form-control">
+                        <option value="HOMEWORK">Homework</option>
+                        <option value="QUIZ">Quiz</option>
+                        <option value="TEST">Test</option>
+                    </select>
                 </td>
                 <td>
                     <button (click)="removeAssignment(i)" class="btn btn-danger"
@@ -33,8 +34,6 @@
         <button type="submit" class="btn btn-success" [disabled]="!assignmentForm.valid">Submit</button>
     </form>
     <hr>
+    <p>This will go away after I check that submitting assignments from this form actually works</p>
     {{this.assignmentForm.value | json}}
 </div>
-<hr>
-<p><a routerLink="/schoolManager/main">Back to school manager main</a></p>
-<p><a routerLink="/schoolManager/login">Login page</a></p>

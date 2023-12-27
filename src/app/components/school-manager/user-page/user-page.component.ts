@@ -22,15 +22,6 @@ export class UserPageComponent implements OnInit{
     if(this.pageView == 'main' || this.pageView == ''){
       this.router.navigate(['/schoolManager/main']);
     }
-    // this.smSvc.currentUser$.subscribe(
-    //   data=>{
-    //     console.log('up-oninit-1');
-    //     console.log(data);
-    //     this.loggedInUser = data as User;
-    //   }
-    // )
-    // console.log('up-oninit-2');
-    // console.log(this.loggedInUser);
   }
 
   setViewPage(view: string){

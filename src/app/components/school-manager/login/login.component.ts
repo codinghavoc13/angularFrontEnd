@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
 import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
 
@@ -14,7 +15,7 @@ export class SMLoginComponent {
   passwordRequiredWarning: boolean = false;
   invalidLoginCredentials: boolean = this.smSvc.invalidLoginCredentials;
 
-  constructor(private smSvc: SchoolManagerService){}
+  constructor(private smSvc: SchoolManagerService, private router: Router){}
 
   setView(view: string){
     this.viewSelector = view;
@@ -27,10 +28,14 @@ export class SMLoginComponent {
   }
 
   login(){
-    console.log(this.loginReqDTO);
     if(this.validateLoginDTO()){
       console.log("Starting the login process");
-      this.smSvc.login(this.loginReqDTO);
+      this.smSvc.login(this.loginReqDTO).subscribe({
+        next:()=>{
+          // this.router.navigate(['/schoolManager/userPage']);
+          this.loginReqDTO = new SMLoginDTO('','');
+        }
+      })
     } else {
       console.log("username and/or password is empty");
     }

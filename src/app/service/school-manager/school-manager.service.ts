@@ -15,29 +15,27 @@ export class SchoolManagerService {
   private currentUserSrc = new BehaviorSubject<User|null>(null);
   currentUser$ = this.currentUserSrc.asObservable();
   roleView: string = '';
+  // user_id: number = 0;
+  loggedInUser: User | undefined;
   invalidLoginCredentials: boolean = false;
-  userTgt: User | undefined;
+  // userTgt: User | undefined;
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
   login(loginReq: SMLoginDTO){
     const urlString = this.baseUrl+"/staff/login";//this will need to change
-    // console.log("Received the following login request for: " + loginReq.username + " / " + loginReq.password);
-    // console.log("Working with: " + urlString);
-    return this.httpClient.post<User>(urlString,loginReq).subscribe(
-      data=>{
-        if(data==null){
-          this.invalidLoginCredentials = true;
-        } else {
-          const user = data;
-          this.userTgt = user;
-          this.roleView = data.role;
-          localStorage.setItem('user',JSON.stringify(user));
+    return this.httpClient.post<User>(this.baseUrl+"/staff/login",loginReq).pipe(
+      map((response:User)=>{
+        const user = response;
+        if(user){
+          console.log(user);
+          this.roleView = user.role;
+          // this.user_id = user.userId;
+          this.loggedInUser = user;
           this.currentUserSrc.next(user);
-          console.log('smsvc-1');
-          this.router.navigate(['/schoolManager/userPage']);
+          this.goToUserPage();
         }
-      }
+      })
     )
   }
 
@@ -46,5 +44,24 @@ export class SchoolManagerService {
     this.currentUserSrc.next(null);
     this.roleView = 'main';
     this.router.navigate(['/schoolManager/main']);
+  }
+
+  goToUserPage(){
+    switch(this.roleView){
+      case 'ADMIN':
+        this.router.navigate(['/schoolManager/staffPage']);
+        break;
+      case 'TEACHER':
+        this.router.navigate(['/schoolManager/teacherPage']);
+        break;
+      case 'STUDENT':
+        this.router.navigate(['/schoolManager/studentPage']);
+        break;
+      case 'PARENT':
+        this.router.navigate(['/schoolManager/parentPage']);
+        break;
+      default:
+        this.router.navigate(['/schoolManager/main']);
+    }
   }
 }

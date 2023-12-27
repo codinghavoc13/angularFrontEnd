@@ -33,6 +33,9 @@ import { StudentPageComponent } from './components/school-manager/student-page/s
 import { StaffPageComponent } from './components/school-manager/staff-page/staff-page.component';
 import { ParentPageComponent } from './components/school-manager/parent-page/parent-page.component';
 import { NavbarComponent } from './components/school-manager/navbar/navbar.component';
+import { TeacherPageComponent } from './components/school-manager/teacher-page/teacher-page.component';
+import { ProfilePageComponent } from './components/school-manager/profile-page/profile-page.component';
+import { AbsenceSubmitPageComponent } from './components/school-manager/absence-submit-page/absence-submit-page.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -45,10 +48,13 @@ const routes: Routes = [
   {path: 'mmdb/actor-display', component: ActorDisplayComponent},
   {path: 'schoolManager/main', component: SMMainComponent},
   {path: 'schoolManager/login', component: SMLoginComponent},
-  {path: 'schoolManager/userPage', component: UserPageComponent},
-  {path: 'schoolManager/addAssignment', component:SMAddAssignmentsComponent},
+  {path: 'schoolManager/teacherPage', component: TeacherPageComponent},
+  {path: 'schoolManager/staffPage', component: StaffPageComponent},
+  {path: 'schoolManager/studentPage', component: StudentPageComponent},
+  {path: 'schoolManager/parentPage', component: ParentPageComponent},
+  // {path: 'schoolManager/addAssignment', component:SMAddAssignmentsComponent},
   {path: '', component: MainComponent},
-  {path: '**', component:CipherMainComponent}
+  {path: '**', component:MainComponent}
 ];
 
 @NgModule({
@@ -75,7 +81,10 @@ const routes: Routes = [
     StudentPageComponent,
     StaffPageComponent,
     ParentPageComponent,
-    NavbarComponent
+    NavbarComponent,
+    TeacherPageComponent,
+    ProfilePageComponent,
+    AbsenceSubmitPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

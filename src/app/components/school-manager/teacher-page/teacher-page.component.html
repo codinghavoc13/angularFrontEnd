@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div *ngIf="(smSvc.currentUser$ | async) as user">
+    <p>Welcome {{user.firstName}}</p>
+    <!--Build up a card based div like originally planned for the login page
+    - Assignment form
+    - Grade book
+    - Attendance
+-->
+    <div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a class="btn btn-dark" [ngClass]="{'active':viewTab=='home'}"
+                    (click)="setTabView('home')">Home</a></li>
+            <li><a class="btn btn-dark" [ngClass]="{'active':viewTab=='assignments'}"
+                    (click)="setTabView('assignments')">Assignments</a></li>
+            <li><a class="btn btn-dark" [ngClass]="{'active':viewTab=='absences'}"
+                    (click)="setTabView('absences')">Absences</a></li>
+            <li><a class="btn btn-dark" [ngClass]="{'active':viewTab=='myContact'}" (click)="setTabView('myContact')">My
+                    Contact Info</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" *ngIf="viewTab=='home'">
+                <h3>Home</h3>
+                <p>Staff Main Page</p>
+            </div>
+            <div id="menu1" *ngIf="viewTab=='assignments'">
+                <h3>Assignments</h3>
+                <app-add-assignments></app-add-assignments>
+            </div>
+            <div id="menu2" *ngIf="viewTab=='absences'">
+                <app-absence-submit-page></app-absence-submit-page>
+            </div>
+            <div id="menu3" *ngIf="viewTab=='myContact'">
+                <app-profile-page></app-profile-page>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p><a class="btn btn-dark" (click)="logout()">Logout</a></p>
+    </div>
+
+</div>

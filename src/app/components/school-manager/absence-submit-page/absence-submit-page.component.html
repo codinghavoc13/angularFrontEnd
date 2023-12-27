@@ -1,0 +1,9 @@
+<div *ngIf="(smSvc.currentUser$ | async) as user">
+    <h3>Welcome {{user.firstName}}</h3>
+    <p>Need to come back to this page after building the following:</p>
+    <ul>
+        <li>Need to force select the current date</li>
+        <li>Need a single select list of students assigned to the current teacher</li>
+        <!-- <li></li> -->
+    </ul>
+</div>

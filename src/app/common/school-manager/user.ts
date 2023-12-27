@@ -1,7 +1,7 @@
 export interface User {
-    staff_id: number,
-    firstname: string,
-    lastname: string,
+    userId: number,
+    firstName: string,
+    lastName: string,
     role: string,
     username: string,
     // passwordHash: string,
