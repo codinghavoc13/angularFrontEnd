@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
-import { Actor } from 'src/app/common/actor';
-import { MMDBResponse } from 'src/app/common/mmdb-response';
-import { Movie } from 'src/app/common/movie';
+import { Actor } from 'src/app/common/mmdb/actor';
+import { MMDBResponse } from 'src/app/common/mmdb/mmdb-response';
+import { Movie } from 'src/app/common/mmdb/movie';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

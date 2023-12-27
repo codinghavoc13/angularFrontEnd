@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { PassphraseBody } from 'src/app/common/passphrase-body';
+import { PassphraseBody } from 'src/app/common/cipher/passphrase-body';
 import { PassphraseComponent } from 'src/app/components/cipher/passphrase/passphrase.component';
 import { environment } from 'src/environments/environment';
 

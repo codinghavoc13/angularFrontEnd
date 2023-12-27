@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Actor } from 'src/app/common/actor';
+import { Actor } from 'src/app/common/mmdb/actor';
 import { MmdbService } from 'src/app/service/mmdb/mmdb.service';
 
 @Component({

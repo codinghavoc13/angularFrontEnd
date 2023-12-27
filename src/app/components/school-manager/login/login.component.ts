@@ -29,7 +29,7 @@ export class SMLoginComponent {
   login(){
     console.log(this.loginReqDTO);
     if(this.validateLoginDTO()){
-      console.log("Starting the Staff login process, this still in the works, doesn't do anything right now");
+      console.log("Starting the login process");
       this.smSvc.login(this.loginReqDTO);
     } else {
       console.log("username and/or password is empty");

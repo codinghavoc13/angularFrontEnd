@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CipherBody } from '../../../common/cipher-body';
+import { CipherBody } from '../../../common/cipher/cipher-body';
 import { CaesarCipherService } from '../../../service/caesar/caesar-cipher.service';
 
 @Component({

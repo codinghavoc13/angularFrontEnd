@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PassphraseBody } from 'src/app/common/passphrase-body';
+import { PassphraseBody } from 'src/app/common/cipher/passphrase-body';
 import { PassphraseService } from 'src/app/service/passphrase/passphrase.service';
 
 @Component({

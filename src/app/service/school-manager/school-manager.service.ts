@@ -16,12 +16,12 @@ export class SchoolManagerService {
   currentUser$ = this.currentUserSrc.asObservable();
   roleView: string = '';
   invalidLoginCredentials: boolean = false;
-  userTgt: any;
+  userTgt: User | undefined;
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
   login(loginReq: SMLoginDTO){
-    const urlString = this.baseUrl+"/staff/login";
+    const urlString = this.baseUrl+"/staff/login";//this will need to change
     // console.log("Received the following login request for: " + loginReq.username + " / " + loginReq.password);
     // console.log("Working with: " + urlString);
     return this.httpClient.post<User>(urlString,loginReq).subscribe(
@@ -34,6 +34,7 @@ export class SchoolManagerService {
           this.roleView = data.role;
           localStorage.setItem('user',JSON.stringify(user));
           this.currentUserSrc.next(user);
+          console.log('smsvc-1');
           this.router.navigate(['/schoolManager/userPage']);
         }
       }

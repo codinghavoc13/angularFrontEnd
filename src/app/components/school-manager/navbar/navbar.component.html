@@ -1,17 +1,11 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark"><!--Add 'fixed-top' to class list to make this nav bar the main nav bar-->
     <div class="container">
         <a class="navbar-brand" routerLink="/schoolManager/main">School Manager</a>
-        <!-- <ul *ngIf="smSvc.currentUser$| async" class="navbar-nav me-auto mb-2 mb-md-0">
+        <ul *ngIf="smSvc.currentUser$| async" class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-                <a class="nav-link" href="#">Matches</a>
+                <a class="nav-link"routerLink="/schoolManager/userPage">User Page</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Lists</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Messages</a>
-            </li>
-        </ul> -->
+        </ul>
         
         <form *ngIf="!(smSvc.currentUser$ | async)" #loginForm="ngForm" class="d-flex"
             (ngSubmit)="login()" autocomplete="off">
