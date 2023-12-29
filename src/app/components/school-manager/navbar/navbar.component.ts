@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
 import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
+import { TeacherPageComponent } from '../teacher-page/teacher-page.component';
 
 @Component({
   selector: 'app-navbar',
@@ -32,7 +33,6 @@ export class NavbarComponent {
       console.log("Starting the login process");
       this.smSvc.login(this.loginReqDTO).subscribe({
         next:()=>{
-          // this.router.navigate(['/schoolManager/userPage']);
           this.loginReqDTO = new SMLoginDTO('','');
         }
       })
@@ -45,10 +45,10 @@ export class NavbarComponent {
     this.smSvc.logout();
   }
 
-  editProfile(){
-
-  }
-
+  /*
+  This method is used when click on 'User Page' from the main page, it will return
+  the user to their specific page
+  */
   goToUserPage(){
     this.viewSelector = this.smSvc.roleView;
     switch(this.viewSelector){

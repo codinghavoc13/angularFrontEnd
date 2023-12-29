@@ -36,6 +36,8 @@ import { NavbarComponent } from './components/school-manager/navbar/navbar.compo
 import { TeacherPageComponent } from './components/school-manager/teacher-page/teacher-page.component';
 import { ProfilePageComponent } from './components/school-manager/profile-page/profile-page.component';
 import { AbsenceSubmitPageComponent } from './components/school-manager/absence-submit-page/absence-submit-page.component';
+import { DynamicAddTestComponent } from './dynamic-add-test/dynamic-add-test.component';
+import { AddStudentComponent } from './components/school-manager/add-student/add-student.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -52,6 +54,7 @@ const routes: Routes = [
   {path: 'schoolManager/staffPage', component: StaffPageComponent},
   {path: 'schoolManager/studentPage', component: StudentPageComponent},
   {path: 'schoolManager/parentPage', component: ParentPageComponent},
+  {path: 'test/dat',component:DynamicAddTestComponent},
   // {path: 'schoolManager/addAssignment', component:SMAddAssignmentsComponent},
   {path: '', component: MainComponent},
   {path: '**', component:MainComponent}
@@ -84,7 +87,9 @@ const routes: Routes = [
     NavbarComponent,
     TeacherPageComponent,
     ProfilePageComponent,
-    AbsenceSubmitPageComponent
+    AbsenceSubmitPageComponent,
+    DynamicAddTestComponent,
+    AddStudentComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
