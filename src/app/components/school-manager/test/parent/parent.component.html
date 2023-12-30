@@ -1,0 +1,21 @@
+<h1>Test</h1>
+<!--This is the home component in the video-->
+<!-- <app-nav-test [roleInNav]="roleFromParent" (viewTabTest)="setTabView($event)"></app-nav-test> -->
+<div class="tab-content">
+    <div id="home" *ngIf="viewTab=='home'">
+        <h3>Home</h3>
+        <p>Teacher Main Page</p>
+    </div>
+    <div id="menu1" *ngIf="viewTab=='add-assignments'">
+        <h3>Assignments</h3>
+    </div>
+    <div id="menu2" *ngIf="viewTab=='absences'">
+        <h3>Absences</h3>
+    </div>
+    <div id="menu3" *ngIf="viewTab=='myContact'">
+        <h3>Contact</h3>
+    </div>
+    <div id="menu4" *ngIf="viewTab=='grades'">
+        <h3>Grades</h3>
+    </div>
+</div>

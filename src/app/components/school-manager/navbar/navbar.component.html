@@ -1,31 +1,47 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark"><!--Add 'fixed-top' to class list to make this nav bar the main nav bar-->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <!--Add 'fixed-top' to class list to make this nav bar the main nav bar-->
     <div class="container">
         <a class="navbar-brand" routerLink="/schoolManager/main">School Manager</a>
         <ul *ngIf="smSvc.currentUser$| async" class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-                <a class="nav-link" (click)="goToUserPage()">User Page</a>
+                <a class="nav-link" [ngClass]="{'active':viewSelector=='home'}"
+                (click)="setTabView('home')">User Page</a>
+            </li>
+            <div class="dropdown" dropdown *ngIf="loggedInRole=='TEACHER'">
+                <a class="nav-link dropdown-toggle text-decoration-none"
+                [ngClass]="{'active':viewSelector==('add-assignments'|| viewSelector=='view-assignments')}" 
+                dropdownToggle>Assignments</a>
+                <div class="dropdown-menu" *dropdownMenu>
+                    <a class="dropdown-item" [ngClass]="{'active':viewSelector=='add-assignments'}"
+                        (click)="setTabView('add-assignments')">Add Assignments</a>
+                    <a class="dropdown-item" [ngClass]="{'active':viewSelector=='view-assignments'}"
+                        (click)="setTabView('view-assignments')">View Assignments</a>
+                </div>
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active':viewSelector=='absences'}"
+                    (click)="setTabView('absences')">Absences</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active':viewSelector=='myContact'}"
+                    (click)="setTabView('myContact')">My Contact</a>
             </li>
         </ul>
-        
-        <form *ngIf="!(smSvc.currentUser$ | async)" #loginForm="ngForm" class="d-flex"
-            (ngSubmit)="login()" autocomplete="off">
-            <input class="form-control me-2" 
-                type="text" placeholder="Username"
-                name="username" [(ngModel)]="loginReqDTO.username">
-            <input class="form-control me-2" 
-                type="password" placeholder="Password"
-                name="password" [(ngModel)]="loginReqDTO.password">
-            <button class="btn btn-outline-success" 
-                type="submit">Login</button>
+        <form *ngIf="!(smSvc.currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()"
+            autocomplete="off">
+            <input class="form-control me-2" type="text" placeholder="Username" name="username"
+                [(ngModel)]="loginReqDTO.username">
+            <input class="form-control me-2" type="password" placeholder="Password" name="password"
+                [(ngModel)]="loginReqDTO.password">
+            <button class="btn btn-outline-success" type="submit">Login</button>
         </form>
-
         <div class="dropdown" *ngIf="(smSvc.currentUser$ | async) as user" dropdown>
             <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome {{ user.firstName }}</a>
             <div class="dropdown-menu" *dropdownMenu>
-                <!-- <a class="dropdown-item" (click)="editProfile()">Edit Profile</a> -->
+                <a class="dropdown-item" [ngClass]="{'active':viewSelector=='myContact'}"
+                    (click)="setTabView('myContact')">Edit Profile</a>
                 <a class="dropdown-item" (click)="logout()">Logout</a>
             </div>
         </div>
-
     </div>
 </nav>

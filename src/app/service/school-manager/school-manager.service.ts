@@ -30,12 +30,11 @@ export class SchoolManagerService {
       map((response:User)=>{
         const user = response;
         if(user){
-          // console.log(user);
           this.roleView = user.role;
-          // this.user_id = user.userId;
           this.loggedInUser = user;
           this.currentUserSrc.next(user);
-          this.goToUserPage();
+          // this.goToUserPage();
+          this.router.navigate(['/schoolManager/userPage']);
         }
       })
     )
@@ -48,38 +47,22 @@ export class SchoolManagerService {
     this.router.navigate(['/schoolManager/main']);
   }
 
-  submitAssignments(assignmentDto: AssignmentDto){
-    const urlString = this.baseUrl+"/teacher/saveNewAssignment";
-    console.log('sm-sa-2');
-    console.log(urlString);
-    console.log('sm-sa-3');
-    console.log(assignmentDto);
-    return this.httpClient.post<AssignmentDto>(urlString,assignmentDto).pipe(
-      map((response:AssignmentDto)=>{
-        console.log(response);
-        const assignments = response;
-        console.log('sm-sa-1');
-        console.log(assignments);
-      })
-    )
-  }
-
-  goToUserPage(){
-    switch(this.roleView){
-      case 'ADMIN':
-        this.router.navigate(['/schoolManager/staffPage']);
-        break;
-      case 'TEACHER':
-        this.router.navigate(['/schoolManager/teacherPage']);
-        break;
-      case 'STUDENT':
-        this.router.navigate(['/schoolManager/studentPage']);
-        break;
-      case 'PARENT':
-        this.router.navigate(['/schoolManager/parentPage']);
-        break;
-      default:
-        this.router.navigate(['/schoolManager/main']);
-    }
-  }
+  // goToUserPage(){
+  //   switch(this.roleView){
+  //     case 'ADMIN':
+  //       this.router.navigate(['/schoolManager/staffPage']);
+  //       break;
+  //     case 'TEACHER':
+  //       this.router.navigate(['/schoolManager/teacherPage']);
+  //       break;
+  //     case 'STUDENT':
+  //       this.router.navigate(['/schoolManager/studentPage']);
+  //       break;
+  //     case 'PARENT':
+  //       this.router.navigate(['/schoolManager/parentPage']);
+  //       break;
+  //     default:
+  //       this.router.navigate(['/schoolManager/main']);
+  //   }
+  // }
 }

@@ -29,15 +29,20 @@ import { SMMainComponent } from './components/school-manager/school-manager-main
 import { SMAddAssignmentsComponent } from './components/school-manager/add-assignments/add-assignments.component';
 import { SMLoginComponent } from './components/school-manager/login/login.component';
 import { UserPageComponent } from './components/school-manager/user-page/user-page.component';
-import { StudentPageComponent } from './components/school-manager/student-page/student-page.component';
-import { StaffPageComponent } from './components/school-manager/staff-page/staff-page.component';
-import { ParentPageComponent } from './components/school-manager/parent-page/parent-page.component';
+// import { StudentPageComponent } from './components/school-manager/student-page/student-page.component';
+// import { StaffPageComponent } from './components/school-manager/staff-page/staff-page.component';
+// import { ParentPageComponent } from './components/school-manager/parent-page/parent-page.component';
 import { NavbarComponent } from './components/school-manager/navbar/navbar.component';
-import { TeacherPageComponent } from './components/school-manager/teacher-page/teacher-page.component';
+// import { TeacherPageComponent } from './components/school-manager/teacher-page/teacher-page.component';
 import { ProfilePageComponent } from './components/school-manager/profile-page/profile-page.component';
 import { AbsenceSubmitPageComponent } from './components/school-manager/absence-submit-page/absence-submit-page.component';
 import { DynamicAddTestComponent } from './dynamic-add-test/dynamic-add-test.component';
 import { AddStudentComponent } from './components/school-manager/add-student/add-student.component';
+import { ViewAssignmentsComponent } from './components/school-manager/view-assignments/view-assignments.component';
+//test
+import { ChildComponent as CCTest } from './components/school-manager/test/child/child.component';
+import { ParentComponent as PCTest } from './components/school-manager/test/parent/parent.component';
+import { NavComponent as NCTest } from './components/school-manager/test/nav/nav.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -50,11 +55,13 @@ const routes: Routes = [
   {path: 'mmdb/actor-display', component: ActorDisplayComponent},
   {path: 'schoolManager/main', component: SMMainComponent},
   {path: 'schoolManager/login', component: SMLoginComponent},
-  {path: 'schoolManager/teacherPage', component: TeacherPageComponent},
-  {path: 'schoolManager/staffPage', component: StaffPageComponent},
-  {path: 'schoolManager/studentPage', component: StudentPageComponent},
-  {path: 'schoolManager/parentPage', component: ParentPageComponent},
+  // {path: 'schoolManager/teacherPage', component: TeacherPageComponent},
+  // {path: 'schoolManager/staffPage', component: StaffPageComponent},
+  // {path: 'schoolManager/studentPage', component: StudentPageComponent},
+  // {path: 'schoolManager/parentPage', component: ParentPageComponent},
+  {path: 'schoolManager/userPage', component: UserPageComponent},
   {path: 'test/dat',component:DynamicAddTestComponent},
+  {path: 'test/parent', component:PCTest},
   // {path: 'schoolManager/addAssignment', component:SMAddAssignmentsComponent},
   {path: '', component: MainComponent},
   {path: '**', component:MainComponent}
@@ -81,15 +88,19 @@ const routes: Routes = [
     SMAddAssignmentsComponent,
     SMLoginComponent,
     UserPageComponent,
-    StudentPageComponent,
-    StaffPageComponent,
-    ParentPageComponent,
+    // StudentPageComponent,
+    // StaffPageComponent,
+    // ParentPageComponent,
     NavbarComponent,
-    TeacherPageComponent,
+    // TeacherPageComponent,
     ProfilePageComponent,
     AbsenceSubmitPageComponent,
     DynamicAddTestComponent,
-    AddStudentComponent
+    AddStudentComponent,
+    ViewAssignmentsComponent,
+    CCTest,
+    PCTest,
+    NCTest
   ],
   imports: [
     RouterModule.forRoot(routes),

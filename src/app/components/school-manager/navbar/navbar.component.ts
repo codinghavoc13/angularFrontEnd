@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
 import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
-import { TeacherPageComponent } from '../teacher-page/teacher-page.component';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +9,8 @@ import { TeacherPageComponent } from '../teacher-page/teacher-page.component';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  @Input() loggedInRole: string = '';
+  @Output() viewEmitter = new EventEmitter();
   viewSelector: string = 'staff';
   loginReqDTO: SMLoginDTO = new SMLoginDTO('','');
   usernameRequiredWarning: boolean = false;
@@ -45,27 +46,8 @@ export class NavbarComponent {
     this.smSvc.logout();
   }
 
-  /*
-  This method is used when click on 'User Page' from the main page, it will return
-  the user to their specific page
-  */
-  goToUserPage(){
-    this.viewSelector = this.smSvc.roleView;
-    switch(this.viewSelector){
-      case 'ADMIN':
-        this.router.navigate(['/schoolManager/staffPage']);
-        break;
-      case 'TEACHER':
-        this.router.navigate(['/schoolManager/teacherPage']);
-        break;
-      case 'STUDENT':
-        this.router.navigate(['/schoolManager/studentPage']);
-        break;
-      case 'PARENT':
-        this.router.navigate(['/schoolManager/parentPage']);
-        break;
-      default:
-        this.router.navigate(['/schoolManager/main']);
-    }
+  setTabView(view: string){
+    this.viewSelector = view;
+    this.viewEmitter.emit(view);
   }
 }

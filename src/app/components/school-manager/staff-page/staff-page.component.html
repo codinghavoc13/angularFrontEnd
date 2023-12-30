@@ -1,33 +1,6 @@
 <div *ngIf="(smSvc.currentUser$ | async) as user">
     <div>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" routerLink="/schoolManager/main">School Manager</a>
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" [ngClass]="{'active':viewTab=='home'}" (click)="setTabView('home')">User
-                            Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [ngClass]="{'active':viewTab=='newStudent'}"
-                            (click)="setTabView('newStudent')">New Student</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [ngClass]="{'active':viewTab=='myContact'}"
-                            (click)="setTabView('myContact')">My Contact</a>
-                    </li>
-                </ul>
-                <div class="dropdown" *ngIf="(smSvc.currentUser$ | async) as user" dropdown>
-                    <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome {{ user.firstName
-                        }}</a>
-                    <div class="dropdown-menu" *dropdownMenu>
-                        <a class="dropdown-item" [ngClass]="{'active':viewTab=='myContact'}"
-                            (click)="setTabView('myContact')">Edit Profile</a>
-                        <a class="dropdown-item" (click)="logout()">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <app-navbar ></app-navbar>
 
         <div class="tab-content">
             <div id="home" *ngIf="viewTab=='home'">

@@ -9,7 +9,7 @@ import { SchoolManagerService } from 'src/app/service/school-manager/school-mana
 })
 export class TeacherPageComponent implements OnInit{
   viewTab='home';
-  tp_teacher_id: number = 0;
+  userRole: string = '';
 
   constructor(public smSvc: SchoolManagerService,
     private router: Router){}

@@ -1,0 +1,35 @@
+<div>
+    <!--This is the register component in the video-->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/schoolManager/main">School Manager</a>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+                <!-- <a class="nav-link" [ngClass]="{'active':viewTab=='home'}" 
+                (click)="setTabView('home')">User Home</a> -->
+            </li>
+            <div class="dropdown" dropdown *ngIf="roleInNav=='TEACHER'">
+                <a class="nav-link dropdown-toggle text-decoration-none" dropdownToggle>Assignments</a>
+                <div class="dropdown-menu" *dropdownMenu>
+                    <!-- <a class="dropdown-item" [ngClass]="{'active':viewTab=='add-assignments'}"
+                        (click)="setTabView('add-assignments')">Add Assignments</a>
+                        <a class="dropdown-item" [ngClass]="{'active':viewTab=='view-assignments'}"
+                        (click)="setTabView('view-assignments')">View Assignments</a> -->
+                </div>
+            </div>
+            <li class="nav-item" *ngIf="roleInNav=='TEACHER' || roleInNav=='STAFF'">
+                <!-- <a class="nav-link" [ngClass]="{'active':viewTab=='absences'}"
+                    (click)="setTabView('absences')">Absences</a> -->
+            </li>
+            <li class="nav-item" *ngIf="roleInNav=='TEACHER'">
+                <!-- <a class="nav-link" [ngClass]="{'active':viewTab=='grades'}"
+                    (click)="setTabView('grades')">Grades</a> -->
+            </li>
+            <li class="nav-item">
+                <!-- <a class="nav-link" [ngClass]="{'active':viewTab=='myContact'}"
+                    (click)="setTabView('myContact')">My Contact</a> -->
+            </li>
+        </ul>
+    </div>
+</nav>
+</div>

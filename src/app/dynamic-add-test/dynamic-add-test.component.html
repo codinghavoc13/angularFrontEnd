@@ -1,34 +1,3 @@
 <div class="container">
-    <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
-        <input type="hidden" id="teacher_id" name="teacher_id" formControlName="teacher_id" class="form-control">
-
-        <div formArrayName="assignments">
-            <div *ngFor="let assignment of assignments().controls; let i=index" [formGroupName]="i">
-                <div class="form-group">
-                    <label style="width: 12%; float: left;" for="assignmentTitle">Assignment Title</label>
-                    <input style="width: 88%;" name="assignmentTitle" type="text" formControlName="assignmentTitle" class="form-control">
-                </div>
-                <br>
-                <div>
-                    <label style="width: 12%; float: left;" for="assignmentType">Assignment Type</label>
-                    <select style="width: 88%;" id="assignmentType" name="assignmentType" formControlName="assignmentType" class="form-control">
-                        <option value="HOMEWORK">Homework</option>
-                        <option value="QUIZ">Quiz</option>
-                        <option value="TEST">Test</option>
-                    </select>
-                </div>
-                <br>
-                <button (click)="removeAssignment(i)" class="btn btn-danger">Remove</button>
-                <br>
-                <hr>
-            </div>
-            <button type="button" (click)="addAssignment()" class="btn btn-primary" [disabled]="!assignmentForm.valid">Add New
-                Row</button>
-        </div>
-        <hr>
-        <button type="submit" class="btn btn-success" [disabled]="!assignmentForm.valid">Submit</button>
-    </form>
-    <hr>
-    <p>This will go away after I check that submitting assignments from this form actually works</p>
-    {{this.assignmentForm.value | json}}
+    <button (click)="generateRandomPW()">Random PW</button>
 </div>

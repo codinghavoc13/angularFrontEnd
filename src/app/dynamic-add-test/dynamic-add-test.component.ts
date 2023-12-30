@@ -47,4 +47,10 @@ export class DynamicAddTestComponent {
     console.log(this.assignmentForm.value);
   }
 
+  generateRandomPW(){
+    console.log('dat-1');
+    const result = Math.random().toString(36).substring(2,12);
+    console.log(result);
+  }
+
 }
