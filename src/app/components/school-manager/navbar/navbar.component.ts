@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
 import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
 
@@ -17,7 +18,8 @@ export class NavbarComponent {
   passwordRequiredWarning: boolean = false;
   invalidLoginCredentials: boolean = this.smSvc.invalidLoginCredentials;
 
-  constructor(public smSvc: SchoolManagerService, private router: Router){}
+  constructor(public smSvc: SchoolManagerService, private router: Router,
+    private toastr: ToastrService){}
 
   setView(view: string){
     this.viewSelector = view;
@@ -32,13 +34,13 @@ export class NavbarComponent {
   login(){
     if(this.validateLoginDTO()){
       console.log("Starting the login process");
-      this.smSvc.login(this.loginReqDTO).subscribe({
-        next:()=>{
-          this.loginReqDTO = new SMLoginDTO('','');
-        }
-      })
+      this.smSvc.login(this.loginReqDTO)//.subscribe({
+      //   next:()=>{
+      //     this.loginReqDTO = new SMLoginDTO('','');
+      //   }
+      // })
     } else {
-      console.log("username and/or password is empty");
+      this.toastr.error("username and/or password is empty");
     }
   }
 

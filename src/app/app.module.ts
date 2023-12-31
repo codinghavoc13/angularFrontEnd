@@ -37,12 +37,13 @@ import { NavbarComponent } from './components/school-manager/navbar/navbar.compo
 import { ProfilePageComponent } from './components/school-manager/profile-page/profile-page.component';
 import { AbsenceSubmitPageComponent } from './components/school-manager/absence-submit-page/absence-submit-page.component';
 import { DynamicAddTestComponent } from './dynamic-add-test/dynamic-add-test.component';
-import { AddStudentComponent } from './components/school-manager/add-student/add-student.component';
+import { RegisterUserComponent } from './components/school-manager/register-user/register-user.component';
 import { ViewAssignmentsComponent } from './components/school-manager/view-assignments/view-assignments.component';
 //test
 import { ChildComponent as CCTest } from './components/school-manager/test/child/child.component';
 import { ParentComponent as PCTest } from './components/school-manager/test/parent/parent.component';
 import { NavComponent as NCTest } from './components/school-manager/test/nav/nav.component';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -55,11 +56,8 @@ const routes: Routes = [
   {path: 'mmdb/actor-display', component: ActorDisplayComponent},
   {path: 'schoolManager/main', component: SMMainComponent},
   {path: 'schoolManager/login', component: SMLoginComponent},
-  // {path: 'schoolManager/teacherPage', component: TeacherPageComponent},
-  // {path: 'schoolManager/staffPage', component: StaffPageComponent},
-  // {path: 'schoolManager/studentPage', component: StudentPageComponent},
-  // {path: 'schoolManager/parentPage', component: ParentPageComponent},
   {path: 'schoolManager/userPage', component: UserPageComponent},
+  {path: 'schoolManager/registerUser', component:RegisterUserComponent},
   {path: 'test/dat',component:DynamicAddTestComponent},
   {path: 'test/parent', component:PCTest},
   // {path: 'schoolManager/addAssignment', component:SMAddAssignmentsComponent},
@@ -96,7 +94,7 @@ const routes: Routes = [
     ProfilePageComponent,
     AbsenceSubmitPageComponent,
     DynamicAddTestComponent,
-    AddStudentComponent,
+    RegisterUserComponent,
     ViewAssignmentsComponent,
     CCTest,
     PCTest,
@@ -109,6 +107,7 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
+    ToastrModule.forRoot({positionClass:'toast-bottom-right'}),
     BrowserAnimationsModule,
     FormsModule
   ],

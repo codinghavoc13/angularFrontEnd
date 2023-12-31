@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, map } from 'rxjs';
 import { Assignment } from 'src/app/common/school-manager/assignment';
 import { AssignmentDto } from 'src/app/common/school-manager/assignment-dto';
@@ -17,27 +18,51 @@ export class SchoolManagerService {
   private currentUserSrc = new BehaviorSubject<User|null>(null);
   currentUser$ = this.currentUserSrc.asObservable();
   roleView: string = 'main';
-  // user_id: number = 0;
   loggedInUser: User | undefined;
   invalidLoginCredentials: boolean = false;
-  // userTgt: User | undefined;
 
-  constructor(private router: Router, private httpClient: HttpClient) { }
+  constructor(private router: Router, private httpClient: HttpClient,
+    private toastr: ToastrService) { }
 
   login(loginReq: SMLoginDTO){
     const urlString = this.baseUrl+"/user/login";
-    return this.httpClient.post<User>(this.baseUrl+"/user/login",loginReq).pipe(
-      map((response:User)=>{
+    // return this.httpClient.post<User>(this.baseUrl+"/user/login",loginReq).pipe(
+    //   map((response:User)=>{
+    //     const user = response;
+    //     if(user){
+    //       this.roleView = user.role;
+    //       this.loggedInUser = user;
+    //       this.currentUserSrc.next(user);
+    //       this.router.navigate(['/schoolManager/userPage']);
+    //     }
+    //   })
+    // )
+    return this.httpClient.post<User>(this.baseUrl+"/user/login",loginReq).subscribe({
+      next: (response)=>{
         const user = response;
         if(user){
           this.roleView = user.role;
           this.loggedInUser = user;
           this.currentUserSrc.next(user);
-          // this.goToUserPage();
           this.router.navigate(['/schoolManager/userPage']);
         }
-      })
+      },
+      error:()=>{
+        this.toastr.error("Invalid login credentials");
+      }
+    }      
     )
+
+    // if(this.validateLoginDTO()){
+    //   console.log("Starting the login process");
+    //   this.smSvc.login(this.loginReqDTO).subscribe({
+    //     next:()=>{
+    //       this.loginReqDTO = new SMLoginDTO('','');
+    //     }
+    //   })
+    // } else {
+    //   this.toastr.error("username and/or password is empty");
+    // }
   }
 
   logout(){
@@ -46,23 +71,4 @@ export class SchoolManagerService {
     this.roleView = 'main';
     this.router.navigate(['/schoolManager/main']);
   }
-
-  // goToUserPage(){
-  //   switch(this.roleView){
-  //     case 'ADMIN':
-  //       this.router.navigate(['/schoolManager/staffPage']);
-  //       break;
-  //     case 'TEACHER':
-  //       this.router.navigate(['/schoolManager/teacherPage']);
-  //       break;
-  //     case 'STUDENT':
-  //       this.router.navigate(['/schoolManager/studentPage']);
-  //       break;
-  //     case 'PARENT':
-  //       this.router.navigate(['/schoolManager/parentPage']);
-  //       break;
-  //     default:
-  //       this.router.navigate(['/schoolManager/main']);
-  //   }
-  // }
 }
