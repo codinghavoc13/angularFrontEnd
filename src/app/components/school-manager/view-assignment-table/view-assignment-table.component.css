@@ -1,0 +1,8 @@
+td, th {
+    padding:5px;
+    width: 20rem;
+}
+
+tr:nth-child(even){
+    background-color: rgb(223, 223, 223);
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
+import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
   selector: 'app-school-manager-main',
@@ -7,10 +7,10 @@ import { SchoolManagerService } from 'src/app/service/school-manager/school-mana
   styleUrls: ['./school-manager-main.component.css']
 })
 export class SMMainComponent {
-  constructor(public smSvc: SchoolManagerService){}
+  constructor(public smUserSvc: UserService){}
 
   logout(){
-    this.smSvc.logout();
+    this.smUserSvc.logout();
   }
 
 }

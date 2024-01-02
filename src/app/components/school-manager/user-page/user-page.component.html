@@ -1,32 +1,41 @@
-<div *ngIf="(smSvc.currentUser$ | async) as user">
+<div *ngIf="(smUserSvc.currentUser$ | async) as user">
     <div>
         <app-navbar [loggedInRole]="userRole" (viewEmitter)="setTabView($event)"></app-navbar>
 
         <div class="tab-content">
             <div id="home" *ngIf="viewTab=='home'">
                 <h3>Home</h3>
-                <p>Teacher Main Page</p>
+                <p>User Main Page</p>
             </div>
             <div id="menu1" *ngIf="viewTab=='add-assignments' && userRole=='TEACHER'">
                 <h3>Assignments</h3>
                 <app-add-assignments></app-add-assignments>
             </div>
-            <div id="menu2" *ngIf="viewTab=='absences' && (userRole=='TEACHER' || userRole=='STAFF')">
+            <div id="menu2" *ngIf="viewTab=='absences' && (userRole=='TEACHER' || userRole=='ADMIN')">
                 <app-absence-submit-page></app-absence-submit-page>
             </div>
             <div id="menu3" *ngIf="viewTab=='myContact'">
                 <app-profile-page></app-profile-page>
             </div>
-            <div id="menu4" *ngIf="viewTab=='view-assignments' && (userRole=='TEACHER' || userRole=='STUDENT')">
+            <div id="menu4" *ngIf="viewTab=='view-assignments' && (userRole=='TEACHER' || userRole=='STUDENT'|| userRole=='PARENT')">
                 <app-view-assignments></app-view-assignments>
             </div>
-            <div id="menu5" *ngIf="viewTab=='newStudent' && userRole=='STAFF'">
+            <div id="menu5" *ngIf="viewTab=='newUser' && userRole=='ADMIN'">
                 <app-register-user></app-register-user>
+            </div>
+            <div id="menu6" *ngIf="viewTab=='main'">
+                <app-main-content></app-main-content>
+            </div>
+            <div id="menu7" *ngIf="viewTab=='view-users' && userRole=='ADMIN'">
+                <app-view-user></app-view-user>
+            </div>
+            <div id="menu8" *ngIf="viewTab=='assign-student' && userRole=='ADMIN'">
+                <app-assign-student></app-assign-student>
             </div>
         </div>
     </div>
+    <hr>
     <div>
         <p><a class="btn btn-dark" (click)="logout()">Logout</a></p>
     </div>
-
 </div>

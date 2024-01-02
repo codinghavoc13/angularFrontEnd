@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
 import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
+import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,9 @@ export class SMLoginComponent {
   loginReqDTO: SMLoginDTO = new SMLoginDTO('','');
   usernameRequiredWarning: boolean = false;
   passwordRequiredWarning: boolean = false;
-  invalidLoginCredentials: boolean = this.smSvc.invalidLoginCredentials;
+  invalidLoginCredentials: boolean = this.smUserSvc.invalidLoginCredentials;
 
-  constructor(private smSvc: SchoolManagerService, private router: Router,
+  constructor(private smUserSvc: UserService, private router: Router,
     private toastr: ToastrService){}
 
   setView(view: string){
@@ -31,8 +32,8 @@ export class SMLoginComponent {
 
   login(){
     if(this.validateLoginDTO()){
-      console.log("Starting the login process");
-      this.smSvc.login(this.loginReqDTO)//.subscribe({
+      console.log("l-1 Starting the login process");
+      this.smUserSvc.login(this.loginReqDTO)//.subscribe({
       //   next:()=>{
       //     // this.router.navigate(['/schoolManager/userPage']);
       //     this.loginReqDTO = new SMLoginDTO('','');

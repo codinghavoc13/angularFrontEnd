@@ -1,29 +1,40 @@
 <div class="container">
     <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
         <input type="hidden" id="teacher_id" name="teacher_id" formControlName="teacher_id" class="form-control">
-
+        <button type="button" (click)="addAssignment()" class="btn btn-primary" [disabled]="!assignmentForm.valid">Add
+            New
+            Row</button>
         <div formArrayName="assignments">
             <div *ngFor="let assignment of assignments().controls; let i=index" [formGroupName]="i">
                 <div class="form-group">
-                    <label style="width: 12%; float: left;" for="assignmentTitle">Assignment Title</label>
-                    <input style="width: 88%;" name="assignmentTitle" type="text" formControlName="assignmentTitle" class="form-control">
+                    <label style="width: 15%; float: left;" for="assignmentTitle">Assignment Title</label>
+                    <input style="width: 35%;" name="assignmentTitle" type="text" formControlName="assignmentTitle"
+                        class="form-control">
                 </div>
                 <br>
                 <div>
-                    <label style="width: 12%; float: left;" for="assignmentType">Assignment Type</label>
-                    <select style="width: 88%;" id="assignmentType" name="assignmentType" formControlName="assignmentType" class="form-control">
+                    <label style="width: 15%; float: left;" for="assignmentType">Assignment Type</label>
+                    <select style="width: 35%;" id="assignmentType" name="assignmentType"
+                        formControlName="assignmentType" class="form-control">
                         <option value="HOMEWORK">Homework</option>
                         <option value="QUIZ">Quiz</option>
                         <option value="TEST">Test</option>
                     </select>
                 </div>
                 <br>
-                <button (click)="removeAssignment(i)" class="btn btn-danger">Remove</button>
+                <div class="row row-cols-sm-auto">
+                    <label style="width: 15%; float: left;">Assignment Due Date</label>
+                    <input style="width: 35%;" class="form-control" placeholder="yyyy-mm-dd" type="date"
+                    formControlName="assignmentDueDate" name="assignmentDueDate"/>
+                    <br>
+                </div>
                 <br>
-                <hr>
+                <button (click)="removeAssignment(i)" class="btn btn-danger" style="float: right;">Remove</button>
+                <br>
+                <!-- <hr> -->
             </div>
-            <button type="button" (click)="addAssignment()" class="btn btn-primary" [disabled]="!assignmentForm.valid">Add New
-                Row</button>
+            <!-- <button type="button" (click)="addAssignment()" class="btn btn-primary" [disabled]="!assignmentForm.valid">Add New
+                Row</button> -->
         </div>
         <hr>
         <button type="submit" class="btn btn-success" [disabled]="!assignmentForm.valid">Submit</button>

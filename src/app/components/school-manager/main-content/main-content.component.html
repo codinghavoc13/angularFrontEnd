@@ -1,0 +1,8 @@
+<div>
+    <h2>School Manager Main Page</h2>
+    <p>This is my idea of a single source portal for parents, students, teachers, school admin staff for managing grades, attendance and contact information. More features may be added as I'm working on this</p>
+
+    <div *ngIf="!(smUserSvc.currentUser$ | async)">
+        <p><a class="btn btn-dark btn-login" routerLink="/schoolManager/login">Login page</a></p>
+    </div>
+</div>

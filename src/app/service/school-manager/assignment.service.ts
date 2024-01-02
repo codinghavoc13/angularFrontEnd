@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Assignment } from 'src/app/common/school-manager/assignment';
 import { AssignmentDto } from 'src/app/common/school-manager/assignment-dto';
 
 @Injectable({
@@ -12,23 +13,11 @@ export class AssignmentService {
 
   submitAssignments(assignmentDto: AssignmentDto){
     const urlString = this.baseUrl+"/teacher/saveNewAssignment";
-    console.log('sm-sa-2');
-    console.log(urlString);
-    console.log('sm-sa-3');
-    console.log(assignmentDto);
-    // return this.httpClient.post<AssignmentDto>(this.baseUrl+"/teacher/saveNewAssignment",assignmentDto).pipe(
-    //   map((response:AssignmentDto)=>{
-    //     console.log(response);
-    //     const assignments = response;
-    //     console.log('sm-sa-1');
-    //     console.log(assignments);
-    //   })
-    // )
     return this.httpClient.post<AssignmentDto>(this.baseUrl+"/teacher/saveNewAssignment", assignmentDto).subscribe(
-      data=>{
-        console.log('sm-sa-1')
-        console.log(data.assignments);
-      }
     )
+  }
+
+  getAssignmentsByTeacherId(teacher_id: number){
+    return this.httpClient.get<Assignment[]>(this.baseUrl+"/teacher/getAssignments/teacher_id/"+teacher_id);
   }
 }

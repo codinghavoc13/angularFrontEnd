@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
 import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
+import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,9 +17,9 @@ export class NavbarComponent {
   loginReqDTO: SMLoginDTO = new SMLoginDTO('','');
   usernameRequiredWarning: boolean = false;
   passwordRequiredWarning: boolean = false;
-  invalidLoginCredentials: boolean = this.smSvc.invalidLoginCredentials;
+  invalidLoginCredentials: boolean = this.smUserSvc.invalidLoginCredentials;
 
-  constructor(public smSvc: SchoolManagerService, private router: Router,
+  constructor(public smUserSvc: UserService, private router: Router,
     private toastr: ToastrService){}
 
   setView(view: string){
@@ -33,8 +34,8 @@ export class NavbarComponent {
 
   login(){
     if(this.validateLoginDTO()){
-      console.log("Starting the login process");
-      this.smSvc.login(this.loginReqDTO)//.subscribe({
+      console.log("nb-1 Starting the login process");
+      this.smUserSvc.login(this.loginReqDTO)//.subscribe({
       //   next:()=>{
       //     this.loginReqDTO = new SMLoginDTO('','');
       //   }
@@ -45,11 +46,13 @@ export class NavbarComponent {
   }
 
   logout(){
-    this.smSvc.logout();
+    this.smUserSvc.logout();
   }
 
   setTabView(view: string){
+    console.log('nb-2: ' + view);
     this.viewSelector = view;
+    console.log('nb-3: '+ this.viewSelector);
     this.viewEmitter.emit(view);
   }
 }

@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {FormGroup, FormControl, FormArray, FormBuilder, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
 import { AssignmentDto } from 'src/app/common/school-manager/assignment-dto';
 import { AssignmentService } from 'src/app/service/school-manager/assignment.service';
-import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
+import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
   selector: 'app-add-assignments',
@@ -16,10 +16,10 @@ export class SMAddAssignmentsComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  constructor(public fb: FormBuilder, private smSvc: SchoolManagerService,
+  constructor(public fb: FormBuilder, private smUserSvc: UserService,
     public assignmentSvc: AssignmentService){
     this.assignmentForm = this.fb.group({
-      teacher_id: smSvc.loggedInUser!.userId,
+      teacher_id: smUserSvc.loggedInUser!.userId,
       assignments: this.fb.array([])
     });
   }
@@ -35,6 +35,9 @@ export class SMAddAssignmentsComponent implements OnInit{
       }],
       assignmentType:['',{
         validators: [ Validators.required],
+      }],
+      assignmentDueDate:['',{
+        validators: [ Validators.required],
       }]
     })
   }
@@ -49,6 +52,7 @@ export class SMAddAssignmentsComponent implements OnInit{
 
   onSubmit(){
     //this will likely be reworked later to send the json values to the back end
+    console.log('aa-1');
     console.log(this.assignmentForm.value);
     this.assignmentDto = new AssignmentDto(this.assignmentForm.value);
     // console.log('aa-1');

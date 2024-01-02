@@ -1,4 +1,4 @@
-<h2>Add New Student page - obviously a WIP</h2>
+<h2>Add New Student page</h2>
 <!--staff would enter new student first and last name, username, school id-->
 <form #loginForm="ngForm">
     <div class="form-group"><!--first name-->
@@ -11,14 +11,9 @@
       <input type="text" class="form-control" id="lastName" aria-describedby="lastName"
       placeholder="Enter student last name" [(ngModel)]="registerDTO.lastName" name="lastName">
     </div>
-    <div class="form-group"><!--user name-->
-      <label for="userName">User Name <!--replace requirement warnings with toastr popups--></label>
-      <input type="text" class="form-control" id="userName" aria-describedby="userName" readonly
-      placeholder="Press the 'Generate Username' button below to create username" [(ngModel)]="registerDTO.username" name="userName">
-    </div>
     <div>
         <label for="role">Role Type</label>
-        <select style="width: 88%;" id="role" name="role"
+        <select id="role" name="role"
             [(ngModel)]="registerDTO.role" class="form-control">
             <option value="STUDENT">Student</option>
             <option value="PARENT">Parent</option>
@@ -29,9 +24,12 @@
       <input type="text" class="form-control" id="studentId" aria-describedby="studentId"
       placeholder="Enter student school ID" [(ngModel)]="registerDTO.schoolStudentId" name="studentId">
     </div>
-    <!-- <div *ngIf="invalidLoginCredentials">
-      <p style="color: red;"><i>Invalid Login Credentials</i></p>
-    </div> -->
-    <a class="btn btn-primary" (click)="registerStudent()">Register Student</a>
-    <a class="btn btn-primary" (click)="generateUsername()">Generate Username</a>
+    <button class="btn btn-primary" [disabled]="registerDTO.role==''" (click)="checkUsernameGen()">Generate Username</button>
+    <div class="form-group"><!--user name-->
+      <label for="userName">User Name <!--replace requirement warnings with toastr popups--></label>
+      <input type="text" class="form-control" id="userName" aria-describedby="userName" readonly
+      placeholder="Press the 'Generate Username' button below to create username" [(ngModel)]="registerDTO.username" name="userName">
+    </div>
+    <button class="btn btn-primary" (click)="registerStudent()">Register User</button>
+    <button class="btn btn-danger" style="float: right;" (click)="clearForm()">Clear Form</button>
   </form>

@@ -10,79 +10,88 @@ import { UserService } from 'src/app/service/school-manager/user.service';
   styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent {
-  registerDTO: RegisterDto = new RegisterDto('','','','','','');
-  usernameNumber: number = 0;
+  registerDTO: RegisterDto = new RegisterDto('', '', '', '', '', '');
+  usernameNumber: number = 1;
   checkUsername: boolean = true;
 
-   constructor(private smUserSvc: UserService, private toastr: ToastrService){}
+  constructor(private smUserSvc: UserService, private toastr: ToastrService) { }
 
-   registerStudent(){
-    // console.log('as-c-1');
-    // this.studentRegisterDTO.role="STUDENT";
-    console.log('as-c-2');
-    console.log("setting password to 'password' but code is in place to set the password to: " + this.generateRandomPW());
-    this.registerDTO.password='password';
-    console.log('as-c-2');
-    console.log(this.registerDTO);
-    if(this.validateRegDTO()){
-      this.smUserSvc.registerStudent(this.registerDTO);
+  registerStudent() {
+    // console.log('as-c-2');
+    // console.log("setting password to 'password' but code is in place to set the password to: " + this.generateRandomPW());
+    this.registerDTO.password = 'password';
+    // console.log('as-c-2');
+    // console.log(this.registerDTO);
+    if (this.validateRegDTO()) {
+      this.smUserSvc.registerUser(this.registerDTO).subscribe(
+        data=>{
+          console.log('ru-1');
+          console.log(data);
+        }  
+      )
+      this.toastr.success('New user registered');
+      this.registerDTO = new RegisterDto('','','','','','');
     } else {
       this.toastr.error('All fields are required');
     }
-   }
+  }
 
-   validateRegDTO(){
+  validateRegDTO() {
     let result = true;
-    result = result && !(this.registerDTO.firstName=='');
-    result = result && !(this.registerDTO.lastName=='');
-    result = result && !(this.registerDTO.username=='');
-    result = result && !(this.registerDTO.role=='');
-    if(this.registerDTO.role=='STUDENT')
-      result = result && !(this.registerDTO.schoolStudentId=='');
-    // console.log('validate-1');
-    // console.log(result);
-    return result;
-   }
-
-   /*Builds a 12 character string of random letters and number. Yes, eventually it will repeat
-   but when combined with the random salt in the password hash system on the back end, chances
-   of true duplicates are extremely low
-   */
-   generateRandomPW(){
-    // console.log('dat-1');
-    const result = Math.random().toString(36).substring(2,12);
-    // console.log(result);
+    result = result && !(this.registerDTO.firstName == '');
+    result = result && !(this.registerDTO.lastName == '');
+    result = result && !(this.registerDTO.username == '');
+    result = result && !(this.registerDTO.role == '');
+    if (this.registerDTO.role == 'STUDENT')
+      result = result && !(this.registerDTO.schoolStudentId == '');
     return result;
   }
 
-  async generateUsername(){
-    if(this.registerDTO.firstName == '' || this.registerDTO.lastName == ''){
+  /*Builds a 12 character string of random letters and number. Yes, eventually it will repeat
+  but when combined with the random salt in the password hash system on the back end, chances
+  of true duplicates are extremely low
+  */
+  generateRandomPW() {
+    const result = Math.random().toString(36).substring(2, 12);
+    return result;
+  }
+
+  async checkUsernameGen() {
+    if (this.registerDTO.firstName == '' || this.registerDTO.lastName == '') {
       this.toastr.error('First and last names are required to generate username');
     } else {
       let tempUserName = this.registerDTO.firstName.toLocaleLowerCase() + '.' + this.registerDTO.lastName.toLocaleLowerCase();
-      // console.log('gu-1');
-      // console.log(tempUserName);
-      // this.studentRegisterDTO.username = tempUserName;
-      const check = new RegisterDto('','','STUDENT',tempUserName,'','');
-      // console.log('gu-2');
-      // console.log(this.studentRegisterDTO.username);
-      // await this.smUserSvc.getUsernames();
-      // console.log('gu-2');
-      // console.log(this.smUserSvc.usernames.find(u=>u===tempUserName));
-      // await console.log(this.smUserSvc.checkUsername(check));
-      console.log('gu-3');
-      if(await this.smUserSvc.checkUsername(check)){
-        console.log('gu-4');
-        this.toastr.error('that user name is already used');
-      } else {
-        console.log('gu-5');
-        this.toastr.success('that user name is available');
-        this.registerDTO.username = tempUserName;
-      }
+      const check = new RegisterDto('', '', 'STUDENT', tempUserName, '', '');
+      this.callSvc(check, tempUserName);
     }
   }
 
-  buildUsername(dto: RegisterDto){
+  checkUsernameValid(tempUserName: string, flag: boolean) {
+    if (flag) {
+      this.buildNewUsername(tempUserName);
+    } else {
+      this.registerDTO.username = tempUserName;
+      //we've assigned an unused username, with or without a number, reset usernameNumber back to 1
+      this.usernameNumber = 1;
+    }
+  }
 
+  async buildNewUsername(tempUsername:string) {
+    let newTemp = tempUsername + this.usernameNumber;
+    this.usernameNumber++;
+    let check = new RegisterDto('', '', 'STUDENT', newTemp, '', '');
+    this.callSvc(check, newTemp);
+  }
+
+  async callSvc(check: RegisterDto, checkName: string){
+    await this.smUserSvc.checkUsername(check).subscribe(
+      data => {
+        this.checkUsernameValid(checkName, data.valueOf());
+      }
+    );
+  }
+
+  clearForm(){
+    this.registerDTO = new RegisterDto('','','','','','');
   }
 }

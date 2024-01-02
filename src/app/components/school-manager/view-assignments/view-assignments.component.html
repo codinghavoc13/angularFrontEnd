@@ -1,15 +1,18 @@
-<p>view-assignments works!</p>
 <!--Plan for multipurpose:
 - Teacher version shows assignments the teacher has created
 - Student version shows assignments assigned to them and grades
 - Parent version would be similar to Student version but would should all students associated with them-->
-<div *ngIf="smSvc.roleView=='TEACHER'">
-    <p>Teacher Version</p>
+<div *ngIf="smUserSvc.roleView=='TEACHER'">
+    <app-view-assignment-table [assignmentList]="homeworkList" [groupTitle]="'Homework'"></app-view-assignment-table>
+    <hr>
+    <app-view-assignment-table [assignmentList]="quizList" [groupTitle]="'Quiz'"></app-view-assignment-table>
+    <hr>
+    <app-view-assignment-table [assignmentList]="testList" [groupTitle]="'Test'"></app-view-assignment-table>
 </div>
-<div *ngIf="smSvc.roleView=='STUDENT'">
+<div *ngIf="smUserSvc.roleView=='STUDENT'">
     <p>Student version</p>
 </div>
-<div *ngIf="smSvc.roleView=='PARENT'">
+<div *ngIf="smUserSvc.roleView=='PARENT'">
     <p>Parent version</p>
 </div>
 

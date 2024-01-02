@@ -1,0 +1,15 @@
+<form>
+    <!--Student select drop down; need to create an end point that will get students that are not associated with a teacher-->
+    <div>
+
+    </div>
+
+    <!--Teacher select drop down-->
+    <div>
+        <label>Available Teachers</label>
+        <select>
+            <option value="default">-----</option>
+            <option *ngFor="let teacher of teacherList" [value]="teacher.userId">{{teacher.firstName}} {{teacher.lastName}}</option>
+        </select>
+    </div>
+</form>

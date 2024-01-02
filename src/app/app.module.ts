@@ -29,11 +29,7 @@ import { SMMainComponent } from './components/school-manager/school-manager-main
 import { SMAddAssignmentsComponent } from './components/school-manager/add-assignments/add-assignments.component';
 import { SMLoginComponent } from './components/school-manager/login/login.component';
 import { UserPageComponent } from './components/school-manager/user-page/user-page.component';
-// import { StudentPageComponent } from './components/school-manager/student-page/student-page.component';
-// import { StaffPageComponent } from './components/school-manager/staff-page/staff-page.component';
-// import { ParentPageComponent } from './components/school-manager/parent-page/parent-page.component';
 import { NavbarComponent } from './components/school-manager/navbar/navbar.component';
-// import { TeacherPageComponent } from './components/school-manager/teacher-page/teacher-page.component';
 import { ProfilePageComponent } from './components/school-manager/profile-page/profile-page.component';
 import { AbsenceSubmitPageComponent } from './components/school-manager/absence-submit-page/absence-submit-page.component';
 import { DynamicAddTestComponent } from './dynamic-add-test/dynamic-add-test.component';
@@ -44,6 +40,12 @@ import { ChildComponent as CCTest } from './components/school-manager/test/child
 import { ParentComponent as PCTest } from './components/school-manager/test/parent/parent.component';
 import { NavComponent as NCTest } from './components/school-manager/test/nav/nav.component';
 import { ToastrModule } from 'ngx-toastr';
+import { MainContentComponent } from './components/school-manager/main-content/main-content.component';
+import { ViewAssignmentTableComponent } from './components/school-manager/view-assignment-table/view-assignment-table.component';
+import { ViewUserComponent } from './components/school-manager/view-user/view-user.component';
+import { ViewUserTableComponent } from './components/school-manager/view-user-table/view-user-table.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AssignStudentComponent } from './components/school-manager/assign-student/assign-student.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -86,11 +88,7 @@ const routes: Routes = [
     SMAddAssignmentsComponent,
     SMLoginComponent,
     UserPageComponent,
-    // StudentPageComponent,
-    // StaffPageComponent,
-    // ParentPageComponent,
     NavbarComponent,
-    // TeacherPageComponent,
     ProfilePageComponent,
     AbsenceSubmitPageComponent,
     DynamicAddTestComponent,
@@ -98,7 +96,12 @@ const routes: Routes = [
     ViewAssignmentsComponent,
     CCTest,
     PCTest,
-    NCTest
+    NCTest,
+    MainContentComponent,
+    ViewAssignmentTableComponent,
+    ViewUserComponent,
+    ViewUserTableComponent,
+    AssignStudentComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -109,7 +112,8 @@ const routes: Routes = [
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({positionClass:'toast-bottom-right'}),
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
