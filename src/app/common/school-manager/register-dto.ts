@@ -5,6 +5,7 @@ export class RegisterDto {
         public role: string,
         public username: string,
         public schoolStudentId: string,
-        public password: string
+        public password: string,
+        public emailString: string
     ){}
 }

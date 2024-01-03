@@ -46,6 +46,8 @@ import { ViewUserComponent } from './components/school-manager/view-user/view-us
 import { ViewUserTableComponent } from './components/school-manager/view-user-table/view-user-table.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AssignStudentComponent } from './components/school-manager/assign-student/assign-student.component';
+import { SelfRegisterComponent } from './components/school-manager/self-register/self-register.component';
+import { ViewUnverifiedUsersComponent } from './components/school-manager/view-unverified-users/view-unverified-users.component';
 
 const routes: Routes = [
   {path: 'caesar', component: CaesarCipherComponent},
@@ -60,6 +62,8 @@ const routes: Routes = [
   {path: 'schoolManager/login', component: SMLoginComponent},
   {path: 'schoolManager/userPage', component: UserPageComponent},
   {path: 'schoolManager/registerUser', component:RegisterUserComponent},
+  {path: 'schoolManager/selfRegister', component:SelfRegisterComponent},
+  {path: 'schoolManager/viewUnverifiedUsers', component:ViewUnverifiedUsersComponent},
   {path: 'test/dat',component:DynamicAddTestComponent},
   {path: 'test/parent', component:PCTest},
   // {path: 'schoolManager/addAssignment', component:SMAddAssignmentsComponent},
@@ -101,7 +105,9 @@ const routes: Routes = [
     ViewAssignmentTableComponent,
     ViewUserComponent,
     ViewUserTableComponent,
-    AssignStudentComponent
+    AssignStudentComponent,
+    SelfRegisterComponent,
+    ViewUnverifiedUsersComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

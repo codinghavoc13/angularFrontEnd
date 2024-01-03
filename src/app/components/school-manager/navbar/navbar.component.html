@@ -1,17 +1,17 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <!--Add 'fixed-top' to class list to make this nav bar the main nav bar-->
     <div class="container">
-        <a class="navbar-brand" [ngClass]="{'active':viewSelector=='main'}"
-        (click)="setTabView('main')">School Manager</a>
+        <a class="navbar-brand" [ngClass]="{'active':viewSelector=='main'}" (click)="setTabView('main')">School
+            Manager</a>
         <ul *ngIf="smUserSvc.currentUser$| async" class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active':viewSelector=='home'}"
-                (click)="setTabView('home')">User Page</a>
+                <a class="nav-link" [ngClass]="{'active':viewSelector=='home'}" (click)="setTabView('home')">User
+                    Page</a>
             </li>
             <div class="dropdown" dropdown *ngIf="loggedInRole=='TEACHER'">
                 <a class="nav-link dropdown-toggle text-decoration-none"
-                [ngClass]="{'active':viewSelector==('add-assignments'|| viewSelector=='view-assignments')}" 
-                dropdownToggle>Assignments</a>
+                    [ngClass]="{'active':viewSelector==('add-assignments'|| viewSelector=='view-assignments')}"
+                    dropdownToggle>Assignments</a>
                 <div class="dropdown-menu" *dropdownMenu>
                     <a class="dropdown-item" [ngClass]="{'active':viewSelector=='add-assignments'}"
                         (click)="setTabView('add-assignments')">Add Assignments</a>
@@ -21,7 +21,7 @@
             </div>
             <li class="nav-item" *ngIf="loggedInRole=='STUDENT' || loggedInRole=='PARENT'">
                 <a class="nav-link" [ngClass]="{'active':viewSelector=='view-assignments'}"
-                        (click)="setTabView('view-assignments')">View Assignments</a>
+                    (click)="setTabView('view-assignments')">View Assignments</a>
             </li>
             <!-- <li class="nav-item" *ngIf="loggedInRole=='ADMIN'">
                 <a class="nav-link" [ngClass]="{'active':viewSelector=='newUser'}"
@@ -29,22 +29,23 @@
             </li> -->
             <div class="dropdown" dropdown *ngIf="loggedInRole=='ADMIN'">
                 <a class="nav-link dropdown-toggle text-decoration-none"
-                [ngClass]="{'active':viewSelector==('newUser'|| viewSelector=='view-users')}" 
-                dropdownToggle>Users</a>
+                    [ngClass]="{'active':viewSelector==('newUser'|| viewSelector=='view-users')}"
+                    dropdownToggle>Users</a>
                 <div class="dropdown-menu" *dropdownMenu>
                     <a class="dropdown-item" [ngClass]="{'active':viewSelector=='newUser'}"
-                    (click)="setTabView('newUser')">New User</a>
+                        (click)="setTabView('newUser')">New User</a>
                     <a class="dropdown-item" [ngClass]="{'active':viewSelector=='view-users'}"
                         (click)="setTabView('view-users')">View Users</a>
+                    <a class="dropdown-item" [ngClass]="{'active':viewSelector=='register-relationship'}"
+                        (click)="setTabView('register-relationship')">Register Relationship</a>
                 </div>
             </div>
             <div class="dropdown" dropdown *ngIf="loggedInRole=='ADMIN'">
                 <a class="nav-link dropdown-toggle text-decoration-none"
-                [ngClass]="{'active':viewSelector==('assign-student')}" 
-                dropdownToggle>Students</a>
+                    [ngClass]="{'active':viewSelector==('assign-student')}" dropdownToggle>Students</a>
                 <div class="dropdown-menu" *dropdownMenu>
                     <a class="dropdown-item" [ngClass]="{'active':viewSelector=='assign-student'}"
-                    (click)="setTabView('assign-student')">Assign Students</a>
+                        (click)="setTabView('assign-student')">Assign Students</a>
                 </div>
             </div>
             <li class="nav-item">

@@ -1,15 +1,14 @@
 <h2>Add New Student page</h2>
-<!--staff would enter new student first and last name, username, school id-->
 <form #loginForm="ngForm">
     <div class="form-group"><!--first name-->
       <label for="firstName">First Name <!--replace requirement warnings with toastr popups--></label>
       <input type="text" class="form-control" id="firstName" aria-describedby="firstName" required
-      placeholder="Enter student first name" [(ngModel)]="registerDTO.firstName" name="firstName">
+      placeholder="Enter student first name" (focusout)="checkUsernameGen()" [(ngModel)]="registerDTO.firstName" name="firstName">
     </div>
     <div class="form-group"><!--last name-->
       <label for="lastName">Last Name <!--replace requirement warnings with toastr popups--></label>
       <input type="text" class="form-control" id="lastName" aria-describedby="lastName"
-      placeholder="Enter student last name" [(ngModel)]="registerDTO.lastName" name="lastName">
+      placeholder="Enter student last name" (focusout)="checkUsernameGen()" [(ngModel)]="registerDTO.lastName" name="lastName">
     </div>
     <div>
         <label for="role">Role Type</label>
@@ -24,7 +23,7 @@
       <input type="text" class="form-control" id="studentId" aria-describedby="studentId"
       placeholder="Enter student school ID" [(ngModel)]="registerDTO.schoolStudentId" name="studentId">
     </div>
-    <button class="btn btn-primary" [disabled]="registerDTO.role==''" (click)="checkUsernameGen()">Generate Username</button>
+    <!-- <button class="btn btn-primary" [disabled]="registerDTO.role==''" (click)="checkUsernameGen()">Generate Username</button> -->
     <div class="form-group"><!--user name-->
       <label for="userName">User Name <!--replace requirement warnings with toastr popups--></label>
       <input type="text" class="form-control" id="userName" aria-describedby="userName" readonly

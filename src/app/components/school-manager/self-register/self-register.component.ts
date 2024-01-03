@@ -1,36 +1,42 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterDto } from 'src/app/common/school-manager/register-dto';
-import { StudentRegisterDto } from 'src/app/common/school-manager/student-register-dto';
 import { UserService } from 'src/app/service/school-manager/user.service';
+import { ElementRef } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { confirmPasswordValidator } from '../validators/password.validator';
 
 @Component({
-  selector: 'app-register-user',
-  templateUrl: './register-user.component.html',
-  styleUrls: ['./register-user.component.css']
+  selector: 'app-self-register',
+  templateUrl: './self-register.component.html',
+  styleUrls: ['./self-register.component.css']
 })
-export class RegisterUserComponent {
-  registerDTO: RegisterDto = new RegisterDto('', '', '', '', '', '','');
+export class SelfRegisterComponent {
+  registerDTO: RegisterDto = new RegisterDto('', '', '', '', '', '', '');
+  compareDTO: RegisterDto = new RegisterDto('', '', '', '', '', '', '');
+  emailValid: boolean = false;
+  passwordValid: boolean = false;
   usernameNumber: number = 1;
-  checkUsername: boolean = true;
 
-  constructor(private smUserSvc: UserService, private toastr: ToastrService) { }
+  constructor(private smUserSvc: UserService, private toastr: ToastrService,
+    private elementRef: ElementRef) { }
 
-  registerStudent() {
+  registerUser() {
     // console.log('as-c-2');
     // console.log("setting password to 'password' but code is in place to set the password to: " + this.generateRandomPW());
     this.registerDTO.password = 'password';
+    this.registerDTO.role='PRIMARY';
     // console.log('as-c-2');
     // console.log(this.registerDTO);
     if (this.validateRegDTO()) {
       this.smUserSvc.registerUser(this.registerDTO).subscribe(
-        data=>{
+        data => {
           console.log('ru-1');
           console.log(data);
-        }  
+        }
       )
       this.toastr.success('New user registered');
-      this.registerDTO = new RegisterDto('','','','','','','');
+      this.registerDTO = new RegisterDto('', '', '', '', '', '', '');
     } else {
       this.toastr.error('All fields are required');
     }
@@ -42,8 +48,9 @@ export class RegisterUserComponent {
     result = result && !(this.registerDTO.lastName == '');
     result = result && !(this.registerDTO.username == '');
     result = result && !(this.registerDTO.role == '');
-    if (this.registerDTO.role == 'STUDENT')
-      result = result && !(this.registerDTO.schoolStudentId == '');
+    result = result && this.emailValid;
+    result = result && this.passwordValid;
+    //going to rework the student id to be built by the backend before saving to database
     return result;
   }
 
@@ -61,7 +68,7 @@ export class RegisterUserComponent {
       this.toastr.error('First and last names are required to generate username');
     } else {
       let tempUserName = this.registerDTO.firstName.toLocaleLowerCase() + '.' + this.registerDTO.lastName.toLocaleLowerCase();
-      const check = new RegisterDto('', '', 'STUDENT', tempUserName, '', '','');
+      const check = new RegisterDto('', '', 'STUDENT', tempUserName, '', '', '');
       this.callSvc(check, tempUserName);
     }
   }
@@ -76,14 +83,15 @@ export class RegisterUserComponent {
     }
   }
 
-  async buildNewUsername(tempUsername:string) {
+  async buildNewUsername(tempUsername: string) {
     let newTemp = tempUsername + this.usernameNumber;
     this.usernameNumber++;
-    let check = new RegisterDto('', '', 'STUDENT', newTemp, '', '','');
+    //setting this dto's role to STUDENT but will not actually be saved
+    let check = new RegisterDto('', '', 'STUDENT', newTemp, '', '', '');
     this.callSvc(check, newTemp);
   }
 
-  async callSvc(check: RegisterDto, checkName: string){
+  async callSvc(check: RegisterDto, checkName: string) {
     await this.smUserSvc.checkUsername(check).subscribe(
       data => {
         this.checkUsernameValid(checkName, data.valueOf());
@@ -91,7 +99,26 @@ export class RegisterUserComponent {
     );
   }
 
-  clearForm(){
-    this.registerDTO = new RegisterDto('','','','','','','');
+  clearForm() {
+    this.registerDTO = new RegisterDto('', '', '', '', '', '', '');
   }
+
+  checkPW() {
+    if (this.registerDTO.password != '' && this.compareDTO.password != '') {
+      if (this.registerDTO.password != this.compareDTO.password) {
+        this.toastr.error('The passwords do not match');
+        this.passwordValid = false;
+      } else this.passwordValid = true;
+    }
+  }
+
+  checkEmail() {
+    if (this.registerDTO.emailString != '' && this.compareDTO.emailString != '') {
+      if (this.registerDTO.emailString != this.compareDTO.emailString) {
+        this.toastr.error('The email addresses do not match');
+        this.emailValid = false;
+      } else this.emailValid = true;
+    }
+  }
+
 }
