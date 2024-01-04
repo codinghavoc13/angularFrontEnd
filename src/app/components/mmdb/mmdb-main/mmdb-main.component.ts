@@ -25,7 +25,6 @@ export class MmdbMainComponent implements OnInit{
     this.httpClient.get<Movie[]>(this.allUrl).subscribe(
       data=>{
         this.movies = data;
-        console.log(this.movies);
       }
     );
   }

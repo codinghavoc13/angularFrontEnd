@@ -1,9 +1,9 @@
 <div>
-    <app-view-user-table [userList]="studentList" [groupTitle]="'Students'"></app-view-user-table>
+    <app-view-user-table [userList]="studentList" [verifyOrAll]="'all'" [groupTitle]="'Students'"></app-view-user-table>
     <hr>
-    <app-view-user-table [userList]="parentList" [groupTitle]="'Parents'"></app-view-user-table>
+    <app-view-user-table [userList]="parentList" [verifyOrAll]="'all'" [groupTitle]="'Parents'"></app-view-user-table>
     <hr>
-    <app-view-user-table [userList]="teacherList" [groupTitle]="'Teachers'"></app-view-user-table>
+    <app-view-user-table [userList]="teacherList" [verifyOrAll]="'all'" [groupTitle]="'Teachers'"></app-view-user-table>
     <hr>
-    <app-view-user-table [userList]="adminList" [groupTitle]="'Admin'"></app-view-user-table>
+    <app-view-user-table [userList]="adminList" [verifyOrAll]="'all'" [groupTitle]="'Admin'"></app-view-user-table>
 </div>

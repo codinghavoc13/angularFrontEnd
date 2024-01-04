@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PassphraseService } from 'src/app/service/passphrase/passphrase.service';
+import { PassphraseService } from 'src/app/service/cipher/passphrase.service';
 
 @Component({
   selector: 'app-passphrase-result',

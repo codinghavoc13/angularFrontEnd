@@ -52,8 +52,8 @@ export class SMAddAssignmentsComponent implements OnInit{
 
   onSubmit(){
     //this will likely be reworked later to send the json values to the back end
-    console.log('aa-1');
-    console.log(this.assignmentForm.value);
+    // console.log('aa-1');
+    // console.log(this.assignmentForm.value);
     this.assignmentDto = new AssignmentDto(this.assignmentForm.value);
     // console.log('aa-1');
     // console.log(this.assignmentDto.teacher_id);

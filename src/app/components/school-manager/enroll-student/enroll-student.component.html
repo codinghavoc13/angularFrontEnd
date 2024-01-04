@@ -1,0 +1,55 @@
+<p>enroll-student works!</p>
+
+<!--Parent form would be nearly identical to register-user, no role drop down-->
+<h2>Student Enrollment Form</h2>
+<div class="container">
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+        <input type="hidden" id="parent_id" name="parent_id" formControlName="parent_id" class="form-control">
+        <button type="button" (click)="addStudent()" class="btn btn-primary" [disabled]="!studentForm.valid">
+            Add New Row</button>
+        <div formArrayName="students">
+            <div *ngFor="let student of students().controls; let i=index" [formGroupName]="i">
+                <div class="form-group">
+                    <label style="width: 15%; float: left;" for="firstName">First Name</label>
+                    <input style="width: 35%;" name="firstName" type="text" formControlName="firstName"
+                        class="form-control">
+                </div>
+                <div class="form-group">
+                    <label style="width: 15%; float: left;" for="lastName">Last Name</label>
+                    <input style="width: 35%;" name="lastName" type="text" formControlName="lastName"
+                        class="form-control">
+                </div>
+                <!-- username, email, password, gradeLevel -->
+                <div class="form-group">
+                    <label style="width: 15%; float: left;" for="username">User Name</label>
+                    <input style="width: 35%;" name="username" type="text" formControlName="username"
+                        class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label style="width: 15%; float: left;" for="password">Password</label>
+                    <input style="width: 35%;" name="password" type="password" formControlName="password"
+                        class="form-control">
+                </div>
+                <div class="form-group">
+                    <label style="width: 15%; float: left;" for="emailString">Email <i>**Optional**</i></label>
+                    <input style="width: 35%;" name="emailString" type="text" formControlName="emailString"
+                        class="form-control">
+                </div>
+                <div class="form-group">
+                    <label style="width: 15%; float: left;" for="gradeLevel">Grade Level</label>
+                    <input style="width: 35%;" name="gradeLevel" type="text" formControlName="gradeLevel"
+                        class="form-control">
+                </div>
+                <br>
+                <button (click)="removeStudent(i)" class="btn btn-danger" style="float: right;">Remove</button>
+                <br>
+                <!-- <hr> -->
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-success" [disabled]="!studentForm.valid">Submit</button>
+    </form>
+    <hr>
+    <p>This will go away after I check that submitting student from this form actually works</p>
+    {{this.studentForm.value | json}}
+</div>

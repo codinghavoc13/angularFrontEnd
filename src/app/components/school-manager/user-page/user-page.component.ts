@@ -13,6 +13,7 @@ import { UserService } from 'src/app/service/school-manager/user.service';
 export class UserPageComponent implements OnInit{
   viewTab='home';
   userRole: string = '';
+  userVerification: boolean = true;
 
   constructor(public smUserSvc: UserService,
     private router: Router){
@@ -23,10 +24,12 @@ export class UserPageComponent implements OnInit{
     // if(this.pageView == 'main' || this.pageView == ''){
     //   this.router.navigate(['/schoolManager/main']);
     // }
+    console.log('up-ngoninit');
     if(this.smUserSvc.roleView=='main') {
       this.router.navigate(['/schoolManager/main']);
     } else {
       this.userRole = this.smUserSvc.loggedInUser!.role;
+      this.userVerification = this.smUserSvc.loggedInUser!.verified;
       console.log('up-1');
       console.log(this.userRole);
     }

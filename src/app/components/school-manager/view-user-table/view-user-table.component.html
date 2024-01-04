@@ -13,17 +13,19 @@
             <i *ngIf="sortFlags[2]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-emailString')"></i>
             <i *ngIf="sortFlags[2]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-emailString')"></i>
         </span>Email Address</th>
-        <th>Phone Number</th>
+        <th *ngIf="verifyOrAll=='all'">Phone Number</th><!--Add ngIf to hide if verifyOrAll is set to all-->
         <th><span>
             <i *ngIf="sortFlags[3]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-username')"></i>
             <i *ngIf="sortFlags[3]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-username')"></i>
         </span>Username</th>
+        <th *ngIf="verifyOrAll=='verify'"></th>
     </tr>
     <tr *ngFor="let user of userList">
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.emailString }}</td>
-        <td>{{ user.phoneString }}</td>
+        <td *ngIf="verifyOrAll=='all'">{{ user.phoneString }}</td><!--Add ngIf to hide if verifyOrAll is set to all-->
         <td>{{ user.username }}</td>
+        <td *ngIf="verifyOrAll=='verify'"><button (click)="verifyUser(user.userId)" >Verify</button></td><!--Add ngIf to hide if verifyOrAll is set to verify-->
     </tr>
 </table>

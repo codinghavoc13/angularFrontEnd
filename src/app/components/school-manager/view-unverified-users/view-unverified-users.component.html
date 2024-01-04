@@ -1,20 +1,5 @@
-<p>view-unverified-users works!</p>
-<!--Two tables to display (1)unverified PRIMARY or PARENT users and (2) unverified STUDENT users-->
-
-<h2>Parents</h2>
-<table>
-    <tr>
-        <th>Last Name</th>
-        <th>First Name</th>
-        <th>Email</th>
-        <th>User Name</th>
-        <th></th>
-    </tr>
-    <tr>
-        <td>Last Name</td>
-        <td>First Name</td>
-        <td>Email</td>
-        <td>User Name</td>
-        <td><button>Verify</button></td>
-    </tr>
-</table>
+<div>
+    <app-view-user-table [userList]="studentList" [verifyOrAll]="'verify'" [groupTitle]="'Students'" (verifyEmitter)="verifyUser($event, 'student')"></app-view-user-table>
+    <hr>
+    <app-view-user-table [userList]="parentList" [verifyOrAll]="'verify'" [groupTitle]="'Parents'" (verifyEmitter)="verifyUser($event, 'parent')"></app-view-user-table>
+</div>

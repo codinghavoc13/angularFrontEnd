@@ -10,7 +10,7 @@ import { UserService } from 'src/app/service/school-manager/user.service';
   styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent {
-  registerDTO: RegisterDto = new RegisterDto('', '', '', '', '', '','');
+  registerDTO: RegisterDto = new RegisterDto('', '', '', '', '', '','', false);
   usernameNumber: number = 1;
   checkUsername: boolean = true;
 
@@ -22,6 +22,8 @@ export class RegisterUserComponent {
     this.registerDTO.password = 'password';
     // console.log('as-c-2');
     // console.log(this.registerDTO);
+    //setting verified to false, admin will go through later and verify everyone
+    this.registerDTO.verified = false;
     if (this.validateRegDTO()) {
       this.smUserSvc.registerUser(this.registerDTO).subscribe(
         data=>{
@@ -30,7 +32,7 @@ export class RegisterUserComponent {
         }  
       )
       this.toastr.success('New user registered');
-      this.registerDTO = new RegisterDto('','','','','','','');
+      this.registerDTO = new RegisterDto('','','','','','','', false);
     } else {
       this.toastr.error('All fields are required');
     }
@@ -61,7 +63,7 @@ export class RegisterUserComponent {
       this.toastr.error('First and last names are required to generate username');
     } else {
       let tempUserName = this.registerDTO.firstName.toLocaleLowerCase() + '.' + this.registerDTO.lastName.toLocaleLowerCase();
-      const check = new RegisterDto('', '', 'STUDENT', tempUserName, '', '','');
+      const check = new RegisterDto('', '', 'STUDENT', tempUserName, '', '','', false);
       this.callSvc(check, tempUserName);
     }
   }
@@ -79,7 +81,7 @@ export class RegisterUserComponent {
   async buildNewUsername(tempUsername:string) {
     let newTemp = tempUsername + this.usernameNumber;
     this.usernameNumber++;
-    let check = new RegisterDto('', '', 'STUDENT', newTemp, '', '','');
+    let check = new RegisterDto('', '', 'STUDENT', newTemp, '', '','', false);
     this.callSvc(check, newTemp);
   }
 
@@ -92,6 +94,6 @@ export class RegisterUserComponent {
   }
 
   clearForm(){
-    this.registerDTO = new RegisterDto('','','','','','','');
+    this.registerDTO = new RegisterDto('','','','','','','', false);
   }
 }

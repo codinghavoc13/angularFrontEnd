@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CipherBody } from '../../../common/cipher/cipher-body';
-import { CaesarCipherService } from '../../../service/caesar/caesar-cipher.service';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CipherBody } from 'src/app/common/cipher/cipher-body';
+import { CaesarCipherService } from 'src/app/service/cipher/caesar-cipher.service';
 
 @Component({
   selector: 'app-caesar-cipher',

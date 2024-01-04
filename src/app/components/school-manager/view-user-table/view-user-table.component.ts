@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from 'src/app/common/school-manager/user';
 
 @Component({
@@ -9,6 +9,8 @@ import { User } from 'src/app/common/school-manager/user';
 export class ViewUserTableComponent {
   @Input() userList: User[] = [];
   @Input() groupTitle: string = '';
+  @Input() verifyOrAll: string = 'all';
+  @Output() verifyEmitter = new EventEmitter();
 
   sortFlags: SortFlags = ['asc','asc','asc','asc'];
 
@@ -56,6 +58,11 @@ export class ViewUserTableComponent {
         this.sortFlags[3]='asc';
         break;
     }
+  }
+
+  verifyUser(userId: number){
+    console.log('vut-userId: ' + userId);
+    this.verifyEmitter.emit(userId);
   }
 }
 

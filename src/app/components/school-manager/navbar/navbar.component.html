@@ -8,7 +8,7 @@
                 <a class="nav-link" [ngClass]="{'active':viewSelector=='home'}" (click)="setTabView('home')">User
                     Page</a>
             </li>
-            <div class="dropdown" dropdown *ngIf="loggedInRole=='TEACHER'">
+            <div class="dropdown" dropdown *ngIf="checkUserPermission('TEACHER')">
                 <a class="nav-link dropdown-toggle text-decoration-none"
                     [ngClass]="{'active':viewSelector==('add-assignments'|| viewSelector=='view-assignments')}"
                     dropdownToggle>Assignments</a>
@@ -27,7 +27,7 @@
                 <a class="nav-link" [ngClass]="{'active':viewSelector=='newUser'}"
                     (click)="setTabView('newUser')">New User</a>
             </li> -->
-            <div class="dropdown" dropdown *ngIf="loggedInRole=='ADMIN'">
+            <div class="dropdown" dropdown *ngIf="checkUserPermission('ADMIN')">
                 <a class="nav-link dropdown-toggle text-decoration-none"
                     [ngClass]="{'active':viewSelector==('newUser'|| viewSelector=='view-users')}"
                     dropdownToggle>Users</a>
@@ -36,11 +36,13 @@
                         (click)="setTabView('newUser')">New User</a>
                     <a class="dropdown-item" [ngClass]="{'active':viewSelector=='view-users'}"
                         (click)="setTabView('view-users')">View Users</a>
-                    <a class="dropdown-item" [ngClass]="{'active':viewSelector=='register-relationship'}"
-                        (click)="setTabView('register-relationship')">Register Relationship</a>
+                    <!-- <a class="dropdown-item" [ngClass]="{'active':viewSelector=='register-relationship'}"
+                        (click)="setTabView('register-relationship')">Register Relationship</a> -->
+                    <a class="dropdown-item" [ngClass]="{'active':viewSelector=='unverifiedUsers'}"
+                        (click)="setTabView('unverifiedUsers')">View Unverified Users</a>
                 </div>
             </div>
-            <div class="dropdown" dropdown *ngIf="loggedInRole=='ADMIN'">
+            <div class="dropdown" dropdown *ngIf="checkUserPermission('ADMIN')">
                 <a class="nav-link dropdown-toggle text-decoration-none"
                     [ngClass]="{'active':viewSelector==('assign-student')}" dropdownToggle>Students</a>
                 <div class="dropdown-menu" *dropdownMenu>
@@ -48,10 +50,12 @@
                         (click)="setTabView('assign-student')">Assign Students</a>
                 </div>
             </div>
-            <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active':viewSelector=='absences'}"
-                    (click)="setTabView('absences')">Absences</a>
-            </li>
+            <div>
+                <li class="nav-item" *ngIf="checkUserPermission('PARENT') || checkUserPermission('STUDENT')">
+                    <a class="nav-link" [ngClass]="{'active':viewSelector=='absences'}"
+                        (click)="setTabView('absences')">Absences</a>
+                </li>
+            </div>
             <li class="nav-item">
                 <a class="nav-link" [ngClass]="{'active':viewSelector=='myContact'}"
                     (click)="setTabView('myContact')">My Contact</a>

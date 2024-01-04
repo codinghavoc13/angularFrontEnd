@@ -6,6 +6,7 @@ export class RegisterDto {
         public username: string,
         public schoolStudentId: string,
         public password: string,
-        public emailString: string
+        public emailString: string,
+        public verified: boolean
     ){}
 }

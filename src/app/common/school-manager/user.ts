@@ -9,5 +9,6 @@ export interface User {
     emailString: string,
     phoneString: string,
     schoolStudentId: string,
-    gradeLevel: string
+    gradeLevel: string,
+    verified: boolean
 }

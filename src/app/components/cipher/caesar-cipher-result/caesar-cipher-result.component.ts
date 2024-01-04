@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CipherBody } from '../../../common/cipher/cipher-body';
-import { CaesarCipherService } from '../../../service/caesar/caesar-cipher.service';
+import { CaesarCipherService } from '../../../service/cipher/caesar-cipher.service';
 
 @Component({
   selector: 'app-caesar-cipher-result',

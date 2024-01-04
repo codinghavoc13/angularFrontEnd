@@ -23,7 +23,7 @@ export class ViewUserComponent implements OnInit{
         console.log(response);
         response.forEach((u)=>{
           if(u.role=='STUDENT') this.studentList.push(u);
-          if(u.role=='PARENT') this.parentList.push(u);
+          if(u.role=='PARENT' || u.role=='PRIMARY') this.parentList.push(u);
           if(u.role=='TEACHER') this.teacherList.push(u);
           if(u.role=='ADMIN') this.adminList.push(u);
         })

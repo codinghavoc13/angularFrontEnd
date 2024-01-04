@@ -1,6 +1,6 @@
 <div *ngIf="(smUserSvc.currentUser$ | async) as user">
     <div>
-        <app-navbar [loggedInRole]="userRole" (viewEmitter)="setTabView($event)"></app-navbar>
+        <app-navbar [loggedInRole]="userRole" [loggedInVerification]="userVerification" (viewEmitter)="setTabView($event)"></app-navbar>
 
         <div class="tab-content">
             <div id="home" *ngIf="viewTab=='home'">
@@ -31,6 +31,9 @@
             </div>
             <div id="menu8" *ngIf="viewTab=='assign-student' && userRole=='ADMIN'">
                 <app-assign-student></app-assign-student>
+            </div>
+            <div id="unverifiedUsers" *ngIf="viewTab=='unverifiedUsers' && userRole=='ADMIN'">
+                <app-view-unverified-users></app-view-unverified-users>
             </div>
         </div>
     </div>

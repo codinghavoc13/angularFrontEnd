@@ -11,7 +11,8 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl = "http://localhost:8080/user";
+  userUrl = "http://localhost:8080/user";
+  staffUrl = "http://localhost:8080/staff";
   usernameCheck: boolean = true;
   private currentUserSrc = new BehaviorSubject<User|null>(null);
   currentUser$ = this.currentUserSrc.asObservable();
@@ -22,8 +23,8 @@ export class UserService {
   constructor(private httpClient: HttpClient, private router: Router, private toastr: ToastrService) { }
 
   login(loginReq: SMLoginDTO){
-    const urlString = this.baseUrl+"/login";
-    return this.httpClient.post<User>(this.baseUrl+"/login",loginReq).subscribe({
+    const urlString = this.userUrl+"/login";
+    return this.httpClient.post<User>(this.userUrl+"/login",loginReq).subscribe({
       next: (response)=>{
         const user = response;
         if(user){
@@ -50,18 +51,28 @@ export class UserService {
   registerUser(dto: RegisterDto){
     console.log('user-svc-1');
     console.log(dto);
-    return this.httpClient.post<User>(this.baseUrl+"/saveNewUser",dto);
+    return this.httpClient.post<User>(this.userUrl+"/saveNewUser",dto);
   }
 
   checkUsername(tempUser: RegisterDto){
-    return this.httpClient.post<boolean>(this.baseUrl+"/checkUsername", tempUser);
+    return this.httpClient.post<boolean>(this.userUrl+"/checkUsername", tempUser);
   }
 
   getAllUsers(){
-    return this.httpClient.get<User[]>(this.baseUrl+"/getAllUsersNoPW");
+    return this.httpClient.get<User[]>(this.userUrl+"/getAllUsersNoPW");
   }
 
   getUsersByRole(role: string){
-    return this.httpClient.get<User[]>(this.baseUrl+"/getUsersByRole/"+role);
+    return this.httpClient.get<User[]>(this.userUrl+"/getUsersByRole/"+role);
+  }
+
+  getUnverifiedUsers(){
+    return this.httpClient.get<User[]>(this.staffUrl+"/getUnverifiedUsers");
+  }
+
+  verifyUser(userId: number){
+    this.httpClient.put<User>(this.staffUrl+"/verifyUser/"+userId, null).subscribe(
+      // data => console.log('u-svc-1: ' + data)
+    );
   }
 }
