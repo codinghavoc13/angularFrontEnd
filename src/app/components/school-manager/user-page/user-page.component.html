@@ -11,7 +11,7 @@
                 <h3>Assignments</h3>
                 <app-add-assignments></app-add-assignments>
             </div>
-            <div id="menu2" *ngIf="viewTab=='absences' && (userRole=='TEACHER' || userRole=='ADMIN')">
+            <div id="menu2" *ngIf="viewTab=='absences'">
                 <app-absence-submit-page></app-absence-submit-page>
             </div>
             <div id="menu3" *ngIf="viewTab=='myContact'">
@@ -35,9 +35,14 @@
             <div id="unverifiedUsers" *ngIf="viewTab=='unverifiedUsers' && userRole=='ADMIN'">
                 <app-view-unverified-users></app-view-unverified-users>
             </div>
+            <div id="enrollStudent" *ngIf="viewTab=='enrollStudent' && (userRole=='PARENT' || userRole=='PRIMARY')">
+                <app-self-register [heading]="'Student'"></app-self-register>
+            </div>
+            <div id="viewStudents" *ngIf="viewTab=='viewStudents' && (userRole=='PARENT' || userRole=='PRIMARY')">
+                <app-view-students></app-view-students>
+            </div>
         </div>
     </div>
-    <hr>
     <div>
         <p><a class="btn btn-dark" (click)="logout()">Logout</a></p>
     </div>

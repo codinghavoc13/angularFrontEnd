@@ -1,8 +1,20 @@
 <h2>Come back to this after finishing the base registration</h2>
-<form>
+<form class="form-inline">
+    <div>
+        <label>Grade Select</label>
+        <select [(ngModel)]="gradeSelect" name="gradeSelect">
+            <option value="default">-----</option>
+            <option *ngFor="let lvl of [].constructor(12); let i = index" [value]="i+1">{{i+1}}</option>
+        </select>
+        <button class="btn btn-success" (click)="buildStudentList()">Select Grade</button>
+    </div>
     <!--Student select drop down; need to create an end point that will get students that are not associated with a teacher-->
     <div>
-
+        <label>Available Students</label>
+        <select>
+            <option value="default">-----</option>
+            <option *ngFor="let student of studentList" [value]="student.userId">{{student.firstName}} {{student.lastName}}</option>
+        </select>
     </div>
 
     <!--Teacher select drop down-->
@@ -14,3 +26,4 @@
         </select>
     </div>
 </form>
+<hr>

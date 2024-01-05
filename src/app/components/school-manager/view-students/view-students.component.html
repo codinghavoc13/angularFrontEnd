@@ -1,0 +1,48 @@
+<p>view-students works!</p>
+<!-- <table *ngFor="let student of students">
+    <tr>
+        <td>First Name:</td>
+        <td>{{student.firstName}}</td>
+    </tr>
+    <tr>
+        <td>Last Name:</td>
+        <td>{{student.lastName}}</td>
+    </tr>
+    <tr>
+        <td>User Name:</td>
+        <td>{{student.username}}</td>
+    </tr>
+    <tr>
+        <td>Email Address:</td>
+        <td>{{student.emailString}}</td>
+    </tr>
+    <tr>
+        <td>Phone Number:</td>
+        <td>{{student.phoneString}}</td>
+    </tr>
+    <hr>
+</table> -->
+
+<div *ngFor="let student of students">
+    <div>
+        <label>First Name: </label>
+        <span> {{student.firstName}}</span>
+    </div>
+    <div>
+        <label>Last Name: </label>
+        <span> {{student.lastName}}</span>
+    </div>
+    <div>
+        <label>User Name: </label>
+        <span> {{student.username}}</span>
+    </div>
+    <div>
+        <label>Email: </label>
+        <span> {{student.emailString}}</span>
+    </div>
+    <div>
+        <label>Phone Number: </label>
+        <span> {{student.phoneString}}</span>
+    </div>
+    <hr>
+</div>

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterDto } from 'src/app/common/school-manager/register-dto';
 import { UserService } from 'src/app/service/school-manager/user.service';
 import { ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { confirmPasswordValidator } from '../validators/password.validator';
+import { EnrollStudentDto } from 'src/app/common/school-manager/enroll-student-dto';
 
 @Component({
   selector: 'app-self-register',
@@ -13,18 +14,19 @@ import { confirmPasswordValidator } from '../validators/password.validator';
 })
 export class SelfRegisterComponent {
   registerDTO: RegisterDto = new RegisterDto('', '', '', '', '', '', '', false);
+  enrollStudentDTO: EnrollStudentDto = new EnrollStudentDto();
   compareDTO: RegisterDto = new RegisterDto('', '', '', '', '', '', '', false);
   emailValid: boolean = false;
   passwordValid: boolean = false;
   usernameNumber: number = 1;
+  @Input() heading: string = 'Parent'
 
   constructor(private smUserSvc: UserService, private toastr: ToastrService,
     private elementRef: ElementRef) { }
 
   registerUser() {
-    // console.log('as-c-2');
-    // console.log("setting password to 'password' but code is in place to set the password to: " + this.generateRandomPW());
-    this.registerDTO.password = 'password';
+    //This will need to be updated to send a different dto if enrolling students vs self registration
+    //moving code to set a PARENT as primary to somewhere else, NTTOTM
     // this.registerDTO.role='PRIMARY';
     this.registerDTO.verified=false;
     console.log('as-c-2');
@@ -44,26 +46,41 @@ export class SelfRegisterComponent {
     }
   }
 
+  enrollStudent(){
+    this.enrollStudentDTO.parent_id = this.smUserSvc.loggedInUser?.userId;
+    this.enrollStudentDTO.student = this.registerDTO;
+    this.enrollStudentDTO.student.role='STUDENT';
+    console.log(this.enrollStudentDTO);
+    this.smUserSvc.enrollStudent(this.enrollStudentDTO).subscribe(
+      data=>{
+        this.toastr.success('Successfully enrolled new student');
+      }
+    );
+  }
+
   validateRegDTO() {
     let result = true;
     result = result && !(this.registerDTO.firstName == '');
     result = result && !(this.registerDTO.lastName == '');
     result = result && !(this.registerDTO.username == '');
     result = result && !(this.registerDTO.role == '');
+    //Parent Registration->Student Enrollment Notes: would need to add a check to only make this required for parents self registering
     result = result && this.emailValid;
     result = result && this.passwordValid;
     //going to rework the student id to be built by the backend before saving to database
     return result;
   }
 
-  /*Builds a 12 character string of random letters and number. Yes, eventually it will repeat
+  /*
+  !!!!!NOT NEEDED WITH SELF REGISTRATION!!!!!
+  Builds a 12 character string of random letters and number. Yes, eventually it will repeat
   but when combined with the random salt in the password hash system on the back end, chances
-  of true duplicates are extremely low
+  of true duplicates are extremely low. 
   */
-  generateRandomPW() {
-    const result = Math.random().toString(36).substring(2, 12);
-    return result;
-  }
+  // generateRandomPW() {
+  //   const result = Math.random().toString(36).substring(2, 12);
+  //   return result;
+  // }
 
   async checkUsernameGen() {
     if (this.registerDTO.firstName != '' && this.registerDTO.lastName != '') {

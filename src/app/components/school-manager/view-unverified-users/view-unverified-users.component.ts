@@ -15,6 +15,10 @@ export class ViewUnverifiedUsersComponent implements OnInit{
   constructor(private smUserSvc: UserService){}
 
   ngOnInit(): void {
+    this.buildLists();
+  }
+
+  buildLists(){
     this.smUserSvc.getUnverifiedUsers().subscribe(
       response => {
         response.forEach((u)=>{
@@ -37,6 +41,10 @@ export class ViewUnverifiedUsersComponent implements OnInit{
         return user.userId !== userId;
       })
     }
+  }
+
+  refresh(){
+    this.buildLists();
   }
 
 }

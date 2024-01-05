@@ -20,13 +20,13 @@ import { SelfRegisterComponent } from '../components/school-manager/self-registe
 import { ViewUnverifiedUsersComponent } from '../components/school-manager/view-unverified-users/view-unverified-users.component';
 import { SharedModule } from './shared.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { EnrollStudentComponent } from '../components/school-manager/enroll-student/enroll-student.component';
+import { ViewStudentsComponent } from '../components/school-manager/view-students/view-students.component';
 
 const routes: Routes = [
   {path: 'schoolManager/main', component: SMMainComponent},
   {path: 'schoolManager/login', component: SMLoginComponent},
   {path: 'schoolManager/userPage', component: UserPageComponent},
-  {path: 'schoolManager/enrollStudent', component: EnrollStudentComponent}
+  {path: 'schoolManager/register', component:SelfRegisterComponent},
 ];
 
 @NgModule({
@@ -47,7 +47,7 @@ const routes: Routes = [
     AssignStudentComponent,
     SelfRegisterComponent,
     ViewUnverifiedUsersComponent,
-    EnrollStudentComponent
+    ViewStudentsComponent
   ],
   imports: [
     CommonModule,

@@ -8,20 +8,20 @@ import { UserService } from 'src/app/service/school-manager/user.service';
   styleUrls: ['./assign-student.component.css']
 })
 export class AssignStudentComponent implements OnInit{
+  tempStudentList: User[] = [];
   studentList: User[] = [];
   teacherList: User[] = [];
+  gradeSelect: number | undefined;
 
   constructor(private smUserSvc: UserService){}
   
   ngOnInit(): void {
-    console.log('as-1');
     this.buildTeacherList();
-    console.log('as-2');
     this.sortTeachers();
+    this.buildTempStudentList();
   }
 
   async buildTeacherList(){
-    console.log('as-3');
     await this.smUserSvc.getUsersByRole('TEACHER').subscribe(
       response => {
         response.forEach((u) =>{
@@ -29,14 +29,24 @@ export class AssignStudentComponent implements OnInit{
         })
       }
     )
-    console.log('as-4');
   }
 
   sortTeachers(){
-    console.log('as-5');
-    console.log(this.teacherList);
     this.teacherList.sort((a, b) => a.lastName.localeCompare(b.lastName));
-    console.log('as-6');
-    console.log(this.teacherList);
+  }
+
+  buildTempStudentList(){
+    this.smUserSvc.getStudentsNotAssignedToTeacher().subscribe(
+      data=>{
+        this.tempStudentList = data;
+      }
+    )
+  }
+
+  buildStudentList(){
+    this.studentList = [];
+    this.tempStudentList.filter((student)=>{
+      if(student.gradeLevel == this.gradeSelect?.toString()) this.studentList.push(student);
+    })
   }
 }

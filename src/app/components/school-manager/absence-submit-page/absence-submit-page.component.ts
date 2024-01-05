@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
+import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
   selector: 'app-absence-submit-page',
@@ -7,7 +8,7 @@ import { SchoolManagerService } from 'src/app/service/school-manager/school-mana
   styleUrls: ['./absence-submit-page.component.css']
 })
 export class AbsenceSubmitPageComponent {
-  constructor(public smSvc: SchoolManagerService){
+  constructor(public smUserSvc: UserService){
     
   }
 }

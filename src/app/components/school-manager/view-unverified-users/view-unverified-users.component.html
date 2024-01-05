@@ -1,5 +1,14 @@
 <div>
-    <app-view-user-table [userList]="studentList" [verifyOrAll]="'verify'" [groupTitle]="'Students'" (verifyEmitter)="verifyUser($event, 'student')"></app-view-user-table>
+    <app-view-user-table *ngIf="studentList.length>0; else noStudents" 
+        [userList]="studentList" [verifyOrAll]="'verify'" [groupTitle]="'Students'" 
+        (verifyEmitter)="verifyUser($event, 'student')"></app-view-user-table>
+        <ng-template #noStudents><h2>No students need to be verified</h2></ng-template>
     <hr>
-    <app-view-user-table [userList]="parentList" [verifyOrAll]="'verify'" [groupTitle]="'Parents'" (verifyEmitter)="verifyUser($event, 'parent')"></app-view-user-table>
+    <app-view-user-table *ngIf="parentList.length>0; else noParents"
+         [userList]="parentList" [verifyOrAll]="'verify'" [groupTitle]="'Parents'" 
+         (verifyEmitter)="verifyUser($event, 'parent')"></app-view-user-table>
+         <ng-template #noParents><h2>No parents need to be verified</h2></ng-template>
 </div>
+<hr>
+<button (click)="refresh()" class="btn btn-success">Refresh Lists</button>
+<hr>

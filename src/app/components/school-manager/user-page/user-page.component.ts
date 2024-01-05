@@ -20,24 +20,13 @@ export class UserPageComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    // this.pageView = this.smSvc.roleView;
-    // if(this.pageView == 'main' || this.pageView == ''){
-    //   this.router.navigate(['/schoolManager/main']);
-    // }
-    console.log('up-ngoninit');
     if(this.smUserSvc.roleView=='main') {
       this.router.navigate(['/schoolManager/main']);
     } else {
       this.userRole = this.smUserSvc.loggedInUser!.role;
       this.userVerification = this.smUserSvc.loggedInUser!.verified;
-      console.log('up-1');
-      console.log(this.userRole);
     }
   }
-
-  // setViewPage(view: string){
-  //   this.pageView = view;
-  // }
 
   logout(){
     this.smUserSvc.logout();

@@ -60,7 +60,7 @@ export class NavbarComponent {
 
   checkUserPermission(role: string){
     // console.log('nb-cup-role: ' + role);
-    console.log('nb-cup-verified: ' + this.loggedInVerification);
+    // console.log('nb-cup-verified: ' + this.loggedInVerification);
     if(this.loggedInVerification){
       if(this.loggedInRole==role){
         return true;

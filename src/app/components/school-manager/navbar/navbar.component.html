@@ -19,6 +19,18 @@
                         (click)="setTabView('view-assignments')">View Assignments</a>
                 </div>
             </div>
+            <!--update this to be another drop down: view enrolled students, enroll student, add relation*-->
+            <div class="dropdown" dropdown *ngIf="checkUserPermission('PARENT') || checkUserPermission('PRIMARY')">
+                <a class="nav-link dropdown-toggle text-decoration-none"
+                    [ngClass]="{'active':viewSelector==('add-assignments'|| viewSelector=='view-assignments')}"
+                    dropdownToggle>Students</a>
+                <div class="dropdown-menu" *dropdownMenu>
+                    <a class="dropdown-item" [ngClass]="{'active':viewSelector=='enrollStudent'}"
+                        (click)="setTabView('enrollStudent')">Enroll Student</a>
+                    <a class="dropdown-item" [ngClass]="{'active':viewSelector=='viewStudents'}"
+                        (click)="setTabView('viewStudents')">View Students</a>
+                </div>
+            </div>
             <li class="nav-item" *ngIf="loggedInRole=='STUDENT' || loggedInRole=='PARENT'">
                 <a class="nav-link" [ngClass]="{'active':viewSelector=='view-assignments'}"
                     (click)="setTabView('view-assignments')">View Assignments</a>
@@ -51,7 +63,7 @@
                 </div>
             </div>
             <div>
-                <li class="nav-item" *ngIf="checkUserPermission('PARENT') || checkUserPermission('STUDENT')">
+                <li class="nav-item" *ngIf="checkUserPermission('TEACHER') || checkUserPermission('ADMIN')">
                     <a class="nav-link" [ngClass]="{'active':viewSelector=='absences'}"
                         (click)="setTabView('absences')">Absences</a>
                 </li>

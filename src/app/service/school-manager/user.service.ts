@@ -6,6 +6,7 @@ import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
 import { User } from 'src/app/common/school-manager/user';
 import { BehaviorSubject, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { EnrollStudentDto } from 'src/app/common/school-manager/enroll-student-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -54,12 +55,30 @@ export class UserService {
     return this.httpClient.post<User>(this.userUrl+"/saveNewUser",dto);
   }
 
+  enrollStudent(dto: EnrollStudentDto){
+    console.log('user-svc-es-1');
+    console.log(dto);
+    return this.httpClient.post<User>(this.userUrl+"/enrollStudent",dto);
+  }
+
   checkUsername(tempUser: RegisterDto){
     return this.httpClient.post<boolean>(this.userUrl+"/checkUsername", tempUser);
   }
 
   getAllUsers(){
     return this.httpClient.get<User[]>(this.userUrl+"/getAllUsersNoPW");
+  }
+
+  getStudentsByGradeLevel(grade_level: number){
+
+  }
+
+  getStudentsByParentId(parent_id: number){
+    return this.httpClient.get<User[]>(this.userUrl+"/getStudentsByParentId/"+parent_id);
+  }
+
+  getStudentsNotAssignedToTeacher(){
+    return this.httpClient.get<User[]>(this.staffUrl+"/getStudentsNotAssignedToTeacher");
   }
 
   getUsersByRole(role: string){
