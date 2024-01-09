@@ -29,18 +29,18 @@ export class SelfRegisterComponent {
     //moving code to set a PARENT as primary to somewhere else, NTTOTM
     // this.registerDTO.role='PRIMARY';
     this.registerDTO.verified=false;
-    console.log('as-c-2');
-    console.log(this.registerDTO);
+    // console.log('as-c-2');
+    // console.log(this.registerDTO);
     if (this.validateRegDTO()) {
       this.smUserSvc.registerUser(this.registerDTO).subscribe(
         data => {
-          console.log('ru-1');
-          console.log(data);
+          // console.log('ru-1');
+          // console.log(data);
+          console.log(this.registerDTO);
+          this.toastr.success('New user registered');
+          this.registerDTO = new RegisterDto('', '', '', '', '', '', '', false);
         }
       )
-      console.log(this.registerDTO);
-      this.toastr.success('New user registered');
-      this.registerDTO = new RegisterDto('', '', '', '', '', '', '', false);
     } else {
       this.toastr.error('All fields are required');
     }
