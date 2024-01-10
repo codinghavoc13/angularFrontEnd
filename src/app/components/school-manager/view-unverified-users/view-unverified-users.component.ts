@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/common/school-manager/user';
+import { StaffService } from 'src/app/service/school-manager/staff.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
@@ -12,14 +13,14 @@ export class ViewUnverifiedUsersComponent implements OnInit{
   parentList: User[] = [];
   userIdToVerify: number = 0;
 
-  constructor(private smUserSvc: UserService){}
+  constructor(private smUserSvc: UserService, private staffSvc: StaffService){}
 
   ngOnInit(): void {
     this.buildLists();
   }
 
   buildLists(){
-    this.smUserSvc.getUnverifiedUsers().subscribe(
+    this.staffSvc.getUnverifiedUsers().subscribe(
       response => {
         response.forEach((u)=>{
           if(u.role=='STUDENT') this.studentList.push(u);
@@ -30,7 +31,7 @@ export class ViewUnverifiedUsersComponent implements OnInit{
   }
 
   async verifyUser(userId: number, list: string){
-    await this.smUserSvc.verifyUser(userId);
+    await this.staffSvc.verifyUser(userId);
     if(list=='student'){
       this.studentList = this.studentList.filter(function(user){
         return user.userId !== userId;

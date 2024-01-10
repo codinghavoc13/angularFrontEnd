@@ -1,44 +1,66 @@
 <h2>Come back to this after finishing the base registration</h2>
-<form class="form-inline" [formGroup]="testForm">
-    <div>
+    <div *ngIf="showCourseTable">
         <label>Grade Select</label>
-        <select formControlName="gradeSelect" name="gradeSelect">
+        <!-- <select formControlName="gradeSelect" name="gradeSelect"> -->
+        <select [(ngModel)]="gradeSelect" name="gradeSelect">
             <option value="default">-----</option>
             <option *ngFor="let lvl of [].constructor(12); let i = index" [value]="i+1">{{i+1}}</option>
         </select>
-        <button class="btn btn-success" (click)="buildStudentList()">Select Grade</button>
-    </div>
-    <!--Student select drop down; need to create an end point that will get students that are not associated with a teacher-->
-    <div *ngIf="!selMultiStudent">
-        <label>Available Students</label>
-        <select formControlName="studentSelect" name="studentSelect" >
-            <option value="default">-----</option>
-            <option *ngFor="let student of studentList" [value]="student.userId">{{student.firstName}} {{student.lastName}}</option>
-        </select>
-    </div>
-    <div *ngIf="selMultiStudent">
-        <label>Available Students - Multiple</label>
-        <select formControlName="studentSelect" name="studentMultipleSelect" multiple>
-            <option value="default">-----</option>
-            <option *ngFor="let student of studentList" [value]="student.userId">{{student.firstName}} {{student.lastName}}</option>
-        </select>
+        <button (click)="buildStudentList()">Select Grade</button>
+        <table>
+            <tr>
+                <th>Course Name</th>
+                <th>Teacher Name</th>
+                <th><button (click)="removeCourseSelect()" [disabled]="courseSelect==0">Remove Course Select</button></th>
+            </tr>
+            <tr *ngFor="let course of courseList">
+                <td>{{course.courseName}}</td>
+                <td>{{course.firstName}} {{course.lastName}}</td>
+                <td><button (click)="selectCourse(course)" [disabled]="courseSelect>0">Select Course</button></td>
+            </tr>
+        </table>
     </div>
 
-    <!--Teacher select drop down-->
-    <div *ngIf="!selMultiTeacher">
-        <label>Available Teachers</label>
-        <select formControlName="teacherSelect" name="teacherSelect" >
-            <option value="default">-----</option>
-            <option *ngFor="let teacher of teacherList" [value]="teacher.userId">{{teacher.firstName}} {{teacher.lastName}}</option>
-        </select>
+    <div *ngIf="showSelectTable">
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Grade Level</th>
+                <th><button class="btn btn-success" (click)="selectAll()">Select all</button></th>
+            </tr>
+            <tr *ngFor="let student of studentList" >
+                <td>{{ student.firstName }}</td>
+                <td>{{ student.lastName }}</td>
+                <td>{{ student.gradeLevel }}</td>
+                <td><button (click)="addStudentToWorkingList(student)" [disabled]="checkWorkingList(student)">Enroll</button></td>
+            </tr>
+        </table>
     </div>
-    <div *ngIf="selMultiTeacher">
-        <label>Available Teachers - Multiple</label>
-        <select formControlName="teacherSelect" name="teacherMultipleSelect" multiple>
-            <option value="default">-----</option>
-            <option *ngFor="let teacher of teacherList" [value]="teacher.userId">{{teacher.firstName}} {{teacher.lastName}}</option>
-        </select>
+    <div *ngIf="showConfirmTable">
+        <h2>Selected Course Information</h2>
+        <h3>{{courseDetail!.courseName}} - {{courseDetail!.firstName}} {{courseDetail!.lastName}}</h3>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Grade Level</th>
+                <th><button class="btn btn-success"(click)="removeAll()">Remove all</button></th>
+            </tr>
+            <tr *ngFor="let student of workingList" >
+                <td>{{ student.firstName }}</td>
+                <td>{{ student.lastName }}</td>
+                <td>{{ student.gradeLevel }}</td>
+                <td><button (click)="removeFromWorkingList(student)">Remove</button></td>
+            </tr>
+        </table>
     </div>
-    <button (click)="submitForm()">Activate the doomsday machine</button>
-</form>
-<hr>
+    <!-- <hr> -->
+    <button *ngIf="showCourseTable" class="btn btn-success" [disabled]="this.courseSelect == 0 || this.studentList.length == 0" (click)="moveToSelect()">Select Students</button>
+    <button *ngIf="showConfirmTable" class="btn btn-success" (click)="returnToCourseSelect()">Back to Course Selection</button>
+    <button *ngIf="showSelectTable" class="btn btn-success" (click)="returnToStudentSelect()">Back to Student Selection</button>
+    <button *ngIf="showSelectTable" class="btn btn-success" [disabled]="this.workingList.length == 0" (click)="moveToConfirm()">Confirm Selection</button>
+    <button *ngIf="showConfirmTable" class="btn btn-warning" (click)="submit()">Confirm</button>
+    <!-- <button (click)="submitForm()">Activate the doomsday machine</button> -->
+<!-- </form> -->
+<!-- <hr> -->

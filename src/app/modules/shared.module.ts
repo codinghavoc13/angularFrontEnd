@@ -17,7 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    NgbModule,
+    NgbModule
   ],
   exports: [
     BrowserModule,
@@ -26,7 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    NgbModule,
+    NgbModule
   ]
 })
 export class SharedModule { }

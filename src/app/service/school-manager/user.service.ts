@@ -13,7 +13,7 @@ import { EnrollStudentDto } from 'src/app/common/school-manager/enroll-student-d
 })
 export class UserService {
   userUrl = "http://localhost:8080/user";
-  staffUrl = "http://localhost:8080/staff";
+  // staffUrl = "http://localhost:8080/staff";
   usernameCheck: boolean = true;
   private currentUserSrc = new BehaviorSubject<User|null>(null);
   currentUser$ = this.currentUserSrc.asObservable();
@@ -77,21 +77,7 @@ export class UserService {
     return this.httpClient.get<User[]>(this.userUrl+"/getStudentsByParentId/"+parent_id);
   }
 
-  getStudentsNotAssignedToTeacher(){
-    return this.httpClient.get<User[]>(this.staffUrl+"/getStudentsNotAssignedToTeacher");
-  }
-
   getUsersByRole(role: string){
     return this.httpClient.get<User[]>(this.userUrl+"/getUsersByRole/"+role);
-  }
-
-  getUnverifiedUsers(){
-    return this.httpClient.get<User[]>(this.staffUrl+"/getUnverifiedUsers");
-  }
-
-  verifyUser(userId: number){
-    this.httpClient.put<User>(this.staffUrl+"/verifyUser/"+userId, null).subscribe(
-      // data => console.log('u-svc-1: ' + data)
-    );
   }
 }
