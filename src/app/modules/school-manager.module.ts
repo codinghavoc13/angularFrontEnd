@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'schoolManager/login', component: SMLoginComponent},
   {path: 'schoolManager/userPage', component: UserPageComponent},
   {path: 'schoolManager/register', component:SelfRegisterComponent},
-  {path: 'schoolManager/assignStudents', component:AssignStudentComponent}
+  // {path: 'schoolManager/assignStudents', component:AssignStudentComponent}
 ];
 
 @NgModule({

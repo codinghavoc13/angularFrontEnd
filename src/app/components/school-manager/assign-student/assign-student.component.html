@@ -1,12 +1,13 @@
 <h2>Come back to this after finishing the base registration</h2>
     <div *ngIf="showCourseTable">
         <label>Grade Select</label>
-        <!-- <select formControlName="gradeSelect" name="gradeSelect"> -->
         <select [(ngModel)]="gradeSelect" name="gradeSelect">
             <option value="default">-----</option>
             <option *ngFor="let lvl of [].constructor(12); let i = index" [value]="i+1">{{i+1}}</option>
         </select>
         <button (click)="buildStudentList()">Select Grade</button>
+        <hr>
+        <h2>Select a Course</h2>
         <table>
             <tr>
                 <th>Course Name</th>
@@ -21,6 +22,12 @@
         </table>
     </div>
 
+    <!--these two table could be combined into one with the if statement moved into the table instead of sitting
+    on the div:
+        - the Select/Remove all button
+        - the selected course information
+        - which list to build from
+    -->
     <div *ngIf="showSelectTable">
         <table>
             <tr>
@@ -57,8 +64,8 @@
     </div>
     <!-- <hr> -->
     <button *ngIf="showCourseTable" class="btn btn-success" [disabled]="this.courseSelect == 0 || this.studentList.length == 0" (click)="moveToSelect()">Select Students</button>
-    <button *ngIf="showConfirmTable" class="btn btn-success" (click)="returnToCourseSelect()">Back to Course Selection</button>
-    <button *ngIf="showSelectTable" class="btn btn-success" (click)="returnToStudentSelect()">Back to Student Selection</button>
+    <button *ngIf="showSelectTable" class="btn btn-success" (click)="returnToCourseSelect()">Back to Course Selection</button>
+    <button *ngIf="showConfirmTable" class="btn btn-success" (click)="returnToStudentSelect()">Back to Student Selection</button>
     <button *ngIf="showSelectTable" class="btn btn-success" [disabled]="this.workingList.length == 0" (click)="moveToConfirm()">Confirm Selection</button>
     <button *ngIf="showConfirmTable" class="btn btn-warning" (click)="submit()">Confirm</button>
     <!-- <button (click)="submitForm()">Activate the doomsday machine</button> -->

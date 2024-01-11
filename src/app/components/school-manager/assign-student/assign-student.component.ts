@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AssignStudentDto } from 'src/app/common/school-manager/assign-student-dto';
 import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
 import { User } from 'src/app/common/school-manager/user';
@@ -17,6 +18,7 @@ export class AssignStudentComponent implements OnInit{
   teacherList: User[] = [];
   
   workingList: User[] = [];
+  //This will need to be looked at before moving forward with the new changes to the backend
   courseList: CourseDetailDto[] = [];
   showCourseTable: boolean = true;
   showSelectTable: boolean = false;
@@ -28,7 +30,8 @@ export class AssignStudentComponent implements OnInit{
   selMultiStudent: boolean = true;
   selMultiTeacher: boolean = false;
 
-  constructor(private smUserSvc: UserService, public fb: FormBuilder,
+  constructor(private smUserSvc: UserService,
+    private toastr: ToastrService,
     private staffSvc: StaffService){
   }
   
@@ -41,7 +44,6 @@ export class AssignStudentComponent implements OnInit{
     await this.staffSvc.getCourseDetails().subscribe(
       response => {
         response.forEach((cd) => {
-          // console.log(cd);
           this.courseList.push(cd);
         })
       }
@@ -75,14 +77,19 @@ export class AssignStudentComponent implements OnInit{
     this.tempStudentList.filter((student)=>{
       if(student.gradeLevel == this.gradeSelect?.toString()) this.studentList.push(student);
     })
+    if(this.studentList.length == 0){
+      this.toastr.warning('No students in that grade found that are not enrolled in a course');
+    } else {
+      this.toastr.success('Student list populated');
+    }
   }
 
   submit(){
-    //{"gradeSelect":"4","studentSelect":[61,60],"teacherSelect":[2]}
     let student_ids_temp: number [] = [];
     this.workingList.forEach((student)=>{
       student_ids_temp.push(student.userId);
     })
+    this.workingList = [];
     let assignStudentDto: AssignStudentDto = new AssignStudentDto(
       this.courseSelect,
       student_ids_temp
@@ -90,7 +97,15 @@ export class AssignStudentComponent implements OnInit{
     console.log(assignStudentDto);
     this.staffSvc.submitStudentAssignmentDto(assignStudentDto).subscribe(
       response =>{
-        console.log(response);
+        //need to update the this.tempStudentList, either pull it down fresh or filter out the ones that match student_ids_temp
+        this.tempStudentList = [];
+        this.buildTempStudentList();
+        //reset the show flags to take the user back to course select
+        this.showCourseTable = true;
+        this.showSelectTable = false;
+        this.showConfirmTable = false;
+        this.courseSelect = 0;
+        this.gradeSelect = '';
       }
     )
   }
@@ -111,24 +126,27 @@ export class AssignStudentComponent implements OnInit{
   }
 
   moveToConfirm(){
+    this.showCourseTable = false;
     this.showSelectTable = false;
     this.showConfirmTable = true;
   }
 
   moveToSelect(){
     this.showCourseTable = false;
-    this.showConfirmTable = false;
     this.showSelectTable = true;
+    this.showConfirmTable = false;
   }
 
   returnToCourseSelect(){
     this.showCourseTable = true;
     this.showSelectTable = false;
+    this.showConfirmTable = false;
   }
 
   returnToStudentSelect(){
-    this.showConfirmTable = false;
+    this.showCourseTable = false;
     this.showSelectTable = true;
+    this.showConfirmTable = false;
   }
 
   selectAll(){

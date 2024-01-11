@@ -38,7 +38,8 @@
             <div id="enrollStudent" *ngIf="viewTab=='enrollStudent' && (userRole=='PARENT' || userRole=='PRIMARY')">
                 <app-self-register [heading]="'Student'"></app-self-register>
             </div>
-            <div id="viewStudents" *ngIf="viewTab=='viewStudents' && (userRole=='PARENT' || userRole=='PRIMARY')">
+            <!-- <div id="viewStudents" *ngIf="viewTab=='viewStudents' && (userRole=='PARENT' || userRole=='PRIMARY')"> -->
+            <div id="viewStudents" *ngIf="viewTab=='viewStudents'">
                 <app-view-students></app-view-students>
             </div>
         </div>
