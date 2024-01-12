@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/common/school-manager/user';
-import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({

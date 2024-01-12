@@ -21,6 +21,8 @@
         <th *ngIf="verifyOrAll=='verify'"></th>
     </tr>
     <tr *ngFor="let user of userList">
+        <!--Will need to adjust column width-->
+        <!--Add grade level to student table-->
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.emailString }}</td>

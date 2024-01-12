@@ -3,7 +3,8 @@ export class CourseDetailDto {
         public courseId: number,
         public firstName: string,
         public lastName: string,
-        public courseName: string
+        public courseName: string,
+        public courseLength: string
     ){}
 }
 

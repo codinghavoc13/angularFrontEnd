@@ -3,8 +3,6 @@ import { ToastrService } from 'ngx-toastr';
 import { RegisterDto } from 'src/app/common/school-manager/register-dto';
 import { UserService } from 'src/app/service/school-manager/user.service';
 import { ElementRef } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { confirmPasswordValidator } from '../validators/password.validator';
 import { EnrollStudentDto } from 'src/app/common/school-manager/enroll-student-dto';
 
 @Component({

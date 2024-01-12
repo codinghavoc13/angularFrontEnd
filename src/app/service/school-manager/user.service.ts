@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterDto } from 'src/app/common/school-manager/register-dto';
 import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
-import { User } from 'src/app/common/school-manager/user';
 import { BehaviorSubject, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { EnrollStudentDto } from 'src/app/common/school-manager/enroll-student-dto';
+import { UserDto } from 'src/app/common/school-manager/user-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +15,17 @@ export class UserService {
   userUrl = "http://localhost:8080/user";
   // staffUrl = "http://localhost:8080/staff";
   usernameCheck: boolean = true;
-  private currentUserSrc = new BehaviorSubject<User|null>(null);
+  private currentUserSrc = new BehaviorSubject<UserDto|null>(null);
   currentUser$ = this.currentUserSrc.asObservable();
   roleView: string = 'main';
-  loggedInUser: User | undefined;
+  loggedInUser: UserDto | undefined;
   invalidLoginCredentials: boolean = false;
 
   constructor(private httpClient: HttpClient, private router: Router, private toastr: ToastrService) { }
 
   login(loginReq: SMLoginDTO){
     const urlString = this.userUrl+"/login";
-    return this.httpClient.post<User>(this.userUrl+"/login",loginReq).subscribe({
+    return this.httpClient.post<UserDto>(this.userUrl+"/login",loginReq).subscribe({
       next: (response)=>{
         const user = response;
         if(user){
@@ -52,13 +52,13 @@ export class UserService {
   registerUser(dto: RegisterDto){
     console.log('user-svc-1');
     console.log(dto);
-    return this.httpClient.post<User>(this.userUrl+"/saveNewUser",dto);
+    return this.httpClient.post<UserDto>(this.userUrl+"/saveNewUser",dto);
   }
 
   enrollStudent(dto: EnrollStudentDto){
     console.log('user-svc-es-1');
     console.log(dto);
-    return this.httpClient.post<User>(this.userUrl+"/enrollStudent",dto);
+    return this.httpClient.post<UserDto>(this.userUrl+"/enrollStudent",dto);
   }
 
   checkUsername(tempUser: RegisterDto){
@@ -66,7 +66,7 @@ export class UserService {
   }
 
   getAllUsers(){
-    return this.httpClient.get<User[]>(this.userUrl+"/getAllUsersNoPW");
+    return this.httpClient.get<UserDto[]>(this.userUrl+"/getAllUsersSimple");
   }
 
   getStudentsByGradeLevel(grade_level: number){
@@ -74,10 +74,10 @@ export class UserService {
   }
 
   getStudentsByParentId(parent_id: number){
-    return this.httpClient.get<User[]>(this.userUrl+"/getStudentsByParentId/"+parent_id);
+    return this.httpClient.get<UserDto[]>(this.userUrl+"/getStudentsByParentId/"+parent_id);
   }
 
   getUsersByRole(role: string){
-    return this.httpClient.get<User[]>(this.userUrl+"/getUsersByRole/"+role);
+    return this.httpClient.get<UserDto[]>(this.userUrl+"/getUsersByRole/"+role);
   }
 }

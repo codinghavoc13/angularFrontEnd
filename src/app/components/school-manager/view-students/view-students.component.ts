@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/app/common/school-manager/user';
+import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { UserService } from 'src/app/service/school-manager/user.service';
   styleUrls: ['./view-students.component.css']
 })
 export class ViewStudentsComponent implements OnInit{
-  students: User[] = [];
+  students: UserDto[] = [];
   ascDesc: boolean = true;
 
   page = 1;

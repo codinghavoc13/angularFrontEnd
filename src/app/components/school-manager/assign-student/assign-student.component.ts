@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AssignStudentDto } from 'src/app/common/school-manager/assign-student-dto';
 import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
-import { User } from 'src/app/common/school-manager/user';
+import { UserDto } from 'src/app/common/school-manager/user-dto';
+// import { User } from 'src/app/common/school-manager/user';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
@@ -13,11 +13,11 @@ import { UserService } from 'src/app/service/school-manager/user.service';
   styleUrls: ['./assign-student.component.css']
 })
 export class AssignStudentComponent implements OnInit{
-  tempStudentList: User[] = [];
-  studentList: User[] = [];
-  teacherList: User[] = [];
+  tempStudentList: UserDto[] = [];
+  studentList: UserDto[] = [];
+  teacherList: UserDto[] = [];
   
-  workingList: User[] = [];
+  workingList: UserDto[] = [];
   //This will need to be looked at before moving forward with the new changes to the backend
   courseList: CourseDetailDto[] = [];
   showCourseTable: boolean = true;
@@ -110,18 +110,18 @@ export class AssignStudentComponent implements OnInit{
     )
   }
 
-  addStudentToWorkingList(student: User){
+  addStudentToWorkingList(student: UserDto){
     this.workingList.push(student);
   }
 
-  removeFromWorkingList(student: User){
+  removeFromWorkingList(student: UserDto){
     const idx = this.workingList.indexOf(student);
     if(idx > -1){
       this.workingList.splice(idx,1);
     }
   }
 
-  checkWorkingList(student: User){
+  checkWorkingList(student: UserDto){
     return this.workingList.includes(student);
   }
 

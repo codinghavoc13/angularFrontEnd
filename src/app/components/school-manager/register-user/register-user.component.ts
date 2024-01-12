@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterDto } from 'src/app/common/school-manager/register-dto';
-import { StudentRegisterDto } from 'src/app/common/school-manager/student-register-dto';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({

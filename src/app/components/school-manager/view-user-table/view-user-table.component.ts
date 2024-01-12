@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from 'src/app/common/school-manager/user';
+import { UserDto } from 'src/app/common/school-manager/user-dto';
 
 @Component({
   selector: 'app-view-user-table',
@@ -7,7 +7,7 @@ import { User } from 'src/app/common/school-manager/user';
   styleUrls: ['./view-user-table.component.css']
 })
 export class ViewUserTableComponent {
-  @Input() userList: User[] = [];
+  @Input() userList: UserDto[] = [];
   @Input() groupTitle: string = '';
   @Input() verifyOrAll: string = 'all';
   @Output() verifyEmitter = new EventEmitter();

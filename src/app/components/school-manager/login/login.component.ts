@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
-import { SchoolManagerService } from 'src/app/service/school-manager/school-manager.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({

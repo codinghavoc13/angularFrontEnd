@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/common/school-manager/user';
+import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
@@ -9,8 +9,8 @@ import { UserService } from 'src/app/service/school-manager/user.service';
   styleUrls: ['./view-unverified-users.component.css']
 })
 export class ViewUnverifiedUsersComponent implements OnInit{
-  studentList: User[] = [];
-  parentList: User[] = [];
+  studentList: UserDto[] = [];
+  parentList: UserDto[] = [];
   userIdToVerify: number = 0;
 
   constructor(private smUserSvc: UserService, private staffSvc: StaffService){}

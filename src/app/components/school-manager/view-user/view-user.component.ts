@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/common/school-manager/user';
+import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
@@ -8,11 +8,11 @@ import { UserService } from 'src/app/service/school-manager/user.service';
   styleUrls: ['./view-user.component.css']
 })
 export class ViewUserComponent implements OnInit{
-  allUsers: User[] = [];
-  studentList: User[] = [];
-  parentList: User[] = [];
-  teacherList: User[] = [];
-  adminList: User[] = [];
+  allUsers: UserDto[] = [];
+  studentList: UserDto[] = [];
+  parentList: UserDto[] = [];
+  teacherList: UserDto[] = [];
+  adminList: UserDto[] = [];
 
   public constructor(public smUserSvc: UserService){}
 
