@@ -5,7 +5,3 @@ td, th {
 tr:nth-child(even){
     background-color: rgb(223, 223, 223);
 }
-
-.viewStudentLabel{
-    width: 125px;
-}

@@ -1,0 +1,55 @@
+<div class="d-flex flex-row">
+    <div class="p-6">
+        <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
+            (pageChange)="handlePageChange($event)"></pagination-controls>
+    </div>
+    <div class="p-6">
+        <button *ngIf="ascDesc" (click)="sortByLastNameAsc()">Sort by last name - ascending</button>
+        <button *ngIf="!ascDesc" (click)="sortByLastNameDesc()">Sort by last name - descending</button>
+    </div>
+</div>
+<div class="row">
+    <div class="card bg-light" style="width: 50%;" *ngFor="let student of students | paginate : {
+    itemsPerPage: pageSize,
+    currentPage: page,
+    totalItems: count
+}; let i = index">
+        <div>
+            <label class="viewStudentLabel">First Name: </label>
+            <span> {{student.firstName}}</span>
+        </div>
+        <div>
+            <label class="viewStudentLabel">Last Name: </label>
+            <span> {{student.lastName}}</span>
+        </div>
+        <div>
+            <label class="viewStudentLabel">User Name: </label>
+            <span> {{student.username}}</span>
+        </div>
+        <div>
+            <label class="viewStudentLabel">Email: </label>
+            <span> {{student.emailString}}</span>
+        </div>
+        <div>
+            <label class="viewStudentLabel">Phone Number: </label>
+            <span> {{student.phoneString}}</span>
+        </div>
+    </div>
+</div>
+<!-- <div class="row">
+    <div *ngFor="let movie of movies" class="card bg-light" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{movie.movieTitle}}</h5>
+            <p class="card-text">{{movie.releaseDate}}</p>
+            <a (click)="prepMovieDetailsPage(movie.movie_id)" class="btn btn-dark">View Details</a>
+        </div>
+    </div>
+</div> -->
+
+<div class="mt-3">
+    Students per page:
+    <select (change)="handlePageSizeChange($event)">
+        <option *ngFor="let size of pageSizes" [ngValue]="size">{{size}}</option>
+    </select>
+</div>
+<hr>

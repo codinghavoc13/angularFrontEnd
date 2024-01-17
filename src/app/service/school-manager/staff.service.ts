@@ -5,12 +5,14 @@ import { ToastrService } from 'ngx-toastr';
 import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
 import { AssignStudentDto } from 'src/app/common/school-manager/assign-student-dto';
 import { UserDto } from 'src/app/common/school-manager/user-dto';
+import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StaffService {
   staffUrl = "http://localhost:8080/staff";
+  teacherUrl = "http://localhost:8080/teacher";
 
   constructor(private httpClient: HttpClient, private router: Router, private toastr: ToastrService) { }
 
@@ -34,5 +36,9 @@ export class StaffService {
 
   submitStudentAssignmentDto(asDto: AssignStudentDto){
     return this.httpClient.post<AssignStudentDto>(this.staffUrl+"/assignStudentsToCourse", asDto);
+  }
+
+  getStudentsByTeacherId(teacherId: number){
+    return this.httpClient.get<StudentListDto[]>(this.teacherUrl+"/getStudents/"+teacherId);
   }
 }

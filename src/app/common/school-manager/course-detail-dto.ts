@@ -1,14 +1,11 @@
 export class CourseDetailDto {
     constructor(
         public courseId: number,
-        public firstName: string,
-        public lastName: string,
+        public teacherFirstName: string,
+        public teacherLastName: string,
+        public teacher_id: number,
         public courseName: string,
-        public courseLength: string
+        public courseLength: string,
+        public period: number
     ){}
 }
-
-// public Long course_id;
-//     public String first_name;
-//     public String last_name;
-//     public String course_name;  

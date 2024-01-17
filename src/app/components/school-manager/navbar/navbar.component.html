@@ -37,8 +37,9 @@
                     <a class="dropdown-item" *ngIf="checkUserPermission('PARENT') || checkUserPermission('PRIMARY')"
                         [ngClass]="{'active':viewSelector=='enrollStudent'}"
                         (click)="setTabView('enrollStudent')">Enroll Student</a>
-                    <!--all-->
-                    <a class="dropdown-item" [ngClass]="{'active':viewSelector=='viewStudents'}"
+                    <!--everyone except student-->
+                    <a class="dropdown-item" *ngIf="!checkUserPermission('STUDENT')"
+                        [ngClass]="{'active':viewSelector=='viewStudents'}"
                         (click)="setTabView('viewStudents')">View Students</a>
                 </div>
             </div>

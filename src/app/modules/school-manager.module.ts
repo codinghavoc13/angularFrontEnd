@@ -21,6 +21,9 @@ import { ViewUnverifiedUsersComponent } from '../components/school-manager/view-
 import { SharedModule } from './shared.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ViewStudentsComponent } from '../components/school-manager/view-students/view-students.component';
+import { ViewStudentsSubComponent } from '../components/school-manager/view-students-sub/view-students-sub.component';
+import { AssignStudentsCourseComponent } from '../components/school-manager/assign-students-course/assign-students-course.component';
+import { AssignStudentCoursesComponent } from '../components/school-manager/assign-student-courses/assign-student-courses.component';
 
 const routes: Routes = [
   {path: 'schoolManager/main', component: SMMainComponent},
@@ -48,7 +51,10 @@ const routes: Routes = [
     AssignStudentComponent,
     SelfRegisterComponent,
     ViewUnverifiedUsersComponent,
-    ViewStudentsComponent
+    ViewStudentsComponent,
+    ViewStudentsSubComponent,
+    AssignStudentsCourseComponent,
+    AssignStudentCoursesComponent
   ],
   imports: [
     CommonModule,

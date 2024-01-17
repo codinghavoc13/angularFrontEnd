@@ -40,6 +40,9 @@
             </div>
             <!-- <div id="viewStudents" *ngIf="viewTab=='viewStudents' && (userRole=='PARENT' || userRole=='PRIMARY')"> -->
             <div id="viewStudents" *ngIf="viewTab=='viewStudents'">
+                <!--primary/parents would view just their child(ren)-->
+                <!--super admin and admin could view either all or by course-->
+                <!--teachers would view all of their students grouped by course-->
                 <app-view-students></app-view-students>
             </div>
         </div>

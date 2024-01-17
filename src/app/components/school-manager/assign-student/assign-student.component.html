@@ -1,73 +1,11 @@
-<h2>Come back to this after finishing the base registration</h2>
-    <div *ngIf="showCourseTable">
-        <label>Grade Select</label>
-        <select [(ngModel)]="gradeSelect" name="gradeSelect">
-            <option value="default">-----</option>
-            <option *ngFor="let lvl of [].constructor(12); let i = index" [value]="i+1">{{i+1}}</option>
-        </select>
-        <button (click)="buildStudentList()">Select Grade</button>
-        <hr>
-        <h2>Select a Course</h2>
-        <table>
-            <tr>
-                <th>Course Name</th>
-                <th>Teacher Name</th>
-                <th><button (click)="removeCourseSelect()" [disabled]="courseSelect==0">Remove Course Select</button></th>
-            </tr>
-            <tr *ngFor="let course of courseList">
-                <td>{{course.courseName}}</td>
-                <td>{{course.firstName}} {{course.lastName}}</td>
-                <td><button (click)="selectCourse(course)" [disabled]="courseSelect>0">Select Course</button></td>
-            </tr>
-        </table>
-    </div>
+<h1>Assign students to courses</h1>
+<button (click)="showManyStudentsToOneCourse()">K-6 - Multiple students to one course</button>
+<button (click)="showOneStudentToManyCourses()">7-12 - One student to multiple courses</button>
 
-    <!--these two table could be combined into one with the if statement moved into the table instead of sitting
-    on the div:
-        - the Select/Remove all button
-        - the selected course information
-        - which list to build from
-    -->
-    <div *ngIf="showSelectTable">
-        <table>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Grade Level</th>
-                <th><button class="btn btn-success" (click)="selectAll()">Select all</button></th>
-            </tr>
-            <tr *ngFor="let student of studentList" >
-                <td>{{ student.firstName }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.gradeLevel }}</td>
-                <td><button (click)="addStudentToWorkingList(student)" [disabled]="checkWorkingList(student)">Enroll</button></td>
-            </tr>
-        </table>
-    </div>
-    <div *ngIf="showConfirmTable">
-        <h2>Selected Course Information</h2>
-        <h3>{{courseDetail!.courseName}} - {{courseDetail!.firstName}} {{courseDetail!.lastName}}</h3>
-        <table>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Grade Level</th>
-                <th><button class="btn btn-success"(click)="removeAll()">Remove all</button></th>
-            </tr>
-            <tr *ngFor="let student of workingList" >
-                <td>{{ student.firstName }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.gradeLevel }}</td>
-                <td><button (click)="removeFromWorkingList(student)">Remove</button></td>
-            </tr>
-        </table>
-    </div>
-    <!-- <hr> -->
-    <button *ngIf="showCourseTable" class="btn btn-success" [disabled]="this.courseSelect == 0 || this.studentList.length == 0" (click)="moveToSelect()">Select Students</button>
-    <button *ngIf="showSelectTable" class="btn btn-success" (click)="returnToCourseSelect()">Back to Course Selection</button>
-    <button *ngIf="showConfirmTable" class="btn btn-success" (click)="returnToStudentSelect()">Back to Student Selection</button>
-    <button *ngIf="showSelectTable" class="btn btn-success" [disabled]="this.workingList.length == 0" (click)="moveToConfirm()">Confirm Selection</button>
-    <button *ngIf="showConfirmTable" class="btn btn-warning" (click)="submit()">Confirm</button>
-    <!-- <button (click)="submitForm()">Activate the doomsday machine</button> -->
-<!-- </form> -->
-<!-- <hr> -->
+<div *ngIf="manyStudentsToOneCourse">
+    <app-assign-students-course></app-assign-students-course>
+</div>
+
+<div *ngIf="oneStudentToManyCourses">
+    <app-assign-student-courses></app-assign-student-courses>
+</div>

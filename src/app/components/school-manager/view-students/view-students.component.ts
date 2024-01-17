@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 import { UserDto } from 'src/app/common/school-manager/user-dto';
+import { StaffService } from 'src/app/service/school-manager/staff.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
@@ -9,19 +11,18 @@ import { UserService } from 'src/app/service/school-manager/user.service';
 })
 export class ViewStudentsComponent implements OnInit{
   students: UserDto[] = [];
+  studentList: StudentListDto[] = [];
   ascDesc: boolean = true;
-
-  page = 1;
   count = 0;
-  pageSize = 3;
-  pageSizes = [3,6,9];
+  role: String = '';
 
-  constructor(private smUserSvc: UserService){}
+  constructor(private smUserSvc: UserService, private staffSvc: StaffService){}
 
   ngOnInit(): void {
     // this.parent_id = this.smUserSvc.loggedInUser?.userId;
     //rework this to call a different userSvc method based on loggedInUser role
     console.log(this.smUserSvc.loggedInUser!.role);
+    this.role = this.smUserSvc.loggedInUser!.role;
     // if(this.smUserSvc.loggedInUser!.role == 'ADMIN'){
     //   this.smUserSvc.getUsersByRole('STUDENT').subscribe(
     //     response=>{
@@ -42,25 +43,13 @@ export class ViewStudentsComponent implements OnInit{
         }
       )
     }
-  }
-
-  handlePageChange(event: number){
-    this.page = event;
-    this.retrieveStudents();
-  }
-
-  handlePageSizeChange(event: any){
-    this.pageSize = event.target.value;
-    this.page = 1;
-  }
-
-  sortByLastNameAsc() {
-    this.students.sort((a, b) => a.lastName.localeCompare(b.lastName));
-    this.ascDesc = false;
-  }
-
-  sortByLastNameDesc() {
-    this.students.sort((a, b) => b.lastName.localeCompare(a.lastName));
-    this.ascDesc = true;
+    if(this.smUserSvc.loggedInUser!.role =='TEACHER'){
+      this.staffSvc.getStudentsByTeacherId(this.smUserSvc.loggedInUser!.userId).subscribe(
+        response =>{
+          this.studentList = response;
+          console.log(this.studentList);
+        }
+      )
+    }
   }
 }
