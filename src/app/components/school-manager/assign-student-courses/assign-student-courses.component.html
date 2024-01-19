@@ -1,1 +1,65 @@
-<p>assign-student-courses works!</p>
+<!--Select a student by grade level or all, sort features on first and last name-->
+<div *ngIf="showGradeSelect">
+    <label for="gradeSelect">Grade Select</label>
+    <select [(ngModel)]="gradeSelect" id="gradeSelect" name="gradeSelect">
+        <option value="default">-----</option>
+        <option *ngFor="let grade of grades;">{{grade}}</option>
+    </select>
+    <button (click)="buildStudentList()">Select Grade</button>
+    <hr>
+</div>
+<div *ngIf="showStudentSelectTable">
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Grade Level</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let student of studentList">
+            <td>{{ student.firstName }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>{{ student.gradeLevel }}</td>
+            <td><button (click)="selectStudent(student)">Select Student</button></td>
+        </tr>
+    </table>
+</div>
+<!--After selecting a student, display their current course schedule with either the course name displayed or 'No Course Selected' if null-->
+<div *ngIf="showCourseSelect">
+    <h2>Current Schedule</h2>
+    <table>
+        <tr>
+            <th>Period</th>
+            <th>Course Name</th>
+            <th>Teacher Name</th>
+        </tr>
+        <tr *ngFor="let course of studentCourseList">
+            <td>{{course.period}}</td>
+            <td>{{course.courseName}}</td>
+            <!--Look at the sort code to show/hide a Select/Deselect Course button-->
+            <td>{{course.teacherFirstName}} {{course.teacherLastName}}</td>
+        </tr>
+    </table>
+    <hr>
+    <!--Below the course schedule, display all available courses with a period greater than -1; sort by course name and period, filter by period-->
+    <h2>Select a Course</h2>
+    <table>
+        <tr>
+            <th>Course Name</th>
+            <th>Teacher Name</th>
+            <th>Period</th>
+            <th><button>Remove Course Select</button></th>
+        </tr>
+        <tr *ngFor="let course of courseList">
+            <td>{{course.courseName}}</td>
+            <td>{{course.teacherFirstName}} {{course.teacherLastName}}</td>
+            <td>{{course.period}}</td>
+            <td><button (click)="selectCourse(course)" >Select Course</button></td>
+        </tr>
+    </table>
+</div>
+<!--Below the course schedule, display all available courses with a period greater than -1; sort by course name and period, filter by period-->
+<!--Future work: save which courses the student has completed and not include those in result set; after implmenting the course prerequisites
+feature, include that (show courses the student has not taken but has taken the prerequisites for; example german 1 is a prereq for german 2 which
+is a prereq for german 3, if the student has taken german 1 but not 2 or 3, only show german 2 since the student has taken german 1 but does not
+meet the prereqs for german 3)-->

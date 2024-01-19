@@ -30,8 +30,12 @@ export class StaffService {
     );
   }
 
-  getCourseDetails(){
-    return this.httpClient.get<CourseDetailDto[]>(this.staffUrl+"/getCourseDetails");
+  getCourseDetails(term: string){
+    return this.httpClient.get<CourseDetailDto[]>(this.staffUrl+"/getCourseDetails/"+term);
+  }
+
+  getCoursesByStudentId(studentId: number){
+    console.log('Doesn\'t do anything yet');
   }
 
   submitStudentAssignmentDto(asDto: AssignStudentDto){

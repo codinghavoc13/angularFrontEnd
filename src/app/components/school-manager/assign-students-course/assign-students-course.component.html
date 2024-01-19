@@ -1,9 +1,8 @@
-<p>assign-students-course works!</p>
 <div *ngIf="showCourseTable">
-    <label>Grade Select</label>
-    <select [(ngModel)]="gradeSelect" name="gradeSelect">
+    <label for="gradeSelect">Grade Select</label>
+    <select [(ngModel)]="gradeSelect" id="gradeSelect" name="gradeSelect">
         <option value="default">-----</option>
-        <option *ngFor="let lvl of [].constructor(12); let i = index" [value]="i+1">{{i+1}}</option>
+        <option *ngFor="let grade of grades;">{{grade}}</option>
     </select>
     <button (click)="buildStudentList()">Select Grade</button>
     <hr>

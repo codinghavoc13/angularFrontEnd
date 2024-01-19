@@ -14,6 +14,7 @@ export class AssignStudentsCourseComponent implements OnInit{
   courseDetail: CourseDetailDto | undefined;
   courseList: CourseDetailDto[] = [];
   courseSelect: number = 0;
+  grades: string[] = ['K','1','2','3','4','5','6'];
   gradeSelect: string = '';
   showCourseTable: boolean = true;
   studentList: UserDto[] = [];
@@ -35,14 +36,16 @@ export class AssignStudentsCourseComponent implements OnInit{
   }
 
   async buildCourseList(){
-    await this.staffSvc.getCourseDetails().subscribe(
+    //need to create two service methods: one to only get courses with a period of -1 (no period) 
+    //and one to get courses with a period greater than or equal to 0 (homeroom = 0)
+    await this.staffSvc.getCourseDetails('full_year').subscribe(
       response => {
         response.forEach((cd) => {
           this.courseList.push(cd);
         })
       }
     )
-    console.log(this.courseList);
+    // console.log(this.courseList);
   }
 
   buildStudentList(){
