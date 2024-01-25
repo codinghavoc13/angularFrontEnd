@@ -4,6 +4,7 @@ import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
 import { AssignStudentDto } from 'src/app/common/school-manager/assign-student-dto';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
+import { CPTDto } from 'src/app/common/school-manager/cpt-dto';
 
 @Component({
   selector: 'app-assign-students-course',
@@ -38,7 +39,7 @@ export class AssignStudentsCourseComponent implements OnInit{
   async buildCourseList(){
     //need to create two service methods: one to only get courses with a period of -1 (no period) 
     //and one to get courses with a period greater than or equal to 0 (homeroom = 0)
-    await this.staffSvc.getCourseDetails('full_year').subscribe(
+    await this.staffSvc.getCourseDetails('elementary').subscribe(
       response => {
         response.forEach((cd) => {
           this.courseList.push(cd);
@@ -121,6 +122,8 @@ export class AssignStudentsCourseComponent implements OnInit{
   selectCourse(course: CourseDetailDto){
     this.courseSelect = course.courseId;
     this.courseDetail = course;
+    console.log("asc-sc-1");
+    console.log(this.courseDetail);
   }
 
   submit(){
@@ -129,25 +132,22 @@ export class AssignStudentsCourseComponent implements OnInit{
       student_ids_temp.push(student.userId);
     })
     this.workingList = [];
-    let assignStudentDto: AssignStudentDto = new AssignStudentDto(
-      this.courseSelect,
-      student_ids_temp,
-      this.courseDetail!.teacher_id
-    );
+    let cpt: CPTDto = new CPTDto(this.courseSelect,this.courseDetail!.teacherId,this.courseDetail!.period);
+    let assignStudentDto: AssignStudentDto = new AssignStudentDto(student_ids_temp, cpt);
     console.log(assignStudentDto);
-    this.staffSvc.submitStudentAssignmentDto(assignStudentDto).subscribe(
-      response =>{
-        //need to update the this.tempStudentList, either pull it down fresh or filter out the ones that match student_ids_temp
-        this.tempStudentList = [];
-        this.buildTempStudentList();
-        //reset the show flags to take the user back to course select
-        this.showCourseTable = true;
-        this.showSelectTable = false;
-        this.showConfirmTable = false;
-        this.courseSelect = 0;
-        this.gradeSelect = '';
-      }
-    )
+    // this.staffSvc.submitStudentAssignmentDto(assignStudentDto).subscribe(
+    //   response =>{
+    //     //need to update the this.tempStudentList, either pull it down fresh or filter out the ones that match student_ids_temp
+    //     this.tempStudentList = [];
+    //     this.buildTempStudentList();
+    //     //reset the show flags to take the user back to course select
+    //     this.showCourseTable = true;
+    //     this.showSelectTable = false;
+    //     this.showConfirmTable = false;
+    //     this.courseSelect = 0;
+    //     this.gradeSelect = '';
+    //   }
+    // )
   }
 
 }

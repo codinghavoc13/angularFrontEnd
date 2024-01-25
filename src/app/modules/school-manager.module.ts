@@ -24,12 +24,15 @@ import { ViewStudentsComponent } from '../components/school-manager/view-student
 import { ViewStudentsSubComponent } from '../components/school-manager/view-students-sub/view-students-sub.component';
 import { AssignStudentsCourseComponent } from '../components/school-manager/assign-students-course/assign-students-course.component';
 import { AssignStudentCoursesComponent } from '../components/school-manager/assign-student-courses/assign-student-courses.component';
+import { ParentComponent } from '../components/school-manager/test/parent/parent.component';
+import { AddCourseComponent } from '../components/school-manager/add-course/add-course.component';
 
 const routes: Routes = [
   {path: 'schoolManager/main', component: SMMainComponent},
   {path: 'schoolManager/login', component: SMLoginComponent},
   {path: 'schoolManager/userPage', component: UserPageComponent},
   {path: 'schoolManager/register', component:SelfRegisterComponent},
+  {path: 'schoolManager/test', component:ParentComponent},
   // {path: 'schoolManager/assignStudents', component:AssignStudentComponent}
 ];
 
@@ -54,7 +57,8 @@ const routes: Routes = [
     ViewStudentsComponent,
     ViewStudentsSubComponent,
     AssignStudentsCourseComponent,
-    AssignStudentCoursesComponent
+    AssignStudentCoursesComponent,
+    AddCourseComponent
   ],
   imports: [
     CommonModule,

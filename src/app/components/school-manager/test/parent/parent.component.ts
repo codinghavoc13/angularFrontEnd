@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
 
 @Component({
   selector: 'app-parent-test',
@@ -9,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class ParentComponent implements OnInit{
   viewTab='home';
   roleFromParent='STAFF';
+  courseList: CourseDetailDto[] = [];
 
   setTabView(event: string){
     this.viewTab = event;
@@ -17,6 +19,9 @@ export class ParentComponent implements OnInit{
   constructor(){}
 
   ngOnInit(): void {
+  }
+
+  async buildCourseList(){
   }
 
 }

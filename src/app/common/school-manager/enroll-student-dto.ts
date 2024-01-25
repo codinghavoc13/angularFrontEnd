@@ -1,6 +1,6 @@
 import { RegisterDto } from "./register-dto";
 
 export class EnrollStudentDto {
-    parent_id: number | undefined;
+    parentId: number | undefined;
     student: RegisterDto |undefined;
 }

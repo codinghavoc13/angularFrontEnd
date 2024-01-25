@@ -3,9 +3,10 @@ export class CourseDetailDto {
         public courseId: number,
         public teacherFirstName: string,
         public teacherLastName: string,
-        public teacher_id: number,
+        public teacherId: number,
         public courseName: string,
-        public courseLength: string,
-        public period: number
+        public courseBlock: string,
+        public period: number,
+        public credit: number
     ){}
 }
