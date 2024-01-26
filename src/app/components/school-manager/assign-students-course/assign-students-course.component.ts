@@ -135,19 +135,20 @@ export class AssignStudentsCourseComponent implements OnInit{
     let cpt: CPTDto = new CPTDto(this.courseSelect,this.courseDetail!.teacherId,this.courseDetail!.period);
     let assignStudentDto: AssignStudentDto = new AssignStudentDto(student_ids_temp, cpt);
     console.log(assignStudentDto);
-    // this.staffSvc.submitStudentAssignmentDto(assignStudentDto).subscribe(
-    //   response =>{
-    //     //need to update the this.tempStudentList, either pull it down fresh or filter out the ones that match student_ids_temp
-    //     this.tempStudentList = [];
-    //     this.buildTempStudentList();
-    //     //reset the show flags to take the user back to course select
-    //     this.showCourseTable = true;
-    //     this.showSelectTable = false;
-    //     this.showConfirmTable = false;
-    //     this.courseSelect = 0;
-    //     this.gradeSelect = '';
-    //   }
-    // )
+    //Need to modify this to send the cptId
+    this.staffSvc.submitStudentAssignmentDto(assignStudentDto).subscribe(
+      response =>{
+        //need to update the this.tempStudentList, either pull it down fresh or filter out the ones that match student_ids_temp
+        this.tempStudentList = [];
+        this.buildTempStudentList();
+        //reset the show flags to take the user back to course select
+        this.showCourseTable = true;
+        this.showSelectTable = false;
+        this.showConfirmTable = false;
+        this.courseSelect = 0;
+        this.gradeSelect = '';
+      }
+    )
   }
 
 }

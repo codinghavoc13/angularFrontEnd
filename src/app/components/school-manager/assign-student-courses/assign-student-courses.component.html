@@ -34,7 +34,7 @@
             <th>Teacher Name</th>
         </tr>
         <!--Need to add a button to remove a course. Remove a course will need to update the course list-->
-        <tr *ngFor="let course of studentCourseList">
+        <tr *ngFor="let course of workingStudentCourseList">
             <td>{{course.period}}
                 <span *ngIf="course.courseBlock=='FALL_SEMESTER'"> - Fall</span>
                 <span *ngIf="course.courseBlock=='SPRING_SEMESTER'"> - Spring</span>

@@ -38,6 +38,7 @@ export class StaffService {
     console.log('Doesn\'t do anything yet');
   }
 
+  //consider renaming this, might be mistaken for submitting assignments
   submitStudentAssignmentDto(asDto: AssignStudentDto){
     return this.httpClient.post<AssignStudentDto>(this.staffUrl+"/assignStudentsToCourse", asDto);
   }

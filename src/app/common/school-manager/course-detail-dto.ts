@@ -8,5 +8,6 @@ export class CourseDetailDto {
         public courseBlock: string,
         public period: number,
         public credit: number
+        //add the cptId
     ){}
 }

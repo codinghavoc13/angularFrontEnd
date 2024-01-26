@@ -15,21 +15,15 @@ export class AssignStudentCoursesComponent implements OnInit{
   filteredCourses: CourseDetailDto[] = [];
   grades: string[] = ['7','8','9','10','11','12'];
   gradeSelect: string = '';
-  studentCourseList: CourseDetailDto[] = [
-    // new CourseDetailDto(1,"A","B",1,"Homeroom","SEMESTER",0),
-    // new CourseDetailDto(1,"C","D",1,"History","SEMESTER",6),
-    // new CourseDetailDto(1,"E","F",1,"Music Appreciation","SEMESTER",1),
-    // new CourseDetailDto(1,"G","H",1,"Geography","SEMESTER",5),
-    // new CourseDetailDto(1,"I","J",1,"Algebra","SEMESTER",2),
-    // new CourseDetailDto(1,"K","L",1,"English","SEMESTER",4),
-    // new CourseDetailDto(1,"M","N",1,"Biology","SEMESTER",3)
-  ];
+  originalStudentCourseList:CourseDetailDto[]=[];//this is the list that is pulled from the database
   showCourseSelect: boolean = false;
   showGradeSelect: boolean = true;
   showStudentSelectTable: boolean = false;
   showStudentSchedule: boolean = false;
   studentList: UserDto[] = [];
+  studentSelect: UserDto | undefined;
   tempStudentList: UserDto[] = [];
+  workingStudentCourseList:CourseDetailDto[]=[]; //this is the list that is displayed
 
   constructor(private staffSvc: StaffService, private toastr: ToastrService){}
   ngOnInit(): void {
@@ -97,6 +91,7 @@ export class AssignStudentCoursesComponent implements OnInit{
   }
 
   getCourse(){
+    console.log('Doesn\'t do anything yet but will reach out to the back to get courses the student is enrolled in, if any');
     console.log('Getting student course list from service');
     this.sortStudentCourseList();
   }
@@ -105,49 +100,41 @@ export class AssignStudentCoursesComponent implements OnInit{
     //need to update this so that after selecting a course this.courseList is filtered
     //to remove other courses with the same period; if the selected course is a half
     //credit course, need to only remove courses of the same courseBlock
-    if(this.studentCourseList.find((c)=>c.period==course.period && c.courseId==-1)){
+    if(this.workingStudentCourseList.find((c)=>c.period==course.period && c.courseId==-1)){
       console.log('asc-sc-1');
-      this.studentCourseList.push(course);
+      this.workingStudentCourseList.push(course);
       this.creditCount+=course.credit;
       this.filterCourses(course);
       console.log(this.courseList);
     } else {
       console.log('asc-sc-2');
     }
-    if(this.studentCourseList.length>7){
+    if(this.workingStudentCourseList.length>7){
       let tempCourseList: CourseDetailDto[] = [];
-      tempCourseList = this.studentCourseList.filter((c)=>c.courseId>-1);
-      this.studentCourseList = tempCourseList;
+      tempCourseList = this.workingStudentCourseList.filter((c)=>c.courseId>-1);
+      this.workingStudentCourseList = tempCourseList;
       this.sortStudentCourseList();
     }
   }
 
   selectStudent(student: UserDto){
-    console.log('Doesn\'t do anything yet but will reach out to the back to get courses the student is enrolled in, if any');
+    this.studentSelect = student;
     this.showStudentSelectTable = false;
     this.showStudentSchedule = false;
     this.showCourseSelect = true;
     this.creditCount = 0;
     this.getCourse();
   }
-
-  /*Need to figure out how to handle courses that are only a semester long; 
-  * maybe add a credits value to each course and update SEMESTER to be either
-  * FALL_SEMESTER or SPRING_SEMESTER; credits will either be 1 for a full year
-  * course or 0.5 for a one semester course; when building and filling in blanks,
-  * default blank courses would have a credit of 1, would need a counter to track
-  * how many credits are currently signed up; before sorting, if total credits is
-  * 6.5, add a blank course with half a credit
-   */
+  
   sortStudentCourseList(){
     let check: CourseDetailDto[] = [];
     for(let i = 0; i < 7; i++){
-      check = this.studentCourseList.filter((c)=>c.period==i);
+      check = this.workingStudentCourseList.filter((c)=>c.period==i);
       if(check.length==0){
         //no course found for a period
         // console.log('not found: ' + i);
         let blankCourse: CourseDetailDto = new CourseDetailDto(-1,"","",-1,"No course selected",'FULL_YEAR',i,1);
-        this.studentCourseList.push(blankCourse);
+        this.workingStudentCourseList.push(blankCourse);
       } else {
         //found a course or courses for that block
         // console.log('found ' + i);
@@ -158,15 +145,15 @@ export class AssignStudentCoursesComponent implements OnInit{
           //if the found course is a spring semester, add a flank fall semester
         if(check.length==1 && check.at(0)!.credit==0.5){
           if(check.at(0)!.courseBlock=='FALL_SEMESTER'){
-            this.studentCourseList.push(new CourseDetailDto(-1,"","",-1,"No course selected",'SPRING_SEMESTER',i,1));
+            this.workingStudentCourseList.push(new CourseDetailDto(-1,"","",-1,"No course selected",'SPRING_SEMESTER',i,1));
           }
           if(check.at(0)!.courseBlock=='SPRING_SEMESTER'){
-            this.studentCourseList.push(new CourseDetailDto(-1,"","",-1,"No course selected",'FALL_SEMESTER',i,1));
+            this.workingStudentCourseList.push(new CourseDetailDto(-1,"","",-1,"No course selected",'FALL_SEMESTER',i,1));
           }
         }
       }
     }
-    this.studentCourseList.sort((a,b)=>a.period - b.period);
+    this.workingStudentCourseList.sort((a,b)=>a.period - b.period);
   }
 
 }
