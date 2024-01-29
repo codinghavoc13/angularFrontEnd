@@ -26,12 +26,14 @@
 </div>
 <!--After selecting a student, display their current course schedule with either the course name displayed or 'No Course Selected' if null-->
 <div *ngIf="showCourseSelect">
+    <button (click)="changeStudent()">Select a Different Student</button>
     <h2>Current Schedule</h2>
     <table>
         <tr>
             <th>Period</th>
             <th>Course Name</th>
             <th>Teacher Name</th>
+            <th></th>
         </tr>
         <!--Need to add a button to remove a course. Remove a course will need to update the course list-->
         <tr *ngFor="let course of workingStudentCourseList">
@@ -42,21 +44,16 @@
             <td>{{course.courseName}}</td>
             <!--Look at the sort code to show/hide a Select/Deselect Course button-->
             <td>{{course.teacherFirstName}} {{course.teacherLastName}}</td>
+            <td><span *ngIf="course.cptId!=-1"><button (click)="removeCourse(course)">Remove Course</button></span></td>
         </tr>
     </table>
     <hr>
-    <!--Below the course schedule, display all available courses with a period 
-        greater than -1; sort by course name and period, filter by period-->
-    <!--Need to figure out how to handle electives that are only a semester long-->
-    <!--only show this if courseList has anything in it-->
-    <!--Below the course schedule, display all available courses with a period greater than -1; sort by course name and period, filter by period-->
     <h2>Select a Course</h2>
     <table>
         <tr>
             <th>Course Name</th>
             <th>Teacher Name</th>
             <th>Period</th>
-            <th><button>Remove Course Select</button></th>
         </tr>
         <tr *ngFor="let course of courseList">
             <td>{{course.courseName}}</td>
@@ -68,7 +65,9 @@
             <td><button (click)="selectCourse(course)" >Select Course</button></td>
         </tr>
     </table>
+    <button (click)="submit()">Submit</button>
 </div>
+<hr>
 
 <!--Future work: save which courses the student has completed and not include those in result set; after implmenting the course prerequisites
 feature, include that (show courses the student has not taken but has taken the prerequisites for; example german 1 is a prereq for german 2 which

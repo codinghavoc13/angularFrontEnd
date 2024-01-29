@@ -133,7 +133,10 @@ export class AssignStudentsCourseComponent implements OnInit{
     })
     this.workingList = [];
     let cpt: CPTDto = new CPTDto(this.courseSelect,this.courseDetail!.teacherId,this.courseDetail!.period);
-    let assignStudentDto: AssignStudentDto = new AssignStudentDto(student_ids_temp, cpt);
+    let assignStudentDto: AssignStudentDto = new AssignStudentDto();
+    assignStudentDto.cptIds.push(this.courseDetail!.cptId);
+    assignStudentDto.studentIds = student_ids_temp;
+    console.log('asc-s-1');
     console.log(assignStudentDto);
     //Need to modify this to send the cptId
     this.staffSvc.submitStudentAssignmentDto(assignStudentDto).subscribe(

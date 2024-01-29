@@ -6,7 +6,7 @@ import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.css']
 })
-// This is the home component in the video
+
 export class ParentComponent implements OnInit{
   viewTab='home';
   roleFromParent='STAFF';
