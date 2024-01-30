@@ -6,6 +6,7 @@ import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto
 import { AssignStudentDto } from 'src/app/common/school-manager/assign-student-dto';
 import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
+import { StudentDetailDto } from 'src/app/common/school-manager/student-detail-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class StaffService {
   teacherUrl = "http://localhost:8080/teacher";
 
   constructor(private httpClient: HttpClient, private router: Router, private toastr: ToastrService) { }
+
+  getAllMiddleHighStudents(){
+    return this.httpClient.get<StudentDetailDto[]>(this.staffUrl+"/getAllMiddleHighStudents");
+  }
 
   getStudentsNotAssignedToTeacher(){
     return this.httpClient.get<UserDto[]>(this.staffUrl+"/getStudentsNotAssignedToTeacher");
@@ -35,7 +40,7 @@ export class StaffService {
   }
 
   getCoursesByStudentId(studentId: number){
-    console.log('Doesn\'t do anything yet');
+    return this.httpClient.get<CourseDetailDto[]>(this.staffUrl+"/getCoursesByStudent/"+studentId);
   }
 
   //consider renaming this, might be mistaken for submitting assignments

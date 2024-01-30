@@ -6,27 +6,43 @@
         <option *ngFor="let grade of grades;">{{grade}}</option>
     </select>
     <button (click)="buildStudentList()">Select Grade</button>
-    <hr>
 </div>
 <div *ngIf="showStudentSelectTable">
+    <h2>Currently Selected Grade: {{ gradeSelect }}</h2>
+    <button (click)="changeGradeLevel()">Select a Different Grade</button><hr>
     <table>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Grade Level</th>
+            <th><span>
+                <i *ngIf="sortFlags[0]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-firstName')"></i>
+                <i *ngIf="sortFlags[0]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-firstName')"></i>
+            </span>First Name</th>
+            <th><span>
+                <i *ngIf="sortFlags[1]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-lastName')"></i>
+                <i *ngIf="sortFlags[1]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-lastName')"></i>
+            </span>Last Name</th>
+            <th><span>
+                <i *ngIf="sortFlags[2]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-creditCount')"></i>
+                <i *ngIf="sortFlags[2]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-creditCount')"></i>
+            </span>Enrolled Credits</th>
             <th></th>
         </tr>
         <tr *ngFor="let student of studentList">
-            <td>{{ student.firstName }}</td>
-            <td>{{ student.lastName }}</td>
-            <td>{{ student.gradeLevel }}</td>
+            <td>{{ student.student.firstName }}</td>
+            <td>{{ student.student.lastName }}</td>
+            <td>{{ student.creditCount}}/6</td>
             <td><button (click)="selectStudent(student)">Select Student</button></td>
         </tr>
     </table>
 </div>
 <!--After selecting a student, display their current course schedule with either the course name displayed or 'No Course Selected' if null-->
-<div *ngIf="showCourseSelect">
-    <button (click)="changeStudent()">Select a Different Student</button>
+<div *ngIf="showCourseSelect">    
+    <h2>Currently Selected Grade: {{ gradeSelect }}</h2>
+    <h2>Currently Selected Student: {{ studentSelect!.student!.firstName }} {{ studentSelect!.student!.lastName }}</h2>
+    <button (click)="changeStudent()">Select a Different Student</button><hr>
+    <div *ngIf="workingStudentCourseList.length==0">
+        <h2>No courses have been selected</h2>
+    </div>
+    <div *ngIf="workingStudentCourseList.length>0">
     <h2>Current Schedule</h2>
     <table>
         <tr>
@@ -47,7 +63,12 @@
             <td><span *ngIf="course.cptId!=-1"><button (click)="removeCourse(course)">Remove Course</button></span></td>
         </tr>
     </table>
-    <hr>
+</div>
+<hr>
+<div *ngIf="courseList.length==0">
+    <h2>There are no available courses to select from</h2>
+</div>
+<div *ngIf="courseList.length>0">
     <h2>Select a Course</h2>
     <table>
         <tr>
@@ -65,9 +86,9 @@
             <td><button (click)="selectCourse(course)" >Select Course</button></td>
         </tr>
     </table>
+</div>
     <button (click)="submit()">Submit</button>
 </div>
-<hr>
 
 <!--Future work: save which courses the student has completed and not include those in result set; after implmenting the course prerequisites
 feature, include that (show courses the student has not taken but has taken the prerequisites for; example german 1 is a prereq for german 2 which
