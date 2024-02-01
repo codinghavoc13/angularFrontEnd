@@ -65,10 +65,10 @@
     </table>
 </div>
 <hr>
-<div *ngIf="courseList.length==0">
+<div *ngIf="displayCourseList.length==0">
     <h2>There are no available courses to select from</h2>
 </div>
-<div *ngIf="courseList.length>0">
+<div *ngIf="displayCourseList.length>0">
     <h2>Select a Course</h2>
     <table>
         <tr>
@@ -76,7 +76,7 @@
             <th>Teacher Name</th>
             <th>Period</th>
         </tr>
-        <tr *ngFor="let course of courseList">
+        <tr *ngFor="let course of displayCourseList">
             <td>{{course.courseName}}</td>
             <td>{{course.teacherFirstName}} {{course.teacherLastName}}</td>
             <td>{{course.period}}
