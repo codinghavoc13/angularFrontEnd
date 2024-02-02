@@ -12,11 +12,12 @@ import { StaffService } from 'src/app/service/school-manager/staff.service';
   styleUrls: ['./assign-student-courses.component.css']
 })
 export class AssignStudentCoursesComponent implements OnInit{
-  courseList: CourseDetailDto[] = [];
-  creditCount: number = 0;
+  displayCourseList: CourseDetailDto[] = [];
   filteredCourses: CourseDetailDto[] = [];
+  filters: string[] = [];
   grades: string[] = ['7','8','9','10','11','12'];
   gradeSelect: string = '';
+  mainCourseList: CourseDetailDto[] = [];
   originalStudentCourseList:CourseDetailDto[]=[];//this is the list that is pulled from the database
   showCourseSelect: boolean = false;
   showGradeSelect: boolean = true;
@@ -29,9 +30,6 @@ export class AssignStudentCoursesComponent implements OnInit{
   workingStudentCourseList:CourseDetailDto[]=[]; //this is the list that is displayed
 
   
-  filters: string[] = [];
-  mainCourseList: CourseDetailDto[] = [];
-  displayCourseList: CourseDetailDto[] = [];
 
   constructor(private staffSvc: StaffService, private toastr: ToastrService){}
   ngOnInit(): void {
@@ -44,23 +42,35 @@ export class AssignStudentCoursesComponent implements OnInit{
     await this.staffSvc.getCourseDetails('middlehigh').subscribe(
       response => {
         response.forEach((cd) => {
-          this.courseList.push(cd);
+          this.mainCourseList.push(cd);
         })
       }
     )
-    this.courseList.sort((a,b)=>a.period - b.period);
+    this.mainCourseList.sort((a,b)=>a.period - b.period);
   }
 
   addFilter(course: CourseDetailDto){
-    //need to figure out how to handle semester courses and blocks
-    console.log('af-1',course);
     if(!this.filters.includes(course.courseName)){
       this.filters.push(course.courseName);
     }
     if(!this.filters.includes(course.period.toString())){
       this.filters.push(course.period.toString())
     }
-    console.log('af-2',this.filters);
+    if(course.credit==0 || course.credit==1){
+      let fall: string = course.period.toString() + '-FALL_SEMESTER';
+      let spring: string = course.period.toString() + '-SPRING_SEMESTER';
+      if(!this.filters.includes(fall)) this.filters.push(fall);
+      if(!this.filters.includes(spring)) this.filters.push(spring);
+    }
+    if(course.credit==0.5){
+      if(!this.filters.includes(course.courseBlock)){
+        this.filters.push(this.buildPeriodBlock(course));
+      }
+    }
+  }
+
+  buildPeriodBlock(course: CourseDetailDto){
+    return course.period + '-'+course.courseBlock;
   }
 
   buildStudentList(){
@@ -86,14 +96,6 @@ export class AssignStudentCoursesComponent implements OnInit{
     )
   }
 
-  calculateEnrolledCredits(courses: CourseDetailDto[]){
-    let result: number = 0;
-    courses.forEach((c)=>{
-      result += c.credit;
-    })
-    return result;
-  }
-
   changeGradeLevel(){
     this.showGradeSelect = true;
     this.showStudentSelectTable = false;
@@ -104,43 +106,32 @@ export class AssignStudentCoursesComponent implements OnInit{
     this.showGradeSelect = false;
     this.showStudentSelectTable = true;
     this.showCourseSelect = false;
+    this.workingStudentCourseList = [];
   }
 
-  // filterCourses(course: CourseDetailDto){
   filterCourses(){
     this.displayCourseList = [];
-    console.log('fc-2',this.filters);
+    let add: boolean = true;
     this.mainCourseList.forEach((c)=>{
-      //need to add in a check for semester courses and update the filter list to include block
-      if(!this.filters.includes(c.period.toString() || c.courseName)){
-        this.displayCourseList.push(c);
+      if(c.credit==1 || c.credit==0){
+        if(this.filters.includes(c.period.toString() && c.courseName)
+        || this.filters.includes(c.period.toString())){
+          add = false;
+        } else {
+          add = true;
+        }
       }
+      if(c.credit == 0.5){
+        if(this.filters.includes(this.buildPeriodBlock(c)) 
+        || this.filters.includes(c.courseName) ){
+          add = false;
+        } else {
+          add = true;
+        }
+      }
+      if(add) this.displayCourseList.push(c);
     });
-    // console.log('fc-1');
-    // console.log(this.displayCourseList);
-    // let tempList: CourseDetailDto[] = [];
-    // this.courseList.forEach((c) => {
-    //   if(course.credit==1 || course.credit==0){
-    //     if (c.period!=course.period && c.courseName != course.courseName) {
-    //       tempList.push(c);
-    //     } else {
-    //       this.filteredCourses.push(c);
-    //     }
-    //   }
-    //   if(course.credit==0.5){
-    //     if(!((c.period==course.period && c.courseBlock=='FULL_YEAR') ||
-    //     (c.period==course.period && c.courseBlock==course.courseBlock) ||
-    //     c.courseName==course.courseName)){
-    //       tempList.push(c);
-    //     } else {
-    //       this.filteredCourses.push(c);
-    //     }
-    //   }
-    // });
-    // this.courseList = tempList;
-    // this.courseList.sort((a,b)=>a.period - b.period);
-    console.log('fc-3',this.displayCourseList.length);
-    this.displayCourseList.sort((a,b)=>a.period - b.period);
+    this.sortStudentCourseList();
   }
 
   getCourse(){
@@ -149,13 +140,12 @@ export class AssignStudentCoursesComponent implements OnInit{
       response=>{
         response.forEach((c)=>{
           this.workingStudentCourseList.push(c);
-          // this.filterCourses(c);
           this.addFilter(c);
         })
+        this.filterCourses();
+        this.sortStudentCourseList();
       }
     )
-    this.filterCourses();
-    this.sortStudentCourseList();
   }
 
   removeCourse(course: CourseDetailDto){
@@ -163,66 +153,28 @@ export class AssignStudentCoursesComponent implements OnInit{
     temp = this.workingStudentCourseList.filter((c)=>c.cptId!=course.cptId);
     this.workingStudentCourseList = temp;
     this.removeFilter(course);
-    this.sortStudentCourseList();
   }
 
-  /*need to look into this, when I removed a course for a specific period, that course
-  came back (yay) but for all periods (no)
-   */
   removeFilter(course: CourseDetailDto){
     let temp: string[] = [];
-    console.log('rf-2');
-    console.log(this.filters);
+    let criteria: string[] = [];
+    criteria.push(course.courseName, course.period.toString(), this.buildPeriodBlock(course));
+    if(course.credit==1 || course.credit==0){
+      criteria.push(course.period.toString() + '-FALL_SEMESTER',course.period.toString() + '-SPRING_SEMESTER');
+    }
     this.filters.forEach((f) =>{
-      if(f != course.courseName && f != course.period.toString()){
+      if(!criteria.includes(f)){
         temp.push(f);
       } 
     })
-    console.log('rf-1');
-    console.log(temp);
     this.filters = temp;
     this.filterCourses();
-    // let tempListFilter: CourseDetailDto[] = [];
-    // let tempListAdd: CourseDetailDto[] = [];
-    // let tempWorking: CourseDetailDto[] = [];
-
-    // /*need to add checks to look at the workingStudentCourse list to not 
-    //   add courses that match the what's in that list (ie, if the student has
-    //   english 3, don't add english 3)
-    // */
-    // this.filteredCourses.forEach((c)=>{
-    //   if(course.credit==1 || course.credit==0){
-    //     if (c.period==course.period || c.courseName == course.courseName) {
-    //       tempListAdd.push(c);
-    //     } else {
-    //       tempListFilter.push(c);
-    //     }
-    //   }
-    //   if(course.credit==0.5){
-    //     if(!((c.period==course.period && c.courseBlock=='FULL_YEAR') ||
-    //     (c.period==course.period && c.courseBlock==course.courseBlock) ||
-    //     c.courseName==course.courseName)){
-    //       tempListAdd.push(c);
-    //     } else {
-    //       tempListFilter.push(c);
-    //     }
-    //   }
-    // });
-    // this.workingStudentCourseList.forEach((c)=>{
-    //   if(c.cptId!=course.cptId) tempWorking.push(c);
-    // });
-    // this.workingStudentCourseList = tempWorking;
-    // this.filteredCourses = tempListFilter;
-    // this.courseList = this.courseList.concat(tempListAdd);
-    this.courseList.sort((a,b)=>a.period - b.period);
   }
 
   selectCourse(course: CourseDetailDto){
-      this.workingStudentCourseList.push(course);
-      this.creditCount+=course.credit;
-      // this.filterCourses(course);
-      this.filterCourses();
-      //when working with an existing list, adding courses was not sorting them
+    this.workingStudentCourseList.push(course);
+    this.addFilter(course);
+    this.filterCourses();
   }
 
   selectStudent(student: StudentDetailDto){
@@ -230,7 +182,6 @@ export class AssignStudentCoursesComponent implements OnInit{
     this.showStudentSelectTable = false;
     this.showStudentSchedule = false;
     this.showCourseSelect = true;
-    this.creditCount = 0;
     this.getCourse();
   }
   
