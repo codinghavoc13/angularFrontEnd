@@ -13,7 +13,7 @@
             <th>Teacher Name</th>
             <th><button (click)="removeCourseSelect()" [disabled]="courseSelect==0">Remove Course Select</button></th>
         </tr>
-        <tr *ngFor="let course of courseList">
+        <tr *ngFor="let course of courseListDisplay">
             <td>{{course.courseName}}</td>
             <td>{{course.teacherFirstName}} {{course.teacherLastName}}</td>
             <td><button (click)="selectCourse(course)" [disabled]="courseSelect>0">Select Course</button></td>
@@ -28,6 +28,7 @@ on the div:
     - which list to build from
 -->
 <div *ngIf="showSelectTable">
+    <h2>Select students to add to {{courseDetail!.courseName}} with {{courseDetail!.teacherFirstName}} {{courseDetail!.teacherLastName}} </h2>
     <table>
         <tr>
             <th>First Name</th>

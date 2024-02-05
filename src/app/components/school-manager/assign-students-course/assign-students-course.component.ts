@@ -14,6 +14,7 @@ import { CPTDto } from 'src/app/common/school-manager/cpt-dto';
 export class AssignStudentsCourseComponent implements OnInit{
   courseDetail: CourseDetailDto | undefined;
   courseList: CourseDetailDto[] = [];
+  courseListDisplay: CourseDetailDto[] = [];
   courseSelect: number = 0;
   grades: string[] = ['K','1','2','3','4','5','6'];
   gradeSelect: string = '';
@@ -59,6 +60,12 @@ export class AssignStudentsCourseComponent implements OnInit{
     } else {
       this.toastr.success('Student list populated');
     }
+    this.courseListDisplay = [];
+    this.courseList.filter((course)=>{
+      if(course.courseName[0] == this.gradeSelect!.toString()){
+        this.courseListDisplay.push(course);
+      };
+    })
   }
 
   buildTempStudentList(){
@@ -122,8 +129,6 @@ export class AssignStudentsCourseComponent implements OnInit{
   selectCourse(course: CourseDetailDto){
     this.courseSelect = course.courseId;
     this.courseDetail = course;
-    console.log("asc-sc-1");
-    console.log(this.courseDetail);
   }
 
   submit(){
@@ -136,15 +141,11 @@ export class AssignStudentsCourseComponent implements OnInit{
     let assignStudentDto: AssignStudentDto = new AssignStudentDto();
     assignStudentDto.cptIds.push(this.courseDetail!.cptId);
     assignStudentDto.studentIds = student_ids_temp;
-    console.log('asc-s-1');
-    console.log(assignStudentDto);
     //Need to modify this to send the cptId
     this.staffSvc.submitStudentAssignmentDto(assignStudentDto).subscribe(
       response =>{
-        //need to update the this.tempStudentList, either pull it down fresh or filter out the ones that match student_ids_temp
         this.tempStudentList = [];
         this.buildTempStudentList();
-        //reset the show flags to take the user back to course select
         this.showCourseTable = true;
         this.showSelectTable = false;
         this.showConfirmTable = false;
