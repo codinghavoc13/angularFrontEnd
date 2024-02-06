@@ -15,27 +15,19 @@ export class ViewStudentsComponent implements OnInit{
   ascDesc: boolean = true;
   count = 0;
   role: String = '';
+  teacherId: number = 0;
 
   constructor(private smUserSvc: UserService, private staffSvc: StaffService){}
 
   ngOnInit(): void {
-    // this.parent_id = this.smUserSvc.loggedInUser?.userId;
-    //rework this to call a different userSvc method based on loggedInUser role
-    console.log(this.smUserSvc.loggedInUser!.role);
     this.role = this.smUserSvc.loggedInUser!.role;
-    // if(this.smUserSvc.loggedInUser!.role == 'ADMIN'){
-    //   this.smUserSvc.getUsersByRole('STUDENT').subscribe(
-    //     response=>{
-    //       this.students = response;
-    //       console.log(this.students.length);
-    //     }
-    //   )
-    // }
+    this.teacherId = this.smUserSvc.loggedInUser!.userId;
     this.retrieveStudents();
   }
   
   retrieveStudents(){
-    if(this.smUserSvc.loggedInUser!.role == 'ADMIN'){
+    //update the if statements to use this.role instead of this.smUser...
+    if(this.role == 'ADMIN'){
       this.smUserSvc.getUsersByRole('STUDENT').subscribe(
         response=>{
           this.students = response;
@@ -43,13 +35,28 @@ export class ViewStudentsComponent implements OnInit{
         }
       )
     }
-    if(this.smUserSvc.loggedInUser!.role =='TEACHER'){
-      this.staffSvc.getStudentsByTeacherId(this.smUserSvc.loggedInUser!.userId).subscribe(
+    if(this.role =='TEACHER'){
+      this.staffSvc.getStudentsByTeacherId(this.teacherId).subscribe(
         response =>{
           this.studentList = response;
-          console.log(this.studentList);
+          this.sortCourses();
         }
       )
     }
+  }
+
+  sortCourses(){
+    this.studentList.sort((a,b) => {
+      //sort by period
+      if (a.period < b.period) return -1;
+      if (a.period > b.period) return 1;
+      //sort by courseName
+      if (a.course.courseName < b.course.courseName) return -1;
+      if (a.course.courseName > b.course.courseName) return 1;
+      //sort by courseBlock
+      if (a.course.courseBlock < b.course.courseBlock) return -1;
+      if (a.course.courseBlock > b.course.courseBlock) return 1;
+      return 0;
+    })
   }
 }

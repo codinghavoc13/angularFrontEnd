@@ -12,6 +12,8 @@ import { StudentDetailDto } from 'src/app/common/school-manager/student-detail-d
   providedIn: 'root'
 })
 export class StaffService {
+  studentList:StudentDetailDto[] = [];
+
   staffUrl = "http://localhost:8080/staff";
   teacherUrl = "http://localhost:8080/teacher";
 

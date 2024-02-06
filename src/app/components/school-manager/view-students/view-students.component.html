@@ -4,7 +4,16 @@
 </ng-container>
 <ng-container *ngIf="role=='TEACHER'">
     <ng-container *ngFor="let dto of studentList">
-        <h2>{{dto.course.courseName}}</h2>
+        <h2>{{dto.course.courseName}} <span> - {{ dto.period }}</span>
+        <span *ngIf="dto.course.credit==0.5 && dto.course.courseBlock=='FALL_SEMESTER'"> - Fall Semester</span>
+        <span *ngIf="dto.course.credit==0.5 && dto.course.courseBlock=='SPRING_SEMESTER'"> - Spring Semester</span>
+    </h2>
+    <div *ngIf="dto.students.length==0">
+        <h4>No students enrolled for this course</h4>
+    </div>
+    <div *ngIf="dto.students.length>0">
         <app-view-students-sub [students]="dto.students" [count]="dto.students.length" ></app-view-students-sub>
+    </div>
+    <hr>
     </ng-container>
 </ng-container>
