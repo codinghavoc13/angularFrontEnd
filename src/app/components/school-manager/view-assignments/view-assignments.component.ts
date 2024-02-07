@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Assignment } from 'src/app/common/school-manager/assignment';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
+import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { AssignmentService } from 'src/app/service/school-manager/assignment.service';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
@@ -16,6 +18,11 @@ import { UserService } from 'src/app/service/school-manager/user.service';
 export class ViewAssignmentsComponent implements OnInit{
   homeworkList: Assignment[] = [];
   quizList: Assignment[] = [];
+  private selectedAssignments: Assignment[] = [];
+  tchrShowAssignmentList: boolean = true;
+  tchrShowCourseList: boolean = false;
+  tchrShowStudentList: boolean = false;
+  selectedStudentsList: UserDto[] = [];
   studentList: StudentListDto[] = [];
   teacherId: number = 0;
   testList: Assignment[] = [];
@@ -27,22 +34,29 @@ export class ViewAssignmentsComponent implements OnInit{
     private staffSvc: StaffService){}
 
   ngOnInit(): void {
-    this.teacherId = this.smUserSvc.loggedInUser!.userId;
-    this.assignSvc.getAssignmentsByTeacherId(this.smUserSvc.loggedInUser!.userId).subscribe(
-      response =>{
-        response.forEach((a)=>{
-          if(a.assignmentType=='HOMEWORK') this.homeworkList.push(a);
-          if(a.assignmentType=='QUIZ') this.quizList.push(a);
-          if(a.assignmentType=='TEST') this.testList.push(a);
-        })
-      }
-    )
-    this.staffSvc.getStudentsByTeacherId(this.teacherId).subscribe(
-      response =>{
-        this.studentList = response;
-        this.sortCourses();
-      }
-    )
+    this.teacherId = this.smUserSvc.getLoggedInUserId();
+    if(this.teacherId != -1){
+      this.assignSvc.getAssignmentsByTeacherId(this.teacherId).subscribe(
+        response =>{
+          response.forEach((a)=>{
+            if(a.assignmentType=='HOMEWORK') this.homeworkList.push(a);
+            if(a.assignmentType=='QUIZ') this.quizList.push(a);
+            if(a.assignmentType=='TEST') this.testList.push(a);
+          })
+        }
+      )
+      this.staffSvc.getStudentsByTeacherId(this.teacherId).subscribe(
+        response =>{
+          this.studentList = response;
+          this.sortCourses();
+        }
+      )
+    }
+  }
+
+  addAssignment(a:Assignment){
+    this.selectedAssignments.push(a);
+    console.log(this.selectedAssignments);
   }
 
   sortCourses(){
@@ -58,5 +72,9 @@ export class ViewAssignmentsComponent implements OnInit{
       if (a.course.courseBlock > b.course.courseBlock) return 1;
       return 0;
     })
+  }
+
+  getSelectedAssignments(){
+    return this.selectedAssignments;
   }
 }

@@ -3,11 +3,22 @@
 - Student version shows assignments assigned to them and grades
 - Parent version would be similar to Student version but would should all students associated with them-->
 <div *ngIf="smUserSvc.roleView=='TEACHER'">
-    <app-view-assignment-table [assignmentList]="homeworkList" [groupTitle]="'Homework'"></app-view-assignment-table>
-    <hr>
-    <app-view-assignment-table [assignmentList]="quizList" [groupTitle]="'Quiz'"></app-view-assignment-table>
-    <hr>
-    <app-view-assignment-table [assignmentList]="testList" [groupTitle]="'Test'"></app-view-assignment-table>
+    <ng-container *ngIf="tchrShowAssignmentList">
+        <app-view-assignment-table [assignmentList]="homeworkList" [groupTitle]="'Homework'"
+            (selectedAssignmentEmit)="addAssignment($event)"></app-view-assignment-table>
+        <hr>
+        <app-view-assignment-table [assignmentList]="quizList" [groupTitle]="'Quiz'"
+            (selectedAssignmentEmit)="addAssignment($event)"></app-view-assignment-table>
+        <hr>
+        <app-view-assignment-table [assignmentList]="testList" [groupTitle]="'Test'"
+            (selectedAssignmentEmit)="addAssignment($event)"></app-view-assignment-table>
+        <app-view-selected-assignments [selectedAssignments]="getSelectedAssignments()" ></app-view-selected-assignments>
+        <hr>
+        <button>Select Course</button>
+    </ng-container>
+    <ng-container *ngIf="tchrShowCourseList">
+        <p>Pending</p>
+    </ng-container>
 </div>
 <div *ngIf="smUserSvc.roleView=='STUDENT'">
     <p>Student version</p>

@@ -19,7 +19,7 @@ export class SMAddAssignmentsComponent implements OnInit{
   constructor(public fb: FormBuilder, private smUserSvc: UserService,
     public assignmentSvc: AssignmentService){
     this.assignmentForm = this.fb.group({
-      teacher_id: smUserSvc.loggedInUser!.userId,
+      teacher_id: smUserSvc.getLoggedInUserId(),
       assignments: this.fb.array([])
     });
   }

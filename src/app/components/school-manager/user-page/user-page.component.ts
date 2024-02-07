@@ -20,8 +20,8 @@ export class UserPageComponent implements OnInit{
     if(this.smUserSvc.roleView=='main') {
       this.router.navigate(['/schoolManager/main']);
     } else {
-      this.userRole = this.smUserSvc.loggedInUser!.role;
-      this.userVerification = this.smUserSvc.loggedInUser!.verified;
+      this.userRole = this.smUserSvc.getLoggedInUserRole()
+      this.userVerification = this.smUserSvc.getLoggedInUserVerification();
     }
   }
 

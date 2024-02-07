@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
@@ -20,8 +21,8 @@ export class ViewStudentsComponent implements OnInit{
   constructor(private smUserSvc: UserService, private staffSvc: StaffService){}
 
   ngOnInit(): void {
-    this.role = this.smUserSvc.loggedInUser!.role;
-    this.teacherId = this.smUserSvc.loggedInUser!.userId;
+    this.role = this.smUserSvc.getLoggedInUserRole()
+    this.teacherId = this.smUserSvc.getLoggedInUserId();
     this.retrieveStudents();
   }
   
@@ -58,5 +59,21 @@ export class ViewStudentsComponent implements OnInit{
       if (a.course.courseBlock > b.course.courseBlock) return 1;
       return 0;
     })
+  }
+
+  courseToString(dto: StudentListDto){
+    let result = "";
+    result = dto.course.courseName + " - ";
+    result += dto.period + " - ";
+    if(dto.course.credit==0.5){
+      if(dto.course.courseBlock=="FALL_SEMESTER"){
+        result += "Fall Semester - ";
+      }
+      if(dto.course.courseBlock=="SPRING_SEMESTER"){
+        result += "Spring Semester - ";
+      }
+    }
+    result += dto.students.length + " enrolled"
+    return result;
   }
 }

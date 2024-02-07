@@ -45,7 +45,7 @@ export class SelfRegisterComponent {
   }
 
   enrollStudent(){
-    this.enrollStudentDTO.parentId = this.smUserSvc.loggedInUser?.userId;
+    this.enrollStudentDTO.parentId = this.smUserSvc.getLoggedInUserId();
     this.enrollStudentDTO.student = this.registerDTO;
     this.enrollStudentDTO.student.role='STUDENT';
     console.log(this.enrollStudentDTO);

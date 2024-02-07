@@ -1,8 +1,8 @@
 <h2>{{groupTitle}}</h2>
 <table>
     <tr>
-        <th>Assignment Title</th>
-        <th><span>
+        <th class="assignmentColumn">Assignment Title</th>
+        <th class="assignmentDueDateColumn"><span>
             <i *ngIf="sortFlag=='asc'" class="bi bi-arrow-up" (click)="sortDueDateAsc()"></i>
             <i *ngIf="sortFlag=='desc'" class="bi bi-arrow-down" (click)="sortDueDateDesc()"></i>
         </span>Due Date</th>
@@ -10,6 +10,6 @@
     <tr *ngFor="let assignment of assignmentList">
         <td>{{ assignment.assignmentTitle }}</td>
         <td>{{ assignment.assignmentDueDate }}</td>
-        <td><button class="btn btn-primary">Assign to all students</button></td>
+        <td><button class="btn btn-primary" (click)="selectAssignment(assignment)">Select Assignment</button></td>
     </tr>
 </table>

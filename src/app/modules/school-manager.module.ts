@@ -26,6 +26,7 @@ import { AssignStudentsCourseComponent } from '../components/school-manager/assi
 import { AssignStudentCoursesComponent } from '../components/school-manager/assign-student-courses/assign-student-courses.component';
 import { ParentComponent } from '../components/school-manager/test/parent/parent.component';
 import { AddCourseComponent } from '../components/school-manager/add-course/add-course.component';
+import { ViewSelectedAssignmentsComponent } from '../components/school-manager/view-selected-assignments/view-selected-assignments.component';
 
 const routes: Routes = [
   {path: 'schoolManager/main', component: SMMainComponent},
@@ -58,7 +59,8 @@ const routes: Routes = [
     ViewStudentsSubComponent,
     AssignStudentsCourseComponent,
     AssignStudentCoursesComponent,
-    AddCourseComponent
+    AddCourseComponent,
+    ViewSelectedAssignmentsComponent
   ],
   imports: [
     CommonModule,

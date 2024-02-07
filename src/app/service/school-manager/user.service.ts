@@ -18,7 +18,7 @@ export class UserService {
   private currentUserSrc = new BehaviorSubject<UserDto|null>(null);
   currentUser$ = this.currentUserSrc.asObservable();
   roleView: string = 'main';
-  loggedInUser: UserDto | undefined;
+  private loggedInUser: UserDto | undefined;
   invalidLoginCredentials: boolean = false;
 
   constructor(private httpClient: HttpClient, private router: Router, private toastr: ToastrService) { }
@@ -67,6 +67,21 @@ export class UserService {
 
   getAllUsers(){
     return this.httpClient.get<UserDto[]>(this.userUrl+"/getAllUsersSimple");
+  }
+
+  /**
+   * need to add checks where ever these are used to handle bad returns
+   */
+  getLoggedInUserId(){
+    return this.loggedInUser == undefined ? -1 : this.loggedInUser.userId;
+  }
+
+  getLoggedInUserRole(){
+    return this.loggedInUser == undefined ? 'NOT_LOGGED_IN' : this.loggedInUser.role;
+  }
+
+  getLoggedInUserVerification(){
+    return this.loggedInUser == undefined ? false : true;
   }
 
   getStudentsByGradeLevel(grade_level: number){
