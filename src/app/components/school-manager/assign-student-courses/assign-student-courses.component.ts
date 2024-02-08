@@ -135,6 +135,7 @@ export class AssignStudentCoursesComponent implements OnInit{
   }
 
   getCourse(){
+    this.filters = [];
     this.workingStudentCourseList = [];
     this.staffSvc.getCoursesByStudentId(this.studentSelect!.student.userId).subscribe(
       response=>{
@@ -182,6 +183,7 @@ export class AssignStudentCoursesComponent implements OnInit{
     this.showStudentSelectTable = false;
     this.showStudentSchedule = false;
     this.showCourseSelect = true;
+    // this.workingStudentCourseList = [];
     this.getCourse();
   }
   

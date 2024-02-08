@@ -1,0 +1,26 @@
+<p>view-students-table works!</p>
+<table>
+    <tr>
+        <th class="nameColumn"><span>
+            <i *ngIf="sortFlags[0]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-firstName')"></i>
+            <i *ngIf="sortFlags[0]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-firstName')"></i>
+        </span>First Name</th>
+        <th class="nameColumn"><span>
+            <i *ngIf="sortFlags[1]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-lastName')"></i>
+            <i *ngIf="sortFlags[1]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-lastName')"></i>
+        </span>Last Name</th>
+        <th>Grade Level</th>
+        <!-- <th><button class="btn btn-success" (click)="selectAll()">Select all</button></th> -->
+        <th *ngIf="showEnrollBtn"><button class="btn btn-success" (click)="selectAll()">Select all</button></th>
+        <th *ngIf="showRemoveBtn"><button class="btn btn-warning" (click)="removeAll()">Remove all</button></th>
+    </tr>
+    <tr *ngFor="let dto of studentList">
+        <td>{{ dto.student.firstName }}</td>
+        <td>{{ dto.student.lastName }}</td>
+        <td>{{ dto.student.gradeLevel }}</td>
+        <!-- <td><button (click)="addStudentToWorkingList(student)"
+                [disabled]="checkWorkingList(student)">Enroll</button></td> -->
+        <td *ngIf="showEnrollBtn"><button (click)="selectStudent(dto)">Enroll</button></td>
+        <td *ngIf="showRemoveBtn"><button (click)="removeFromWorkingList(dto)">Remove</button></td>
+    </tr>
+</table>

@@ -9,6 +9,5 @@ export class CourseDetailDto {
         public teacherFirstName: string,
         public teacherLastName: string,
         public teacherId: number
-        //add the cptId
     ){}
 }

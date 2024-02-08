@@ -45,6 +45,9 @@
                 <!--teachers would view all of their students grouped by course-->
                 <app-view-students></app-view-students>
             </div>
+            <div id="viewStudentsByCourse" *ngIf="viewTab=='viewStudentsByCourse'">
+                <app-view-students-by-course></app-view-students-by-course>
+            </div>
         </div>
     </div>
     <!-- <hr> -->

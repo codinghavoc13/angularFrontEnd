@@ -29,39 +29,17 @@ on the div:
 -->
 <div *ngIf="showSelectTable">
     <h2>Select students to add to {{courseDetail!.courseName}} with {{courseDetail!.teacherFirstName}} {{courseDetail!.teacherLastName}} </h2>
-    <table>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Grade Level</th>
-            <th><button class="btn btn-success" (click)="selectAll()">Select all</button></th>
-        </tr>
-        <tr *ngFor="let student of studentList">
-            <td>{{ student.firstName }}</td>
-            <td>{{ student.lastName }}</td>
-            <td>{{ student.gradeLevel }}</td>
-            <td><button (click)="addStudentToWorkingList(student)"
-                    [disabled]="checkWorkingList(student)">Enroll</button></td>
-        </tr>
-    </table>
+    <app-view-students-table [studentList]="studentList" [showRemoveBtn]=false [showEnrollBtn]=true
+        (selectAllStudentsEmit)="selectAll()"
+        (selectStudentEmit)="addStudentToWorkingList($event)"></app-view-students-table>
+    <!--QOTD: Keep with current path or move both to one page-->
 </div>
 <div *ngIf="showConfirmTable">
     <h2>Selected Course Information</h2>
     <h3>{{courseDetail!.courseName}} - {{courseDetail!.teacherFirstName}} {{courseDetail!.teacherLastName}}</h3>
-    <table>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Grade Level</th>
-            <th><button class="btn btn-success" (click)="removeAll()">Remove all</button></th>
-        </tr>
-        <tr *ngFor="let student of workingList">
-            <td>{{ student.firstName }}</td>
-            <td>{{ student.lastName }}</td>
-            <td>{{ student.gradeLevel }}</td>
-            <td><button (click)="removeFromWorkingList(student)">Remove</button></td>
-        </tr>
-    </table>
+    <app-view-students-table [studentList]="workingList" [showRemoveBtn]=true [showEnrollBtn]=false
+        (removeAllStudentsEmit)="removeAll()"
+        (removeStudentEmit)="removeFromWorkingList($event)"></app-view-students-table>
 </div>
 <!-- <hr> -->
 <button *ngIf="showCourseTable" class="btn btn-success"

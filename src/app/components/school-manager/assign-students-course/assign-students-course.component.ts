@@ -5,6 +5,7 @@ import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto
 import { AssignStudentDto } from 'src/app/common/school-manager/assign-student-dto';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
 import { CPTDto } from 'src/app/common/school-manager/cpt-dto';
+import { StudentDetailDto } from 'src/app/common/school-manager/student-detail-dto';
 
 @Component({
   selector: 'app-assign-students-course',
@@ -19,11 +20,11 @@ export class AssignStudentsCourseComponent implements OnInit{
   grades: string[] = ['K','1','2','3','4','5','6'];
   gradeSelect: string = '';
   showCourseTable: boolean = true;
-  studentList: UserDto[] = [];
+  studentList: StudentDetailDto[] = [];
   showConfirmTable: boolean = false;
   showSelectTable: boolean = false;
-  tempStudentList: UserDto[] = [];
-  workingList: UserDto[] = [];
+  tempStudentList: StudentDetailDto[] = [];
+  workingList: StudentDetailDto[] = [];
 
   constructor(private staffSvc: StaffService, private toastr: ToastrService){}
   
@@ -33,7 +34,9 @@ export class AssignStudentsCourseComponent implements OnInit{
     this.buildTempStudentList();
   }
 
-  addStudentToWorkingList(student: UserDto){
+  //add logic to replicate the assignment select for teachers to remove students from
+  //the display once they have been selected and add to a separate list
+  addStudentToWorkingList(student: StudentDetailDto){
     this.workingList.push(student);
   }
 
@@ -52,8 +55,8 @@ export class AssignStudentsCourseComponent implements OnInit{
 
   buildStudentList(){
     this.studentList = [];
-    this.tempStudentList.filter((student)=>{
-      if(student.gradeLevel == this.gradeSelect?.toString()) this.studentList.push(student);
+    this.tempStudentList.filter((dto)=>{
+      if(dto.student.gradeLevel == this.gradeSelect?.toString()) this.studentList.push(dto);
     })
     if(this.studentList.length == 0){
       this.toastr.warning('No students in that grade found that are not enrolled in a course');
@@ -76,7 +79,7 @@ export class AssignStudentsCourseComponent implements OnInit{
     )
   }
 
-  checkWorkingList(student: UserDto){
+  checkWorkingList(student: StudentDetailDto){
     return this.workingList.includes(student);
   }
 
@@ -93,6 +96,7 @@ export class AssignStudentsCourseComponent implements OnInit{
   }
 
   removeAll(){
+    console.log('asc-ra-1');
     this.workingList = [];
   }
 
@@ -100,7 +104,7 @@ export class AssignStudentsCourseComponent implements OnInit{
     this.courseSelect = 0;
   }
 
-  removeFromWorkingList(student: UserDto){
+  removeFromWorkingList(student: StudentDetailDto){
     const idx = this.workingList.indexOf(student);
     if(idx > -1){
       this.workingList.splice(idx,1);
@@ -120,6 +124,7 @@ export class AssignStudentsCourseComponent implements OnInit{
   }
 
   selectAll(){
+    console.log('asc-sa-1');
     this.studentList.forEach((student)=>{
       if(!this.checkWorkingList(student))
         this.workingList.push(student);
@@ -133,8 +138,8 @@ export class AssignStudentsCourseComponent implements OnInit{
 
   submit(){
     let student_ids_temp: number [] = [];
-    this.workingList.forEach((student)=>{
-      student_ids_temp.push(student.userId);
+    this.workingList.forEach((dto)=>{
+      student_ids_temp.push(dto.student.userId);
     })
     this.workingList = [];
     let cpt: CPTDto = new CPTDto(this.courseSelect,this.courseDetail!.teacherId,this.courseDetail!.period);

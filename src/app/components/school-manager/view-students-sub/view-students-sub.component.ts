@@ -12,8 +12,8 @@ export class ViewStudentsSubComponent {
 
   page = 1;
   @Input() count = 0;
-  pageSize = 4;
-  pageSizes = [4,8,12];
+  pageSize = 6;
+  pageSizes = [6,12,18];
 
   handlePageChange(event: number){
     this.page = event;

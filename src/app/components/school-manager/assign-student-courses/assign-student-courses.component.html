@@ -10,29 +10,7 @@
 <div *ngIf="showStudentSelectTable">
     <h2>Currently Selected Grade: {{ gradeSelect }}</h2>
     <button (click)="changeGradeLevel()">Select a Different Grade</button><hr>
-    <table>
-        <tr>
-            <th><span>
-                <i *ngIf="sortFlags[0]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-firstName')"></i>
-                <i *ngIf="sortFlags[0]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-firstName')"></i>
-            </span>First Name</th>
-            <th><span>
-                <i *ngIf="sortFlags[1]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-lastName')"></i>
-                <i *ngIf="sortFlags[1]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-lastName')"></i>
-            </span>Last Name</th>
-            <th><span>
-                <i *ngIf="sortFlags[2]=='asc'" class="bi bi-arrow-up" (click)="sortField('asc-creditCount')"></i>
-                <i *ngIf="sortFlags[2]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-creditCount')"></i>
-            </span>Enrolled Credits</th>
-            <th></th>
-        </tr>
-        <tr *ngFor="let student of studentList">
-            <td>{{ student.student.firstName }}</td>
-            <td>{{ student.student.lastName }}</td>
-            <td>{{ student.creditCount}}/6</td>
-            <td><button (click)="selectStudent(student)">Select Student</button></td>
-        </tr>
-    </table>
+    <app-view-students-table [studentList]="studentList" (selectStudentEmit)="selectStudent($event)"></app-view-students-table>
 </div>
 <!--After selecting a student, display their current course schedule with either the course name displayed or 'No Course Selected' if null-->
 <div *ngIf="showCourseSelect">    

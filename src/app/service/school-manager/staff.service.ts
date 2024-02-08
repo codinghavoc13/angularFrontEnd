@@ -7,6 +7,7 @@ import { AssignStudentDto } from 'src/app/common/school-manager/assign-student-d
 import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 import { StudentDetailDto } from 'src/app/common/school-manager/student-detail-dto';
+import { FullCourseDetailDto } from 'src/app/common/school-manager/full-course-detail-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class StaffService {
   }
 
   getStudentsNotAssignedToTeacher(){
-    return this.httpClient.get<UserDto[]>(this.staffUrl+"/getStudentsNotAssignedToTeacher");
+    return this.httpClient.get<StudentDetailDto[]>(this.staffUrl+"/getStudentsNotAssignedToTeacher");
   }
 
   getUnverifiedUsers(){
@@ -43,6 +44,10 @@ export class StaffService {
 
   getCoursesByStudentId(studentId: number){
     return this.httpClient.get<CourseDetailDto[]>(this.staffUrl+"/getCoursesByStudent/"+studentId);
+  }
+
+  getFullCourseDetails(){
+    return this.httpClient.get<FullCourseDetailDto[]>(this.staffUrl+"/getFullCourseDetails");
   }
 
   //consider renaming this, might be mistaken for submitting assignments
