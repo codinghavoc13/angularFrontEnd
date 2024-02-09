@@ -10,6 +10,7 @@
     <tr *ngFor="let assignment of assignmentList">
         <td>{{ assignment.assignmentTitle }}</td>
         <td>{{ assignment.assignmentDueDate }}</td>
-        <td><button class="btn btn-primary" (click)="selectAssignment(assignment)">Select Assignment</button></td>
+        <td *ngIf="groupTitle!='Selected'"><button class="btn btn-primary" (click)="selectAssignment(assignment)">Select Assignment</button></td>
+        <td *ngIf="groupTitle=='Selected'"><button class="btn btn-primary" (click)="removeSelectedAssignment(assignment)">Remove Assignment</button></td>
     </tr>
 </table>

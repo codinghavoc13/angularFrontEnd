@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Assignment } from 'src/app/common/school-manager/assignment';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
@@ -17,15 +17,19 @@ import { UserService } from 'src/app/service/school-manager/user.service';
  */
 export class ViewAssignmentsComponent implements OnInit{
   homeworkList: Assignment[] = [];
+  @Output() listChangeEmit = new EventEmitter<Assignment>();
   quizList: Assignment[] = [];
+  roleView: string = "";
   private selectedAssignments: Assignment[] = [];
   tchrShowAssignmentList: boolean = true;
   tchrShowCourseList: boolean = false;
   tchrShowStudentList: boolean = false;
   selectedStudentsList: UserDto[] = [];
-  studentList: StudentListDto[] = [];
+  courseDTOList: StudentListDto[] = [];
   teacherId: number = 0;
   testList: Assignment[] = [];
+
+  testListShow: boolean = true;
 
   //look at passing teacherId from the userPage instead of injecting the UserService 
   public constructor(
@@ -35,19 +39,18 @@ export class ViewAssignmentsComponent implements OnInit{
 
   ngOnInit(): void {
     this.teacherId = this.smUserSvc.getLoggedInUserId();
+    this.roleView = this.smUserSvc.getLoggedInUserRoleView();
     if(this.teacherId != -1){
       this.assignSvc.getAssignmentsByTeacherId(this.teacherId).subscribe(
         response =>{
           response.forEach((a)=>{
-            if(a.assignmentType=='HOMEWORK') this.homeworkList.push(a);
-            if(a.assignmentType=='QUIZ') this.quizList.push(a);
-            if(a.assignmentType=='TEST') this.testList.push(a);
+            this.sortAssignment(a);
           })
         }
       )
       this.staffSvc.getStudentsByTeacherId(this.teacherId).subscribe(
         response =>{
-          this.studentList = response;
+          this.courseDTOList = response;
           this.sortCourses();
         }
       )
@@ -55,12 +58,50 @@ export class ViewAssignmentsComponent implements OnInit{
   }
 
   addAssignment(a:Assignment){
+    console.log('va-aa-1',this.testList.length);
     this.selectedAssignments.push(a);
-    console.log(this.selectedAssignments);
+    console.log('va-aa-2',this.testList.length);
+  }
+
+  removeAssignment(assignment: Assignment){
+    console.log('va-ra-1', assignment);
+    let temp: Assignment[] = [];
+    this.selectedAssignments.forEach((a)=>{
+      if(a != assignment){
+        temp.push(a);
+      }
+    })
+    this.selectedAssignments = temp;
+    console.log('va-ra-2',this.testList);
+    this.sortAssignment(assignment);
+    console.log('va-ra-3',this.testList);
+  }
+
+  showCourseSelect(){
+    this.tchrShowAssignmentList = false;
+    this.tchrShowCourseList = true;
+  }
+
+  sortAssignment(a: Assignment){
+    if(a.assignmentType=='HOMEWORK') {
+      // console.log('va-sa-1');
+      this.homeworkList.push(a);
+    }
+    if(a.assignmentType=='QUIZ')  {
+      // console.log('va-sa-2');
+      this.quizList.push(a);
+    }
+    if(a.assignmentType=='TEST')  {
+      // console.log('va-sa-3');
+      this.testList.forEach((b)=>{
+        if(a==b){ console.log('exists')}
+      })
+      this.testList.push(a);
+    }
   }
 
   sortCourses(){
-    this.studentList.sort((a,b) => {
+    this.courseDTOList.sort((a,b) => {
       //sort by period
       if (a.period < b.period) return -1;
       if (a.period > b.period) return 1;

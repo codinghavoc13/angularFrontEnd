@@ -1,4 +1,3 @@
-import { incrementalFromCompilerTicket } from '@angular/compiler-cli/src/ngtsc/core';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Assignment } from 'src/app/common/school-manager/assignment';
 
@@ -9,12 +8,22 @@ import { Assignment } from 'src/app/common/school-manager/assignment';
 })
 export class ViewAssignmentTableComponent {
   @Input() assignmentList: Assignment[] = [];
+  @Input() newAssignment: Assignment | undefined;
   @Input() groupTitle: string = '';
   @Output() selectedAssignmentEmit = new EventEmitter<Assignment>();
-  private selectedAssignments: Assignment[] = [];
-  //going to need touse the Output to send the selected assignment
+  //going to need to use the Output to send the selected assignment
+  
+  homeworkList: Assignment[] = [];
+  quizList: Assignment[] = [];
+  selectedAssignments: Assignment[] = [];
+  testList: Assignment[] = [];
 
   sortFlag: string = 'asc';
+
+  removeSelectedAssignment(incoming: Assignment){
+    console.log('vat-rsa-1');
+    this.selectedAssignmentEmit.emit(incoming);
+  }
 
   selectAssignment(incoming: Assignment) {
     let temp: Assignment[] = [];
@@ -41,5 +50,9 @@ export class ViewAssignmentTableComponent {
   sortDueDateDesc() {
     this.assignmentList.sort((a, b) => new Date(b.assignmentDueDate).getTime() - new Date(a.assignmentDueDate).getTime());
     this.sortFlag = 'asc';
+  }
+
+  updateList(incoming: Assignment){
+    this.assignmentList.push(incoming);
   }
 }

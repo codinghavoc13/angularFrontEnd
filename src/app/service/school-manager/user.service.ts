@@ -80,6 +80,10 @@ export class UserService {
     return this.loggedInUser == undefined ? 'NOT_LOGGED_IN' : this.loggedInUser.role;
   }
 
+  getLoggedInUserRoleView(){
+    return this.roleView;
+  }
+
   getLoggedInUserVerification(){
     return this.loggedInUser == undefined ? false : true;
   }

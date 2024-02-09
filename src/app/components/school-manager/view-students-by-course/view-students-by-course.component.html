@@ -1,7 +1,7 @@
 <ng-container>
-    <button class="vsbc-sort-button">Sort by Teacher Last Name</button>
-    <button class="vsbc-sort-button">Sort by Course Name</button>
-    <button class="vsbc-sort-button">Sort by Number of Enrolled Students</button>
+    <button class="vsbc-sort-button" (click)="sortByTeacherLastName()">Sort by Teacher Last Name</button>
+    <button class="vsbc-sort-button" (click)="sortCourse()">Sort by Course Name</button>
+    <button class="vsbc-sort-button" (click)="sortByEnrollment()">Sort by Number of Enrolled Students</button>
     <div ngbAccordion [closeOthers]="true">
         <div ngbAccordionItem *ngFor="let dto of fullCourseDetailList">
             <h2 ngbAccordionHeader>

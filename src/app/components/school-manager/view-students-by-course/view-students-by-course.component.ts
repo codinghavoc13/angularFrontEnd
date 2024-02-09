@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { response } from 'express';
-import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
+import { ToastrService } from 'ngx-toastr';
 import { FullCourseDetailDto } from 'src/app/common/school-manager/full-course-detail-dto';
-import { StudentDetailDto } from 'src/app/common/school-manager/student-detail-dto';
-import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
 
 @Component({
@@ -14,7 +11,8 @@ import { StaffService } from 'src/app/service/school-manager/staff.service';
 export class ViewStudentsByCourseComponent implements OnInit {
   fullCourseDetailList: FullCourseDetailDto[] = [];
 
-  constructor(private staffSvc: StaffService) { }
+  constructor(private staffSvc: StaffService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.buildList();
@@ -26,6 +24,20 @@ export class ViewStudentsByCourseComponent implements OnInit {
         this.fullCourseDetailList = response;
       }
     )
+  }
+
+  //sort course name
+  sortCourse(){
+    this.toastr.info("Sorting courses by course name feature coming soon");
+  }
+
+  //sort number of students enrolled
+  sortByEnrollment(){
+    this.toastr.info("Sorting courses by number of enrolled students coming soon");
+  }
+  //sort teacher last name
+  sortByTeacherLastName(){
+    this.toastr.info("Sorting courses by the teacher's last name coming soon");
   }
 
   teacherInfoString(dto: FullCourseDetailDto) {

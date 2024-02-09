@@ -2,28 +2,40 @@
 - Teacher version shows assignments the teacher has created
 - Student version shows assignments assigned to them and grades
 - Parent version would be similar to Student version but would should all students associated with them-->
-<div *ngIf="smUserSvc.roleView=='TEACHER'">
+<div *ngIf="roleView=='TEACHER'">
     <ng-container *ngIf="tchrShowAssignmentList">
+        <!--Drop this down to one reference, vat handles displaying all tables, sends the selected list back here which handles submitting to back end-->
         <app-view-assignment-table [assignmentList]="homeworkList" [groupTitle]="'Homework'"
             (selectedAssignmentEmit)="addAssignment($event)"></app-view-assignment-table>
         <hr>
         <app-view-assignment-table [assignmentList]="quizList" [groupTitle]="'Quiz'"
             (selectedAssignmentEmit)="addAssignment($event)"></app-view-assignment-table>
         <hr>
-        <app-view-assignment-table [assignmentList]="testList" [groupTitle]="'Test'"
+        <app-view-assignment-table *ngIf=testListShow [assignmentList]="testList" [groupTitle]="'Test'"
             (selectedAssignmentEmit)="addAssignment($event)"></app-view-assignment-table>
-        <app-view-selected-assignments [selectedAssignments]="getSelectedAssignments()" ></app-view-selected-assignments>
         <hr>
-        <button>Select Course</button>
+        <app-view-assignment-table [assignmentList]="getSelectedAssignments()" [groupTitle]="'Selected'"
+            (selectedAssignmentEmit)="removeAssignment($event)"></app-view-assignment-table>
+        <!-- <app-view-selected-assignments [selectedAssignments]="getSelectedAssignments()" ></app-view-selected-assignments> -->
+        <hr>
+        <button (click)="showCourseSelect()">Select Course</button>
     </ng-container>
     <ng-container *ngIf="tchrShowCourseList">
         <p>Pending</p>
     </ng-container>
 </div>
-<div *ngIf="smUserSvc.roleView=='STUDENT'">
+<div *ngIf="roleView=='STUDENT'">
+    <!--student and parent versions will likely be the same: grades, grouped by course, with grade for that assignment
+    Will probably use the accordion design, one tab for each assignment type, the tab will have:
+        - the number of assignments assigned
+        - the number that have been graded
+        - the overall grade for that group of assignments (plan for now is homework/quiz/test = 30/30/40)
+    Below the accordion will be the overall grade for the course as of when they are viewing it
+    The big difference between the two views is that the student will only show that student's info, the parent will show all students;
+        I'm thinking a separate component that takes a list of student info; the student will simply be a list of one-->
     <p>Student version</p>
 </div>
-<div *ngIf="smUserSvc.roleView=='PARENT'">
+<div *ngIf="roleView=='PARENT'">
     <p>Parent version</p>
 </div>
 <hr>
