@@ -5,23 +5,15 @@
 <div *ngIf="roleView=='TEACHER'">
     <ng-container *ngIf="tchrShowAssignmentList">
         <!--Drop this down to one reference, vat handles displaying all tables, sends the selected list back here which handles submitting to back end-->
-        <app-view-assignment-table [assignmentList]="homeworkList" [groupTitle]="'Homework'"
-            (selectedAssignmentEmit)="addAssignment($event)"></app-view-assignment-table>
-        <hr>
-        <app-view-assignment-table [assignmentList]="quizList" [groupTitle]="'Quiz'"
-            (selectedAssignmentEmit)="addAssignment($event)"></app-view-assignment-table>
-        <hr>
-        <app-view-assignment-table *ngIf=testListShow [assignmentList]="testList" [groupTitle]="'Test'"
-            (selectedAssignmentEmit)="addAssignment($event)"></app-view-assignment-table>
-        <hr>
-        <app-view-assignment-table [assignmentList]="getSelectedAssignments()" [groupTitle]="'Selected'"
-            (selectedAssignmentEmit)="removeAssignment($event)"></app-view-assignment-table>
-        <!-- <app-view-selected-assignments [selectedAssignments]="getSelectedAssignments()" ></app-view-selected-assignments> -->
+        <app-view-assignment-table-group [assignmentList]="assignmentList"></app-view-assignment-table-group>
         <hr>
         <button (click)="showCourseSelect()">Select Course</button>
     </ng-container>
     <ng-container *ngIf="tchrShowCourseList">
         <p>Pending</p>
+        <!--Need a new table displaying the course name, period, a select button
+        Questions: How to handle courseBlock, maybe pair it up with period?
+        -->
     </ng-container>
 </div>
 <div *ngIf="roleView=='STUDENT'">

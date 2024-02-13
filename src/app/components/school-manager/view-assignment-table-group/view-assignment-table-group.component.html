@@ -1,0 +1,60 @@
+<h2>Homework</h2>
+<table>
+    <tr>
+        <th class="assignmentColumn">Assignment Title</th>
+        <th class="assignmentDueDateColumn"><span>
+            <i *ngIf="sortFlag[0]=='asc'" class="bi bi-arrow-up" (click)="sortColumn('homework', 'desc')"></i>
+            <i *ngIf="sortFlag[0]=='desc'" class="bi bi-arrow-down" (click)="sortColumn('homework','asc')"></i>
+        </span>Due Date</th>
+    </tr>
+    <tr *ngFor="let assignment of homeworkList">
+        <td>{{ assignment.assignmentTitle }}</td>
+        <td>{{ assignment.assignmentDueDate }}</td>
+        <td><button class="btn btn-primary" (click)="selectAssignment(assignment)">Select Assignment</button></td>
+    </tr>
+</table>
+<h2>Quiz</h2>
+<table>
+    <tr>
+        <th class="assignmentColumn">Assignment Title</th>
+        <th class="assignmentDueDateColumn"><span>
+            <i *ngIf="sortFlag[1]=='asc'" class="bi bi-arrow-up" (click)="sortColumn('quiz', 'desc')"></i>
+            <i *ngIf="sortFlag[1]=='desc'" class="bi bi-arrow-down" (click)="sortColumn('quiz','asc')"></i>
+        </span>Due Date</th>
+    </tr>
+    <tr *ngFor="let assignment of quizList">
+        <td>{{ assignment.assignmentTitle }}</td>
+        <td>{{ assignment.assignmentDueDate }}</td>
+        <td><button class="btn btn-primary" (click)="selectAssignment(assignment)">Select Assignment</button></td>
+    </tr>
+</table>
+<h2>Test</h2>
+<table>
+    <tr>
+        <th class="assignmentColumn">Assignment Title</th>
+        <th class="assignmentDueDateColumn"><span>
+            <i *ngIf="sortFlag[2]=='asc'" class="bi bi-arrow-up" (click)="sortColumn('test', 'desc')"></i>
+            <i *ngIf="sortFlag[2]=='desc'" class="bi bi-arrow-down" (click)="sortColumn('test','asc')"></i>
+        </span>Due Date</th>
+    </tr>
+    <tr *ngFor="let assignment of testList">
+        <td>{{ assignment.assignmentTitle }}</td>
+        <td>{{ assignment.assignmentDueDate }}</td>
+        <td><button class="btn btn-primary" (click)="selectAssignment(assignment)">Select Assignment</button></td>
+    </tr>
+</table>
+<h2>Selected</h2>
+<table>
+    <tr>
+        <th class="assignmentColumn">Assignment Title</th>
+        <th class="assignmentDueDateColumn"><span>
+            <i *ngIf="sortFlag[3]=='asc'" class="bi bi-arrow-up" (click)="sortColumn('select', 'desc')"></i>
+            <i *ngIf="sortFlag[3]=='desc'" class="bi bi-arrow-down" (click)="sortColumn('select','asc')"></i>
+        </span>Due Date</th>
+    </tr>
+    <tr *ngFor="let assignment of selectedAssignments">
+        <td>{{ assignment.assignmentTitle }}</td>
+        <td>{{ assignment.assignmentDueDate }}</td>
+        <td><button class="btn btn-primary" (click)="removeSelectedAssignment(assignment)">Remove Assignment</button></td>
+    </tr>
+</table>

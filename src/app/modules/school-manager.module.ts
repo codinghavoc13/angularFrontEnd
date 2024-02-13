@@ -29,6 +29,7 @@ import { AddCourseComponent } from '../components/school-manager/add-course/add-
 import { ViewSelectedAssignmentsComponent } from '../components/school-manager/view-selected-assignments/view-selected-assignments.component';
 import { ViewStudentsTableComponent } from '../components/school-manager/view-students-table/view-students-table.component';
 import { ViewStudentsByCourseComponent } from '../components/school-manager/view-students-by-course/view-students-by-course.component';
+import { ViewAssignmentTableGroupComponent } from '../components/school-manager/view-assignment-table-group/view-assignment-table-group.component';
 
 const routes: Routes = [
   {path: 'schoolManager/main', component: SMMainComponent},
@@ -64,7 +65,8 @@ const routes: Routes = [
     AddCourseComponent,
     ViewSelectedAssignmentsComponent,
     ViewStudentsTableComponent,
-    ViewStudentsByCourseComponent
+    ViewStudentsByCourseComponent,
+    ViewAssignmentTableGroupComponent
   ],
   imports: [
     CommonModule,

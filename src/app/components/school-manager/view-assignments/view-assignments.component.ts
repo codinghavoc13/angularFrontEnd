@@ -16,18 +16,20 @@ import { UserService } from 'src/app/service/school-manager/user.service';
  * Need to update this to get the list of students assigned to course/teacher
  */
 export class ViewAssignmentsComponent implements OnInit{
-  homeworkList: Assignment[] = [];
-  @Output() listChangeEmit = new EventEmitter<Assignment>();
-  quizList: Assignment[] = [];
+  @Output() 
+  assignmentList: Assignment[] = [];
+  // homeworkList: Assignment[] = [];
+  // @Output() listChangeEmit = new EventEmitter<Assignment>();
+  // quizList: Assignment[] = [];
   roleView: string = "";
-  private selectedAssignments: Assignment[] = [];
+  // private selectedAssignments: Assignment[] = [];
   tchrShowAssignmentList: boolean = true;
   tchrShowCourseList: boolean = false;
   tchrShowStudentList: boolean = false;
   selectedStudentsList: UserDto[] = [];
   courseDTOList: StudentListDto[] = [];
   teacherId: number = 0;
-  testList: Assignment[] = [];
+  // testList: Assignment[] = [];
 
   testListShow: boolean = true;
 
@@ -41,13 +43,7 @@ export class ViewAssignmentsComponent implements OnInit{
     this.teacherId = this.smUserSvc.getLoggedInUserId();
     this.roleView = this.smUserSvc.getLoggedInUserRoleView();
     if(this.teacherId != -1){
-      this.assignSvc.getAssignmentsByTeacherId(this.teacherId).subscribe(
-        response =>{
-          response.forEach((a)=>{
-            this.sortAssignment(a);
-          })
-        }
-      )
+      // this.getAssignments();
       this.staffSvc.getStudentsByTeacherId(this.teacherId).subscribe(
         response =>{
           this.courseDTOList = response;
@@ -57,47 +53,9 @@ export class ViewAssignmentsComponent implements OnInit{
     }
   }
 
-  addAssignment(a:Assignment){
-    console.log('va-aa-1',this.testList.length);
-    this.selectedAssignments.push(a);
-    console.log('va-aa-2',this.testList.length);
-  }
-
-  removeAssignment(assignment: Assignment){
-    console.log('va-ra-1', assignment);
-    let temp: Assignment[] = [];
-    this.selectedAssignments.forEach((a)=>{
-      if(a != assignment){
-        temp.push(a);
-      }
-    })
-    this.selectedAssignments = temp;
-    console.log('va-ra-2',this.testList);
-    this.sortAssignment(assignment);
-    console.log('va-ra-3',this.testList);
-  }
-
   showCourseSelect(){
     this.tchrShowAssignmentList = false;
     this.tchrShowCourseList = true;
-  }
-
-  sortAssignment(a: Assignment){
-    if(a.assignmentType=='HOMEWORK') {
-      // console.log('va-sa-1');
-      this.homeworkList.push(a);
-    }
-    if(a.assignmentType=='QUIZ')  {
-      // console.log('va-sa-2');
-      this.quizList.push(a);
-    }
-    if(a.assignmentType=='TEST')  {
-      // console.log('va-sa-3');
-      this.testList.forEach((b)=>{
-        if(a==b){ console.log('exists')}
-      })
-      this.testList.push(a);
-    }
   }
 
   sortCourses(){
@@ -113,9 +71,5 @@ export class ViewAssignmentsComponent implements OnInit{
       if (a.course.courseBlock > b.course.courseBlock) return 1;
       return 0;
     })
-  }
-
-  getSelectedAssignments(){
-    return this.selectedAssignments;
   }
 }
