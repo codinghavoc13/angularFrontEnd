@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Assignment } from 'src/app/common/school-manager/assignment';
 import { AssignmentService } from 'src/app/service/school-manager/assignment.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
@@ -10,6 +10,8 @@ import { UserService } from 'src/app/service/school-manager/user.service';
 })
 export class ViewAssignmentTableGroupComponent implements OnInit {
   @Input() assignmentList: Assignment[] = [];
+  @Output() selectedListEmit = new EventEmitter<Assignment[]>();
+
   homeworkList: Assignment[] = [];
   quizList: Assignment[] = [];
   selectedAssignments: Assignment[] = [];
@@ -102,6 +104,10 @@ export class ViewAssignmentTableGroupComponent implements OnInit {
       })
       this.testList = temp;
     }
+  }
+
+  sendSelectedCourses(){
+    this.selectedListEmit.emit(this.selectedAssignments);
   }
 
   sortAssignment(a: Assignment) {

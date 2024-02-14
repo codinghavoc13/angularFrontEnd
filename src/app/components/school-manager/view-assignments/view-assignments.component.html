@@ -5,15 +5,27 @@
 <div *ngIf="roleView=='TEACHER'">
     <ng-container *ngIf="tchrShowAssignmentList">
         <!--Drop this down to one reference, vat handles displaying all tables, sends the selected list back here which handles submitting to back end-->
-        <app-view-assignment-table-group [assignmentList]="assignmentList"></app-view-assignment-table-group>
+        <app-view-assignment-table-group [assignmentList]="assignmentList"
+            (selectedListEmit)="showCourseSelect($event)"></app-view-assignment-table-group>
         <hr>
-        <button (click)="showCourseSelect()">Select Course</button>
     </ng-container>
     <ng-container *ngIf="tchrShowCourseList">
         <p>Pending</p>
         <!--Need a new table displaying the course name, period, a select button
         Questions: How to handle courseBlock, maybe pair it up with period?
         -->
+        <table>
+            <tr>
+                <th class="courseNameColumn">Course Name</th>
+                <th class="coursePeriodBlockColumn">Period</th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let dto of courseDTOList">
+                <td>{{dto.course.courseName}}</td>
+                <td>{{buildPeriodBlockString(dto)}}</td>
+                <td><button>Select Course</button></td>
+            </tr>
+        </table>
     </ng-container>
 </div>
 <div *ngIf="roleView=='STUDENT'">

@@ -16,26 +16,21 @@ import { UserService } from 'src/app/service/school-manager/user.service';
  * Need to update this to get the list of students assigned to course/teacher
  */
 export class ViewAssignmentsComponent implements OnInit{
-  @Output() 
+  // @Output() 
   assignmentList: Assignment[] = [];
-  // homeworkList: Assignment[] = [];
-  // @Output() listChangeEmit = new EventEmitter<Assignment>();
-  // quizList: Assignment[] = [];
   roleView: string = "";
-  // private selectedAssignments: Assignment[] = [];
+  selectedAssignments: Assignment[] = [];
   tchrShowAssignmentList: boolean = true;
   tchrShowCourseList: boolean = false;
   tchrShowStudentList: boolean = false;
   selectedStudentsList: UserDto[] = [];
   courseDTOList: StudentListDto[] = [];
   teacherId: number = 0;
-  // testList: Assignment[] = [];
 
   testListShow: boolean = true;
 
   //look at passing teacherId from the userPage instead of injecting the UserService 
   public constructor(
-    private assignSvc: AssignmentService,
     public smUserSvc: UserService, 
     private staffSvc: StaffService){}
 
@@ -53,7 +48,21 @@ export class ViewAssignmentsComponent implements OnInit{
     }
   }
 
-  showCourseSelect(){
+  buildPeriodBlockString(dto: StudentListDto){
+    let result: string = "";
+    result = dto.period.toString();
+    if(dto.course.courseBlock=='FALL_SEMESTER'){
+      result += ' - Fall Semester';
+    }
+    if(dto.course.courseBlock=='SPRING_SEMESTER'){
+      result += ' - Spring Semester';
+    }
+    return result;
+  }
+
+  showCourseSelect(incoming: Assignment[]){
+    this.assignmentList = incoming;
+    console.log(this.assignmentList);
     this.tchrShowAssignmentList = false;
     this.tchrShowCourseList = true;
   }
