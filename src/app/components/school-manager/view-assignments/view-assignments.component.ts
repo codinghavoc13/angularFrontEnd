@@ -1,11 +1,9 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
+import { response } from 'express';
 import { Assignment } from 'src/app/common/school-manager/assignment';
-import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
 import { GradeEntryDTO } from 'src/app/common/school-manager/grade-entry-dto';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 import { UserDto } from 'src/app/common/school-manager/user-dto';
-import { AssignmentService } from 'src/app/service/school-manager/assignment.service';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
@@ -22,12 +20,14 @@ export class ViewAssignmentsComponent implements OnInit{
   displayList: StudentListDto[] = [];
   gradeEntryList: GradeEntryDTO[] = [];
   roleView: string = "";
-  selectedAssignments: number[] = [];
+  selectedAssignments: Assignment[] = [];
   selectedCourses: number [] = [];
+  selectedStudentsList: UserDto[] = [];
+  studentCptIdList: StudentCPTPair[] = [];
   tchrShowAssignmentList: boolean = true;
+  tchrShowConfirm: boolean = false;
   tchrShowCourseList: boolean = false;
   tchrShowStudentList: boolean = false;
-  selectedStudentsList: UserDto[] = [];
   courseDTOList: StudentListDto[] = [];
   teacherId: number = 0;
 
@@ -65,8 +65,30 @@ export class ViewAssignmentsComponent implements OnInit{
     return result;
   }
 
+  deselectAllCourses(){
+    this.selectedCourses = [];
+  }
+
   isCourseSelected(cptID: number){
     return this.selectedCourses.includes(cptID);
+  }
+
+  isStudentSelected(student: UserDto){
+    return this.selectedStudentsList.includes(student);
+  }
+
+  moveToConfirm(){
+    this.tchrShowConfirm = true;
+    this.tchrShowStudentList = false;
+  }
+
+  removeAssignment(assignment: Assignment){
+    let temp:Assignment[] = [];
+    this.selectedAssignments.forEach((a)=>{
+      if(a != assignment) temp.push(a);
+    })
+    this.selectedAssignments = temp;
+    this.sortSelectedAssignments();
   }
 
   removeCourse(cptID: number){
@@ -80,25 +102,39 @@ export class ViewAssignmentsComponent implements OnInit{
     this.selectedCourses = temp;
   }
 
+  removeStudent(student: UserDto){
+    let temp:UserDto[] = [];
+    this.selectedStudentsList.forEach((s)=>{
+      if(s != student) temp.push(s);
+    })
+    this.selectedStudentsList = temp;
+    this.sortSelectedStudents();
+  }
+
+  selectAllCourses(){
+    this.courseDTOList.forEach((c)=>{
+      this.selectedCourses.push(c.cptId);
+    })
+  }
+
   selectCourse(cptID: number){
     this.selectedCourses.push(cptID);
     console.log(this.selectedCourses);
   }
 
-  selectStudent(studentId: number, cptId: number){
-    this.selectedAssignments.forEach((a)=>{
-      this.gradeEntryList.push(new GradeEntryDTO(studentId,cptId,a))
-    })
-    console.log(this.gradeEntryList);
+  selectStudent(student: UserDto, studentId: number, cptId: number){
+    if(!this.selectedStudentsList.includes(student)){
+      this.selectedStudentsList.push(student)
+    }
+    this.sortSelectedStudents();
+    this.studentCptIdList.push(new StudentCPTPair(studentId, cptId));
   }
 
   showCourseSelect(incoming: Assignment[]){
     incoming.forEach((a)=>{
-      this.selectedAssignments.push(a.assignmentId)
-    })
-    console.log(this.selectedAssignments);
-    // this.assignmentList = incoming;
-    // console.log(this.assignmentList);
+      this.selectedAssignments.push(a)
+    });
+    this.sortSelectedAssignments();
     this.tchrShowAssignmentList = false;
     this.tchrShowCourseList = true;
   }
@@ -129,4 +165,47 @@ export class ViewAssignmentsComponent implements OnInit{
       return 0;
     })
   }
+
+  sortSelectedAssignments(){
+    this.selectedAssignments.sort((a,b)=>{
+      if(a.assignmentDueDate < b.assignmentDueDate) return -1;
+      if(a.assignmentDueDate > b.assignmentDueDate) return 1;
+      return 0;
+    })
+  }
+
+  sortSelectedStudents(){
+    this.selectedStudentsList.sort((a,b)=>{
+      if (a.lastName < b.lastName) return -1;
+      if (a.lastName > b.lastName) return 1;
+      if (a.firstName < b.firstName) return -1;
+      if (a.firstName > b.firstName) return 1;
+      return 0;
+    })
+  }
+
+  submit(){
+    this.gradeEntryList = [];
+    this.selectedAssignments.forEach((a) => {
+      this.studentCptIdList.forEach((sc)=>{
+        this.gradeEntryList.push(new GradeEntryDTO(sc.studentId,sc.cptId,a.assignmentId))
+      })
+    })
+    // console.log(this.selectedAssignments);
+    // this.selectedAssignments.forEach((a)=>{
+    //   this.gradeEntryList.push(new GradeEntryDTO(studentId,cptId,a.assignmentId))
+    // })
+    console.log(this.gradeEntryList);
+    this.staffSvc.submitInitialGradeEntries(this.gradeEntryList).subscribe(
+      response=>{
+        console.log('submitted');
+      }
+    );
+  }
+}
+
+class StudentCPTPair{
+  constructor(
+    public studentId: number,
+    public cptId: number){}
 }

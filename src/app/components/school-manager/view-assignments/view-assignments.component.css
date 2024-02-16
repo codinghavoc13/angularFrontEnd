@@ -5,3 +5,7 @@ td, th {
 .courseNameColumn, .coursePeriodBlockColumn{
     width: 350px;
 }
+
+.remove-btn{
+    float: right;
+}

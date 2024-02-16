@@ -8,6 +8,7 @@ import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 import { StudentDetailDto } from 'src/app/common/school-manager/student-detail-dto';
 import { FullCourseDetailDto } from 'src/app/common/school-manager/full-course-detail-dto';
+import { GradeEntryDTO } from 'src/app/common/school-manager/grade-entry-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,11 @@ export class StaffService {
 
   getFullCourseDetails(){
     return this.httpClient.get<FullCourseDetailDto[]>(this.staffUrl+"/getFullCourseDetails");
+  }
+
+  submitInitialGradeEntries(gradeEntryList: GradeEntryDTO[]){
+    console.log('ss-sige-1', gradeEntryList);
+    return this.httpClient.post<GradeEntryDTO[]>(this.teacherUrl+"/saveGrade",gradeEntryList);
   }
 
   //consider renaming this, might be mistaken for submitting assignments

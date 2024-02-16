@@ -5,26 +5,28 @@
 <div *ngIf="roleView=='TEACHER'">
     <ng-container *ngIf="tchrShowAssignmentList">
         <!--Drop this down to one reference, vat handles displaying all tables, sends the selected list back here which handles submitting to back end-->
-        <app-view-assignment-table-group 
+        <app-view-assignment-table-group
             (selectedListEmit)="showCourseSelect($event)"></app-view-assignment-table-group>
         <hr>
     </ng-container>
     <ng-container *ngIf="tchrShowCourseList">
-        <p>Pending</p>
-        <!--Need a new table displaying the course name, period, a select button
-        Questions: How to handle courseBlock, maybe pair it up with period?
-        -->
         <table>
             <tr>
                 <th class="courseNameColumn">Course Name</th>
                 <th class="coursePeriodBlockColumn">Period</th>
-                <th></th>
+                <th>
+                    <span *ngIf="selectedCourses.length==0"><button (click)="selectAllCourses()">Select All Courses</button></span>
+                    <span *ngIf="selectedCourses.length>0"><button (click)="deselectAllCourses()">Deselect All Courses</button></span>
+                </th>
             </tr>
             <tr *ngFor="let dto of courseDTOList">
                 <td>{{dto.course.courseName}}</td>
                 <td>{{buildPeriodBlockString(dto)}}</td>
-                <td><span *ngIf="!isCourseSelected(dto.cptId)"><button (click)="selectCourse(dto.cptId)">Select Course</button></span>
-                    <span *ngIf="isCourseSelected(dto.cptId)"><button (click)="removeCourse(dto.cptId)">Remove Course</button></span></td>
+                <td><span *ngIf="!isCourseSelected(dto.cptId)"><button (click)="selectCourse(dto.cptId)">Select
+                            Course</button></span>
+                    <span *ngIf="isCourseSelected(dto.cptId)"><button (click)="removeCourse(dto.cptId)">Remove
+                            Course</button></span>
+                </td>
             </tr>
         </table>
         <button (click)="showStudentSelect()">Next Page - Select Students</button>
@@ -33,7 +35,7 @@
         <div ngbAccordion [closeOthers]="true">
             <div ngbAccordionItem *ngFor="let dto of displayList">
                 <h2 ngbAccordionHeader>
-                    <button ngbAccordionButton>{{dto.course.courseName}}</button>
+                    <button ngbAccordionButton>{{dto.course.courseName}} - {{buildPeriodBlockString(dto)}}</button>
                 </h2>
                 <div ngbAccordionCollapse>
                     <div ngbAccordionBody>
@@ -49,7 +51,10 @@
                                     </tr>
                                     <tr *ngFor="let student of dto.students">
                                         <td>{{student.firstName}} {{student.lastName}}</td>
-                                        <td><button (click)="selectStudent(student.userId, dto.cptId)">Select</button></td>
+                                        <td><button
+                                                (click)="selectStudent(student, student.userId, dto.cptId)"
+                                                [disabled]="isStudentSelected(student)">Select</button>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -58,6 +63,30 @@
                 </div>
             </div>
         </div>
+        <button (click)="moveToConfirm()">Next Step - Confirmation</button>
+    </ng-container>
+    <ng-container *ngIf="tchrShowConfirm">
+        <div class="row">
+            <div style="width: 50%;">
+                <h2>Selected Assignments</h2>
+                <table>
+                    <tr *ngFor="let assignment of selectedAssignments">
+                        <td style="width: 90%;">{{assignment.assignmentTitle}}</td>
+                        <td><button (click)="removeAssignment(assignment)" class="btn btn-danger">X</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width: 50%;">
+                <h2>Selected Students</h2>
+                <table>
+                    <tr *ngFor="let student of selectedStudentsList">
+                        <td style="width: 90%;">{{student.firstName}} {{student.lastName}}</td>
+                        <td><button (click)="removeStudent(student)" class="btn btn-danger">X</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <button (click)="submit()">Submit</button>
     </ng-container>
 </div>
 <div *ngIf="roleView=='STUDENT'">
