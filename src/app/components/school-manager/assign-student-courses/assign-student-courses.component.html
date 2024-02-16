@@ -10,7 +10,11 @@
 <div *ngIf="showStudentSelectTable">
     <h2>Currently Selected Grade: {{ gradeSelect }}</h2>
     <button (click)="changeGradeLevel()">Select a Different Grade</button><hr>
-    <app-view-students-table [studentList]="studentList" (selectStudentEmit)="selectStudent($event)"></app-view-students-table>
+    <app-view-students-table 
+        [showRemoveBtn]=false 
+        [showEnrollBtn]=true 
+        [studentList]="studentList" 
+        (selectStudentEmit)="selectStudent($event)"></app-view-students-table>
 </div>
 <!--After selecting a student, display their current course schedule with either the course name displayed or 'No Course Selected' if null-->
 <div *ngIf="showCourseSelect">    

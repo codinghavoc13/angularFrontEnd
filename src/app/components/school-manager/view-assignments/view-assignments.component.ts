@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Assignment } from 'src/app/common/school-manager/assignment';
+import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
+import { GradeEntryDTO } from 'src/app/common/school-manager/grade-entry-dto';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { AssignmentService } from 'src/app/service/school-manager/assignment.service';
@@ -16,10 +18,12 @@ import { UserService } from 'src/app/service/school-manager/user.service';
  * Need to update this to get the list of students assigned to course/teacher
  */
 export class ViewAssignmentsComponent implements OnInit{
-  // @Output() 
-  assignmentList: Assignment[] = [];
+  // assignmentList: Assignment[] = [];
+  displayList: StudentListDto[] = [];
+  gradeEntryList: GradeEntryDTO[] = [];
   roleView: string = "";
-  selectedAssignments: Assignment[] = [];
+  selectedAssignments: number[] = [];
+  selectedCourses: number [] = [];
   tchrShowAssignmentList: boolean = true;
   tchrShowCourseList: boolean = false;
   tchrShowStudentList: boolean = false;
@@ -42,6 +46,7 @@ export class ViewAssignmentsComponent implements OnInit{
       this.staffSvc.getStudentsByTeacherId(this.teacherId).subscribe(
         response =>{
           this.courseDTOList = response;
+          // console.log(this.courseDTOList);
           this.sortCourses();
         }
       )
@@ -60,11 +65,54 @@ export class ViewAssignmentsComponent implements OnInit{
     return result;
   }
 
+  isCourseSelected(cptID: number){
+    return this.selectedCourses.includes(cptID);
+  }
+
+  removeCourse(cptID: number){
+    console.log(cptID);
+    let temp: number[] = [];
+    this.selectedCourses.forEach((c)=>{
+      if(c!=cptID){
+        temp.push(c);
+      }
+    })
+    this.selectedCourses = temp;
+  }
+
+  selectCourse(cptID: number){
+    this.selectedCourses.push(cptID);
+    console.log(this.selectedCourses);
+  }
+
+  selectStudent(studentId: number, cptId: number){
+    this.selectedAssignments.forEach((a)=>{
+      this.gradeEntryList.push(new GradeEntryDTO(studentId,cptId,a))
+    })
+    console.log(this.gradeEntryList);
+  }
+
   showCourseSelect(incoming: Assignment[]){
-    this.assignmentList = incoming;
-    console.log(this.assignmentList);
+    incoming.forEach((a)=>{
+      this.selectedAssignments.push(a.assignmentId)
+    })
+    console.log(this.selectedAssignments);
+    // this.assignmentList = incoming;
+    // console.log(this.assignmentList);
     this.tchrShowAssignmentList = false;
     this.tchrShowCourseList = true;
+  }
+
+  showStudentSelect(){
+    this.tchrShowStudentList = true;
+    this.tchrShowCourseList = false;
+    console.log(this.courseDTOList);
+    this.courseDTOList.forEach((dto)=>{
+      if(this.selectedCourses.includes(dto.cptId) && dto.students.length>0){
+        this.displayList.push(dto);
+      }
+    })
+    console.log(this.displayList);
   }
 
   sortCourses(){

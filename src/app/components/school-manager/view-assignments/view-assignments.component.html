@@ -5,7 +5,7 @@
 <div *ngIf="roleView=='TEACHER'">
     <ng-container *ngIf="tchrShowAssignmentList">
         <!--Drop this down to one reference, vat handles displaying all tables, sends the selected list back here which handles submitting to back end-->
-        <app-view-assignment-table-group [assignmentList]="assignmentList"
+        <app-view-assignment-table-group 
             (selectedListEmit)="showCourseSelect($event)"></app-view-assignment-table-group>
         <hr>
     </ng-container>
@@ -23,9 +23,41 @@
             <tr *ngFor="let dto of courseDTOList">
                 <td>{{dto.course.courseName}}</td>
                 <td>{{buildPeriodBlockString(dto)}}</td>
-                <td><button>Select Course</button></td>
+                <td><span *ngIf="!isCourseSelected(dto.cptId)"><button (click)="selectCourse(dto.cptId)">Select Course</button></span>
+                    <span *ngIf="isCourseSelected(dto.cptId)"><button (click)="removeCourse(dto.cptId)">Remove Course</button></span></td>
             </tr>
         </table>
+        <button (click)="showStudentSelect()">Next Page - Select Students</button>
+    </ng-container>
+    <ng-container *ngIf="tchrShowStudentList">
+        <div ngbAccordion [closeOthers]="true">
+            <div ngbAccordionItem *ngFor="let dto of displayList">
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton>{{dto.course.courseName}}</button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+                            <div *ngIf="dto.students.length==0">
+                                <h4>No students enrolled for this course</h4>
+                            </div>
+                            <div *ngIf="dto.students.length>0">
+                                <table>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr *ngFor="let student of dto.students">
+                                        <td>{{student.firstName}} {{student.lastName}}</td>
+                                        <td><button (click)="selectStudent(student.userId, dto.cptId)">Select</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ng-container>
 </div>
 <div *ngIf="roleView=='STUDENT'">

@@ -1,4 +1,3 @@
-<p>view-students-table works!</p>
 <table>
     <tr>
         <th class="nameColumn"><span>
@@ -10,9 +9,11 @@
             <i *ngIf="sortFlags[1]=='desc'" class="bi bi-arrow-down" (click)="sortField('desc-lastName')"></i>
         </span>Last Name</th>
         <th>Grade Level</th>
-        <!-- <th><button class="btn btn-success" (click)="selectAll()">Select all</button></th> -->
-        <th *ngIf="showEnrollBtn"><button class="btn btn-success" (click)="selectAll()">Select all</button></th>
-        <th *ngIf="showRemoveBtn"><button class="btn btn-warning" (click)="removeAll()">Remove all</button></th>
+        <th><span *ngIf="showEnrollAllBtn"><button class="btn btn-success" (click)="selectAll()">Select all</button></span>
+            <span *ngIf="showRemoveAllBtn"><button class="btn btn-warning" (click)="removeAll()">Remove all</button></span>
+            <span *ngIf="showSelectAllBtn"><button class="btn btn-success" (click)="selectAll()">Select all</button></span>
+            <span *ngIf="showUnselectAllBtn"><button class="btn btn-warning" (click)="removeAll()">Remove all</button></span>
+        </th>
     </tr>
     <tr *ngFor="let dto of studentList">
         <td>{{ dto.student.firstName }}</td>
@@ -20,7 +21,11 @@
         <td>{{ dto.student.gradeLevel }}</td>
         <!-- <td><button (click)="addStudentToWorkingList(student)"
                 [disabled]="checkWorkingList(student)">Enroll</button></td> -->
-        <td *ngIf="showEnrollBtn"><button (click)="selectStudent(dto)">Enroll</button></td>
-        <td *ngIf="showRemoveBtn"><button (click)="removeFromWorkingList(dto)">Remove</button></td>
+        <td>
+            <span *ngIf="showEnrollBtn"><button (click)="selectStudent(dto)">Enroll</button></span>
+            <span *ngIf="showRemoveBtn"><button (click)="removeFromWorkingList(dto)">Remove</button></span>
+            <span *ngIf="showSelectBtn"><button (click)="selectStudent(dto)">Select</button></span>
+            <span *ngIf="showUnselectBtn"><button (click)="removeFromWorkingList(dto)">Unselect</button></span>
+        </td>
     </tr>
 </table>

@@ -5,6 +5,7 @@ import { UserDto } from "./user-dto";
 export class StudentListDto {
     constructor(
         public course: CourseDetailDto,
+        public cptId: number,
         public period: number,
         public students: UserDto[]
     ){}

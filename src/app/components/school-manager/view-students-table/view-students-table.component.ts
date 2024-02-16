@@ -10,7 +10,13 @@ import { UserDto } from 'src/app/common/school-manager/user-dto';
 export class ViewStudentsTableComponent {
   @Input() studentList: StudentDetailDto[] = [];
   @Input() showEnrollBtn: boolean = false;
+  @Input() showEnrollAllBtn: boolean = false;
   @Input() showRemoveBtn: boolean = false;
+  @Input() showRemoveAllBtn: boolean = false;
+  @Input() showSelectBtn: boolean = false;
+  @Input() showSelectAllBtn: boolean = false;
+  @Input() showUnselectBtn: boolean = false;
+  @Input() showUnselectAllBtn: boolean = false;
   @Output() selectAllStudentsEmit = new EventEmitter();
   @Output() selectStudentEmit = new EventEmitter<StudentDetailDto>();
   @Output() removeAllStudentsEmit = new EventEmitter();
@@ -33,6 +39,10 @@ export class ViewStudentsTableComponent {
 
   selectStudent(student: StudentDetailDto){
     this.selectStudentEmit.emit(student);
+  }
+
+  selectStudentForAssignment(student: StudentDetailDto){
+
   }
 
   sortField(flag: string) {

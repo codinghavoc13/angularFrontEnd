@@ -29,7 +29,11 @@ on the div:
 -->
 <div *ngIf="showSelectTable">
     <h2>Select students to add to {{courseDetail!.courseName}} with {{courseDetail!.teacherFirstName}} {{courseDetail!.teacherLastName}} </h2>
-    <app-view-students-table [studentList]="studentList" [showRemoveBtn]=false [showEnrollBtn]=true
+    <app-view-students-table [studentList]="studentList"
+        [showEnrollBtn]=true
+        [showEnrollAllBtn]=true
+        [showRemoveBtn]=false
+        [showRemoveAllBtn]=false
         (selectAllStudentsEmit)="selectAll()"
         (selectStudentEmit)="addStudentToWorkingList($event)"></app-view-students-table>
     <!--QOTD: Keep with current path or move both to one page-->
@@ -37,7 +41,11 @@ on the div:
 <div *ngIf="showConfirmTable">
     <h2>Selected Course Information</h2>
     <h3>{{courseDetail!.courseName}} - {{courseDetail!.teacherFirstName}} {{courseDetail!.teacherLastName}}</h3>
-    <app-view-students-table [studentList]="workingList" [showRemoveBtn]=true [showEnrollBtn]=false
+    <app-view-students-table [studentList]="workingList" 
+        [showEnrollBtn]=false
+        [showEnrollAllBtn]=false
+        [showRemoveBtn]=true
+        [showRemoveAllBtn]=true
         (removeAllStudentsEmit)="removeAll()"
         (removeStudentEmit)="removeFromWorkingList($event)"></app-view-students-table>
 </div>
