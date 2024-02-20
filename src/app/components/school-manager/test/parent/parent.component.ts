@@ -8,22 +8,39 @@ import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto
 })
 
 export class ParentComponent implements OnInit {
-  courseList:CourseDetailDto[] = [];
-  public isCollapsed = -1;
+  dates: Date[] = [];
+  startEnd: Map<string,Date>[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
-    this.buildCourseList();
+    this.buildDateList();
   }
 
-  buildCourseList(){
-    this.courseList.push(new CourseDetailDto('Full Year',1,'English 1',1,1,1,'Sarah','Smith',1));
-    this.courseList.push(new CourseDetailDto('Full Year',1,'English 1',2,1,2,'Sarah','Smith',1));
-    this.courseList.push(new CourseDetailDto('Full Year',1,'English 1',3,1,3,'Sarah','Smith',1));
-    this.courseList.push(new CourseDetailDto('Full Year',1,'English 1',4,1,4,'Sarah','Smith',1));
-    this.courseList.push(new CourseDetailDto('Full Year',1,'English 1',5,1,5,'Sarah','Smith',1));
-    this.courseList.push(new CourseDetailDto('Full Year',1,'English 1',6,1,6,'Sarah','Smith',1));
+  buildDateList(){
+    let base: Date = new Date();
+    let temp: Map<string,Date> = new Map<string,Date>();
+    for(let i = 0; i <= 20; i++){
+      let working: Date = new Date();
+      working.setDate(base.getDate() + i);
+      // console.log(working.getDay());
+      if(working.getDay() == 6) {
+        temp.set('start',working);
+      } else if (working.getDay() == 0){
+        temp.set('stop',working);
+        this.startEnd.push(temp);
+        temp = new Map<string,Date>();
+      } else {
+        this.dates.push(working);
+      }
+    }
+    this.dates.forEach((d)=>{
+      console.log(d);
+    })
+    this.startEnd.forEach((se)=>{
+      console.log('START: ',se.get('start'));
+      console.log('STOP: ',se.get('stop'));
+    })
   }
 
 }

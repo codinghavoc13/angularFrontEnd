@@ -1,17 +1,7 @@
 <p>grade-book works!</p>
-<!--accordion style page for each course with sub accordion for each student-->
-<!--each row will display the student's name, the grade in a non-editable text field, a button to
-enter a grade, pressing the button will change the text field to an input field, and change
-the enter grade button to a submit button, pressing submit will grab the information from
-that row needed to update the grade entry table and place into process list, at the end of the row
-will be a red button delete that single row-->
-<!--Question: group by student or by assignment or a button to switch between the two?
-    - Example: 100 assignments x 30 students
-    - -> grouped by assignment: would be groupd by assignment type; to enter a grade, would need
-        to select the assignment type, scroll down to the assignment and expand, scroll down to
-        the student, press the enter grade button, enter the value, then submit
-    - -> grouped by student: the main accordion would be each student; to enter a grade, would
-        need to scroll to the student and expand, scroll to the assignment type and expand, then
-        scroll to the assignment, press the enter grade button, enter value, then submit
-    - Benefits to assignment would be able to update the whole class more easily
-    - Benefits to 'by student' would be able to focus on one student-->
+<!--Scrap the accordion plan, going with a split panel display
+    - left panel is a list of filters: course name/block/period, assignment type, want to come up with a way to group due dates into blocks instead of storing all dates
+    - right panel will display the following: student name - course - assignment - assignment due date - grade - edit/save button
+        example: 'John Doe - Biology - Mid Term Quiz - 10 December 2024 - 95 - Edit/Save'
+        Right panel will likely be a table format to keep each section the same width
+        Edit/Save button text will default to Edit but will change to Save when the Teacher is trying to make a change-->

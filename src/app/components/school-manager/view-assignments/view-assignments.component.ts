@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { response } from 'express';
+import { ToastrService } from 'ngx-toastr';
 import { Assignment } from 'src/app/common/school-manager/assignment';
 import { GradeEntryDTO } from 'src/app/common/school-manager/grade-entry-dto';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
@@ -36,7 +37,8 @@ export class ViewAssignmentsComponent implements OnInit{
   //look at passing teacherId from the userPage instead of injecting the UserService 
   public constructor(
     public smUserSvc: UserService, 
-    private staffSvc: StaffService){}
+    private staffSvc: StaffService,
+    private toastr: ToastrService){}
 
   ngOnInit(): void {
     this.teacherId = this.smUserSvc.getLoggedInUserId();
@@ -199,6 +201,7 @@ export class ViewAssignmentsComponent implements OnInit{
     this.staffSvc.submitInitialGradeEntries(this.gradeEntryList).subscribe(
       response=>{
         console.log('submitted');
+        this.toastr.success("Successfully saved " + response.length + " new entries");
       }
     );
   }
