@@ -3,6 +3,7 @@ import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
+import { TeacherService } from 'src/app/service/school-manager/teacher.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class ViewStudentsComponent implements OnInit{
   role: String = '';
   teacherId: number = 0;
 
-  constructor(private smUserSvc: UserService, private staffSvc: StaffService){}
+  constructor(private smUserSvc: UserService, private staffSvc: StaffService,
+    private teacherSvc: TeacherService){}
 
   ngOnInit(): void {
     this.role = this.smUserSvc.getLoggedInUserRole()
@@ -37,7 +39,7 @@ export class ViewStudentsComponent implements OnInit{
       )
     }
     if(this.role =='TEACHER'){
-      this.staffSvc.getStudentsByTeacherId(this.teacherId).subscribe(
+      this.teacherSvc.getStudentsByTeacherId(this.teacherId).subscribe(
         response =>{
           this.studentList = response;
           this.sortCourses();

@@ -5,3 +5,25 @@
         example: 'John Doe - Biology - Mid Term Quiz - 10 December 2024 - 95 - Edit/Save'
         Right panel will likely be a table format to keep each section the same width
         Edit/Save button text will default to Edit but will change to Save when the Teacher is trying to make a change-->
+<div class="row">
+    <div style="width: 30%;">
+        <p>Filters</p>
+        <ng-container>
+        <ul>
+            <li *ngFor="let courses of gradeBook.courseNames">{{courses}}</li>
+        </ul>
+    </ng-container>
+        <hr>
+        <ng-container>
+            <ul>
+                <li *ngFor="let week of gradeBook.weeks">{{gradeBook.weeks.length}} - {{week}}</li>
+            </ul>
+        </ng-container>
+    </div>
+    <div style="width: 70%;">
+        <p>Grade Table</p>
+        <ul>
+            <li *ngFor="let gradeDto of gradeBook.gradeDtos">{{gradeDto.assignmentDueDate}}</li>
+        </ul>
+    </div>
+</div>

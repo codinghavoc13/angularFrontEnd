@@ -14,10 +14,10 @@ import { GradeEntryDTO } from 'src/app/common/school-manager/grade-entry-dto';
   providedIn: 'root'
 })
 export class StaffService {
-  studentList:StudentDetailDto[] = [];
+  // studentList:StudentDetailDto[] = [];
 
   staffUrl = "http://localhost:8080/staff";
-  teacherUrl = "http://localhost:8080/teacher";
+  // teacherUrl = "http://localhost:8080/teacher";
 
   constructor(private httpClient: HttpClient, private router: Router, private toastr: ToastrService) { }
 
@@ -51,17 +51,17 @@ export class StaffService {
     return this.httpClient.get<FullCourseDetailDto[]>(this.staffUrl+"/getFullCourseDetails");
   }
 
-  submitInitialGradeEntries(gradeEntryList: GradeEntryDTO[]){
-    console.log('ss-sige-1', gradeEntryList);
-    return this.httpClient.post<GradeEntryDTO[]>(this.teacherUrl+"/saveGrade",gradeEntryList);
-  }
+  // submitInitialGradeEntries(gradeEntryList: GradeEntryDTO[]){
+  //   console.log('ss-sige-1', gradeEntryList);
+  //   return this.httpClient.post<GradeEntryDTO[]>(this.teacherUrl+"/saveGrade",gradeEntryList);
+  // }
 
   //consider renaming this, might be mistaken for submitting assignments
   submitStudentAssignmentDto(asDto: AssignStudentDto){
     return this.httpClient.post<AssignStudentDto>(this.staffUrl+"/assignStudentsToCourse", asDto);
   }
 
-  getStudentsByTeacherId(teacherId: number){
-    return this.httpClient.get<StudentListDto[]>(this.teacherUrl+"/getStudents/"+teacherId);
-  }
+  // getStudentsByTeacherId(teacherId: number){
+  //   return this.httpClient.get<StudentListDto[]>(this.teacherUrl+"/getStudents/"+teacherId);
+  // }
 }

@@ -19,7 +19,7 @@ import { AssignStudentComponent } from '../components/school-manager/assign-stud
 import { SelfRegisterComponent } from '../components/school-manager/self-register/self-register.component';
 import { ViewUnverifiedUsersComponent } from '../components/school-manager/view-unverified-users/view-unverified-users.component';
 import { SharedModule } from './shared.module';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+// import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ViewStudentsComponent } from '../components/school-manager/view-students/view-students.component';
 import { ViewStudentsSubComponent } from '../components/school-manager/view-students-sub/view-students-sub.component';
 import { AssignStudentsCourseComponent } from '../components/school-manager/assign-students-course/assign-students-course.component';
@@ -73,7 +73,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    BsDropdownModule,
+    // BsDropdownModule,
     SharedModule
   ],
   exports:[

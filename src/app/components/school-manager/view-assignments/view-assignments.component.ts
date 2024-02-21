@@ -6,6 +6,7 @@ import { GradeEntryDTO } from 'src/app/common/school-manager/grade-entry-dto';
 import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
 import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { StaffService } from 'src/app/service/school-manager/staff.service';
+import { TeacherService } from 'src/app/service/school-manager/teacher.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
 
 @Component({
@@ -38,6 +39,7 @@ export class ViewAssignmentsComponent implements OnInit{
   public constructor(
     public smUserSvc: UserService, 
     private staffSvc: StaffService,
+    private teacherSvc: TeacherService,
     private toastr: ToastrService){}
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class ViewAssignmentsComponent implements OnInit{
     this.roleView = this.smUserSvc.getLoggedInUserRoleView();
     if(this.teacherId != -1){
       // this.getAssignments();
-      this.staffSvc.getStudentsByTeacherId(this.teacherId).subscribe(
+      this.teacherSvc.getStudentsByTeacherId(this.teacherId).subscribe(
         response =>{
           this.courseDTOList = response;
           // console.log(this.courseDTOList);
@@ -198,7 +200,7 @@ export class ViewAssignmentsComponent implements OnInit{
     //   this.gradeEntryList.push(new GradeEntryDTO(studentId,cptId,a.assignmentId))
     // })
     console.log(this.gradeEntryList);
-    this.staffSvc.submitInitialGradeEntries(this.gradeEntryList).subscribe(
+    this.teacherSvc.submitInitialGradeEntries(this.gradeEntryList).subscribe(
       response=>{
         console.log('submitted');
         this.toastr.success("Successfully saved " + response.length + " new entries");

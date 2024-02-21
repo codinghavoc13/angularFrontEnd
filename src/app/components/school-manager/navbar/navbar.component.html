@@ -17,6 +17,8 @@
                         (click)="setTabView('add-assignments')">Add Assignments</a>
                     <a class="dropdown-item" [ngClass]="{'active':viewSelector=='view-assignments'}"
                         (click)="setTabView('view-assignments')">View Assignments</a>
+                    <a class="dropdown-item" [ngClass]="{'active':viewSelector=='gradeBook'}"
+                        (click)="setTabView('gradeBook')">Grade Book</a>
                 </div>
             </div>
             <!--Student dropdown: 

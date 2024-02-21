@@ -7,6 +7,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [],
@@ -19,7 +20,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     BrowserAnimationsModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BsDropdownModule,
   ],
   exports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     BrowserAnimationsModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BsDropdownModule
   ]
 })
 export class SharedModule { }
