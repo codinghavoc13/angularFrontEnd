@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from './shared.module';
 
 import { SMMainComponent } from '../components/school-manager/school-manager-main/school-manager-main.component';
 import { SMAddAssignmentsComponent } from '../components/school-manager/add-assignments/add-assignments.component';
@@ -18,8 +19,6 @@ import { ViewUserTableComponent } from '../components/school-manager/view-user-t
 import { AssignStudentComponent } from '../components/school-manager/assign-student/assign-student.component';
 import { SelfRegisterComponent } from '../components/school-manager/self-register/self-register.component';
 import { ViewUnverifiedUsersComponent } from '../components/school-manager/view-unverified-users/view-unverified-users.component';
-import { SharedModule } from './shared.module';
-// import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ViewStudentsComponent } from '../components/school-manager/view-students/view-students.component';
 import { ViewStudentsSubComponent } from '../components/school-manager/view-students-sub/view-students-sub.component';
 import { AssignStudentsCourseComponent } from '../components/school-manager/assign-students-course/assign-students-course.component';
@@ -37,8 +36,7 @@ const routes: Routes = [
   {path: 'schoolManager/login', component: SMLoginComponent},
   {path: 'schoolManager/userPage', component: UserPageComponent},
   {path: 'schoolManager/register', component:SelfRegisterComponent},
-  {path: 'schoolManager/test', component:ParentComponent},
-  // {path: 'schoolManager/assignStudents', component:AssignStudentComponent}
+  {path: 'schoolManager/test', component:ParentComponent}
 ];
 
 @NgModule({
@@ -73,7 +71,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    // BsDropdownModule,
     SharedModule
   ],
   exports:[

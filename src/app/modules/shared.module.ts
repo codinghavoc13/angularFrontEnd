@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+//bootstrap modal
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap'; 
 
 @NgModule({
   declarations: [],
@@ -21,7 +23,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BrowserAnimationsModule,
     NgbModule,
     NgxPaginationModule,
-    BsDropdownModule,
+    BsDropdownModule, NgbDatepickerModule
   ],
   exports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BrowserAnimationsModule,
     NgbModule,
     NgxPaginationModule,
-    BsDropdownModule
+    BsDropdownModule, 
+    NgbDatepickerModule
   ]
 })
 export class SharedModule { }

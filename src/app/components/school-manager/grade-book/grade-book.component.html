@@ -1,4 +1,29 @@
 <p>grade-book works!</p>
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Grade Update</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="mb-3">
+				<label for="grade">New Grade</label>
+				<div class="input-group">
+					<input [(ngModel)]="gradeInput"
+						id="grade"
+						class="form-control"
+						placeholder="0"
+						name="gf"
+                        min="0" max="100"
+					/>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+	</div>
+</ng-template>
 <!--Scrap the accordion plan, going with a split panel display
     - left panel is a list of filters: course name/block/period, assignment type, want to come up with a way to group due dates into blocks instead of storing all dates
     - right panel will display the following: student name - course - assignment - assignment due date - grade - edit/save button
@@ -16,14 +41,34 @@
         <hr>
         <ng-container>
             <ul>
-                <li *ngFor="let week of gradeBook.weeks">{{gradeBook.weeks.length}} - {{week}}</li>
+                <li *ngFor="let week of gradeBook.weeks">{{week.start}} - {{week.stop}}</li>
             </ul>
         </ng-container>
     </div>
-    <div style="width: 70%;">
+    <div style="width: 70%; border: 2px dashed black;">
         <p>Grade Table</p>
-        <ul>
-            <li *ngFor="let gradeDto of gradeBook.gradeDtos">{{gradeDto.assignmentDueDate}}</li>
-        </ul>
+        <table style="border: 1px solid black;">
+            <tr>
+                <th>Student</th>
+                <th>Assignment Info</th>
+                <th>Grade</th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let gradeDto of gradeBook.gradeDtos">
+                <td style="width: 240px;">{{gradeDto.studentFirstName}} {{gradeDto.studentLastName}}</td>
+                <td style="width: 360px;">{{gradeDto.assignmentTitle}} - {{gradeDto.assignmentDueDate}}</td>
+                <td style="width: 40px; text-align: right;">
+                    {{gradeDto.grade}}
+                    <!-- <span *ngIf="!isGradeSelected(gradeDto.gradeId)">{{gradeDto.grade}}</span> -->
+                    <!-- <span *ngIf="isGradeSelected(gradeDto.gradeId)"><input type="number" min="0" max="100"></span> -->
+                </td>
+                <td>
+                    <!-- <span *ngIf="!isGradeSelected(gradeDto.gradeId)"><button (click)="addToWorkingList(gradeDto.gradeId)">Update Grade</button></span>
+
+                    <span *ngIf="isGradeSelected(gradeDto.gradeId)"><button (click)="updateGradeUpdateList(gradeDto.gradeId, gradeDto.grade)">Save Grade</button></span> -->
+                    <button class="btn btn-outline-primary" (click)="open()">Update Grade</button>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
