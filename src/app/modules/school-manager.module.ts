@@ -30,6 +30,7 @@ import { ViewStudentsTableComponent } from '../components/school-manager/view-st
 import { ViewStudentsByCourseComponent } from '../components/school-manager/view-students-by-course/view-students-by-course.component';
 import { ViewAssignmentTableGroupComponent } from '../components/school-manager/view-assignment-table-group/view-assignment-table-group.component';
 import { GradeBookComponent } from '../components/school-manager/grade-book/grade-book.component';
+import { GradeEntryPopupComponent } from '../components/school-manager/grade-book/grade-entry-popup/grade-entry-popup.component';
 
 const routes: Routes = [
   {path: 'schoolManager/main', component: SMMainComponent},
@@ -66,7 +67,8 @@ const routes: Routes = [
     ViewStudentsTableComponent,
     ViewStudentsByCourseComponent,
     ViewAssignmentTableGroupComponent,
-    GradeBookComponent
+    GradeBookComponent,
+    GradeEntryPopupComponent
   ],
   imports: [
     CommonModule,

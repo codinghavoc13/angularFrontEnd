@@ -2,14 +2,16 @@
   <div class="card-header">
     <form #loginForm="ngForm">
       <div class="form-group">
-        <label for="username">User Name <i *ngIf="usernameRequiredWarning" style="color: red;">*User name is required*</i></label>
-        <input type="text" class="form-control" id="username" aria-describedby="username"
-        placeholder="Enter user name" [(ngModel)]="loginReqDTO.username" name="username">
+        <label for="username">User Name <i *ngIf="usernameRequiredWarning" style="color: red;">*User name is
+            required*</i></label>
+        <input type="text" class="form-control" id="username" aria-describedby="username" placeholder="Enter user name"
+          [(ngModel)]="loginReqDTO.username" name="username">
       </div>
       <div class="form-group">
-        <label for="password">Password <i *ngIf="passwordRequiredWarning" style="color: red;">*User name is required*</i></label>
-        <input type="password" class="form-control" id="password" aria-describedby="password"
-        placeholder="Password" [(ngModel)]="loginReqDTO.password" name="password">
+        <label for="password">Password <i *ngIf="passwordRequiredWarning" style="color: red;">*User name is
+            required*</i></label>
+        <input type="password" class="form-control" id="password" aria-describedby="password" placeholder="Password"
+          [(ngModel)]="loginReqDTO.password" name="password">
       </div>
       <div *ngIf="invalidLoginCredentials">
         <p style="color: red;"><i>Invalid Login Credentials</i></p>

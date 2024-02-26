@@ -1,0 +1,8 @@
+<div style="padding: 20px;">
+    <form #gradeEntryForm="ngForm">
+        <label for="gradeEntry">Enter Grade</label>
+        <input id="gradeEntry" class="form-control" [(ngModel)]="gradeEntry" name="gradeEntry" type="number" min="0" max="100">
+        <button (click)="submitGrade()">Save</button>
+        <span *ngIf="validEntryWarn" style="color: red; font-style: italic; font: bold;">Enter a valid number: 0.0-100.0</span>
+    </form>
+</div>
