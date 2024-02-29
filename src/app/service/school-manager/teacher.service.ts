@@ -22,7 +22,7 @@ export class TeacherService {
   }
 
   submitInitialGradeEntries(gradeEntryList: GradeEntryDTO[]){
-    // console.log('ss-sige-1', gradeEntryList);
+    console.log('ss-sige-1', gradeEntryList);
     return this.httpClient.post<GradeEntryDTO[]>(this.teacherUrl+"/saveGrade",gradeEntryList);
   }
 

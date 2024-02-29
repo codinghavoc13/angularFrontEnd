@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, TemplateRef, inject } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GradeBookDTO } from 'src/app/common/school-manager/grade-book-dto';
 import { TeacherService } from 'src/app/service/school-manager/teacher.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
@@ -14,9 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class GradeBookComponent implements OnInit{
   gradeBook: GradeBookDTO = new GradeBookDTO([],[],[],[],[]);
-  //may rework gradesToUpdate to be a map of numbers and SingleGradeDTOs
   gradesToUpdate: Map<number, SingleGradeDTO> = new Map();
-  // gradesToUpdate: Map<number, number> = new Map();
   role: String = '';
   teacherId: number = 0;
   workingGradeList: number[] = [];
@@ -33,12 +31,7 @@ export class GradeBookComponent implements OnInit{
     this.getGradeBook();
   }
 
-  // addToWorkingList(id:number){
-  //   this.workingGradeList.push(id);
-  // }
-
   displayGrade(gradeId:number, existingGrade: number){
-    //when I switch gradesToUpdate to SGDs, this will
     if(this.gradesToUpdate.has(gradeId)){
       return "*" + this.gradesToUpdate.get(gradeId)!.grade + "*";
     } else {
@@ -53,10 +46,6 @@ export class GradeBookComponent implements OnInit{
       }
     );
   }
-
-  // isGradeSelected(gradeId: number){
-  //   return this.workingGradeList.includes(gradeId);
-  // }
 
   openGradeEntryForm(gradeId:number, existingGrade: number) {
     const modelRef = this.modalSvc.open(GradeEntryPopupComponent);
@@ -84,15 +73,4 @@ export class GradeBookComponent implements OnInit{
       }
     )
   }
-
-  // updateGradeUpdateList(id: number, grade: number){
-  //   console.log('bg-ugul-1',this.workingGradeList);
-  //   this.gradesToUpdate.set(id, grade);
-  //   let temp: number[] = [];
-  //   this.workingGradeList.forEach((i)=>{
-  //     if(i!=id)temp.push(i);
-  //   })
-  //   this.workingGradeList = temp;
-  //   console.log('bg-ugul-2',this.workingGradeList);
-  // }
 }

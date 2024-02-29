@@ -1,0 +1,12 @@
+.gradeColumn {
+    width: 100px;
+    text-align: center;
+}
+
+.gradeColumnData {
+    text-align: center;
+}
+
+tr:nth-child(even){
+    background-color: rgb(223, 223, 223);
+}
