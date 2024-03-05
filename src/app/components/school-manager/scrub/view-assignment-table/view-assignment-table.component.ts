@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Assignment } from 'src/app/common/school-manager/assignment';
-import { AssignStudentComponent } from '../assign-student/assign-student.component';
+import { AssignStudentComponent } from '../../assign-student-main/assign-student/assign-student.component';
 
 @Component({
   selector: 'app-view-assignment-table',

@@ -3,16 +3,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GradeBookDTO } from 'src/app/common/school-manager/grade-book-dto';
 import { TeacherService } from 'src/app/service/school-manager/teacher.service';
 import { UserService } from 'src/app/service/school-manager/user.service';
-import { GradeEntryPopupComponent } from './grade-entry-popup/grade-entry-popup.component';
+import { GradeEntryPopupComponent } from '../grade-entry-popup/grade-entry-popup.component';
 import { SingleGradeDTO } from 'src/app/common/school-manager/single-grade-DTO';
 import { ToastrService } from 'ngx-toastr';
 
+//rename to grade-book-entry
+//move to grade-book
 @Component({
-  selector: 'app-grade-book',
-  templateUrl: './grade-book.component.html',
-  styleUrls: ['./grade-book.component.css']
+  selector: 'app-grade-book-entry',
+  templateUrl: './grade-book-entry.component.html',
+  styleUrls: ['./grade-book-entry.component.css']
 })
-export class GradeBookComponent implements OnInit{
+export class GradeBookEntryComponent implements OnInit{
   gradeBook: GradeBookDTO = new GradeBookDTO([],[],[],[],[]);
   gradesToUpdate: Map<number, SingleGradeDTO> = new Map();
   role: String = '';

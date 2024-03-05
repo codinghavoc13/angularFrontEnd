@@ -10,27 +10,28 @@ import { UserPageComponent } from '../components/school-manager/user-page/user-p
 import { NavbarComponent } from '../components/school-manager/navbar/navbar.component';
 import { ProfilePageComponent } from '../components/school-manager/profile-page/profile-page.component';
 import { AbsenceSubmitPageComponent } from '../components/school-manager/absence-submit-page/absence-submit-page.component';
-import { RegisterUserComponent } from '../components/school-manager/register-user/register-user.component';
-import { ViewAssignmentsComponent } from '../components/school-manager/view-assignments/view-assignments.component';
+import { RegisterUserComponent } from '../components/school-manager/admin-only/register-user/register-user.component';
+import { ViewAssignmentsComponent } from '../components/school-manager/view-assignments-main/view-assignments/view-assignments.component';
 import { MainContentComponent } from '../components/school-manager/main-content/main-content.component';
-import { ViewAssignmentTableComponent } from '../components/school-manager/view-assignment-table/view-assignment-table.component';
-import { ViewUserComponent } from '../components/school-manager/view-user/view-user.component';
-import { ViewUserTableComponent } from '../components/school-manager/view-user-table/view-user-table.component';
-import { AssignStudentComponent } from '../components/school-manager/assign-student/assign-student.component';
+import { ViewAssignmentTableComponent } from '../components/school-manager/scrub/view-assignment-table/view-assignment-table.component';
+import { ViewUserComponent } from '../components/school-manager/admin-only/view-user/view-user.component';
+import { ViewUserTableComponent } from '../components/school-manager/admin-only/view-user-table/view-user-table.component';
+import { AssignStudentComponent } from '../components/school-manager/assign-student-main/assign-student/assign-student.component';
 import { SelfRegisterComponent } from '../components/school-manager/self-register/self-register.component';
-import { ViewUnverifiedUsersComponent } from '../components/school-manager/view-unverified-users/view-unverified-users.component';
+import { ViewUnverifiedUsersComponent } from '../components/school-manager/admin-only/view-unverified-users/view-unverified-users.component';
 import { ViewStudentsComponent } from '../components/school-manager/view-students/view-students.component';
 import { ViewStudentsSubComponent } from '../components/school-manager/view-students-sub/view-students-sub.component';
-import { AssignStudentsCourseComponent } from '../components/school-manager/assign-students-course/assign-students-course.component';
-import { AssignStudentCoursesComponent } from '../components/school-manager/assign-student-courses/assign-student-courses.component';
+import { AssignStudentsCourseComponent } from '../components/school-manager/assign-student-main/assign-students-course/assign-students-course.component';
+import { AssignStudentCoursesComponent } from '../components/school-manager/assign-student-main/assign-student-courses/assign-student-courses.component';
 import { ParentComponent } from '../components/school-manager/test/parent/parent.component';
-import { AddCourseComponent } from '../components/school-manager/add-course/add-course.component';
+import { AddCourseComponent } from '../components/school-manager/admin-only/add-course/add-course.component';
 import { ViewSelectedAssignmentsComponent } from '../components/school-manager/view-selected-assignments/view-selected-assignments.component';
 import { ViewStudentsTableComponent } from '../components/school-manager/view-students-table/view-students-table.component';
 import { ViewStudentsByCourseComponent } from '../components/school-manager/view-students-by-course/view-students-by-course.component';
-import { ViewAssignmentTableGroupComponent } from '../components/school-manager/view-assignment-table-group/view-assignment-table-group.component';
-import { GradeBookComponent } from '../components/school-manager/grade-book/grade-book.component';
-import { GradeEntryPopupComponent } from '../components/school-manager/grade-book/grade-entry-popup/grade-entry-popup.component';
+import { ViewAssignmentTableGroupComponent } from '../components/school-manager/view-assignments-main/view-assignment-table-group/view-assignment-table-group.component';
+import { GradeBookEntryComponent } from '../components/school-manager/grade-book-main/grade-book-entry/grade-book-entry.component';
+import { GradeEntryPopupComponent } from '../components/school-manager/grade-book-main/grade-entry-popup/grade-entry-popup.component';
+import { GradeBookSummaryComponent } from '../components/school-manager/grade-book-main/grade-book-summary/grade-book-summary.component';
 
 const routes: Routes = [
   {path: 'schoolManager/main', component: SMMainComponent},
@@ -67,8 +68,9 @@ const routes: Routes = [
     ViewStudentsTableComponent,
     ViewStudentsByCourseComponent,
     ViewAssignmentTableGroupComponent,
-    GradeBookComponent,
-    GradeEntryPopupComponent
+    GradeBookEntryComponent,
+    GradeEntryPopupComponent,
+    GradeBookSummaryComponent
   ],
   imports: [
     CommonModule,
