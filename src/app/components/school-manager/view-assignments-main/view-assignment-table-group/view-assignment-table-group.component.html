@@ -28,6 +28,21 @@
         <td><button class="btn btn-primary" (click)="selectAssignment(assignment)">Select Assignment</button></td>
     </tr>
 </table>
+<h2>Report</h2>
+<table>
+    <tr>
+        <th class="assignmentColumn">Assignment Title</th>
+        <th class="assignmentDueDateColumn"><span>
+            <i *ngIf="sortFlag[2]=='asc'" class="bi bi-arrow-up" (click)="sortColumn('report', 'desc')"></i>
+            <i *ngIf="sortFlag[2]=='desc'" class="bi bi-arrow-down" (click)="sortColumn('report','asc')"></i>
+        </span>Due Date</th>
+    </tr>
+    <tr *ngFor="let assignment of reportList">
+        <td>{{ assignment.assignmentTitle }}</td>
+        <td>{{ assignment.assignmentDueDate }}</td>
+        <td><button class="btn btn-primary" (click)="selectAssignment(assignment)">Select Assignment</button></td>
+    </tr>
+</table>
 <h2>Test</h2>
 <table>
     <tr>

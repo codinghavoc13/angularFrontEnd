@@ -14,11 +14,13 @@ export class ViewAssignmentTableGroupComponent implements OnInit {
 
   homeworkList: Assignment[] = [];
   quizList: Assignment[] = [];
+  reportList: Assignment[] = [];
   selectedAssignments: Assignment[] = [];
   teacherId: number = 0;
   testList: Assignment[] = [];
 
-  sortFlag: string[] = ['asc','asc','asc','asc'];
+  //homework, quiz, report, test, selected
+  sortFlag: string[] = ['asc','asc','asc','asc','asc'];
 
   constructor(private assignSvc: AssignmentService,
     public smUserSvc: UserService) { }
@@ -60,6 +62,10 @@ export class ViewAssignmentTableGroupComponent implements OnInit {
     if (incoming.assignmentType == 'QUIZ') {
       this.quizList.push(incoming);
       this.sortColumn('quiz',this.sortFlag[1]);
+    }
+    if (incoming.assignmentType == 'REPORT') {
+      this.reportList.push(incoming);
+      this.sortColumn('report',this.sortFlag[1]);
     }
     if (incoming.assignmentType == 'TEST') {
       this.testList.push(incoming);
@@ -145,6 +151,15 @@ export class ViewAssignmentTableGroupComponent implements OnInit {
         }
         this.sortFlag[1] = order;
         break;
+      case 'report':
+        if(order=='asc'){
+          this.reportList.sort((a, b) => new Date(a.assignmentDueDate).getTime() - new Date(b.assignmentDueDate).getTime());
+        }
+        if(order=='desc'){
+        this.reportList.sort((a, b) => new Date(b.assignmentDueDate).getTime() - new Date(a.assignmentDueDate).getTime());
+        }
+        this.sortFlag[2] = order;
+        break;
       case 'test':
         if(order=='asc'){
           this.testList.sort((a, b) => new Date(a.assignmentDueDate).getTime() - new Date(b.assignmentDueDate).getTime());
@@ -152,7 +167,7 @@ export class ViewAssignmentTableGroupComponent implements OnInit {
         if(order=='desc'){
         this.testList.sort((a, b) => new Date(b.assignmentDueDate).getTime() - new Date(a.assignmentDueDate).getTime());
         }
-        this.sortFlag[2] = order;
+        this.sortFlag[3] = order;
         break;
       case 'select':
         if(order=='asc'){
@@ -161,7 +176,7 @@ export class ViewAssignmentTableGroupComponent implements OnInit {
         if(order=='desc'){
         this.selectedAssignments.sort((a, b) => new Date(b.assignmentDueDate).getTime() - new Date(a.assignmentDueDate).getTime());
         }
-        this.sortFlag[3] = order;
+        this.sortFlag[4] = order;
         break;
     }
   }

@@ -19,7 +19,7 @@ export class SMAddAssignmentsComponent implements OnInit{
   constructor(public fb: FormBuilder, private smUserSvc: UserService,
     public assignmentSvc: AssignmentService){
     this.assignmentForm = this.fb.group({
-      teacher_id: smUserSvc.getLoggedInUserId(),
+      teacherId: smUserSvc.getLoggedInUserId(),
       assignments: this.fb.array([])
     });
   }
@@ -51,14 +51,7 @@ export class SMAddAssignmentsComponent implements OnInit{
   }
 
   onSubmit(){
-    //this will likely be reworked later to send the json values to the back end
-    // console.log('aa-1');
-    // console.log(this.assignmentForm.value);
     this.assignmentDto = new AssignmentDto(this.assignmentForm.value);
-    // console.log('aa-1');
-    // console.log(this.assignmentDto.teacher_id);
-    // console.log('aa-2');
-    // console.log(this.assignmentDto.assignments);
     this.assignmentSvc.submitAssignments(this.assignmentDto);
   }
 }
