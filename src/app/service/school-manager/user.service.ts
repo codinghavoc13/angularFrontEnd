@@ -50,6 +50,7 @@ export class UserService {
   }
 
   registerUser(dto: RegisterDto){
+    //CODINGHAVOC This will need to commented out for in prep of going online
     console.log('user-svc-1');
     console.log(dto);
     return this.httpClient.post<UserDto>(this.userUrl+"/saveNewUser",dto);
