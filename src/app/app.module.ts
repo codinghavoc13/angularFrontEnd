@@ -13,6 +13,7 @@ import { MainComponent } from './main/components/main.component';
 import { NavComponent } from './main/components/nav/nav.component';
 import { CipherModule } from './cipher/module/cipher.module';
 import { MmdbModule } from './mmdb/module/mmdb.module';
+import { SharedModule } from './shared.module';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
     FormsModule,
     CipherModule,
     MmdbModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
