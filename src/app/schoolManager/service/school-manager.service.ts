@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
-import { UserDto } from 'src/app/common/school-manager/user-dto';
+import { UserDto } from '../common/user-dto';
 
 @Injectable({
   providedIn: 'root'

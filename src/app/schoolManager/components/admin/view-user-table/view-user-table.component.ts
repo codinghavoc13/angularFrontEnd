@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UserDto } from 'src/app/common/school-manager/user-dto';
+import { UserDto } from 'src/app/schoolManager/common/user-dto';
 
 @Component({
   selector: 'app-view-user-table',

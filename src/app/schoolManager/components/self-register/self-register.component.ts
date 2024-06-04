@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { RegisterDto } from 'src/app/common/school-manager/register-dto';
 import { UserService } from 'src/app/schoolManager/service/user.service';
 import { ElementRef } from '@angular/core';
-import { EnrollStudentDto } from 'src/app/common/school-manager/enroll-student-dto';
+import { EnrollStudentDto } from '../../common/enroll-student-dto';
+import { RegisterDto } from '../../common/register-dto';
 
 @Component({
   selector: 'app-self-register',

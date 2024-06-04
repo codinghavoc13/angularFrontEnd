@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
-import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
-import { UserDto } from 'src/app/common/school-manager/user-dto';
 import { StaffService } from 'src/app/schoolManager/service/staff.service';
 import { TeacherService } from 'src/app/schoolManager/service/teacher.service';
 import { UserService } from 'src/app/schoolManager/service/user.service';
+import { StudentListDto } from '../../common/student-list-dto';
+import { UserDto } from '../../common/user-dto';
 
 @Component({
   selector: 'app-view-students',

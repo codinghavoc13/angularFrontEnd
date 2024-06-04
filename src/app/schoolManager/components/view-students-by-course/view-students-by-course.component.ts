@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { FullCourseDetailDto } from 'src/app/common/school-manager/full-course-detail-dto';
 import { StaffService } from 'src/app/schoolManager/service/staff.service';
+import { FullCourseDetailDto } from '../../common/full-course-detail-dto';
 
 @Component({
   selector: 'app-view-students-by-course',

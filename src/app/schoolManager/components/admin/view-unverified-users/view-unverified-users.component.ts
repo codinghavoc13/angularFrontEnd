@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDto } from 'src/app/common/school-manager/user-dto';
+import { UserDto } from 'src/app/schoolManager/common/user-dto';
 import { StaffService } from 'src/app/schoolManager/service/staff.service';
 import { UserService } from 'src/app/schoolManager/service/user.service';
 

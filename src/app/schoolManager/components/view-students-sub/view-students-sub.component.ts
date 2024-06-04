@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UserDto } from 'src/app/common/school-manager/user-dto';
+import { UserDto } from '../../common/user-dto';
 
 @Component({
   selector: 'app-view-students-sub',

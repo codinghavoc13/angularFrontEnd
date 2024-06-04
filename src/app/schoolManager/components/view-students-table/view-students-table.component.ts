@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { StudentDetailDto } from 'src/app/common/school-manager/student-detail-dto';
-import { UserDto } from 'src/app/common/school-manager/user-dto';
+import { StudentDetailDto } from '../../common/student-detail-dto';
 
 @Component({
   selector: 'app-view-students-table',

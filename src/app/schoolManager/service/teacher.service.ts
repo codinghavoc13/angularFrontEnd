@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GradeBookDTO } from 'src/app/common/school-manager/grade-book-dto';
-import { GradeEntryDTO } from 'src/app/common/school-manager/grade-entry-dto';
-import { SingleGradeDTO } from 'src/app/common/school-manager/single-grade-DTO';
-import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
+import { GradeBookDTO } from '../common/grade-book-dto';
+import { GradeEntryDTO } from '../common/grade-entry-dto';
+import { SingleGradeDTO } from '../common/single-grade-DTO';
+import { StudentListDto } from '../common/student-list-dto';
 
 @Injectable({
   providedIn: 'root'

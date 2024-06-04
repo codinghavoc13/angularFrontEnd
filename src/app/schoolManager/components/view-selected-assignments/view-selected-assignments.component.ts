@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Assignment } from 'src/app/common/school-manager/assignment';
+import { Assignment } from '../../common/assignment';
 
 @Component({
   selector: 'app-view-selected-assignments',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
-import { AssignmentDto } from 'src/app/common/school-manager/assignment-dto';
 import { UserService } from 'src/app/schoolManager/service/user.service';
 import { AssignmentService } from '../../service/assignment.service';
+import { AssignmentDto } from '../../common/assignment-dto';
 
 @Component({
   selector: 'app-add-assignments',

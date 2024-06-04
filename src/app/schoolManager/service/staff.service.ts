@@ -2,13 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CourseDetailDto } from 'src/app/common/school-manager/course-detail-dto';
-import { AssignStudentDto } from 'src/app/common/school-manager/assign-student-dto';
-import { UserDto } from 'src/app/common/school-manager/user-dto';
-import { StudentListDto } from 'src/app/common/school-manager/student-list-dto';
-import { StudentDetailDto } from 'src/app/common/school-manager/student-detail-dto';
-import { FullCourseDetailDto } from 'src/app/common/school-manager/full-course-detail-dto';
-import { GradeEntryDTO } from 'src/app/common/school-manager/grade-entry-dto';
+import { AssignStudentDto } from '../common/assign-student-dto';
+import { CourseDetailDto } from '../common/course-detail-dto';
+import { FullCourseDetailDto } from '../common/full-course-detail-dto';
+import { StudentDetailDto } from '../common/student-detail-dto';
+import { UserDto } from '../common/user-dto';
 
 @Injectable({
   providedIn: 'root'

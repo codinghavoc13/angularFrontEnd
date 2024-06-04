@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterDto } from 'src/app/common/school-manager/register-dto';
-import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
 import { BehaviorSubject, map } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { EnrollStudentDto } from 'src/app/common/school-manager/enroll-student-dto';
-import { UserDto } from 'src/app/common/school-manager/user-dto';
+import { EnrollStudentDto } from '../common/enroll-student-dto';
+import { RegisterDto } from '../common/register-dto';
+import { SMLoginDTO } from '../common/smlogin-dto';
+import { UserDto } from '../common/user-dto';
 
 @Injectable({
   providedIn: 'root'

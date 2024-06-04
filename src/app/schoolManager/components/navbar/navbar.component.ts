@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { SMLoginDTO } from 'src/app/common/school-manager/smlogin-dto';
 import { UserService } from 'src/app/schoolManager/service/user.service';
+import { SMLoginDTO } from '../../common/smlogin-dto';
 
 @Component({
   selector: 'app-navbar',
