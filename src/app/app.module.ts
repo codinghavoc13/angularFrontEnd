@@ -14,6 +14,7 @@ import { NavComponent } from './main/components/nav/nav.component';
 import { CipherModule } from './cipher/module/cipher.module';
 import { MmdbModule } from './mmdb/module/mmdb.module';
 import { SharedModule } from './shared.module';
+import { ListManagerModule } from './listManager/module/list-manager.module';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -37,6 +38,7 @@ const routes: Routes = [
     FormsModule,
     CipherModule,
     MmdbModule,
+    ListManagerModule,
     SharedModule
   ],
   providers: [],
