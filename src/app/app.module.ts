@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
-import { MainComponent } from './components/main/main.component';
-import { NavComponent } from './components/main/nav/nav.component';
+import { MainComponent } from './main/components/main.component';
+import { NavComponent } from './main/components/nav/nav.component';
+import { CipherModule } from './cipher/module/cipher.module';
+import { MmdbModule } from './mmdb/module/mmdb.module';
+import { SharedModule } from './shared.module';
+import { SchoolManagerModule } from './schoolManager/module/school-manager.module';
+import { TestModulesModule } from './main/modules/test-modules.module';
 
-import { TestModulesModule } from './modules/test-modules.module';
-import { CipherModule } from './modules/cipher.module';
-import { SharedModule } from './modules/shared.module';
-import { MmdbModule } from './modules/mmdb.module';
-import { SchoolManagerModule } from './modules/school-manager.module';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -33,6 +38,8 @@ const routes: Routes = [
     CipherModule,
     MmdbModule,
     SchoolManagerModule,
+    BrowserAnimationsModule,
+    FormsModule,
     SharedModule
   ],
   providers: [],
