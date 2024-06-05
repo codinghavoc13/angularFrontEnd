@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { MainComponent } from './main/components/main.component';
 import { NavComponent } from './main/components/nav/nav.component';
@@ -39,7 +40,8 @@ const routes: Routes = [
     CipherModule,
     MmdbModule,
     ListManagerModule,
-    SharedModule
+    SharedModule,
+    // ToastrModule.forRoot({positionClass:'toast-bottom-right'})
   ],
   providers: [],
   bootstrap: [AppComponent]

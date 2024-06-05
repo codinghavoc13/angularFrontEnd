@@ -1,0 +1,4 @@
+Use this file to keep track of generate scripts in case I need to rebuild
+
+ng generate service listManager/service/user --skip-tests
+ng generate class login-dto --skip-tests
