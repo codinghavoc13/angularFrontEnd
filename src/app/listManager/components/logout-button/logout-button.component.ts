@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-logout-button',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class LogoutButtonComponent {
 
+  constructor(private userSvc: UserService){}
+
+  logout(){
+    this.userSvc.logout();
+  }
 }

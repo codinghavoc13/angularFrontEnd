@@ -15,8 +15,8 @@ const routes: Routes = [
     {path: 'listManager', component:ListManagerMainComponent},
     {path: 'listManager/login', component:LoginPageComponent},
     {path: 'listManager/listPage', component:ListPageComponent},
-    {path: '', component: ListManagerMainComponent},
-    {path: '**', component:ListManagerMainComponent}
+    // {path: '', component: ListManagerMainComponent},
+    // {path: '**', component:ListManagerMainComponent}
 ];
 
 @NgModule({
