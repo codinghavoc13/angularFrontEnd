@@ -37,4 +37,8 @@ export class ListPageComponent implements OnInit{
     return this.userSvc.currentUser$;
   }
 
+  viewList(listId: number){
+    console.log(listId);
+  }
+
 }

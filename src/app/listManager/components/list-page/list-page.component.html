@@ -1,5 +1,16 @@
 <h2 *ngIf="(checkUser() | async) as user">
     Welcome {{user.firstName}}
 </h2>
-<p>list-page works!</p>
+<table>
+    <tr>
+        <th>List Name</th>
+        <th class="numItemsCol">Number of Items</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let list of lists">
+        <td>{{list.listName}}</td>
+        <td class="numItemsCol">{{list.numberOfItems}}</td>
+        <td><a class="btn btn-success" (click)="viewList(list.listId)">View List</a></td>
+    </tr>
+</table>
 <app-logout-button></app-logout-button>

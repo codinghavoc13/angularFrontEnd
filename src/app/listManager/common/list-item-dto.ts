@@ -1,11 +1,12 @@
 export class ListItemDto {
     constructor(
-        public ordered: boolean,
-        public listItems: ListItemDto[],
+        public listItemId: number,
         public listId: number,
-        public numberOfItems: number,
-        public userId: number,
-        public listName: string,
-        public listNotes: string
+        public itemName: string,
+        public quantity: number,
+        public orderPosition: number,
+        public itemNotes: string
+        //leaving this here but commenting out; develop for sublists
+        // public listItems: ListItemDto[],
     ){}
 }

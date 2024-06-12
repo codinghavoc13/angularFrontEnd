@@ -13,6 +13,6 @@ export class ListManagerService {
     private toastr: ToastrService) { }
 
   buildList(userId: number){
-    return this.httpClient.get<ListInfoDto[]>(this.listUrl+"/list/"+userId);
+    return this.httpClient.get<ListInfoDto[]>(this.listUrl+"/user/"+userId);
   }
 }
