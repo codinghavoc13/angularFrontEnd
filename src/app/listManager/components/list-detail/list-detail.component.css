@@ -1,0 +1,9 @@
+th, td{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.numItemsCol{
+    text-align: center;
+    word-wrap: normal;
+}

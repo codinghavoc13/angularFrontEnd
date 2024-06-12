@@ -30,7 +30,6 @@ export class UserService {
         this.user.next(response);
         this.userId = response.userId;
         this.loggedIn = true;
-        // console.log(this.user);
         this.router.navigate(['listManager/listPage']);
       },
       error:()=>{
@@ -40,10 +39,7 @@ export class UserService {
   }
 
   logout(){
-    // console.log(this.user);
     this.user.next(null);// = new UserDto('','','','',-1);
     this.loggedIn = false;
-    // console.log(this.user);
-    this.router.navigate(['listManager'])
   }
 }

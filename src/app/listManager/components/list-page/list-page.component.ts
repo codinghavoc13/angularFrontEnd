@@ -20,15 +20,15 @@ export class ListPageComponent implements OnInit{
   ngOnInit(): void {
     if(!this.userSvc.loggedIn){
       this.router.navigate(['listManager']);
+    } else {
+      this.buildList();
     }
-    this.buildList();
   }
 
   buildList(){
-    this.listSvc.buildList(this.userSvc.userId).subscribe(
+    this.listSvc.buildLists(this.userSvc.userId).subscribe(
       data => {
         this.lists = data;
-        console.log(this.lists);
       }
     )
   }
@@ -38,7 +38,8 @@ export class ListPageComponent implements OnInit{
   }
 
   viewList(listId: number){
-    console.log(listId);
+    this.listSvc.listDetailDisplay = listId;
+    this.router.navigate(['listManager/listDetail'])
   }
 
 }

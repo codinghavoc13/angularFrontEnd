@@ -12,7 +12,9 @@ import { UserDto } from '../../common/user-dto';
 export class LoginPageComponent {
   loginDTO: UserDto = new UserDto('','','','',-1);
 
-  constructor(public userSvc: UserService, private router: Router, private toastr: ToastrService){}
+  constructor(public userSvc: UserService, 
+    private router: Router, 
+    private toastr: ToastrService){}
 
   login(){
     // this.toastr.success('You clicked the button');

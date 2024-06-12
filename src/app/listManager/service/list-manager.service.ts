@@ -8,11 +8,16 @@ import { ListInfoDto } from '../common/list-info-dto';
 })
 export class ListManagerService {
   listUrl = "http://localhost:8080/listManager/list";
+  listDetailDisplay: number = -1;
 
   constructor(private httpClient: HttpClient,
     private toastr: ToastrService) { }
 
-  buildList(userId: number){
+  buildList(listId: number){
+    return this.httpClient.get<ListInfoDto>(this.listUrl+"/list/"+listId);
+  }
+
+  buildLists(userId: number){
     return this.httpClient.get<ListInfoDto[]>(this.listUrl+"/user/"+userId);
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logout-button',
@@ -8,9 +9,12 @@ import { UserService } from '../../service/user.service';
 })
 export class LogoutButtonComponent {
 
-  constructor(private userSvc: UserService){}
+  constructor(private userSvc: UserService,
+    private router: Router
+  ){}
 
   logout(){
+    this.router.navigate(['listManager']);
     this.userSvc.logout();
   }
 }

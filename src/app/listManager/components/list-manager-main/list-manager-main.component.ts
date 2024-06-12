@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListManagerMainComponent implements OnInit{
   ngOnInit(): void {
-    console.log("list manager main ngOnInit");
   }
 
 }

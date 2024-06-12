@@ -1,1 +1,31 @@
-<p>list-detail works!</p>
+<h2>{{listInfo.listName}}</h2>
+<p *ngIf="listInfo.listNotes!=''">{{listInfo.listNotes}}</p>
+<!-- Need to look at a few things:
+ - changing lists to tables
+ - changing existing data to set quantity to -1 for things that don't have a quantity
+    - this will also require a check on that column to not show that column when 
+        value is -1
+ - the query results from the database should already have everything in order, should
+    not need separate tables -->
+
+<table>
+    <tr>
+        <th *ngIf="listInfo.ordered">Order</th>
+        <!-- Need to come back and implement check boxes -->
+        <th>Item</th>
+        <!-- How to handle the quantity header if the quantity values are 0?
+            Two ideas:
+                Don't show it if all items have a value of 0
+                Show it but only show the quantity if the value is greater than 0 -->
+        <th>Quantity</th>
+        <th>Notes</th>
+    </tr>
+    <tr *ngFor="let item of listInfo.listItems">
+        <td *ngIf="listInfo.ordered">{{item.orderPosition}}</td>
+        <td>{{item.itemName}}</td>
+        <td class="numItemsCol"><span *ngIf="item.quantity>0">{{item.quantity}}</span></td>
+        <td><span *ngIf="item.itemNotes!=''">{{item.itemNotes}}</span></td>
+    </tr>
+</table>
+<a href="#" class="btn btn-success" routerLink="/listManager/listPage">Go Back to Lists</a>
+<app-logout-button></app-logout-button>
