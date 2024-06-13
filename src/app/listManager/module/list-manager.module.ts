@@ -11,12 +11,14 @@ import { ListDetailComponent } from '../components/list-detail/list-detail.compo
 import { LoginPageComponent } from '../components/login-page/login-page.component';
 import { LogoutButtonComponent } from '../components/logout-button/logout-button.component';
 import { NewEditListComponent } from '../components/new-edit-list/new-edit-list.component';
+import { NewEditListItemsComponent } from '../components/new-edit-list-items/new-edit-list-items.component';
 
 const routes: Routes = [
     {path: 'listManager', component:ListManagerMainComponent},
     {path: 'listManager/login', component:LoginPageComponent},
     {path: 'listManager/listPage', component:ListPageComponent},
-    {path: 'listManager/listDetail', component:ListDetailComponent}
+    {path: 'listManager/listDetail', component:ListDetailComponent},
+    {path: 'listManager/newEditList', component:NewEditListComponent}
     // {path: '', component: ListManagerMainComponent},
     // {path: '**', component:ListManagerMainComponent}
 ];
@@ -30,7 +32,8 @@ const routes: Routes = [
     ListDetailComponent,
     LoginPageComponent,
     LogoutButtonComponent,
-    NewEditListComponent
+    NewEditListComponent,
+    NewEditListItemsComponent
   ],
   imports: [
     CommonModule,
