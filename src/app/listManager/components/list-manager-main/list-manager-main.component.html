@@ -1,8 +1,24 @@
-<!-- <app-nav-bar></app-nav-bar> -->
+<!--Refactoring this page to look more like the userpage from school manager
+    - an enum value will determine which component to display-->
 <div class="col-md-12">
-<h1>List Manager</h1>
-<p>Welcome to my take on a basic idea: an application to track and manage different lists such as 
-    grocery or packing lists, to-do lists, favorites lists</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam finibus a ipsum a ultrices. Etiam vel quam turpis. Sed massa mauris, dictum eget ultrices ut, porttitor quis elit. In aliquet lacinia eros blandit tincidunt. Morbi neque justo, scelerisque sit amet arcu et, fermentum posuere tortor. Nunc posuere convallis augue eu pretium. Mauris viverra varius elementum. Integer vel commodo tortor. Donec dignissim id velit a tristique. </p>
-<a href="#" class="btn btn-primary" routerLink="/listManager/login">Login/Register</a>
+    <div *ngIf="isMain()">
+        <h1>List Manager</h1>
+        <p>Welcome to my take on a basic idea: an application to track and manage different lists such as
+            grocery or packing lists, to-do lists, favorites lists</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam finibus a ipsum a ultrices. Etiam vel quam turpis.
+            Sed massa mauris, dictum eget ultrices ut, porttitor quis elit. In aliquet lacinia eros blandit tincidunt. Morbi
+            neque justo, scelerisque sit amet arcu et, fermentum posuere tortor. Nunc posuere convallis augue eu pretium.
+            Mauris viverra varius elementum. Integer vel commodo tortor. Donec dignissim id velit a tristique. </p>
+        <!-- <a href="#" class="btn btn-primary" routerLink="/listManager/login">Login/Register</a> -->
+        <a class="btn btn-primary" (click)="login()">Login/Register</a>
+    </div>
+    <div *ngIf="isLogin()">
+        <app-login-page (displayEmit)="switchDisplay($event)"></app-login-page>
+    </div>
+    <div *ngIf="isListInfo()">
+        <app-list-page></app-list-page>
+    </div>
+    <div *ngIf="getUserSvc().loggedIn">
+        <app-logout-button (displayEmit)="switchDisplay($event)"></app-logout-button>
+    </div>
 </div>

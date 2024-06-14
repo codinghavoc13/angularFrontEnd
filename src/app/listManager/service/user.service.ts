@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 export class UserService {
   userUrl = "http://localhost:8080/listManager/user";
   // user: UserDto = new UserDto('','','','',-1);
-  private user = new BehaviorSubject<UserDto|null>(null);
+  user = new BehaviorSubject<UserDto|null>(null);
   currentUser$ = this.user.asObservable();
   userId: number = -1;
   loggedIn: boolean = false;
@@ -24,22 +24,17 @@ export class UserService {
 
   login(loginDetails: UserDto){
     const loginURL = this.userUrl+"/login";
-    return this.httpClient.post<UserDto>(loginURL, loginDetails).subscribe({
-      next: (response)=>{
-        this.toastr.success("You may pass");
-        this.user.next(response);
-        this.userId = response.userId;
-        this.loggedIn = true;
-        this.router.navigate(['listManager/listPage']);
-      },
-      error:()=>{
-        this.toastr.error("Username or password are incorrect");
-      }
-    })
+    return this.httpClient.post<UserDto>(loginURL, loginDetails);
   }
 
   logout(){
     this.user.next(null);// = new UserDto('','','','',-1);
     this.loggedIn = false;
+  }
+
+  updateDetails(response: UserDto){
+    this.user.next(response);
+    this.userId = response.userId;
+    this.loggedIn = true;
   }
 }

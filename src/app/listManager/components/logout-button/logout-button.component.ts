@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
+import { Display } from '../../common/display';
 
 @Component({
   selector: 'app-logout-button',
@@ -8,13 +9,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./logout-button.component.css']
 })
 export class LogoutButtonComponent {
+  @Output() displayEmit = new EventEmitter<Display>();
 
   constructor(private userSvc: UserService,
     private router: Router
   ){}
 
   logout(){
-    this.router.navigate(['listManager']);
+    // this.router.navigate(['listManager']);
     this.userSvc.logout();
+    this.displayEmit.emit(Display.MAIN);
   }
 }

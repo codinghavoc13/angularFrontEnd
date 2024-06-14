@@ -8,8 +8,13 @@ import { ListInfoDto } from '../../common/list-info-dto';
 })
 export class NewEditListComponent {
   listInfoDto: ListInfoDto = new ListInfoDto(false,[],-1,0,-1,'','');
+  listToEdit: ListInfoDto = new ListInfoDto(false,[],-1,0,-1,'','');
 
   discardChanges(){}
+
+  getListToEdit(list: ListInfoDto){
+    
+  }
 
   submit(){
     console.log(this.listInfoDto);

@@ -6,11 +6,12 @@
         <th>List Name</th>
         <th class="numItemsCol">Number of Items</th>
         <th></th>
+        <th></th>
     </tr>
     <tr *ngFor="let list of lists">
         <td>{{list.listName}}</td>
         <td class="numItemsCol">{{list.numberOfItems}}</td>
         <td><a class="btn btn-success" (click)="viewList(list.listId)">View List</a></td>
+        <td><a class="btn btn-warning" (click)="sendToEdit(list)">Edit List Info</a></td>
     </tr>
 </table>
-<app-logout-button></app-logout-button>

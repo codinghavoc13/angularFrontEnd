@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ListInfoDto } from '../../common/list-info-dto';
 import { ListManagerService } from '../../service/list-manager.service';
 import { UserService } from '../../service/user.service';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-page.component.css']
 })
 export class ListPageComponent implements OnInit{
+  @Output() listToEmit = new EventEmitter<ListInfoDto>();
   lists: ListInfoDto[] = [];
 
   constructor(private listSvc: ListManagerService,
@@ -18,11 +19,7 @@ export class ListPageComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    if(!this.userSvc.loggedIn){
-      this.router.navigate(['listManager']);
-    } else {
-      this.buildList();
-    }
+    this.buildList();
   }
 
   buildList(){
@@ -35,6 +32,10 @@ export class ListPageComponent implements OnInit{
 
   checkUser(){
     return this.userSvc.currentUser$;
+  }
+
+  sendToEdit(list: ListInfoDto){
+    this.listToEmit.emit(list);
   }
 
   viewList(listId: number){

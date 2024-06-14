@@ -15,12 +15,12 @@ import { NewEditListItemsComponent } from '../components/new-edit-list-items/new
 
 const routes: Routes = [
     {path: 'listManager', component:ListManagerMainComponent},
-    {path: 'listManager/login', component:LoginPageComponent},
-    {path: 'listManager/listPage', component:ListPageComponent},
-    {path: 'listManager/listDetail', component:ListDetailComponent},
-    {path: 'listManager/newEditList', component:NewEditListComponent}
+    // {path: 'listManager/login', component:LoginPageComponent},
+    // {path: 'listManager/listPage', component:ListPageComponent},
+    // {path: 'listManager/listDetail', component:ListDetailComponent},
+    // {path: 'listManager/newEditList', component:NewEditListComponent}
     // {path: '', component: ListManagerMainComponent},
-    // {path: '**', component:ListManagerMainComponent}
+    {path: 'listManager/**', component:ListManagerMainComponent}
 ];
 
 @NgModule({
