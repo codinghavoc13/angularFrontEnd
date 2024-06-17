@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListInfoDto } from '../../common/list-info-dto';
 import { ListManagerService } from '../../service/list-manager.service';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListDetailComponent implements OnInit{
   @Input() listId: number = -1;
+  @Output() returnEmit = new EventEmitter<number>();
   listInfo: ListInfoDto = new ListInfoDto(false,[],-1,-1,-1,'','');
 
   constructor(private listSvc: ListManagerService,
@@ -23,18 +24,19 @@ export class ListDetailComponent implements OnInit{
   }
 
   buildList(){
-    const tgt: number = this.listSvc.listDetailDisplay;
-    if(tgt == -1){
-      this.toastr.error("Invalid list ID number")
-      this.router.navigate(['listManager/listPage']);
+    if(this.listId == -1){
+      this.toastr.error("Invalid list ID number");
     } else {
-      this.listSvc.buildList(tgt).subscribe(
+      this.listSvc.buildList(this.listId).subscribe(
         data => {
           this.listInfo = data;
-          // console.log(this.listInfo);
         }
       )
     }
+  }
+
+  returnToMainPage(){
+    this.returnEmit.emit(-1);
   }
 
 }

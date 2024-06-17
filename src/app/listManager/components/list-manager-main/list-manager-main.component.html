@@ -16,9 +16,15 @@
         <app-login-page (displayEmit)="switchDisplay($event)"></app-login-page>
     </div>
     <div *ngIf="isListInfo()">
-        <app-list-page></app-list-page>
+        <app-list-page (listToEmit)="setListId($event)"></app-list-page>
+    </div>
+    <div *ngIf="isListDetail()">
+        <app-list-detail [listId]="listId" (returnEmit)="setListId($event)"></app-list-detail>
     </div>
     <div *ngIf="getUserSvc().loggedIn">
+        <hr>
+        <a class="btn btn-success mx-3">New List</a>
         <app-logout-button (displayEmit)="switchDisplay($event)"></app-logout-button>
     </div>
+    <div *ngIf="isCreateEdit()"></div>
 </div>

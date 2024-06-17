@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-page.component.css']
 })
 export class ListPageComponent implements OnInit{
-  @Output() listToEmit = new EventEmitter<ListInfoDto>();
+  @Output() listToEmit = new EventEmitter<number>();
+  //need a separate emitter; the one above sends to view, need another
+  //to take to edit
   lists: ListInfoDto[] = [];
 
   constructor(private listSvc: ListManagerService,
@@ -34,13 +36,14 @@ export class ListPageComponent implements OnInit{
     return this.userSvc.currentUser$;
   }
 
-  sendToEdit(list: ListInfoDto){
-    this.listToEmit.emit(list);
+  sendToEdit(listId: number){
+    this.listToEmit.emit(listId);
   }
 
   viewList(listId: number){
-    this.listSvc.listDetailDisplay = listId;
-    this.router.navigate(['listManager/listDetail'])
+    this.listToEmit.emit(listId);
+    // this.listSvc.listDetailDisplay = listId;
+    // this.router.navigate(['listManager/listDetail'])
   }
 
 }
