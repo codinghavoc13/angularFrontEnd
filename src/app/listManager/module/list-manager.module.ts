@@ -10,8 +10,8 @@ import { CreateEditListComponent } from '../components/create-edit-list/create-e
 import { ListDetailComponent } from '../components/list-detail/list-detail.component';
 import { LoginPageComponent } from '../components/login-page/login-page.component';
 import { LogoutButtonComponent } from '../components/logout-button/logout-button.component';
-import { NewEditListComponent } from '../components/new-edit-list/new-edit-list.component';
-import { NewEditListItemsComponent } from '../components/new-edit-list-items/new-edit-list-items.component';
+import { EditListComponent } from '../components/edit-list/edit-list.component';
+import { EditListItemsComponent } from '../components/edit-list-items/edit-list-items.component';
 
 const routes: Routes = [
     {path: 'listManager', component:ListManagerMainComponent},
@@ -32,8 +32,8 @@ const routes: Routes = [
     ListDetailComponent,
     LoginPageComponent,
     LogoutButtonComponent,
-    NewEditListComponent,
-    NewEditListItemsComponent
+    EditListComponent,
+    EditListItemsComponent
   ],
   imports: [
     CommonModule,

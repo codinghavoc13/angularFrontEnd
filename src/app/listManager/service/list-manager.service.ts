@@ -20,4 +20,8 @@ export class ListManagerService {
   buildLists(userId: number){
     return this.httpClient.get<ListInfoDto[]>(this.listUrl+"/user/"+userId);
   }
+
+  updateList(list: ListInfoDto){
+    return this.httpClient.post<ListInfoDto>(this.listUrl+"/updateList",list);
+  }
 }

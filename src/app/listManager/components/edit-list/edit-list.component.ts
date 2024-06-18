@@ -1,20 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListInfoDto } from '../../common/list-info-dto';
 import { ListManagerService } from '../../service/list-manager.service';
-import { NgForm } from '@angular/forms';
+import { UserService } from '../../service/user.service';
 
 @Component({
-  selector: 'app-new-edit-list',
-  templateUrl: './new-edit-list.component.html',
-  styleUrls: ['./new-edit-list.component.css']
+  selector: 'app-edit-list',
+  templateUrl: './edit-list.component.html',
+  styleUrls: ['./edit-list.component.css']
 })
-export class NewEditListComponent implements OnInit{
+export class EditListComponent implements OnInit{
+  @Input() listIdToEdit: number = -1;
+  @Output() returnEmit = new EventEmitter<number>();
   listInfoDto: ListInfoDto = new ListInfoDto(false,[],-1,0,-1,'','');
   // listToEdit: ListInfoDto = new ListInfoDto(false,[],-1,0,-1,'','');
   originalList: ListInfoDto = new ListInfoDto(false,[],-1,0,-1,'','');
-  @Input() listIdToEdit: number = -1;
 
-  constructor(private listSvc: ListManagerService){}
+  constructor(private listSvc: ListManagerService,
+    private userSvc: UserService
+  ){}
   
   ngOnInit(): void {
     console.log('nel-1: ' + this.listIdToEdit);
@@ -45,8 +48,19 @@ export class NewEditListComponent implements OnInit{
     
   }
 
+  returnToMainPage(){
+    this.returnEmit.emit(-1);
+  }
+
   submit(){
     console.log(this.listInfoDto);
+    this.listInfoDto.userId = this.userSvc.userId
+    this.listSvc.updateList(this.listInfoDto).subscribe(
+      data =>{
+        this.listInfoDto = data;
+        console.log(this.listInfoDto);
+      }
+    )
   }
 
 }

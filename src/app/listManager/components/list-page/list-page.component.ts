@@ -3,6 +3,7 @@ import { ListInfoDto } from '../../common/list-info-dto';
 import { ListManagerService } from '../../service/list-manager.service';
 import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-page',
@@ -18,7 +19,8 @@ export class ListPageComponent implements OnInit{
 
   constructor(private listSvc: ListManagerService,
     private userSvc: UserService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ){}
 
   ngOnInit(): void {
@@ -35,6 +37,10 @@ export class ListPageComponent implements OnInit{
 
   checkUser(){
     return this.userSvc.currentUser$;
+  }
+
+  deleteList(listId: number){
+    this.toastr.info('Still in development')
   }
 
   sendToEdit(listId: number){

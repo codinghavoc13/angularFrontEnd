@@ -10,6 +10,7 @@
             [(ngModel)]="listInfoDto.ordered" value="">Ordered List?
         </label>
     </div>
+    <!--Need to work on the back end part but eventually need another check box for a checked list-->
     <div class="form-group mt-3">
         <label class="form-label" for="listNotesInput">List Notes</label>
         <textarea type="text" class="form-control" id="listNotesInput" name="listNotesInput" [(ngModel)]="listInfoDto.listNotes"></textarea>
@@ -17,3 +18,4 @@
     <button type="submit" class="btn btn-success mt-3" (click)="submit()">Submit</button>
     <button type="submit" class="btn btn-warning mt-3 ml-3" (click)="discardChanges()">Discard Changes</button>
 </form>
+<a class="btn btn-success mt-3" (click)="returnToMainPage()">Go Back to Lists</a>
