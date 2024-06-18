@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ɵisEnvironmentProviders } from '@angular/core';
 import { ListInfoDto } from '../../common/list-info-dto';
 import { ListManagerService } from '../../service/list-manager.service';
 import { UserService } from '../../service/user.service';
@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-page.component.css']
 })
 export class ListPageComponent implements OnInit{
-  @Output() listToEmit = new EventEmitter<number>();
+  @Output() listToViewEmit = new EventEmitter<number>();
   //need a separate emitter; the one above sends to view, need another
   //to take to edit
+  @Output() listToEditEmit = new EventEmitter<number>();
   lists: ListInfoDto[] = [];
 
   constructor(private listSvc: ListManagerService,
@@ -37,11 +38,11 @@ export class ListPageComponent implements OnInit{
   }
 
   sendToEdit(listId: number){
-    this.listToEmit.emit(listId);
+    this.listToEditEmit.emit(listId);
   }
 
   viewList(listId: number){
-    this.listToEmit.emit(listId);
+    this.listToViewEmit.emit(listId);
     // this.listSvc.listDetailDisplay = listId;
     // this.router.navigate(['listManager/listDetail'])
   }

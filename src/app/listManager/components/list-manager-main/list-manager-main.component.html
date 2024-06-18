@@ -9,22 +9,25 @@
             Sed massa mauris, dictum eget ultrices ut, porttitor quis elit. In aliquet lacinia eros blandit tincidunt. Morbi
             neque justo, scelerisque sit amet arcu et, fermentum posuere tortor. Nunc posuere convallis augue eu pretium.
             Mauris viverra varius elementum. Integer vel commodo tortor. Donec dignissim id velit a tristique. </p>
-        <!-- <a href="#" class="btn btn-primary" routerLink="/listManager/login">Login/Register</a> -->
         <a class="btn btn-primary" (click)="login()">Login/Register</a>
     </div>
     <div *ngIf="isLogin()">
         <app-login-page (displayEmit)="switchDisplay($event)"></app-login-page>
     </div>
     <div *ngIf="isListInfo()">
-        <app-list-page (listToEmit)="setListId($event)"></app-list-page>
+        <app-list-page (listToViewEmit)="viewListByID($event)"
+        (listToEditEmit)="editListByID($event)"></app-list-page>
     </div>
     <div *ngIf="isListDetail()">
-        <app-list-detail [listId]="listId" (returnEmit)="setListId($event)"></app-list-detail>
+        <app-list-detail [listId]="listId" (returnEmit)="viewListByID($event)"></app-list-detail>
     </div>
+    <div *ngIf="isCreateEdit()">
+        <app-new-edit-list [listIdToEdit]="listId"></app-new-edit-list>
+    </div>
+    <!--Keep this div at the bottom or else the log out button will appear in the middle of the page-->
     <div *ngIf="getUserSvc().loggedIn">
         <hr>
-        <a class="btn btn-success mx-3">New List</a>
+        <a class="btn btn-success mx-3" (click)="newList()">New List</a>
         <app-logout-button (displayEmit)="switchDisplay($event)"></app-logout-button>
     </div>
-    <div *ngIf="isCreateEdit()"></div>
 </div>

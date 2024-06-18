@@ -1,1 +1,14 @@
 <p>new-edit-list-items works!</p>
+<!--Notes for this page:
+- for each item, need a delete button to remove the item
+- basic: need input fields for item name, quantity and notes
+- need to plan for how to handle the ordered check box and showing/hiding the order position column
+- when ordered is checked, need a validator to make sure that no two values are repeated and that values are greater than 0
+    - give users the option to set postion to whatever they want
+        - this would update the order of the list each time the user makes changes to the list since the backend is getting the items
+            by postion asc
+    - OR force an ascending order (1, 2, 3, n...), NO descending order (99, 98, 97, n...)
+        - this would require a complex check of making sure there are no 0s, only one of each number starting at 1 and going to the length
+            of the list and making sure that no number is skipped
+        - a great example of data intensive search algorithms; definitely not recommended for larger lists
+-->

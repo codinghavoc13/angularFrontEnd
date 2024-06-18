@@ -18,6 +18,12 @@ export class ListManagerMainComponent implements OnInit{
 
   constructor(private userSvc: UserService){}
 
+  editListByID(listId: number){
+    this.listId = listId;
+    this.display = Display.NEW_EDIT_LIST_INFO;
+    console.log(this.listId)
+  }
+
   isMain(){
     return this.display === Display.MAIN;
   }
@@ -46,16 +52,20 @@ export class ListManagerMainComponent implements OnInit{
     this.switchDisplay(Display.LOGIN);
   }
 
-  setListId(listId: number){
+  newList(){
+    this.display = Display.NEW_EDIT_LIST_INFO;
+  }
+
+  switchDisplay(display: Display){
+    this.display = display;
+  }
+
+  viewListByID(listId: number){
     this.listId = listId;
     if(listId >= 0){
       this.switchDisplay(Display.LIST_DETAIL);
     } else {
       this.display = Display.LIST_INFO;
     }
-  }
-
-  switchDisplay(display: Display){
-    this.display = display;
   }
 }
