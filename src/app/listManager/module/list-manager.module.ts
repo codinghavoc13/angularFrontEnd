@@ -6,7 +6,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { ListManagerMainComponent } from '../components/list-manager-main/list-manager-main.component';
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { ListPageComponent } from '../components/list-page/list-page.component';
-import { CreateEditListComponent } from '../components/create-edit-list/create-edit-list.component';
 import { ListDetailComponent } from '../components/list-detail/list-detail.component';
 import { LoginPageComponent } from '../components/login-page/login-page.component';
 import { LogoutButtonComponent } from '../components/logout-button/logout-button.component';
@@ -15,11 +14,7 @@ import { EditListItemsComponent } from '../components/edit-list-items/edit-list-
 
 const routes: Routes = [
     {path: 'listManager', component:ListManagerMainComponent},
-    // {path: 'listManager/login', component:LoginPageComponent},
-    // {path: 'listManager/listPage', component:ListPageComponent},
-    // {path: 'listManager/listDetail', component:ListDetailComponent},
-    // {path: 'listManager/newEditList', component:NewEditListComponent}
-    // {path: '', component: ListManagerMainComponent},
+    {path: 'listManager/editListItemTest', component:EditListItemsComponent},
     {path: 'listManager/**', component:ListManagerMainComponent}
 ];
 
@@ -28,7 +23,6 @@ const routes: Routes = [
     ListManagerMainComponent,
     NavBarComponent,
     ListPageComponent,
-    CreateEditListComponent,
     ListDetailComponent,
     LoginPageComponent,
     LogoutButtonComponent,

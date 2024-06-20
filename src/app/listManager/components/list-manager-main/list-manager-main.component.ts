@@ -20,7 +20,7 @@ export class ListManagerMainComponent implements OnInit{
 
   editListByID(listId: number){
     this.listId = listId;
-    this.display = Display.NEW_EDIT_LIST_INFO;
+    this.display = Display.EDIT_LIST_INFO;
     console.log(this.listId)
   }
 
@@ -28,8 +28,12 @@ export class ListManagerMainComponent implements OnInit{
     return this.display === Display.MAIN;
   }
 
-  isCreateEdit(){
-    return this.display === Display.NEW_EDIT_LIST_INFO;
+  isEditListInfo(){
+    return this.display === Display.EDIT_LIST_INFO;
+  }
+
+  isEditListItems(){
+    return this.display === Display.EDIT_LIST_ITEMS;
   }
 
   isListDetail(){
@@ -53,7 +57,7 @@ export class ListManagerMainComponent implements OnInit{
   }
 
   newList(){
-    this.display = Display.NEW_EDIT_LIST_INFO;
+    this.display = Display.EDIT_LIST_INFO;
   }
 
   switchDisplay(display: Display){
