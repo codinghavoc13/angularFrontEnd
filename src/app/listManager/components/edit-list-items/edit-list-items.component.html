@@ -12,8 +12,8 @@
         - a great example of data intensive search algorithms; definitely not recommended for larger lists
 -->
 <!--
-    public Long listItemId;
-    public Long listId;
+    public Long listItemId; - hidden
+    public Long listId; - hidden
     public String itemName;
     public Long quantity;
     public Long orderPosition;
@@ -45,9 +45,9 @@
             <hr>
         </div>
         <div>
-            <a style="width: 200px;" class="btn btn-success mt-3" (click)="addItem()">Add another item</a>
-            <br>
-            <a style="width: 200px;" class="btn btn-primary mt-3" (click)="submit()">Submit</a>
+            <a style="width: 200px;" class="btn btn-success m-3" (click)="addItem()">Add another item</a>
+            <a style="width: 200px;" class="btn btn-primary m-3" (click)="submit()">Submit</a>
+            <a style="width: 200px;" class="btn btn-primary m-3" (click)="returnToList()">Discard and Return to List</a>
         </div>
     </div>
 </form>

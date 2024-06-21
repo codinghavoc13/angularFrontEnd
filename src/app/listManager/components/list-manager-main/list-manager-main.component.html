@@ -19,10 +19,14 @@
         (listToEditEmit)="editListByID($event)"></app-list-page>
     </div>
     <div *ngIf="isListDetail()">
-        <app-list-detail [listId]="listId" (returnEmit)="viewListByID($event)"></app-list-detail>
+        <app-list-detail [listId]="listId" (returnEmit)="viewListByID($event)"
+            (displayEmit)="switchDisplay($event)"></app-list-detail>
     </div>
     <div *ngIf="isEditListInfo()">
         <app-edit-list [listIdToEdit]="listId" (returnEmit)="viewListByID($event)"></app-edit-list>
+    </div>
+    <div *ngIf="isEditListItems()">
+        <app-edit-list-items [listId]="listId" (displayEmit)="switchDisplay($event)"></app-edit-list-items>
     </div>
     <!--Keep this div at the bottom or else the log out button will appear in the middle of the page-->
     <div *ngIf="getUserSvc().loggedIn">

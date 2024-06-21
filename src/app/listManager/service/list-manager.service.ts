@@ -13,6 +13,10 @@ export class ListManagerService {
   constructor(private httpClient: HttpClient,
     private toastr: ToastrService) { }
 
+  // buildItems(listId: number){
+  //   return this.httpClient.get<ListInfoDto>(this.listUrl="/list/"+listId);
+  // }
+
   buildList(listId: number){
     return this.httpClient.get<ListInfoDto>(this.listUrl+"/list/"+listId);
   }

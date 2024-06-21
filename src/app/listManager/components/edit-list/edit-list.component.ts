@@ -58,7 +58,8 @@ export class EditListComponent implements OnInit{
     this.listSvc.updateList(this.listInfoDto).subscribe(
       data =>{
         this.listInfoDto = data;
-        console.log(this.listInfoDto);
+        // console.log(this.listInfoDto);
+        this.returnToMainPage();
       }
     )
   }
