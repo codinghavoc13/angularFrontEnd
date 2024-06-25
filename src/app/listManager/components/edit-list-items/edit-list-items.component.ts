@@ -54,7 +54,7 @@ export class EditListItemsComponent implements OnInit{
   loadItem(item: ListItemDto):FormGroup{
     return this.fb.group({
       itemName:item.itemName,
-      quantity:item.quantity,
+      // quantity:item.quantity,
       orderPosition:item.orderPosition,
       itemNotes:item.itemNotes,
       listId:item.listId,
@@ -65,11 +65,11 @@ export class EditListItemsComponent implements OnInit{
   newItem():FormGroup{
     return this.fb.group({
       itemName:'',
-      quantity:0,
+      // quantity:0,
       orderPosition:0,
       itemNotes:'',
-      listId:0,
-      listItemId:0
+      listId:-1,
+      listItemId:-1
     })
   }
 

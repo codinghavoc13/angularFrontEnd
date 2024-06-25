@@ -4,7 +4,7 @@
     *ngFor="let item of listInfo.listItems">
     <div class="p-4">
         <h3><span *ngIf="listInfo.ordered">{{item.orderPosition}}. </span>
-            <span *ngIf="item.quantity>0">{{item.quantity}} - </span>
+            <!-- <span *ngIf="item.quantity>0">{{item.quantity}} - </span> -->
             {{item.itemName}}</h3>
         <p *ngIf="item.itemNotes!=''"><span><b>Notes: </b>{{item.itemNotes}}</span></p>
     </div>
