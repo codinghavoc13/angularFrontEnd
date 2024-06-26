@@ -82,6 +82,18 @@ export class EditListItemsComponent implements OnInit{
   }
 
   submit(){
-    // console.log(this.items().value)
+    console.log(this.items().value);
+    this.listSvc.buildList(this.listId).subscribe(
+      data => {
+        const list = data;
+        list.listItems = this.items().value;
+        console.log(list);
+        this.listSvc.updateList(list).subscribe(
+          data2 => {
+            this.returnToList();
+          }
+        );
+      }
+    )
   }
 }
