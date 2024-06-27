@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output  } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ListManagerService } from '../../service/list-manager.service';
-import { Display } from '../../common/display';
+import { Display } from '../../common/enum/display';
 import { ListItemDto } from '../../common/list-item-dto';
 
 @Component({
@@ -13,16 +13,13 @@ export class EditListItemsComponent implements OnInit{
   @Output() displayEmit = new EventEmitter<Display>();
   @Input() listId: number = -1;
   itemForm: FormGroup;
-  
-  //need to take in a listId number
-  //need to build out a listInfoDto object using the listId
-  //need to take the items from this.items().value and add to the listInfoDto above
 
   ngOnInit(): void {
     this.getList();
   }
 
-  constructor(public fb: FormBuilder, public listSvc: ListManagerService){
+  constructor(public fb: FormBuilder, public listSvc: ListManagerService
+  ){
     this.itemForm = this.fb.group({
       items: this.fb.array([])
     })
@@ -36,7 +33,12 @@ export class EditListItemsComponent implements OnInit{
 
   addItem(){
     this.items().push(this.newItem());
-    // console.log(this.items().length)
+  }
+
+  getItemId(i: number){
+    const temp = this.items().at(i).value as ListItemDto;
+    console.log('eli-gii-1 ' + temp.listItemId);
+    return -1;
   }
 
   getList(){

@@ -13,16 +13,16 @@ export class ListManagerService {
   constructor(private httpClient: HttpClient,
     private toastr: ToastrService) { }
 
-  // buildItems(listId: number){
-  //   return this.httpClient.get<ListInfoDto>(this.listUrl="/list/"+listId);
-  // }
-
   buildList(listId: number){
     return this.httpClient.get<ListInfoDto>(this.listUrl+"/list/"+listId);
   }
 
   buildLists(userId: number){
     return this.httpClient.get<ListInfoDto[]>(this.listUrl+"/user/"+userId);
+  }
+
+  deleteItem(itemId: number){
+    return this.httpClient.post<boolean>(this.listUrl+"/deleteItem/"+itemId,null);
   }
 
   updateList(list: ListInfoDto){

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared.module';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { ListManagerMainComponent } from '../components/list-manager-main/list-manager-main.component';
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { ListPageComponent } from '../components/list-page/list-page.component';
@@ -11,6 +13,7 @@ import { LoginPageComponent } from '../components/login-page/login-page.componen
 import { LogoutButtonComponent } from '../components/logout-button/logout-button.component';
 import { EditListComponent } from '../components/edit-list/edit-list.component';
 import { EditListItemsComponent } from '../components/edit-list-items/edit-list-items.component';
+import { ConfirmDeletePopupComponent } from '../components/confirm-delete-popup/confirm-delete-popup.component';
 
 const routes: Routes = [
     {path: 'listManager', component:ListManagerMainComponent},
@@ -27,13 +30,15 @@ const routes: Routes = [
     LoginPageComponent,
     LogoutButtonComponent,
     EditListComponent,
-    EditListItemsComponent
+    EditListItemsComponent,
+    ConfirmDeletePopupComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
-    ToastrModule.forRoot({positionClass:'toast-bottom-right'})
+    ToastrModule.forRoot({positionClass:'toast-bottom-right'}),
+    NgbModalModule
   ],
   exports: [
   ]

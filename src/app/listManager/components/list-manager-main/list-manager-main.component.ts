@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Display } from '../../common/display';
+import { Display } from '../../common/enum/display';
 import { UserService } from '../../service/user.service';
 
 @Component({

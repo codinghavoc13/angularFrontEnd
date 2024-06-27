@@ -3,7 +3,8 @@ import { ListInfoDto } from '../../common/list-info-dto';
 import { ListManagerService } from '../../service/list-manager.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Display } from '../../common/display';
+import { Display } from '../../common/enum/display';
+import { ListItem } from '../../common/enum/list-item';
 
 @Component({
   selector: 'app-list-detail',
@@ -15,6 +16,7 @@ export class ListDetailComponent implements OnInit{
   @Output() returnEmit = new EventEmitter<number>();
   @Output() displayEmit = new EventEmitter<Display>();
   listInfo: ListInfoDto = new ListInfoDto(false,[],-1,-1,-1,'','');
+  tgt: ListItem = ListItem.ITEM;
 
   constructor(private listSvc: ListManagerService,
     private router: Router,

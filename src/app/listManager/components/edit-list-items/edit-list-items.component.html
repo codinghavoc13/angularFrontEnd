@@ -21,7 +21,7 @@
 -->
 <form [formGroup]="itemForm">
     <div formArrayName="items">
-        <div *ngFor="let item of items().controls; let i=index"[formGroupName]="i">
+        <div *ngFor="let item of items().controls; let i=index" [formGroupName]="i">
             <div class="form-group mt-3">
                 <label class="form-label" for="itemName">Item Name</label>
                 <input type="text" class="form-control" id="itemName" name="itemName"
@@ -42,6 +42,11 @@
                 <textarea type="text" class="form-control" id="itemNotes" name="itemNotes"
                 formControlName="itemNotes"></textarea>
             </div>
+            <!-- Need to figure out how to pass the selected index to the popup without the
+             extra runs of the getItemId method
+            <div>
+                <app-confirm-delete-popup></app-confirm-delete-popup>
+            </div> -->
             <hr>
         </div>
         <div>

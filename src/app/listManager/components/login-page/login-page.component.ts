@@ -3,7 +3,7 @@ import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserDto } from '../../common/user-dto';
-import { Display } from '../../common/display';
+import { Display } from '../../common/enum/display';
 
 @Component({
   selector: 'app-login-page',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
-import { Display } from '../../common/display';
+import { Display } from '../../common/enum/display';
 
 @Component({
   selector: 'app-logout-button',
