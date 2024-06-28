@@ -1,3 +1,5 @@
+<!--This page can be delete or archived-->
+
 <!--Notes for this page:
 - for each item, need a delete button to remove the item
 - basic: need input fields for item name, quantity and notes
@@ -19,7 +21,7 @@
     public Long orderPosition;
     public String itemNotes;
 -->
-<form [formGroup]="itemForm">
+<!-- <form [formGroup]="itemForm">
     <div formArrayName="items">
         <div *ngFor="let item of items().controls; let i=index" [formGroupName]="i">
             <div class="form-group mt-3">
@@ -27,11 +29,6 @@
                 <input type="text" class="form-control" id="itemName" name="itemName"
                 formControlName="itemName">
             </div>
-            <!-- <div class="form-group mt-3">
-                <label class="form-label" for="quantity">Quantity</label>
-                <input type="text" class="form-control" id="quantity" name="quantity"
-                formControlName="quantity">
-            </div> -->
             <div class="form-group mt-3">
                 <label class="form-label" for="orderPosition">Order Position</label>
                 <input type="text" class="form-control" id="orderPosition" name="orderPosition"
@@ -42,11 +39,6 @@
                 <textarea type="text" class="form-control" id="itemNotes" name="itemNotes"
                 formControlName="itemNotes"></textarea>
             </div>
-            <!-- Need to figure out how to pass the selected index to the popup without the
-             extra runs of the getItemId method
-            <div>
-                <app-confirm-delete-popup></app-confirm-delete-popup>
-            </div> -->
             <hr>
         </div>
         <div>
@@ -55,4 +47,4 @@
             <a style="width: 25%;" class="btn btn-primary m-3" (click)="returnToList()">Discard and Return to List</a>
         </div>
     </div>
-</form>
+</form> -->

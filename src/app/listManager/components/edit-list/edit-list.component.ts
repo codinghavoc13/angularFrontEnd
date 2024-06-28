@@ -12,8 +12,6 @@ export class EditListComponent implements OnInit{
   @Input() listIdToEdit: number = -1;
   @Output() returnEmit = new EventEmitter<number>();
   listInfoDto: ListInfoDto = new ListInfoDto(false,[],-1,0,-1,'','');
-  // listToEdit: ListInfoDto = new ListInfoDto(false,[],-1,0,-1,'','');
-  originalList: ListInfoDto = new ListInfoDto(false,[],-1,0,-1,'','');
 
   constructor(private listSvc: ListManagerService,
     private userSvc: UserService
@@ -30,7 +28,6 @@ export class EditListComponent implements OnInit{
   getList(){
     this.listSvc.buildList(this.listIdToEdit).subscribe(
       data=>{
-        this.originalList = data;
         this.listInfoDto = data;
       }
     )
@@ -44,10 +41,6 @@ export class EditListComponent implements OnInit{
     }
   }
 
-  getListToEdit(list: ListInfoDto){
-    
-  }
-
   returnToMainPage(){
     this.returnEmit.emit(-1);
   }
@@ -58,7 +51,6 @@ export class EditListComponent implements OnInit{
     this.listSvc.updateList(this.listInfoDto).subscribe(
       data =>{
         this.listInfoDto = data;
-        // console.log(this.listInfoDto);
         this.returnToMainPage();
       }
     )

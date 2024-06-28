@@ -3,7 +3,10 @@
 <div class="card bg-light mt-3"
     *ngFor="let item of listInfo.listItems">
     <div class="p-4">
-        <span style="float: right;"><app-confirm-delete-popup [itemId]="item.listItemId" [tgt]="tgt" (refreshEmit)="buildList()"></app-confirm-delete-popup></span>
+        <span style="float: right;">
+             <app-edit-item-popup [itemIdToEdit]="item.listItemId" (refreshEmit)="buildList()"></app-edit-item-popup>
+            <app-confirm-delete-popup [itemId]="item.listItemId" [tgt]="tgt" (refreshEmit)="buildList()"></app-confirm-delete-popup>
+        </span>
         <h3>
             <span *ngIf="listInfo.ordered">{{item.orderPosition}}. </span>
             <!-- <span *ngIf="item.quantity>0">{{item.quantity}} - </span> -->
@@ -11,7 +14,5 @@
         <p *ngIf="item.itemNotes!=''"><span><b>Notes: </b>{{item.itemNotes}}</span></p>
     </div>
 </div>
-
-<a class="btn btn-success mt-3" (click)="editListItems()">Edit List Items</a>
 
 <a class="btn btn-success mt-3" (click)="returnToMainPage()">Go Back to Lists</a>

@@ -21,14 +21,11 @@ export class ConfirmDeletePopupComponent {
   ){}
 
   confirmDelete(content: TemplateRef<any>){
-    console.log('eli-cd-1');
-    this.modalSvc.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(
+    this.modalSvc.open(content).result.then(
       (result) =>{
         this.confirmResult = result;
         if(this.confirmResult =='delete'){
           if(this.tgt === ListItem.ITEM){
-            console.log('cdp-cd-2');
-            this.toastr.info('Deleting item ' + this.itemId);
             this.listSvc.deleteItem(this.itemId).subscribe(
               data => {
                 if(data){

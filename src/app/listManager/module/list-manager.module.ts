@@ -12,12 +12,12 @@ import { ListDetailComponent } from '../components/list-detail/list-detail.compo
 import { LoginPageComponent } from '../components/login-page/login-page.component';
 import { LogoutButtonComponent } from '../components/logout-button/logout-button.component';
 import { EditListComponent } from '../components/edit-list/edit-list.component';
-import { EditListItemsComponent } from '../components/edit-list-items/edit-list-items.component';
+// import { EditListItemsComponent } from '../components/edit-list-items/edit-list-items.component';
 import { ConfirmDeletePopupComponent } from '../components/confirm-delete-popup/confirm-delete-popup.component';
+import { EditItemPopupComponent } from '../components/edit-item-popup/edit-item-popup.component';
 
 const routes: Routes = [
     {path: 'listManager', component:ListManagerMainComponent},
-    {path: 'listManager/editListItemTest', component:EditListItemsComponent},
     {path: 'listManager/**', component:ListManagerMainComponent}
 ];
 
@@ -30,8 +30,9 @@ const routes: Routes = [
     LoginPageComponent,
     LogoutButtonComponent,
     EditListComponent,
-    EditListItemsComponent,
-    ConfirmDeletePopupComponent
+    // EditListItemsComponent,
+    ConfirmDeletePopupComponent,
+    EditItemPopupComponent
   ],
   imports: [
     CommonModule,

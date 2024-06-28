@@ -18,6 +18,8 @@ export class ListDetailComponent implements OnInit{
   listInfo: ListInfoDto = new ListInfoDto(false,[],-1,-1,-1,'','');
   tgt: ListItem = ListItem.ITEM;
 
+  showEdit: boolean = false;
+
   constructor(private listSvc: ListManagerService,
     private router: Router,
     private toastr: ToastrService
@@ -45,6 +47,14 @@ export class ListDetailComponent implements OnInit{
 
   returnToMainPage(){
     this.returnEmit.emit(-1);
+  }
+
+  setEditShowTrue(){
+    this.showEdit = true;
+  }
+
+  showEditComp(){
+    return this.showEdit;
   }
 
 }
