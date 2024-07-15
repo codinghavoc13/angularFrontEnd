@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Movie } from '../common/movie';
+import { environment } from '../../../environments/environment';
 import { Actor } from '../common/actor';
 import { MMDBResponse } from '../common/mmdb-response';
+import { Movie } from '../common/movie';
 
 @Injectable({
   providedIn: 'root'

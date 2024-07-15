@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { PassphraseBody } from '../common/passphrase-body';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class PassphraseService {
     this.httpClient.post<PassphraseBody>(this.encryptUrl, pp).subscribe(
       data=>{
         this.ppOutput = data as PassphraseBody;
-        this.router.navigate(['/passphraseResult']);
+        this.router.navigate(['/cipher/passphraseResult']);
       }
     )
   }
@@ -30,7 +30,7 @@ export class PassphraseService {
     this.httpClient.post<PassphraseBody>(this.decryptUrl, pp).subscribe(
       data=>{
         this.ppOutput = data as PassphraseBody;
-        this.router.navigate(['/passphraseResult']);
+        this.router.navigate(['/cipher/passphraseResult']);
       }
     )
   }

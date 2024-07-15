@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
+import { CipherBody } from '../common/cipher-body';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { BehaviorSubject } from 'rxjs';
-import { CipherBody } from '../common/cipher-body';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,7 @@ export class CaesarCipherService {
     this.httpClient.post<CipherBody>(this.baseUrl, cbInputParam).subscribe(
       data=>{
         this.cbOutput = data as CipherBody;
-        this.router.navigate(['/caesarResult']);
+        this.router.navigate(['/cipher/caesarResult']);
       }
     )
   }

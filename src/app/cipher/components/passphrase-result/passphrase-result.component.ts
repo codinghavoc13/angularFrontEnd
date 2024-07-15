@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
 import { PassphraseService } from '../../service/passphrase.service';
+import { CommonModule } from '@angular/common';
+import { MainModule } from '../../../main/module/main/main.module';
 
 @Component({
   selector: 'app-passphrase-result',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MainModule
+  ],
   templateUrl: './passphrase-result.component.html',
-  styleUrls: ['./passphrase-result.component.css']
+  styleUrl: './passphrase-result.component.css'
 })
 export class PassphraseResultComponent {
   ppResult = this.ppSvc.ppOutput;

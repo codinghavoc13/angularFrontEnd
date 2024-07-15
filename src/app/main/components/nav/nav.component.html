@@ -5,11 +5,12 @@
         <div class="dropdown"  dropdown>
             <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Monolith Listings</a>
             <ul *dropdownMenu class="dropdown-menu">
-                <li role="menuitem"><a class="dropdown-item" routerLink="/cipher">Cipher Main</a></li>
-                <li role="menuitem"><a class="dropdown-item" routerLink="/caesar">->Caesar Cipher</a></li>
-                <li role="menuitem"><a class="dropdown-item" routerLink="/passphrase">->Passphrase</a></li>
+                <li role="menuitem"><a class="dropdown-item" routerLink="cipher" routerLinkActive="active">Cipher Main</a></li>
+                <!--May look into removing these or figuring out how to direct to cipher main but pull up the different version-->
+                <li role="menuitem"><a class="dropdown-item" routerLink="caesar">->Caesar Cipher</a></li>
+                <li role="menuitem"><a class="dropdown-item" routerLink="passphrase">->Passphrase</a></li>
                 <li class="divider dropdown-divider"></li>
-                <li role="menuitem"><a class="dropdown-item" routerLink="/mmdb">MMDB</a></li>
+                <li role="menuitem"><a class="dropdown-item" routerLink="mmdb" routerLinkActive="active">MMDB</a></li>
                 <!-- <li class="divider dropdown-divider"></li>
                 <li role="menuitem"><a class="dropdown-item" href="http://www.codingHavoc.com">CodingHavoc Home</a></li> -->
             </ul>

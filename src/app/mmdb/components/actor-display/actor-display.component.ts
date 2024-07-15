@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actor } from '../../common/actor';
 import { MMDBResponse } from '../../common/mmdb-response';
 import { Movie } from '../../common/movie';
 import { MmdbService } from '../../service/mmdb.service';
+import { CommonModule } from '@angular/common';
+import { MainModule } from '../../../main/module/main/main.module';
+import { MmdbModule } from '../../module/mmdb/mmdb.module';
 
 @Component({
   selector: 'app-actor-display',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MainModule,
+    MmdbModule
+  ],
   templateUrl: './actor-display.component.html',
-  styleUrls: ['./actor-display.component.css']
+  styleUrl: './actor-display.component.css'
 })
-export class ActorDisplayComponent implements OnInit{
+export class ActorDisplayComponent {
   // actorToDisplay: Actor = new Actor(-1,"","","");
 
   nullActor: Actor = new Actor(-1,"","","");
@@ -26,4 +35,5 @@ export class ActorDisplayComponent implements OnInit{
       this.router.navigate(['/mmdb']);
     }
   }
+
 }

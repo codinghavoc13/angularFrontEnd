@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CaesarCipherService } from '../../service/caesar-cipher.service';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CipherBody } from '../../common/cipher-body';
+import { CaesarCipherService } from '../../service/caesar-cipher.service';
+import { CaesarExplainedComponent } from '../caesar-explained/caesar-explained.component';
+import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-caesar-cipher',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    CaesarExplainedComponent,
+    RouterLink, RouterLinkActive, RouterOutlet
+  ],
   templateUrl: './caesar-cipher.component.html',
-  styleUrls: ['./caesar-cipher.component.css']
+  styleUrl: './caesar-cipher.component.css'
 })
-
-export class CaesarCipherComponent{
+export class CaesarCipherComponent {
   keySelect = "1K";
   showExplained = false;
   cbInput: CipherBody | undefined;
@@ -40,4 +49,5 @@ export class CaesarCipherComponent{
   showExplanation(flag: boolean){
     this.showExplained = flag;
   }
+
 }

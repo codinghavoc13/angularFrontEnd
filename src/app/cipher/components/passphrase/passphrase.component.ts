@@ -1,12 +1,22 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PassphraseBody } from '../../common/passphrase-body';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PassphraseService } from '../../service/passphrase.service';
+import { PassphraseExplainedComponent } from '../passphrase-explained/passphrase-explained.component';
+import { CommonModule } from '@angular/common';
+import { MainModule } from '../../../main/module/main/main.module';
 
 @Component({
   selector: 'app-passphrase',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    PassphraseExplainedComponent,
+    MainModule
+  ],
   templateUrl: './passphrase.component.html',
-  styleUrls: ['./passphrase.component.css']
+  styleUrl: './passphrase.component.css'
 })
 export class PassphraseComponent {
   showExplained = false;

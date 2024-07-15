@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Movie } from '../../common/movie';
 import { MmdbService } from '../../service/mmdb.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-movie-list',
+  standalone: true,
+  imports: [
+    CommonModule
+  ],
   templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.css']
+  styleUrl: './movie-list.component.css'
 })
-export class MovieListComponent implements OnInit{
+export class MovieListComponent {
   movies: Movie[] = [];
 
   constructor(private mmdbSvc: MmdbService){}

@@ -1,19 +1,16 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { MmdbService } from 'src/app/mmdb/service/mmdb.service';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MainModule } from '../../module/main/main.module';
 
 @Component({
   selector: 'app-nav',
+  standalone: true,
+  imports: [BsDropdownModule,
+    MainModule
+  ],
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrl: './nav.component.css'
 })
 export class NavComponent {
-  //add a method here to call mmdbsvc.buildmovielist, then navigate to the mmdb main page
-  constructor(private mmdbSvc: MmdbService,
-    private router: Router){}
 
-  loadMMDBMain(){
-    this.mmdbSvc.buildMovieList();
-    this.router.navigate(['/mmdb']);
-  }
 }

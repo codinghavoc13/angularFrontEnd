@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Actor } from '../../common/actor';
+import { Component } from '@angular/core';
 import { MmdbService } from '../../service/mmdb.service';
+import { Actor } from '../../common/actor';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-actor-list',
+  standalone: true,
+  imports: [
+    CommonModule],
   templateUrl: './actor-list.component.html',
-  styleUrls: ['./actor-list.component.css']
+  styleUrl: './actor-list.component.css'
 })
-export class ActorListComponent implements OnInit{
+export class ActorListComponent {
   actors: Actor[] = [];
 
   constructor(private mmdbSvc: MmdbService){}
@@ -19,5 +23,6 @@ export class ActorListComponent implements OnInit{
   prepActorDetailsPage(movieId: number){
     this.mmdbSvc.buildActorDetail(movieId);
   }
+
 
 }
