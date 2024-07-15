@@ -1,0 +1,16 @@
+<h1>No registration at the moment</h1>
+<p>I plan to create a couple 'demo' profiles that are limited in how many lists and items per list that will reset with each login.</p>
+<form #loginForm="ngForm">
+    <div class="form-group">
+        <label for="email_address">Email Address</label>
+        <input type="email" class="form-control" id="email_address" aria-describedby="emailHelp"
+        [(ngModel)]="loginDTO.email" name="email">
+    </div>
+    <div class="form-group">
+        <label for="pw_input">Password</label>
+        <input type="password" class="form-control" id="pw_input"
+        [(ngModel)]="loginDTO.pwClear" name="pwClear">
+    </div>
+    <button type="submit" class="btn btn-primary mt-3" (click)="login()">Login</button>
+    <!-- <a href="#" class="btn btn-primary" routerLink="/listManager/listPage">Login</a> -->
+</form>

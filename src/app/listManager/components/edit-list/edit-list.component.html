@@ -1,0 +1,22 @@
+<!--Rework this into a popup modal, mirror off edit-list-items component-->
+<!--Look into renaming this component-->
+<form #listForm="ngForm">
+    <div class="form-group mt-3">
+        <label class="form-label" for="listNameInput">List Name</label>
+        <input type="text" class="form-control" id="listNameInput" name="listNameInput" [(ngModel)]="listInfoDto.listName">
+    </div>
+    <div class="form-group checkbox">
+        <label class="form-label" for="orderedInput">
+            <input type="checkbox" class="mt-3" id="orderedInput" name="orderedInput" 
+            [(ngModel)]="listInfoDto.ordered" value="">Ordered List?
+        </label>
+    </div>
+    <!--Need to work on the back end part but eventually need another check box for a checked list-->
+    <div class="form-group mt-3">
+        <label class="form-label" for="listNotesInput">List Notes</label>
+        <textarea type="text" class="form-control" id="listNotesInput" name="listNotesInput" [(ngModel)]="listInfoDto.listNotes"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success mt-3" (click)="submit()">Submit</button>
+    <button type="submit" class="btn btn-warning mt-3 ml-3" (click)="discardChanges()">Discard Changes</button>
+</form>
+<a class="btn btn-success mt-3" (click)="returnToMainPage()">Go Back to Lists</a>

@@ -1,0 +1,19 @@
+<h2 *ngIf="(checkUser() | async) as user">
+    Welcome {{user.firstName}}
+</h2>
+<table>
+    <tr>
+        <th>List Name</th>
+        <th class="numItemsCol">Number of Items</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let list of lists">
+        <td>{{list.listName}}</td>
+        <td class="numItemsCol">{{list.numberOfItems}}</td>
+        <td><a class="btn btn-success" (click)="viewList(list.listId)">View List</a></td>
+        <td><a class="btn btn-warning" (click)="sendToEdit(list.listId)">Edit List Info</a></td>
+        <td><a class="btn btn-danger" (click)="deleteList(list.listId)">Delete List</a></td>
+    </tr>
+</table>

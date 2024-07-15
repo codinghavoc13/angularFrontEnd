@@ -1,0 +1,11 @@
+<a class="btn btn-warning" (click)="confirmDelete(content)">Delete Item</a>
+
+<ng-template #content let-modal>
+    <div class="modal-body">
+        <h1>Confirm Delete</h1>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-success" (click)="modal.close('delete')">Yes, delete</a>
+        <a class="btn btn-warning" (click)="modal.close('cancel')">No, I made a mistake</a>
+    </div>
+</ng-template>

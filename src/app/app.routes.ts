@@ -8,6 +8,7 @@ import { PassphraseComponent } from './cipher/components/passphrase/passphrase.c
 import { PassphraseResultComponent } from './cipher/components/passphrase-result/passphrase-result.component';
 import { MovieDisplayComponent } from './mmdb/components/movie-display/movie-display.component';
 import { ActorDisplayComponent } from './mmdb/components/actor-display/actor-display.component';
+import { ListManagerMainComponent } from './listManager/components/list-manager-main/list-manager-main.component';
 
 export const routes: Routes = [
     {path: '', component: MainComponent},
@@ -19,4 +20,6 @@ export const routes: Routes = [
     {path: 'mmdb', component: MmdbMainComponent},
     {path: 'mmdb/movie-display', component: MovieDisplayComponent},
     {path: 'mmdb/actor-display', component: ActorDisplayComponent},
+    {path: 'listManager', component:ListManagerMainComponent},
+    {path: 'listManager/**', component:ListManagerMainComponent},
     {path: '**', component:MainComponent}];
