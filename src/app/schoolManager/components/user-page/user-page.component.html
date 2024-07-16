@@ -1,0 +1,60 @@
+<div *ngIf="(smUserSvc.currentUser$ | async) as user">
+    <div>
+        <app-navbar [loggedInRole]="userRole" [loggedInVerification]="userVerification" (viewEmitter)="setTabView($event)"></app-navbar>
+
+        <div class="tab-content">
+            <div id="home" *ngIf="viewTab=='home'">
+                <h3>Home</h3>
+                <p>User Main Page</p>
+            </div>
+            <div id="menu1" *ngIf="viewTab=='add-assignments' && userRole=='TEACHER'">
+                <h3>Assignments</h3>
+                <app-add-assignments></app-add-assignments>
+            </div>
+            <div id="menu2" *ngIf="viewTab=='absences'">
+                <app-absence-submit-page></app-absence-submit-page>
+            </div>
+            <div id="menu3" *ngIf="viewTab=='myContact'">
+                <app-profile-page></app-profile-page>
+            </div>
+            <div id="menu4" *ngIf="viewTab=='view-assignments' && (userRole=='TEACHER' || userRole=='STUDENT'|| userRole=='PARENT')">
+                <app-view-assignments></app-view-assignments>
+            </div>
+            <div id="menu5" *ngIf="viewTab=='newUser' && userRole=='ADMIN'">
+                <app-register-user></app-register-user>
+            </div>
+            <div id="menu6" *ngIf="viewTab=='main'">
+                <app-main-content></app-main-content>
+            </div>
+            <div id="menu7" *ngIf="viewTab=='view-users' && userRole=='ADMIN'">
+                <app-view-user></app-view-user>
+            </div>
+            <div id="menu8" *ngIf="viewTab=='assign-student' && userRole=='ADMIN'">
+                <app-assign-student></app-assign-student>
+            </div>
+            <div id="unverifiedUsers" *ngIf="viewTab=='unverifiedUsers' && userRole=='ADMIN'">
+                <app-view-unverified-users></app-view-unverified-users>
+            </div>
+            <div id="enrollStudent" *ngIf="viewTab=='enrollStudent' && (userRole=='PARENT' || userRole=='PRIMARY')">
+                <app-self-register [heading]="'Student'"></app-self-register>
+            </div>
+            <!-- <div id="viewStudents" *ngIf="viewTab=='viewStudents' && (userRole=='PARENT' || userRole=='PRIMARY')"> -->
+            <div id="viewStudents" *ngIf="viewTab=='viewStudents'">
+                <!--primary/parents would view just their child(ren)-->
+                <!--super admin and admin could view either all or by course-->
+                <!--teachers would view all of their students grouped by course-->
+                <app-view-students></app-view-students>
+            </div>
+            <div id="viewStudentsByCourse" *ngIf="viewTab=='viewStudentsByCourse'">
+                <app-view-students-by-course></app-view-students-by-course>
+            </div>
+            <div id="gradeBook"*ngIf="viewTab=='gradeBook'">
+                <app-grade-book-entry></app-grade-book-entry>
+            </div>
+        </div>
+    </div>
+    <!-- <hr> -->
+    <div>
+        <p><a class="btn btn-dark" (click)="logout()">Logout</a></p>
+    </div>
+</div>

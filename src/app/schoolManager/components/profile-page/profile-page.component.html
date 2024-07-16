@@ -1,0 +1,37 @@
+<div *ngIf="(smUserSvc.currentUser$ | async) as user">
+    <h3>Welcome {{user.firstName}}</h3>
+    <div>
+        <table>
+            <tr>
+                <td>First Name:</td>
+                <td>{{user.firstName}}</td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td>{{user.lastName}}</td>
+            </tr>
+            <tr>
+                <td>User Name:</td>
+                <td>{{user.username}}</td>
+            </tr>
+            <tr>
+                <td>Email Address:</td>
+                <td>{{user.emailString}}</td>
+            </tr>
+            <tr>
+                <td>Phone Number:</td>
+                <td>{{user.phoneString}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<hr>
+<!--add a button to 'hide' the table above and show form to allow user to update 'some' fields
+allow updates: email and phone
+need to think about: allowing updates to username-->
+<!-- <form>
+    <div>
+        <label></label>
+        <input>
+    </div>
+</form> -->

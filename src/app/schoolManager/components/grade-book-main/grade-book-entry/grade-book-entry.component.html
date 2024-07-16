@@ -1,0 +1,46 @@
+<!--Thinking about either moving this to a new component or introducing a new 'page' to this one that only shows 
+    grade summaries, likely an accordion again with a table inside the accordion that displays the student's name, 
+    their overall grade in the course, and a button to show more details; showing more details would include a breakdown
+    of each assignment type and what the average is for each block-->
+<!--Scrap the accordion plan, going with a split panel display
+    - left panel is a list of filters: course name/block/period, assignment type, due date week blocks
+    - right panel will display the following: student name - course - assignment - assignment due date - grade - edit/save button
+        example: 'John Doe - Biology - Mid Term Quiz - 10 December 2024 - 95 - Edit/Save'
+        Right panel will likely be a table format to keep each section the same width
+        Edit/Save button text will default to Edit but will change to Save when the Teacher is trying to make a change-->
+        <div class="row">
+            <div style="width: 30%;">
+                <ng-container>
+                <ul>
+                    <li *ngFor="let courses of gradeBook.courseNames">{{courses}}</li>
+                </ul>
+            </ng-container>
+                <hr>
+                <ng-container>
+                    <ul>
+                        <li *ngFor="let week of gradeBook.weeks">{{week.start}} - {{week.stop}}</li>
+                    </ul>
+                </ng-container>
+            </div>
+            <div style="width: 70%;">
+                <table>
+                    <tr>
+                        <th>Student</th>
+                        <th>Assignment Info</th>
+                        <th>Grade</th>
+                        <th></th>
+                    </tr>
+                    <tr *ngFor="let gradeDto of gradeBook.gradeDtos">
+                        <td style="width: 25%;">{{gradeDto.studentFirstName}} {{gradeDto.studentLastName}}</td>
+                        <td style="width: 25%;">{{gradeDto.assignmentTitle}} - {{gradeDto.assignmentDueDate}}</td>
+                        <td style="width: 10%; text-align: right;">
+                            {{ displayGrade(gradeDto.gradeId, gradeDto.grade) }}
+                        </td>
+                        <td style="width: 15%;">
+                            <button class="btn btn-primary" (click)="openGradeEntryForm(gradeDto.gradeId, gradeDto.grade)">Update Grade</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <button (click)="submitChanges()">Save Changes</button>

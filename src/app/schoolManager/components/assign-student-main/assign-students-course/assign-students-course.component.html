@@ -1,0 +1,62 @@
+<div *ngIf="showCourseTable">
+    <label for="gradeSelect">Grade Select</label>
+    <select [(ngModel)]="gradeSelect" id="gradeSelect" name="gradeSelect">
+        <option value="default">-----</option>
+        <option *ngFor="let grade of grades;">{{grade}}</option>
+    </select>
+    <button (click)="buildStudentList()">Select Grade</button>
+    <hr>
+    <h2>Select a Course</h2>
+    <table>
+        <tr>
+            <th>Course Name</th>
+            <th>Teacher Name</th>
+            <th><button (click)="removeCourseSelect()" [disabled]="courseSelect==0">Remove Course Select</button></th>
+        </tr>
+        <tr *ngFor="let course of courseListDisplay">
+            <td>{{course.courseName}}</td>
+            <td>{{course.teacherFirstName}} {{course.teacherLastName}}</td>
+            <td><button (click)="selectCourse(course)" [disabled]="courseSelect>0">Select Course</button></td>
+        </tr>
+    </table>
+</div>
+
+<!--these two table could be combined into one with the if statement moved into the table instead of sitting
+on the div:
+    - the Select/Remove all button
+    - the selected course information
+    - which list to build from
+-->
+<div *ngIf="showSelectTable">
+    <h2>Select students to add to {{courseDetail!.courseName}} with {{courseDetail!.teacherFirstName}} {{courseDetail!.teacherLastName}} </h2>
+    <app-view-students-table [studentList]="studentList"
+        [showEnrollBtn]=true
+        [showEnrollAllBtn]=true
+        [showRemoveBtn]=false
+        [showRemoveAllBtn]=false
+        (selectAllStudentsEmit)="selectAll()"
+        (selectStudentEmit)="addStudentToWorkingList($event)"></app-view-students-table>
+    <!--QOTD: Keep with current path or move both to one page-->
+</div>
+<div *ngIf="showConfirmTable">
+    <h2>Selected Course Information</h2>
+    <h3>{{courseDetail!.courseName}} - {{courseDetail!.teacherFirstName}} {{courseDetail!.teacherLastName}}</h3>
+    <app-view-students-table [studentList]="workingList" 
+        [showEnrollBtn]=false
+        [showEnrollAllBtn]=false
+        [showRemoveBtn]=true
+        [showRemoveAllBtn]=true
+        (removeAllStudentsEmit)="removeAll()"
+        (removeStudentEmit)="removeFromWorkingList($event)"></app-view-students-table>
+</div>
+<!-- <hr> -->
+<button *ngIf="showCourseTable" class="btn btn-success"
+    [disabled]="this.courseSelect == 0 || this.studentList.length == 0" (click)="moveToSelect()">Select
+    Students</button>
+<button *ngIf="showSelectTable" class="btn btn-success" (click)="returnToCourseSelect()">Back to Course
+    Selection</button>
+<button *ngIf="showConfirmTable" class="btn btn-success" (click)="returnToStudentSelect()">Back to Student
+    Selection</button>
+<button *ngIf="showSelectTable" class="btn btn-success" [disabled]="this.workingList.length == 0"
+    (click)="moveToConfirm()">Confirm Selection</button>
+<button *ngIf="showConfirmTable" class="btn btn-warning" (click)="submit()">Confirm</button>

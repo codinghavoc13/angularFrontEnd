@@ -1,0 +1,20 @@
+<div *ngIf="selectedAssignments.length==0">
+    <p>No assignments selected</p>
+</div>
+<div *ngIf="selectedAssignments.length>0">
+    <p>You have selected {{selectedAssignments.length}} assignments</p>
+    <table>
+        <tr>
+            <th class="assignmentColumn">Title</th>
+            <th class="assignmentTypeColumn">Type</th>
+            <th class="assignmentDueDateColumn">Due Date</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let assignment of selectedAssignments">
+            <td>{{assignment.assignmentTitle}}</td>
+            <td>{{assignment.assignmentType}}</td>
+            <td>{{assignment.assignmentDueDate}}</td>
+            <td><button>Remove</button></td>
+        </tr>
+    </table>
+</div>

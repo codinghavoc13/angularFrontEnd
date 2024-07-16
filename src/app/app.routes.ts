@@ -8,6 +8,9 @@ import { PassphraseComponent } from './cipher/components/passphrase/passphrase.c
 import { PassphraseResultComponent } from './cipher/components/passphrase-result/passphrase-result.component';
 import { MovieDisplayComponent } from './mmdb/components/movie-display/movie-display.component';
 import { ActorDisplayComponent } from './mmdb/components/actor-display/actor-display.component';
+import { SchoolManagerMainComponent } from './schoolManager/components/school-manager-main/school-manager-main.component';
+import { LoginComponent } from './schoolManager/components/login/login.component';
+import { UserPageComponent } from './schoolManager/components/user-page/user-page.component';
 
 export const routes: Routes = [
     {path: '', component: MainComponent},
@@ -19,4 +22,7 @@ export const routes: Routes = [
     {path: 'mmdb', component: MmdbMainComponent},
     {path: 'mmdb/movie-display', component: MovieDisplayComponent},
     {path: 'mmdb/actor-display', component: ActorDisplayComponent},
+    {path: 'schoolManager', component: SchoolManagerMainComponent},
+    {path: 'schoolManager/login', component: LoginComponent},
+    {path: 'schoolManager/userPage', component: UserPageComponent},
     {path: '**', component:MainComponent}];

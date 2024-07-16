@@ -1,0 +1,78 @@
+<!--Select a student by grade level or all, sort features on first and last name-->
+<div *ngIf="showGradeSelect">
+    <label for="gradeSelect">Grade Select</label>
+    <select [(ngModel)]="gradeSelect" id="gradeSelect" name="gradeSelect">
+        <option value="default">-----</option>
+        <option *ngFor="let grade of grades;">{{grade}}</option>
+    </select>
+    <button (click)="buildStudentList()">Select Grade</button>
+</div>
+<div *ngIf="showStudentSelectTable">
+    <h2>Currently Selected Grade: {{ gradeSelect }}</h2>
+    <button (click)="changeGradeLevel()">Select a Different Grade</button><hr>
+    <app-view-students-table 
+        [showRemoveBtn]=false 
+        [showEnrollBtn]=true 
+        [studentList]="studentList" 
+        (selectStudentEmit)="selectStudent($event)"></app-view-students-table>
+</div>
+<!--After selecting a student, display their current course schedule with either the course name displayed or 'No Course Selected' if null-->
+<div *ngIf="showCourseSelect">    
+    <h2>Currently Selected Grade: {{ gradeSelect }}</h2>
+    <h2>Currently Selected Student: {{ studentSelect!.student!.firstName }} {{ studentSelect!.student!.lastName }}</h2>
+    <button (click)="changeStudent()">Select a Different Student</button><hr>
+    <div *ngIf="workingStudentCourseList.length==0">
+        <h2>No courses have been selected</h2>
+    </div>
+    <div *ngIf="workingStudentCourseList.length>0">
+    <h2>Current Schedule</h2>
+    <table>
+        <tr>
+            <th>Period</th>
+            <th>Course Name</th>
+            <th>Teacher Name</th>
+            <th></th>
+        </tr>
+        <!--Need to add a button to remove a course. Remove a course will need to update the course list-->
+        <tr *ngFor="let course of workingStudentCourseList">
+            <td>{{course.period}}
+                <span *ngIf="course.courseBlock=='FALL_SEMESTER'"> - Fall</span>
+                <span *ngIf="course.courseBlock=='SPRING_SEMESTER'"> - Spring</span>
+            </td>
+            <td>{{course.courseName}}</td>
+            <!--Look at the sort code to show/hide a Select/Deselect Course button-->
+            <td>{{course.teacherFirstName}} {{course.teacherLastName}}</td>
+            <td><span *ngIf="course.cptId!=-1"><button (click)="removeCourse(course)">Remove Course</button></span></td>
+        </tr>
+    </table>
+</div>
+<hr>
+<div *ngIf="displayCourseList.length==0">
+    <h2>There are no available courses to select from</h2>
+</div>
+<div *ngIf="displayCourseList.length>0">
+    <h2>Select a Course</h2>
+    <table>
+        <tr>
+            <th>Course Name</th>
+            <th>Teacher Name</th>
+            <th>Period</th>
+        </tr>
+        <tr *ngFor="let course of displayCourseList">
+            <td>{{course.courseName}}</td>
+            <td>{{course.teacherFirstName}} {{course.teacherLastName}}</td>
+            <td>{{course.period}}
+                <span *ngIf="course.courseBlock=='FALL_SEMESTER'"> - Fall</span>
+                <span *ngIf="course.courseBlock=='SPRING_SEMESTER'"> - Spring</span>
+            </td>
+            <td><button (click)="selectCourse(course)" >Select Course</button></td>
+        </tr>
+    </table>
+</div>
+    <button (click)="submit()">Submit</button>
+</div>
+
+<!--Future work: save which courses the student has completed and not include those in result set; after implmenting the course prerequisites
+feature, include that (show courses the student has not taken but has taken the prerequisites for; example german 1 is a prereq for german 2 which
+is a prereq for german 3, if the student has taken german 1 but not 2 or 3, only show german 2 since the student has taken german 1 but does not
+meet the prereqs for german 3)-->

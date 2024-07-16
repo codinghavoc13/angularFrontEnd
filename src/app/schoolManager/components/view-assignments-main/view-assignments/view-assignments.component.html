@@ -1,0 +1,106 @@
+<!--Plan for multipurpose:
+- Teacher version shows assignments the teacher has created
+- Student version shows assignments assigned to them and grades
+- Parent version would be similar to Student version but would should all students associated with them-->
+<div *ngIf="roleView=='TEACHER'">
+    <ng-container *ngIf="tchrShowAssignmentList">
+        <!--Drop this down to one reference, vat handles displaying all tables, sends the selected list back here which handles submitting to back end-->
+        <app-view-assignment-table-group
+            (selectedListEmit)="showCourseSelect($event)"></app-view-assignment-table-group>
+        <hr>
+    </ng-container>
+    <ng-container *ngIf="tchrShowCourseList">
+        <table>
+            <tr>
+                <th class="courseNameColumn">Course Name</th>
+                <th class="coursePeriodBlockColumn">Period</th>
+                <th>
+                    <span *ngIf="selectedCourses.length==0"><button (click)="selectAllCourses()">Select All Courses</button></span>
+                    <span *ngIf="selectedCourses.length>0"><button (click)="deselectAllCourses()">Deselect All Courses</button></span>
+                </th>
+            </tr>
+            <tr *ngFor="let dto of courseDTOList">
+                <td>{{dto.course.courseName}}</td>
+                <td>{{buildPeriodBlockString(dto)}}</td>
+                <td><span *ngIf="!isCourseSelected(dto.cptId)"><button (click)="selectCourse(dto.cptId)">Select
+                            Course</button></span>
+                    <span *ngIf="isCourseSelected(dto.cptId)"><button (click)="removeCourse(dto.cptId)">Remove
+                            Course</button></span>
+                </td>
+            </tr>
+        </table>
+        <button (click)="showStudentSelect()">Next Page - Select Students</button>
+    </ng-container>
+    <ng-container *ngIf="tchrShowStudentList">
+        <div ngbAccordion [closeOthers]="true">
+            <div ngbAccordionItem *ngFor="let dto of displayList">
+                <h2 ngbAccordionHeader>
+                    <button ngbAccordionButton>{{dto.course.courseName}} - {{buildPeriodBlockString(dto)}}</button>
+                </h2>
+                <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                        <ng-template>
+                            <div *ngIf="dto.students.length==0">
+                                <h4>No students enrolled for this course</h4>
+                            </div>
+                            <div *ngIf="dto.students.length>0">
+                                <table>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr *ngFor="let student of dto.students">
+                                        <td>{{student.firstName}} {{student.lastName}}</td>
+                                        <td><button
+                                                (click)="selectStudent(student, student.userId, dto.cptId)"
+                                                [disabled]="isStudentSelected(student)">Select</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button (click)="moveToConfirm()">Next Step - Confirmation</button>
+    </ng-container>
+    <ng-container *ngIf="tchrShowConfirm">
+        <div class="row">
+            <div style="width: 50%;">
+                <h2>Selected Assignments</h2>
+                <table>
+                    <tr *ngFor="let assignment of selectedAssignments">
+                        <td style="width: 90%;">{{assignment.assignmentTitle}}</td>
+                        <td><button (click)="removeAssignment(assignment)" class="btn btn-danger">X</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width: 50%;">
+                <h2>Selected Students</h2>
+                <table>
+                    <tr *ngFor="let student of selectedStudentsList">
+                        <td style="width: 90%;">{{student.firstName}} {{student.lastName}}</td>
+                        <td><button (click)="removeStudent(student)" class="btn btn-danger">X</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <button (click)="submit()">Submit</button>
+    </ng-container>
+</div>
+<div *ngIf="roleView=='STUDENT'">
+    <!--student and parent versions will likely be the same: grades, grouped by course, with grade for that assignment
+    Will probably use the accordion design, one tab for each assignment type, the tab will have:
+        - the number of assignments assigned
+        - the number that have been graded
+        - the overall grade for that group of assignments (plan for now is homework/quiz/test = 30/30/40)
+    Below the accordion will be the overall grade for the course as of when they are viewing it
+    The big difference between the two views is that the student will only show that student's info, the parent will show all students;
+        I'm thinking a separate component that takes a list of student info; the student will simply be a list of one-->
+    <p>Student version</p>
+</div>
+<div *ngIf="roleView=='PARENT'">
+    <p>Parent version</p>
+</div>
+<hr>

@@ -9,6 +9,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     RouterLink, RouterLinkActive, RouterOutlet
   ],
   exports: [
+    CommonModule,
     RouterLink, RouterLinkActive, RouterOutlet
   ]
 })

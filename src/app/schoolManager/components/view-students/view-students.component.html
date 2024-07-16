@@ -1,0 +1,25 @@
+<ng-container *ngIf="role=='ADMIN' || role=='SUPER_ADMIN'">
+    <h2>All Students</h2>
+    <app-view-students-sub [students]="students"[count]="count"></app-view-students-sub>
+</ng-container>
+<ng-container *ngIf="role=='TEACHER'">
+    <div ngbAccordion [closeOthers]="true">
+        <div ngbAccordionItem *ngFor="let dto of studentList">
+            <h2 ngbAccordionHeader>
+                <button ngbAccordionButton>{{courseToString(dto)}}</button>
+            </h2>
+            <div ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                    <ng-template>
+                        <div *ngIf="dto.students.length==0">
+                            <h4>No students enrolled for this course</h4>
+                        </div>
+                        <div *ngIf="dto.students.length>0">
+                            <app-view-students-sub [students]="dto.students" [count]="dto.students.length" ></app-view-students-sub>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
