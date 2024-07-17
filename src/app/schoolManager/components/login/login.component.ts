@@ -3,15 +3,16 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SMLoginDTO } from '../../common/smlogin-dto';
 import { UserService } from '../../service/user.service';
-import { SchoolManagerModule } from '../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../main/module/main/main.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Assignment } from '../../../common/assignment';
 import { AssignmentService } from '../../../service/assignment.service';
 import { UserService } from '../../../service/user.service';
-import { SchoolManagerModule } from '../../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../../main/module/main/main.module';
 
 @Component({
@@ -10,7 +9,6 @@ import { MainModule } from '../../../../main/module/main/main.module';
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
   ],
   templateUrl: './view-assignment-table-group.component.html',
   styleUrl: './view-assignment-table-group.component.css'

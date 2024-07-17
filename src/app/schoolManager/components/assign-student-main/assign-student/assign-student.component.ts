@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDto } from '../../../common/user-dto';
 import { UserService } from '../../../service/user.service';
-import { SchoolManagerModule } from '../../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../../main/module/main/main.module';
+import { AssignStudentCoursesComponent } from '../assign-student-courses/assign-student-courses.component';
+import { AssignStudentsCourseComponent } from '../assign-students-course/assign-students-course.component';
 
 @Component({
   selector: 'app-assign-student',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    AssignStudentCoursesComponent,
+    AssignStudentsCourseComponent
   ],
   templateUrl: './assign-student.component.html',
   styleUrl: './assign-student.component.css'

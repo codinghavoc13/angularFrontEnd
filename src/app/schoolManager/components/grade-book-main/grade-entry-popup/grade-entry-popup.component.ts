@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { SchoolManagerModule } from '../../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../../main/module/main/main.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-grade-entry-popup',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './grade-entry-popup.component.html',
   styleUrl: './grade-entry-popup.component.css'

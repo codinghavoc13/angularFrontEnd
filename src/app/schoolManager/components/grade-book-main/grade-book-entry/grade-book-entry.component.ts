@@ -6,15 +6,13 @@ import { SingleGradeDTO } from '../../../common/single-grade-DTO';
 import { TeacherService } from '../../../service/teacher.service';
 import { UserService } from '../../../service/user.service';
 import { GradeEntryPopupComponent } from '../grade-entry-popup/grade-entry-popup.component';
-import { SchoolManagerModule } from '../../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../../main/module/main/main.module';
 
 @Component({
   selector: 'app-grade-book-entry',
   standalone: true,
   imports: [
-    MainModule,
-    SchoolManagerModule
+    MainModule
   ],
   templateUrl: './grade-book-entry.component.html',
   styleUrl: './grade-book-entry.component.css'

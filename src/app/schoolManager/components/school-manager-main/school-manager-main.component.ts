@@ -1,22 +1,20 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../service/user.service';
-import { SchoolManagerModule } from '../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../main/module/main/main.module';
+import { MainContentComponent } from '../main-content/main-content.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-school-manager-main',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    MainContentComponent,
+    NavbarComponent
   ],
   templateUrl: './school-manager-main.component.html',
   styleUrl: './school-manager-main.component.css'
 })
 export class SchoolManagerMainComponent {
-  constructor(public smUserSvc: UserService){}
-
-  logout(){
-    this.smUserSvc.logout();
-  }
+  constructor(){
+    console.log('SchoolManagerMain constructor')}
 }

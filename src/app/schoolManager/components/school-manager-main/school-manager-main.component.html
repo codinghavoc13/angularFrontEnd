@@ -1,15 +1,10 @@
 <div class="col-md-12">
-    <!-- <app-navbar></app-navbar> -->
-    <!-- <app-main-content></app-main-content> -->
+    <p>Test</p>
+    <!-- <div> -->
+        <app-navbar></app-navbar>
+    <!-- </div> -->
     <div>
-        <h2>School Manager Main Page</h2>
-        <h3><b>ATTENTION:</b></h3>
-        <h4>This site is not intended to be run on small screens such as mobile devices. You can view it on smaller screens but some of the display may not line up right</h4>
-        <p>This is my idea of a single source portal for parents, students, teachers, school admin staff for managing grades, attendance and contact information. More features may be added as I'm working on this</p>
-    
-        <div *ngIf="!(smUserSvc.currentUser$ | async)">
-            <p><a class="btn btn-dark btn-login" routerLink="/schoolManager/login">Login page</a></p>
-        </div>
+        <app-main-content></app-main-content>
     </div>
     <p>Test</p>
 </div>

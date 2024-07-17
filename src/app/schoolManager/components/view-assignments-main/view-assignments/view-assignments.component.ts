@@ -7,15 +7,17 @@ import { UserDto } from '../../../common/user-dto';
 import { StaffService } from '../../../service/staff.service';
 import { TeacherService } from '../../../service/teacher.service';
 import { UserService } from '../../../service/user.service';
-import { SchoolManagerModule } from '../../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../../main/module/main/main.module';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { ViewAssignmentTableGroupComponent } from '../view-assignment-table-group/view-assignment-table-group.component';
 
 @Component({
   selector: 'app-view-assignments',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    NgbAccordionModule,
+    ViewAssignmentTableGroupComponent
   ],
   templateUrl: './view-assignments.component.html',
   styleUrl: './view-assignments.component.css'

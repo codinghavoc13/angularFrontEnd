@@ -3,15 +3,21 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SMLoginDTO } from '../../common/smlogin-dto';
 import { UserService } from '../../service/user.service';
-import { SchoolManagerModule } from '../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../main/module/main/main.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    // SchoolManagerModule
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLink, RouterLinkActive, RouterOutlet,
+    BsDropdownModule
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'

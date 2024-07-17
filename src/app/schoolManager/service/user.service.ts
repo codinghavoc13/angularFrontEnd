@@ -23,7 +23,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient, private router: Router, 
     private toastr: ToastrService) { 
-      // console.log('school-manager.user.service constructor')
+      console.log('school-manager.user.service constructor')
       // console.log(this.currentUserSrc)
     }
 

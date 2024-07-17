@@ -4,15 +4,18 @@ import { AssignStudentDto } from '../../../common/assign-student-dto';
 import { CourseDetailDto } from '../../../common/course-detail-dto';
 import { StudentDetailDto } from '../../../common/student-detail-dto';
 import { StaffService } from '../../../service/staff.service';
-import { SchoolManagerModule } from '../../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../../main/module/main/main.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ViewStudentsTableComponent } from '../../view-students-table/view-students-table.component';
 
 @Component({
   selector: 'app-assign-student-courses',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    FormsModule,
+    ReactiveFormsModule,
+    ViewStudentsTableComponent
   ],
   templateUrl: './assign-student-courses.component.html',
   styleUrl: './assign-student-courses.component.css'

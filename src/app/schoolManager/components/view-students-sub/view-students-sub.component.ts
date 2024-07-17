@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { UserDto } from '../../common/user-dto';
-import { SchoolManagerModule } from '../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../main/module/main/main.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-view-students-sub',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    NgxPaginationModule
   ],
   templateUrl: './view-students-sub.component.html',
   styleUrl: './view-students-sub.component.css'

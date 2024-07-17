@@ -3,11 +3,13 @@ import { FormGroup, FormBuilder, FormArray, Validators, FormsModule, ReactiveFor
 import { AssignmentDto } from '../../common/assignment-dto';
 import { AssignmentService } from '../../service/assignment.service';
 import { UserService } from '../../service/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-assignments',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule, ReactiveFormsModule
   ],
   templateUrl: './add-assignments.component.html',

@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FullCourseDetailDto } from '../../common/full-course-detail-dto';
 import { StaffService } from '../../service/staff.service';
-import { SchoolManagerModule } from '../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../main/module/main/main.module';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { ViewStudentsSubComponent } from '../view-students-sub/view-students-sub.component';
 
 @Component({
   selector: 'app-view-students-by-course',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    NgbAccordionModule,
+    ViewStudentsSubComponent
   ],
   templateUrl: './view-students-by-course.component.html',
   styleUrl: './view-students-by-course.component.css'

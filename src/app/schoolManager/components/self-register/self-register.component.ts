@@ -3,15 +3,16 @@ import { ToastrService } from 'ngx-toastr';
 import { EnrollStudentDto } from '../../common/enroll-student-dto';
 import { RegisterDto } from '../../common/register-dto';
 import { UserService } from '../../service/user.service';
-import { SchoolManagerModule } from '../../module/school-manager/school-manager.module';
 import { MainModule } from '../../../main/module/main/main.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-self-register',
   standalone: true,
   imports: [
     MainModule,
-    SchoolManagerModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './self-register.component.html',
   styleUrl: './self-register.component.css'

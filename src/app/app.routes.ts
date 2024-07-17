@@ -22,7 +22,7 @@ export const routes: Routes = [
     {path: 'mmdb', component: MmdbMainComponent},
     {path: 'mmdb/movie-display', component: MovieDisplayComponent},
     {path: 'mmdb/actor-display', component: ActorDisplayComponent},
-    {path: 'schoolManager', component: SchoolManagerMainComponent},
+    {path: 'schoolManager/main', component: SchoolManagerMainComponent},
     {path: 'schoolManager/login', component: LoginComponent},
     {path: 'schoolManager/userPage', component: UserPageComponent},
     {path: '**', component:MainComponent}];
