@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Actor } from '../common/actor';
@@ -22,8 +22,8 @@ export class MmdbService {
   private mmdbMovieUrl = environment.baseUrl + "/mmdb/movieDetails/";
   private mmdbActorUrl = environment.baseUrl + "/mmdb/actorDetails/";
 
-  constructor(private httpClient: HttpClient,
-    private router: Router) {}
+  httpClient = inject(HttpClient)
+  constructor(private router: Router) {}
     
   async buildMovieList(){
     this.httpClient.get<Movie>(this.allMoviesUrl).subscribe(

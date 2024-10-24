@@ -1,27 +1,18 @@
-# AngularFrontEnd
+# AngularFrontEnd and [Monolith Backend](https://github.com/codinghavoc13/monolithBackEnd)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+This is the forward facing side of the [Monolith Backend](https://github.com/codinghavoc13/monolithBackEnd). The two fully working sections are a Cipher application and a drastically reduced version of IMDB that only has information about movies that I own (and nowhere near the level of detail found on IMDB).
+## Cipher
 
-## Development server
+In addition to the dreaded "Hello World" application that is usually the first program new software developers write, I used to also write a basic Caesar Cipher program (details are on the page), so when I wrote this first Angular page (and the accompanying Spring Boot application), I thought it appropriate to do the same. After writing the Caesar Cipher version, I also chose to build out another cipher using a pass phrase instead of one or two numerical keys.
+### Future plans
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+I plan to come back to this application at some point to clean up the code to use ASCII code values instead of a fixed alphabet.
 
-## Code scaffolding
+## MMDB
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+MMDB, or My Movie Database, is, as I said, a drastically reduced version of IMDB. I keep track of movies I own, and some of the actors starring in those movies. The listings for each movie provide a brief summary and a few other details, along with a list of actors. Clicking on an actor takes to you another page showing some information about that actor and which movies they've been in (again, movies that I have). Click on one of those movies takes you back to the movie summary page for that movie. Round and round.
 
-## Build
+This page is meant to demonstrate getting information from a database and presenting to the screen.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Future plans
+Add a couple forms that will allow me to enter more information to the database. These forms will either be password protected so that I can update on the go, or will be local only so that I don't have to worry about someone hacking in and claiming that I have movies that I don't or are questionable
